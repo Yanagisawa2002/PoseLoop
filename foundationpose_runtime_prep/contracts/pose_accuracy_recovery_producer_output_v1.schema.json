@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "poseloop.pose-accuracy-recovery.producer-output.v1",
+  "title": "PoseLoop GPU-C runtime-isolated producer output for GPU-A",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "item_id",
+    "sample_key",
+    "mask_variant_id",
+    "manifest_lock_sha256",
+    "input_sha256",
+    "implementation_commit",
+    "implementation_sha256",
+    "model_sha256",
+    "checkpoint_sha256",
+    "initial_model_to_camera_pose_m",
+    "final_model_to_camera_pose_m",
+    "top_k",
+    "refiner_trace",
+    "status",
+    "attempt",
+    "latency_ms",
+    "failure",
+    "oom",
+    "failure_reason",
+    "access_counters",
+    "visualization_inventory"
+  ],
+  "properties": {
+    "schema_version": {"const": "poseloop.pose-accuracy-recovery.producer-output.v1"},
+    "item_id": {"type": "string", "minLength": 1},
+    "sample_key": {"$ref": "#/$defs/sample_key"},
+    "mask_variant_id": {"enum": ["official_known_sample_sanity", "oracle_mask_control", "predicted_mask", "depth_component_mask", "bbox_mask"]},
+    "manifest_lock_sha256": {"$ref": "#/$defs/sha256"},
+    "input_sha256": {"$ref": "#/$defs/input_sha256"},
+    "implementation_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "implementation_sha256": {"$ref": "#/$defs/sha256"},
+    "model_sha256": {"$ref": "#/$defs/sha256"},
+    "checkpoint_sha256": {"$ref": "#/$defs/sha256"},
+    "initial_model_to_camera_pose_m": {"oneOf": [{"$ref": "#/$defs/se3"}, {"type": "null"}]},
+    "final_model_to_camera_pose_m": {"oneOf": [{"$ref": "#/$defs/se3"}, {"type": "null"}]},
+    "top_k": {"type": "array", "maxItems": 5, "items": {"$ref": "#/$defs/candidate"}},
+    "refiner_trace": {"type": "array", "maxItems": 6, "items": {"$ref": "#/$defs/refiner_state"}},
+    "status": {"enum": ["success", "failed", "oom"]},
+    "attempt": {"type": "integer", "minimum": 1},
+    "latency_ms": {"type": "number", "minimum": 0},
+    "failure": {"type": "boolean"},
+    "oom": {"type": "boolean"},
+    "failure_reason": {"type": ["string", "null"]},
+    "access_counters": {"$ref": "#/$defs/access_counters"},
+    "visualization_inventory": {"type": "array", "maxItems": 5, "items": {"$ref": "#/$defs/visualization_member"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "success"}}},
+      "then": {
+        "properties": {
+          "initial_model_to_camera_pose_m": {"$ref": "#/$defs/se3"},
+          "final_model_to_camera_pose_m": {"$ref": "#/$defs/se3"},
+          "top_k": {"minItems": 5, "maxItems": 5},
+          "refiner_trace": {"minItems": 6, "maxItems": 6},
+          "failure": {"const": false},
+          "oom": {"const": false},
+          "failure_reason": {"type": "null"},
+          "visualization_inventory": {"minItems": 5, "maxItems": 5}
+        }
+      },
+      "else": {
+        "properties": {
+          "initial_model_to_camera_pose_m": {"type": "null"},
+          "final_model_to_camera_pose_m": {"type": "null"},
+          "top_k": {"maxItems": 0},
+          "refiner_trace": {"maxItems": 0},
+          "failure": {"const": true},
+          "failure_reason": {"type": "string", "minLength": 1},
+          "visualization_inventory": {"maxItems": 0}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sample_key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scene_id", "image_id", "object_id"],
+      "properties": {
+        "scene_id": {"type": "integer", "minimum": 0},
+        "image_id": {"type": "integer", "minimum": 0},
+        "object_id": {"type": "integer", "minimum": 1}
+      }
+    },
+    "input_sha256": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rgb", "depth", "mask", "camera", "cad"],
+      "properties": {
+        "rgb": {"$ref": "#/$defs/sha256"},
+        "depth": {"$ref": "#/$defs/sha256"},
+        "mask": {"$ref": "#/$defs/sha256"},
+        "camera": {"$ref": "#/$defs/sha256"},
+        "cad": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "se3": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number"}}
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "candidate_id", "score", "model_to_camera_pose_m"],
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1, "maximum": 5},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "score": {"type": "number"},
+        "model_to_camera_pose_m": {"$ref": "#/$defs/se3"}
+      }
+    },
+    "refiner_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["iteration", "model_to_camera_pose_m", "objective"],
+      "properties": {
+        "iteration": {"type": "integer", "minimum": 0, "maximum": 5},
+        "model_to_camera_pose_m": {"$ref": "#/$defs/se3"},
+        "objective": {"type": "number"}
+      }
+    },
+    "access_counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label_access_count_on_gpu_c", "gt_path_open_count_on_gpu_c", "evaluator_path_open_count_on_gpu_c", "scorer_path_open_count_on_gpu_c"],
+      "properties": {
+        "label_access_count_on_gpu_c": {"const": 0},
+        "gt_path_open_count_on_gpu_c": {"const": 0},
+        "evaluator_path_open_count_on_gpu_c": {"const": 0},
+        "scorer_path_open_count_on_gpu_c": {"const": 0}
+      }
+    },
+    "visualization_member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "relative_path", "sha256", "bytes"],
+      "properties": {
+        "role": {"enum": ["rgb", "input_mask", "initial_pose_overlay", "top_k_overlay", "final_pose_overlay"]},
+        "relative_path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    }
+  }
+}

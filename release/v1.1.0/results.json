@@ -1,0 +1,60 @@
+{
+  "schema_version": "poseloop.release-result.v1",
+  "release": "v1.1.0",
+  "status": "PASS_PACKAGE_AND_CLOSE",
+  "claim_scope": "already-consumed XYZ-IBD RealSense development data; custom metrics; not sealed; not official BOP leaderboard",
+  "dataset": {
+    "frame_count": 25,
+    "ground_truth_instance_count": 770,
+    "scene_ids": [10, 25, 30, 40, 65],
+    "scene9_read_count": 0
+  },
+  "detector": {
+    "prediction_count": 820,
+    "tp_iou50": 577,
+    "fp_iou50": 243,
+    "fn_iou50": 193,
+    "precision_iou50": 0.7036585365853658,
+    "recall_iou50": 0.7493506493506493,
+    "f1_iou50": 0.7257861635220125,
+    "ap50": 0.7023932319668922,
+    "ap75": 0.10114568295588894,
+    "pq_iou50": 0.5104102419369828,
+    "paired_frame_f1_delta": 0.6993761230356026,
+    "paired_frame_f1_bootstrap_95": [0.6548244454153018, 0.7366492430282804],
+    "positive_frames": 25,
+    "positive_scenes": 5
+  },
+  "pose_pipeline": {
+    "runtime_completed": 820,
+    "runtime_expected": 820,
+    "runtime_seconds": 575.473,
+    "mask_iou50_matches": 577,
+    "joint_pose_successes": 482,
+    "joint_precision": 0.5878048780487805,
+    "joint_recall": 0.625974025974026,
+    "joint_f1": 0.6062893081761006,
+    "joint_ap": 0.5318658235280908,
+    "ar_mssd": 0.6305194805194805,
+    "ar_mspd": 0.6457142857142858,
+    "combined_ar_mssd_mspd": 0.6381168831168831,
+    "positive_scenes": 5,
+    "per_scene_joint_recall": {
+      "10": 0.8,
+      "25": 0.4373,
+      "30": 0.7905,
+      "40": 0.6148,
+      "65": 0.78
+    }
+  },
+  "provenance": {
+    "foundationpose_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "bop_toolkit_commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "detector_checkpoint_sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+    "detector_prediction_manifest_sha256": "dded85d8d9bec68f3c6d80343183635bd80e738a28e9a93a87531d93fbe7441b",
+    "pose_protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+    "pose_prediction_sha256": "a029289f61afe1222b4b45562784076287c36ed952b85820e78fba1187ed39c06",
+    "pose_evaluation_sha256": "b58231994492be504b8bbb1636ea76fac9e479059f883434bcdd862ebf663254"
+  },
+  "retired_routes_frozen": true
+}

@@ -1,0 +1,21 @@
+{
+  "camera_frame": "opencv_x_right_y_down_z_forward",
+  "camera_intrinsics": [
+    [
+      400.0,
+      0.0,
+      1.5
+    ],
+    [
+      0.0,
+      400.0,
+      1.5
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "depth_scale_to_m": 0.001
+}

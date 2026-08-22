@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "release": "v1.0.0",
+  "result_source_commit": "11b6d6aa68c12e707dd84c2da7f30722c182d3f3",
+  "metric": {
+    "name": "oracle_mask_subset_ar_mssd_mspd",
+    "definition": "Mean of symmetry-aware AR_MSSD and AR_MSPD on the evaluated oracle visible-mask subset.",
+    "limitations": [
+      "Known object IDs and ground-truth visible masks are used.",
+      "The score is not official BOP AP, leaderboard AR, or full-dataset performance.",
+      "M1 and M2 use micro aggregation on the same fixed 300 targets.",
+      "M3 and M4 use macro-object aggregation on an unequal 230-instance holdout."
+    ]
+  },
+  "phases": {
+    "m0": {
+      "sample_count": 1,
+      "raw_rotation_error_degrees": 171.956,
+      "symmetry_aware_mssd_mm": 6.383,
+      "symmetry_aware_normalized_mssd": 0.0236,
+      "symmetry_aware_mspd_px": 3.459,
+      "claim": "Runtime, checkpoint, and evaluator smoke evidence only; no accuracy claim.",
+      "source_report": "reports/m1_baseline.md"
+    },
+    "m1": {
+      "target_count": 300,
+      "object_count": 15,
+      "ar_mssd": 0.633,
+      "ar_mspd": 0.7043333333333333,
+      "combined": 0.6686666666666666,
+      "claim": "Symmetry-aware single-view diagnostic baseline.",
+      "source_report": "reports/m1_baseline.md"
+    },
+    "m2": {
+      "target_count": 300,
+      "object_count": 15,
+      "same_targets_as_m1": true,
+      "view_budget": 5,
+      "selector": "max_mask_area",
+      "selector_input": "ground-truth visible-mask pixel count among already acquired views",
+      "acquisition_order": "target first, then fixed camera-centre greedy farthest-point order",
+      "baseline": {
+        "ar_mssd": 0.633,
+        "ar_mspd": 0.7043333333333333,
+        "combined": 0.6686666666666666
+      },
+      "selected": {
+        "ar_mssd": 0.7253333333333332,
+        "ar_mspd": 0.7799999999999999,
+        "combined": 0.7526666666666666
+      },
+      "reported_gain_pp": 8.4,
+      "claim": "Main positive diagnostic: fixed multi-view evidence is exploitable on the same oracle-mask target subset.",
+      "source_report": "reports/m2_multiview.md"
+    },
+    "m3": {
+      "holdout_target_count": 230,
+      "holdout_object_count": 15,
+      "development_holdout_physical_instance_overlap": 0,
+      "scene_disjoint": false,
+      "fixed_k1_combined": 0.8317859428153546,
+      "fixed_k5_combined": 0.8381174427424426,
+      "active_fast": {
+        "combined": 0.8368569703716761,
+        "mean_views": 2.017391304347826,
+        "registration_latency_reduction_vs_fixed_k5": 0.5954045295864918,
+        "matched_random_combined": 0.8423231757349403,
+        "gain_vs_matched_random": -0.005466205363264254,
+        "paired_95_ci_vs_matched_random": [
+          -0.031817571127130094,
+          0.0224399847361246
+        ]
+      },
+      "active_conservative": {
+        "combined": 0.8379068094215154,
+        "mean_views": 3.9304347826086956,
+        "matched_random_combined": 0.8441465128009243,
+        "gain_vs_matched_random": -0.006239703379408934,
+        "paired_95_ci_vs_matched_random": [
+          -0.013439966671400674,
+          -0.0007149945438547772
+        ]
+      },
+      "claim": "Budget saving is demonstrated, but learned allocation advantage over matched controls is not supported.",
+      "source_report": "reports/m3_active_budget.md"
+    },
+    "m4": {
+      "development_target_count": 300,
+      "holdout_target_count": 230,
+      "holdout_object_count": 15,
+      "development_holdout_physical_instance_overlap": 0,
+      "low_visibility_holdout_target_count": 0,
+      "scores": {
+        "target_only": 0.8317859428153546,
+        "fixed_first": 0.8210670277434982,
+        "random_candidate": 0.8109534305563719,
+        "learned_voi": 0.825446504203857,
+        "oracle_best_candidate": 0.8814440257454963
+      },
+      "learned_gains": {
+        "vs_target_only": -0.00633943861149755,
+        "vs_fixed_first": 0.004379476460358855,
+        "vs_random_candidate": 0.014493073647485089
+      },
+      "paired_95_intervals": {
+        "vs_target_only": [
+          -0.0376386,
+          0.0250242
+        ],
+        "vs_fixed_first": [
+          -0.0145272,
+          0.0273586
+        ],
+        "vs_random_candidate": [
+          -0.00309447,
+          0.0327861
+        ]
+      },
+      "claim": "No end-to-end gain and no statistically resolved one-step ranking advantage.",
+      "source_report": "reports/m4_view_ranking.md"
+    }
+  }
+}

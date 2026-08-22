@@ -1,0 +1,226 @@
+{
+  "created_utc": "2026-08-16T05:28:27.748397Z",
+  "dataset": {
+    "accessed_paths": [
+      "/home/cgliu/datasets/xyzibd/test_targets_bop19.json",
+      "/home/cgliu/datasets/xyzibd/test_targets_bop24.json",
+      "/home/cgliu/datasets/xyzibd/models_eval/models_info.json",
+      "/home/cgliu/datasets/xyzibd/val"
+    ],
+    "dataset_name_matches": true,
+    "errors": [],
+    "evaluator_only_label_paths_accessed": [],
+    "ready": true,
+    "required_public_inputs": {
+      "models_eval/models_info.json": {
+        "exists": true,
+        "kind": "file",
+        "path": "/home/cgliu/datasets/xyzibd/models_eval/models_info.json",
+        "sha256": "25b876a00ed7585f083f4b634c32fe13a3a548bee1f6fb033722932331e62374"
+      },
+      "test_targets_bop19.json": {
+        "exists": true,
+        "kind": "file",
+        "path": "/home/cgliu/datasets/xyzibd/test_targets_bop19.json",
+        "sha256": "6ebafd20964d09f649a2e1acc98e5b8b1c39d89e746a0b8865c887f6d74fa011"
+      },
+      "test_targets_bop24.json": {
+        "exists": true,
+        "kind": "file",
+        "path": "/home/cgliu/datasets/xyzibd/test_targets_bop24.json",
+        "sha256": "7f620e5bdf8d6f11201d90464c5a93963ea37718ff662e5a392ca41eb10d6ebe"
+      },
+      "val": {
+        "exists": true,
+        "kind": "directory",
+        "path": "/home/cgliu/datasets/xyzibd/val"
+      }
+    },
+    "root": "/home/cgliu/datasets/xyzibd"
+  },
+  "errors": [
+    "missing prediction roles: coco_predictions, predicted_association, single_view_pose, multi_view_pose, provenance"
+  ],
+  "evaluator_only_label_paths_accessed": [],
+  "fingerprint": {
+    "dataset_public_input_sha256": {
+      "models_eval/models_info.json": "25b876a00ed7585f083f4b634c32fe13a3a548bee1f6fb033722932331e62374",
+      "test_targets_bop19.json": "6ebafd20964d09f649a2e1acc98e5b8b1c39d89e746a0b8865c887f6d74fa011",
+      "test_targets_bop24.json": "7f620e5bdf8d6f11201d90464c5a93963ea37718ff662e5a392ca41eb10d6ebe"
+    },
+    "prediction_sha256": {},
+    "protocol_sha256": "86b403e0343800c9cbc6b66d665e1141f12cf82df62c58d043763b9346627f8a",
+    "toolkit_commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "toolkit_evaluator_sha256": {
+      "scripts/eval_bop19_pose.py": "44a0fa020f53bec65dad351c4a188e2a21e3d8cbe554925e06c98315be3f57f4",
+      "scripts/eval_bop22_coco.py": "5927e0cbfa16d2499a80d72f0644c1ea4276aec2abf944b6bea876d9ed46222c",
+      "scripts/eval_bop24_pose.py": "83b7b4e08325fee2434e19990be80d0d9f20d180cfe2084cffd60d3b0002bc23"
+    },
+    "toolkit_pinned_source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "toolkit_verified_revision": "cea62d651c7e395b2e1962b9749e4e89693c6ac4"
+  },
+  "fingerprint_sha256": "0c669ac053ffd845bc73c9a39da487ffdd1f82c7f976c1fbd27e1c014d9e6537",
+  "official_commands": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop19_pose.py",
+        "--renderer_type=vispy",
+        "--result_filenames=poseloop-r3-single_xyzibd-val.csv",
+        "--results_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval/poseloop-r3-single_xyzibd-val/scores_bop19.json",
+      "metric": "official_bop19_localization_ar",
+      "variant": "single_view"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop24_pose.py",
+        "--result_filenames=poseloop-r3-single_xyzibd-val.csv",
+        "--results_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop24.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval/poseloop-r3-single_xyzibd-val/scores_bop24.json",
+      "metric": "official_bop24_pose_detection_ap",
+      "variant": "single_view"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop19_pose.py",
+        "--renderer_type=vispy",
+        "--result_filenames=poseloop-r3-multiview_xyzibd-val.csv",
+        "--results_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval/poseloop-r3-multiview_xyzibd-val/scores_bop19.json",
+      "metric": "official_bop19_localization_ar",
+      "variant": "multi_view"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop24_pose.py",
+        "--result_filenames=poseloop-r3-multiview_xyzibd-val.csv",
+        "--results_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop24.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval/poseloop-r3-multiview_xyzibd-val/scores_bop24.json",
+      "metric": "official_bop24_pose_detection_ap",
+      "variant": "multi_view"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop22_coco.py",
+        "--result_filenames=poseloop-r3-input_xyzibd-val.json",
+        "--results_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--ann_type=bbox",
+        "--bbox_type=amodal"
+      ],
+      "expected_score": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval/poseloop-r3-input_xyzibd-val/scores_bop22_coco_bbox.json",
+      "metric": "official_bop22_coco_bbox_ap",
+      "variant": "shared_predicted_input"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop22_coco.py",
+        "--result_filenames=poseloop-r3-input_xyzibd-val.json",
+        "--results_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--ann_type=segm",
+        "--bbox_type=amodal"
+      ],
+      "expected_score": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/eval/poseloop-r3-input_xyzibd-val/scores_bop22_coco_segm.json",
+      "metric": "official_bop22_coco_segm_ap",
+      "variant": "shared_predicted_input"
+    }
+  ],
+  "official_evaluation_executed": false,
+  "package_version": "1.0.0",
+  "prediction_bundle": {
+    "errors": [
+      "missing prediction roles: coco_predictions, predicted_association, single_view_pose, multi_view_pose, provenance"
+    ],
+    "expected_files": {
+      "coco_predictions": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs/poseloop-r3-input_xyzibd-val.json",
+      "multi_view_pose": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs/poseloop-r3-multiview_xyzibd-val.csv",
+      "predicted_association": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs/poseloop-r3-predicted-association_xyzibd-val.jsonl",
+      "provenance": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs/poseloop-r3-provenance_xyzibd-val.json",
+      "single_view_pose": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs/poseloop-r3-single_xyzibd-val.csv"
+    },
+    "missing_roles": [
+      "coco_predictions",
+      "predicted_association",
+      "single_view_pose",
+      "multi_view_pose",
+      "provenance"
+    ],
+    "ready": false,
+    "root": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/artifacts/r3_bop_industrial/inputs"
+  },
+  "protocol": {
+    "path": "/mnt/c/Users/cgliu/.codex/worktrees/2029/PoseLoop/protocols/poseloop_r3_bop_industrial_protocol.json",
+    "sha256": "86b403e0343800c9cbc6b66d665e1141f12cf82df62c58d043763b9346627f8a",
+    "state": "frozen_before_r3_predictions"
+  },
+  "protocol_id": "poseloop.r3.bop-industrial.e2e.v1",
+  "repository": {
+    "baseline_commit": "e5e14ab6cf5f0b4adf97ca161ec04f188f6ea7e5",
+    "baseline_is_ancestor": true,
+    "branch": "codex/poseloop/r3-bop-e2e",
+    "git_query_errors": [],
+    "head": "e5e14ab6cf5f0b4adf97ca161ec04f188f6ea7e5",
+    "status_entries": [
+      "?? protocols/poseloop_r3_bop_industrial_protocol.json",
+      "?? r3_bop_industrial/",
+      "?? reports/r3_bop_industrial/",
+      "?? tests/r3_bop_industrial/"
+    ]
+  },
+  "schema_version": "poseloop.r3.preflight.v1",
+  "status": "blocked",
+  "toolkit": {
+    "actual_commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "errors": [],
+    "expected_commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "expected_source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "official_evaluators": {
+      "scripts/eval_bop19_pose.py": {
+        "exists": true,
+        "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop19_pose.py",
+        "sha256": "44a0fa020f53bec65dad351c4a188e2a21e3d8cbe554925e06c98315be3f57f4"
+      },
+      "scripts/eval_bop22_coco.py": {
+        "exists": true,
+        "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop22_coco.py",
+        "sha256": "5927e0cbfa16d2499a80d72f0644c1ea4276aec2abf944b6bea876d9ed46222c"
+      },
+      "scripts/eval_bop24_pose.py": {
+        "exists": true,
+        "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit/scripts/eval_bop24_pose.py",
+        "sha256": "83b7b4e08325fee2434e19990be80d0d9f20d180cfe2084cffd60d3b0002bc23"
+      }
+    },
+    "ready": true,
+    "root": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/third_party/bop_toolkit",
+    "source_kind": "git_checkout",
+    "source_tree_file_count": 93,
+    "source_tree_sha256": "b4bb32259d4890c8650cf33ebb430a112e81cb93581c233c33941a6f24de19f2",
+    "tracked_sources_clean": true
+  }
+}

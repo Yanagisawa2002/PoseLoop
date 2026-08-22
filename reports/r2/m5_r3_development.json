@@ -1,0 +1,152 @@
+{
+  "candidate_selection_gate": {
+    "cross_fitted_macro_object_relative_improvement_at_least_5pct": true,
+    "cross_fitted_natural_missing_relative_improvement_nonnegative": true,
+    "nonfinite_output_count_zero": true,
+    "same_candidate_selected_in_every_leave_one_object_out_fold": true
+  },
+  "candidates": [
+    {
+      "baseline_macro_object_loss": 7.708743641319414,
+      "candidate_id": "last_5_measurements",
+      "history_limit": 5,
+      "macro_object_relative_improvement": 0.013062982419338526,
+      "natural_missing_macro_object_relative_improvement": -0.07048490377517032,
+      "nonfinite_output_count": 0,
+      "proposed_macro_object_loss": 7.6080444586576705
+    },
+    {
+      "baseline_macro_object_loss": 7.708743641319414,
+      "candidate_id": "last_10_measurements",
+      "history_limit": 10,
+      "macro_object_relative_improvement": 0.020764520050865775,
+      "natural_missing_macro_object_relative_improvement": -0.02571738114184496,
+      "nonfinite_output_count": 0,
+      "proposed_macro_object_loss": 7.548675279412253
+    },
+    {
+      "baseline_macro_object_loss": 7.708743641319414,
+      "candidate_id": "last_20_measurements",
+      "history_limit": 20,
+      "macro_object_relative_improvement": 0.05524497208652572,
+      "natural_missing_macro_object_relative_improvement": 0.044538175487313175,
+      "nonfinite_output_count": 0,
+      "proposed_macro_object_loss": 7.28287431403254
+    },
+    {
+      "baseline_macro_object_loss": 7.708743641319414,
+      "candidate_id": "all_history",
+      "history_limit": null,
+      "macro_object_relative_improvement": 0.05693953915029708,
+      "natural_missing_macro_object_relative_improvement": 0.04273692537322833,
+      "nonfinite_output_count": 0,
+      "proposed_macro_object_loss": 7.269811330954903
+    }
+  ],
+  "development_data_status": "consumed_M5_R2_labels_opened",
+  "leave_one_object_out": [
+    {
+      "held_out_missing_relative_improvement": 0.20400792526873276,
+      "held_out_object_id": 1,
+      "held_out_relative_improvement": 0.21084838250556595,
+      "selected_candidate_id": "all_history",
+      "training_relative_improvement_by_candidate": {
+        "all_history": -0.05892560895425151,
+        "last_10_measurements": -0.1315765394861026,
+        "last_20_measurements": -0.06135577407186474,
+        "last_5_measurements": -0.09756567410852923
+      }
+    },
+    {
+      "held_out_missing_relative_improvement": -0.005976181313759171,
+      "held_out_object_id": 9,
+      "held_out_relative_improvement": -0.13917194286889487,
+      "selected_candidate_id": "all_history",
+      "training_relative_improvement_by_candidate": {
+        "all_history": 0.14274819818474627,
+        "last_10_measurements": 0.14187024229766682,
+        "last_20_measurements": 0.1399106693755613,
+        "last_5_measurements": 0.08923691418858658
+      }
+    },
+    {
+      "held_out_missing_relative_improvement": -0.3080178391872918,
+      "held_out_object_id": 12,
+      "held_out_relative_improvement": -0.03347420179339746,
+      "selected_candidate_id": "all_history",
+      "training_relative_improvement_by_candidate": {
+        "all_history": 0.08100709793494452,
+        "last_10_measurements": 0.03667537883591209,
+        "last_20_measurements": 0.07941111385563472,
+        "last_5_measurements": 0.03378420933729054
+      }
+    },
+    {
+      "held_out_missing_relative_improvement": 0.3386844942498143,
+      "held_out_object_id": 14,
+      "held_out_relative_improvement": 0.3856673999943125,
+      "selected_candidate_id": "all_history",
+      "training_relative_improvement_by_candidate": {
+        "all_history": 0.04534234617914952,
+        "last_10_measurements": 0.011528762975417823,
+        "last_20_measurements": 0.04494177212400003,
+        "last_5_measurements": 0.004819675612051183
+      }
+    },
+    {
+      "held_out_missing_relative_improvement": 0.3637096000034993,
+      "held_out_object_id": 17,
+      "held_out_relative_improvement": 0.1208165965324846,
+      "selected_candidate_id": "all_history",
+      "training_relative_improvement_by_candidate": {
+        "all_history": 0.05551398826706869,
+        "last_10_measurements": 0.019765485990295206,
+        "last_20_measurements": 0.053703885685651064,
+        "last_5_measurements": 0.014824958076478847
+      }
+    }
+  ],
+  "object_count": 5,
+  "photoneo_r3_prediction_or_evaluator_outcome_read": false,
+  "provenance": {
+    "analysis_code": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/scripts/analyze_m5_r3_development.py",
+      "sha256": "942c6ba50f81e637d1545d462f869dae7921d86fa315c0731907803dfae7d472"
+    },
+    "m5_r2_result": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/artifacts/r2/m5_r2/result.json",
+      "sha256": "f080646e6289f1f4e7993d39435223d265b1da865c432fd5adba83505ae49e64"
+    },
+    "m5_r2_track_results": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/artifacts/r2/m5_r2/track_results.jsonl",
+      "sha256": "f8d360e1bed80703b3f56ee77adaf4679f256b61768da1ce896fb16c2c191046"
+    },
+    "models_eval_info": {
+      "path": "/home/cgliu/datasets/xyzibd/models_eval/models_info.json",
+      "sha256": "25b876a00ed7585f083f4b634c32fe13a3a548bee1f6fb033722932331e62374"
+    }
+  },
+  "schema_version": 1,
+  "selected_candidate": {
+    "bootstrap": {
+      "mean_relative_improvement": 0.04245683478842636,
+      "one_sided_90pct_lower_relative_improvement": -0.1075901595097649,
+      "resamples": 5000,
+      "seed": 5303,
+      "two_sided_90pct_upper_relative_improvement": 0.21145940424215207,
+      "unit": "paired hierarchical object then complete-track resampling"
+    },
+    "candidate_id": "all_history",
+    "cross_fitted_baseline_macro_object_loss": 7.708743641319414,
+    "cross_fitted_missing_relative_improvement": 0.04273692537322833,
+    "cross_fitted_proposed_macro_object_loss": 7.269811330954903,
+    "cross_fitted_relative_improvement": 0.05693953915029708,
+    "history_limit": null,
+    "one_sided_90pct_lower_relative_improvement": -0.1075901595097649,
+    "rotation_scale_deg": 5.0,
+    "translation_scale_m": 0.01
+  },
+  "stage": "M5-R3 consumed RealSense development and candidate freeze",
+  "status": "FROZEN_M5_R3_CANDIDATE",
+  "track_count": 21
+}

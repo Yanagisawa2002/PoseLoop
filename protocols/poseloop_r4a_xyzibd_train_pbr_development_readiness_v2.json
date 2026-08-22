@@ -1,0 +1,66 @@
+{
+  "schema_version": "poseloop.r4a.development-readiness.protocol.v2",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-readiness.v2",
+  "created_utc": "2026-08-16T15:50:00Z",
+  "state": "frozen_before_v2_development_label_parse",
+  "required_branch": "codex/poseloop/r4a-development-coverage-geometry",
+  "role": "DEVELOPMENT_ONLY",
+  "output_namespace": "development_readiness_v2",
+  "immutable_v1_failure": {
+    "remote_implementation_commit": "3a33144dd950bbae83a26e85ba6d8edd16efacc8",
+    "protocol_sha256": "5820f9f65cb06574173bcdc140e9868571e5fea48fedd6761cdf68f3646345f9",
+    "prefreeze_receipt_sha256": "54df31ba9aee9dd418d23f367946c7dd2e5795912d95484bc6b703fe2f52fa0e",
+    "prefreeze_receipt_lock_sha256": "e303255ed0281702609eeac4895323b8bc65cd32ba8c3464c40438d9a5b8e03e",
+    "job_log_sha256": "720b15a8ce4736035aaaad905447e87e74ecb1807068cc77c9bce50468353084",
+    "job_exit_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "failure_receipt_sha256": "1c68d619f865ee598f748116c041e8f8d759fab428900b1153bcb338d580ca5f",
+    "failure_receipt_lock_sha256": "5aea75e5faa30f057fd720f56ef109a866a5a015acfedaa4c9621447f6f78f92",
+    "exit_code": 1,
+    "failure_stage": "development_gt_pose_schema_shape_guard",
+    "rerun_permitted": false
+  },
+  "schema_only_diagnosis": {
+    "sha256": "0c39209c4e59dc484ba86b7fcb95d46603901f4530dfd14fc820d1fd08fa60d4",
+    "row_count": 173,
+    "raw_rotation_shape": [3, 3],
+    "raw_translation_shape": [3],
+    "toolkit_rotation_shape": [3, 3],
+    "toolkit_translation_shape": [3, 1],
+    "pose_values_recorded": false,
+    "xyzibd_val_access_count": 0,
+    "evaluator_invocation_count": 0
+  },
+  "frozen_slice": {
+    "plan_sha256": "b8ec0ce6b93064d689b10be656eb0961cc2ccb41a154b4798ec9a9f6861bc768",
+    "extraction_result_sha256": "35a1a84f2ebb624feecf8a5c3757b06d1670dc0d764858fecd44938741297dda",
+    "slice_prefreeze_sha256": "443fabb778813904097f220a5a8c7eb8507309a802abb45fd1ee5a5e5c49d875",
+    "entry_count": 188,
+    "target_count": 173
+  },
+  "selection": {
+    "scene_ids": [0, 1, 2],
+    "image_ids": [0],
+    "input_modality": "gray",
+    "target_policy": "all_instances_in_selected_frames"
+  },
+  "public_model_object_ids": [1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+  "pinned_toolkit": {
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "allowed_entrypoints": ["bop_toolkit_lib.inout.load_scene_gt", "bop_toolkit_lib.inout.load_scene_camera"],
+    "evaluator_entrypoints_permitted": false
+  },
+  "manifest_contract": {
+    "includes": ["scene_id", "image_id", "instance_id", "object_id", "gray/depth/mask/model paths", "camera intrinsics", "depth scale"],
+    "excludes": ["GT rotation", "GT translation", "visibility fraction", "pose error", "score", "candidate rank"],
+    "candidate_selection_from_gt": false
+  },
+  "boundaries": {
+    "xyzibd_val_access_permitted": false,
+    "evaluator_invocation_permitted": false,
+    "gt_pose_export_to_prediction_manifest": false,
+    "score_guided_pose_selection_permitted": false,
+    "foundationpose_checkpoint_change_permitted": false,
+    "remote_shutdown_release_delete_permitted": false
+  }
+}

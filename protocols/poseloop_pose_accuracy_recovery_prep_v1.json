@@ -1,0 +1,190 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.protocol.v1",
+  "protocol_id": "poseloop.pose-accuracy-recovery.development-prep.v1",
+  "created_utc": "2026-08-16T20:00:00Z",
+  "state": "frozen_pre_execution_template",
+  "role": "DEVELOPMENT_ONLY_PREP",
+  "auto_deploy": false,
+  "random_seed": 731,
+  "immutable_upstream": {
+    "r4a_v3_final_commit": "58939e69960f2227c4fa20be547e61df23fe391d",
+    "r4a_v3_status": "NO_GO",
+    "reinterpretation_permitted": false,
+    "artifact_mutation_permitted": false
+  },
+  "immutable_boundaries": {
+    "server_connection_permitted": false,
+    "download_permitted": false,
+    "training_permitted": false,
+    "inference_permitted": false,
+    "sealed_split_access_permitted": false,
+    "accuracy_claim_permitted": false,
+    "push_merge_tag_permitted": false
+  },
+  "development_decomposition": {
+    "official_known_sample_sanity": {
+      "namespace_role": "EVALUATOR_ONLY",
+      "purpose": "verify units, coordinates, evaluator wiring, and a published known-sample path before model diagnosis",
+      "deployment_conclusion_permitted": false
+    },
+    "oracle_mask_control": {
+      "namespace_role": "EVALUATOR_ONLY",
+      "purpose": "fault localization between segmentation and pose components only",
+      "deployment_conclusion_permitted": false,
+      "producer_export_permitted": false
+    },
+    "predicted_mask": {
+      "namespace_role": "LABEL_FREE_PRODUCER_ONLY",
+      "purpose": "deployment-shaped predicted segmentation input"
+    },
+    "depth_component_mask": {
+      "namespace_role": "LABEL_FREE_PRODUCER_ONLY",
+      "purpose": "existing depth connected-component control"
+    },
+    "bbox_mask": {
+      "namespace_role": "LABEL_FREE_PRODUCER_ONLY",
+      "purpose": "existing bounding-box mask control"
+    }
+  },
+  "diagnostics": {
+    "namespace_role": "EVALUATOR_ONLY",
+    "fixture_input_kind": "SYNTHETIC_COMMITTED_FIXTURE",
+    "perturbation_grid": {
+      "composition": "cartesian_axis_aligned_camera_frame",
+      "axes": [
+        "x",
+        "y",
+        "z"
+      ],
+      "signs": [
+        -1,
+        1
+      ],
+      "rotation_degrees": [
+        0.0,
+        1.0,
+        3.0
+      ],
+      "translation_mm": [
+        0.0,
+        1.0,
+        3.0
+      ],
+      "expected_hypothesis_count": 169
+    },
+    "scorer_order": "descending_higher_is_better",
+    "scorer_top_k": 5,
+    "minimum_rank_correlation": 0.95,
+    "refiner_trace_count": 8,
+    "refiner_trace_selection": "largest_l1_perturbation_then_candidate_id",
+    "fixture_refiner_scales": [
+      1.0,
+      0.5,
+      0.0
+    ],
+    "monotonic_tolerance": 1e-09
+  },
+  "fixture_prediction_perturbations": {
+    "official_known_sample_sanity": {
+      "baseline_rotation_degrees": 2.0,
+      "baseline_translation_mm": 2.0,
+      "final_rotation_degrees": 0.5,
+      "final_translation_mm": 0.5
+    },
+    "oracle_mask_control": {
+      "baseline_rotation_degrees": 3.0,
+      "baseline_translation_mm": 2.0,
+      "final_rotation_degrees": 1.0,
+      "final_translation_mm": 0.5
+    },
+    "predicted_mask": {
+      "baseline_rotation_degrees": 5.0,
+      "baseline_translation_mm": 5.0,
+      "final_rotation_degrees": 2.0,
+      "final_translation_mm": 2.0
+    },
+    "depth_component_mask": {
+      "baseline_rotation_degrees": 6.0,
+      "baseline_translation_mm": 6.0,
+      "final_rotation_degrees": 3.0,
+      "final_translation_mm": 3.0
+    },
+    "bbox_mask": {
+      "baseline_rotation_degrees": 8.0,
+      "baseline_translation_mm": 8.0,
+      "final_rotation_degrees": 4.0,
+      "final_translation_mm": 4.0
+    }
+  },
+  "official_metric_capabilities": {
+    "AR": {
+      "adapter": "official_bop_output_ingest_only",
+      "requires": [
+        "MSSD",
+        "MSPD",
+        "VSD"
+      ],
+      "runtime_capability_receipt_required": true,
+      "fabricate_when_unavailable": false
+    },
+    "MSSD": {
+      "adapter": "official_bop_output_ingest_only",
+      "requires": [],
+      "runtime_capability_receipt_required": true,
+      "fabricate_when_unavailable": false
+    },
+    "MSPD": {
+      "adapter": "official_bop_output_ingest_only",
+      "requires": [],
+      "runtime_capability_receipt_required": true,
+      "fabricate_when_unavailable": false
+    },
+    "VSD": {
+      "adapter": "official_bop_output_ingest_only",
+      "requires": [],
+      "runtime_capability_receipt_required": true,
+      "dataset_depth_and_delta_assets_required": true,
+      "fabricate_when_unavailable": false
+    }
+  },
+  "known_capability_constraints": {
+    "source": "frozen prior R3 evidence; no PREP evaluator call",
+    "xyzibd_pinned_toolkit_supported_error_types": [
+      "ad",
+      "add",
+      "adi",
+      "mssd",
+      "mspd"
+    ],
+    "xyzibd_vsd": "unavailable",
+    "xyzibd_bop19_ar_requiring_vsd": "unavailable",
+    "reduced_error_set_may_be_relabelled_official_ar": false
+  },
+  "internal_metrics": {
+    "ADD-S": "ADD for asymmetric objects; closest-point ADI-style distance for symmetric objects",
+    "rotation_error": "SO(3) geodesic degrees",
+    "translation_error": "millimeters",
+    "coverage": "exact manifest-key coverage",
+    "missing_failure": "separate missing and failed rates",
+    "grouping": [
+      "object",
+      "scene",
+      "mask_variant",
+      "stage"
+    ],
+    "paired_deltas": [
+      "mask-variant-minus-predicted-mask",
+      "final-minus-baseline"
+    ]
+  },
+  "outputs": {
+    "root_configurable": true,
+    "formats": [
+      "json",
+      "jsonl",
+      "csv"
+    ],
+    "dry_run_marker_required": true,
+    "accuracy_claim_permitted": false
+  }
+}

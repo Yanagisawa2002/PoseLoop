@@ -1,0 +1,7 @@
+Looking in indexes: https://mirrors.aliyun.com/pypi/simple
+Collecting pycocotools==2.0.10
+  Downloading https://mirrors.aliyun.com/pypi/packages/49/80/912b4c60f94e747dd2c3adbda5d4a4edc1d735fbfa0d91ab2eb231decb5d/pycocotools-2.0.10-cp312-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (397 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 397.1/397.1 kB 3.4 MB/s eta 0:00:00
+Requirement already satisfied: numpy in ./workspace/.venv/lib/python3.12/site-packages (from pycocotools==2.0.10) (1.26.4)
+Installing collected packages: pycocotools
+Successfully installed pycocotools-2.0.10

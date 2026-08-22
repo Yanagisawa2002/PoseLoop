@@ -1,0 +1,45 @@
+{
+  "schema_version": "poseloop.r4c.prep.isaac-ros-tensorrt-runtime-contract.v1",
+  "runtime_id": "isaac-ros-foundationpose-tensorrt-cpp-v1",
+  "protocol_id": "poseloop-r4c-foundationpose-runtime-prep-v1",
+  "auto_deploy_default": false,
+  "backend_transport_contract": {
+    "relative_path": "backend_transport_v1.json",
+    "schema_version": "poseloop.r4c.prep.backend-transport-contract.v2",
+    "sha256": "e1c92930b045227d4b760a18481fee7fd03ee555072b419dfc25c3254e5085ea"
+  },
+  "lock_status": "unresolved-no-local-or-live-runtime-inspection",
+  "runtime_lock": {
+    "container_image_digest": null,
+    "isaac_ros_release": null,
+    "foundationpose_package_version_or_commit": null,
+    "cuda_version": null,
+    "tensorrt_version": null,
+    "refiner_engine_sha256": null,
+    "scorer_engine_sha256": null,
+    "adapter_executable_sha256": null
+  },
+  "unresolved_required_fields": [
+    "container_image_digest",
+    "isaac_ros_release",
+    "foundationpose_package_version_or_commit",
+    "cuda_version",
+    "tensorrt_version",
+    "refiner_engine_sha256",
+    "scorer_engine_sha256",
+    "adapter_executable_sha256"
+  ],
+  "source_checkpoint_identities": {
+    "refiner": {
+      "bytes": 68220109,
+      "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60"
+    },
+    "scorer": {
+      "bytes": 190229389,
+      "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26"
+    }
+  },
+  "production_runner_status": "blocked-until-runtime-lock-is-frozen",
+  "label_access_count": 0,
+  "official_scorer_run": false
+}

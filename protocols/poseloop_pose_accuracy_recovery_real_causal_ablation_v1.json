@@ -1,0 +1,76 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.real-causal-ablation.v1",
+  "protocol_id": "poseloop.pose-accuracy-recovery.development.real-causal-ablation.v1",
+  "role": "CONSUMED_REAL_DEVELOPMENT_CAUSAL_DIAGNOSTIC",
+  "a_r7_freeze": {
+    "commit": "1d9a2d650bada890db35d940aec7d63d57437f47",
+    "status": "SYNTHETIC_POSITIVE_FORMAL_NO_GO_REAL_UNTESTED",
+    "threshold_or_gate_mutation_permitted": false,
+    "successor_threshold_tuning_permitted": false
+  },
+  "dataset": {
+    "dataset_id": "xyzibd",
+    "split": "val",
+    "sensor": "realsense",
+    "consumption_status": "ALREADY_CONSUMED_DEVELOPMENT_LABELS_OPENED",
+    "scene_ids": [10, 25, 30, 40, 65],
+    "image_ids_per_scene": [0, 10, 20, 30, 40],
+    "frame_count": 25,
+    "selection_rule": "cartesian_product(scene_ids,image_ids_per_scene)_sorted",
+    "rgb_relative_template": "val/{scene_id:06d}/rgb_realsense/{image_id:06d}.png",
+    "depth_relative_template": "val/{scene_id:06d}/depth_realsense/{image_id:06d}.png",
+    "scene_gt_relative_template": "val/{scene_id:06d}/scene_gt_realsense.json",
+    "scene_gt_info_relative_template": "val/{scene_id:06d}/scene_gt_info_realsense.json",
+    "mask_visib_relative_template": "val/{scene_id:06d}/mask_visib_realsense/{image_id:06d}_{gt_index:06d}.png",
+    "train_pbr_read_permitted": false,
+    "scene9_replay_permitted": false,
+    "sealed_claim_permitted": false
+  },
+  "model_identities": {
+    "a_r6_commit": "b9e6e4b6e0172135142ace74718b3d65a635509e",
+    "sam2_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "sam2_tree": "64becbca23f880e0056449377496da248a74da43",
+    "sam2_checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+    "dinov2_checkpoint_sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+    "fastsam_checkpoint_sha256": "752cadc2828edb1cd4bc4f9eb587100631af06ea2108f4c9ed56df4755701e76"
+  },
+  "variants": [
+    "a_r6_baseline",
+    "geometry_instances",
+    "geometry_plus_sam2",
+    "geometry_plus_sam2_plus_causal_cad"
+  ],
+  "inference": {
+    "a_r6_native_resolution": "same frozen normalized coverage, container, boundary, calibration, margin, and tie-break rules evaluated at native Realsense HxW without resizing",
+    "fastsam_source": "frozen A-R5 official CNOS runtime",
+    "geometry_support": "union of FastSAM proposals passing every frozen A-R6 non-CAD filter",
+    "geometry_instances": "robust raw-depth edge components followed by marker watershed inside support",
+    "sam2_role": "mask refinement only; geometry supplies instance count and prompts",
+    "sam2_prompting": "one positive geometry seed, every other geometry seed as negative, geometry bounding box",
+    "sam2_failure_action": "retain the corresponding geometry mask",
+    "cad_role": "causal keep-or-drop decision, not diagnostic-only ranking",
+    "cad_threshold": "leave-one-scene-out threshold selected on the other four consumed scenes",
+    "model_rerun_after_label_open": false
+  },
+  "metrics": {
+    "primary": [
+      "instance_precision_iou50",
+      "instance_recall_iou50",
+      "instance_f1_iou50",
+      "ap50",
+      "ap75",
+      "pq_iou50"
+    ],
+    "diagnostic": ["merge_count", "split_count"],
+    "forbidden_primary_gate": "absolute_unmatched_prediction_count",
+    "paired_bootstrap_frames": 2000,
+    "bootstrap_seed": 20260821
+  },
+  "decisions": {
+    "retain_sam2": "paired frame-F1 delta lower 95% bootstrap bound > 0, at least 4/5 scenes improve, AP50 and PQ do not decrease",
+    "retain_cad": "CAD AUROC lower 95% bootstrap bound > 0.5, paired frame-F1 delta lower bound > 0, at least 4/5 scenes improve, AP50 and PQ do not decrease",
+    "route_positive": "best successor beats both A-R6 and raw-FastSAM diagnostics in paired F1 with lower bound > 0 and does not reduce AP50 or PQ",
+    "route_failure_action": "switch to a true instance detector/segmenter or 3D instance proposal family",
+    "scene9_action": "never replay in A-R8; only a later physically-correct synthetic successor may authorize one replay"
+  }
+}

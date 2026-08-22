@@ -1,0 +1,39 @@
+{
+  "schema_version": "poseloop.r4a.development-final-evaluation.protocol.v3",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-final-evaluation.v3",
+  "created_utc": "2026-08-16T19:15:00Z",
+  "state": "frozen_after_v2_environment_failure_before_any_v3_official_development_evaluator_call",
+  "role": "DEVELOPMENT_ONLY",
+  "inherits_protocol": {
+    "relative_path": "poseloop_r4a_v3_development_final_evaluation_v2.json",
+    "sha256": "d6acf8f0d5f00a7d88e6bcfe69b98de3d1f798b083f0a258f8771311fd6bd96b"
+  },
+  "supersedes_without_scoring": {
+    "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-final-evaluation.v2",
+    "protocol_sha256": "d6acf8f0d5f00a7d88e6bcfe69b98de3d1f798b083f0a258f8771311fd6bd96b",
+    "local_implementation_commit": "98e89d9409ad6cba5efefbfce077903ef61ccf90",
+    "gpu_a_implementation_commit": "34c8cdfcc62006b2fd7a45fd3ce61a0c1e8a66fb",
+    "pre_score_sha256": "ea16e5268c88e9c5681bdaf906e3668e2a779a99c19fd3b074f82b9992bf4d37",
+    "invocation_started_sha256": "e0579f06f861084d6eb61a211b5f0a3edea9081b897ac323ae46e93f666f1d",
+    "official_once_sha256": "844fed46ab9c97c21a70af27790d1bacd612be18fdfeeef68af370e58f62333fd",
+    "official_log_sha256": "4e36e750ca891ce1454d8176f3c8380e80312ecc5e741dd2c91e2eaf0f383f77",
+    "fixed_command_exit_codes": [1, 1],
+    "score_file_count": 0,
+    "failure": "ModuleNotFoundError: No module named imageio",
+    "cause": "Path.resolve dereferenced the venv Python symlink to the base interpreter",
+    "rerun_v2_permitted": false
+  },
+  "implementation_fix": {
+    "scope": "evaluator interpreter path only",
+    "rule": "use an absolute path without symlink dereference",
+    "expected_interpreter_suffix": "/workspace/.venv/bin/python",
+    "prediction_input_candidate_association_or_multi_view_change": false,
+    "score_guided_change": false
+  },
+  "bop24_development": {
+    "result_filenames": {
+      "single_view": "poseloopr4av3singlev3_xyzibd-train.csv",
+      "multi_view": "poseloopr4av3multiv3_xyzibd-train.csv"
+    }
+  }
+}

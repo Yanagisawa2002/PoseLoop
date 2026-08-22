@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-r1-v1",
+  "purpose": "Recover M3-M6 with difficulty-stratified development gates and a single fresh-sensor sealed validation.",
+  "legacy_freeze": {
+    "tag": "poseloop-m3-m6-frozen-20260815",
+    "commit": "d6a22e2267dca207b6a9d84fc2cb4729513382ad",
+    "status": "read_only_negative_or_unresolved_baseline",
+    "protected_namespaces": [
+      "artifacts/m3",
+      "artifacts/m4",
+      "artifacts/m5_g0",
+      "artifacts/m6_g0",
+      "precomputed/m5_g0",
+      "precomputed/m6_g0",
+      "reports/m3_active_budget.md",
+      "reports/m4_view_ranking.md",
+      "reports/m5_g0",
+      "reports/m6_g0"
+    ],
+    "r1_output_namespace": "artifacts/r1"
+  },
+  "difficulty_protocol": {
+    "evaluation_only_fields": [
+      "target_visibility_bin",
+      "object_id",
+      "physical_instance_track_id",
+      "sensor_modality",
+      "cad_symmetry_class",
+      "temporal_corruption_family"
+    ],
+    "axes": {
+      "visibility": {
+        "V0": "high",
+        "V1": "mid",
+        "V2": "low",
+        "V3": "current prefix has no usable pose"
+      },
+      "cad_ambiguity": {
+        "A0": "asymmetric or weakly ambiguous",
+        "A1": "finite discrete symmetry",
+        "A2": "continuous axial symmetry or severe self-occlusion"
+      },
+      "sensor_domain": {
+        "S0": "RealSense development domain",
+        "S1": "unseen sensor modality and unseen sample IDs"
+      },
+      "temporal_stress": {
+        "T0": "clean synthetic trajectory",
+        "T1": "synthetic dropout or outlier corruption",
+        "T2": "real sequence replay"
+      }
+    },
+    "rules": [
+      "Difficulty fields may stratify folds, weights, metrics, and guardrails but may not be runtime policy features unless explicitly listed in a stage feature contract.",
+      "All rows from one physical-instance track stay in one grouped-CV fold.",
+      "Every aggregate is accompanied by per-difficulty support and performance.",
+      "A stratum with fewer than 20 development rows is descriptive and cannot independently pass or fail a gate."
+    ]
+  },
+  "splits": {
+    "development": {
+      "source": "M2 RealSense groups and metrics",
+      "allowed_uses": [
+        "feature development",
+        "nested grouped-CV model selection",
+        "development threshold selection"
+      ],
+      "group_key": "physical_instance_track_id"
+    },
+    "legacy_holdout": {
+      "source": "frozen M3-M6 artifacts",
+      "allowed_uses": [
+        "baseline diagnosis",
+        "historical comparison after an R1 component is frozen"
+      ],
+      "forbidden_uses": [
+        "feature selection",
+        "hyperparameter selection",
+        "gate threshold selection"
+      ]
+    },
+    "sealed": {
+      "required": [
+        "sensor modality absent from development",
+        "sample IDs absent from development and legacy holdout",
+        "manifest and labels sealed before inference",
+        "one evaluation invocation after all components and gates are frozen"
+      ],
+      "preferred": "physical-instance tracks also absent from development",
+      "fallback_if_no_new_tracks_exist": "Declare sensor-and-observation generalization only; do not claim instance generalization.",
+      "reopen_policy": "Any method change after opening the sealed split creates a new protocol version and requires a different untouched split.",
+      "r1_execution": {
+        "sensor_modality": "Photoneo",
+        "dataset_split": "XYZ-IBD validation observations absent from all RealSense development artifacts",
+        "target_count": 150,
+        "target_selection": "Ten per object by stable hash among input-valid observations whose associated track has at least five input-valid views; no prediction or pose-error outcome is read.",
+        "sample_identity": "Use a pn modality component so every sealed sample ID is disjoint from RealSense development IDs.",
+        "claim_scope": "sensor-and-observation generalization only because physical instances may overlap RealSense development",
+        "single_open_gates": {
+          "M3_gain_over_exact_budget_matched_random_pp_min": 0.0,
+          "M3_mean_views_max": 3.0,
+          "M4_gain_over_fixed_slot_pp_min": 0.0,
+          "M4_gain_over_uniform_random_pp_min": 0.0,
+          "M6_auroc_gain_over_raw_score_min": 0.05,
+          "M6_aurc_relative_reduction_min": 0.1
+        }
+      }
+    }
+  },
+  "stages": {
+    "M3-R1": {
+      "question": "Can acquired-prefix features predict the marginal value of additional views better than random allocation?",
+      "development_data": "M2 only",
+      "targets": {
+        "k1": "combined_AR(k3)-combined_AR(k1)",
+        "k3": "combined_AR(k5)-combined_AR(k3)"
+      },
+      "validation": {
+        "outer_folds": 5,
+        "inner_folds": 4,
+        "splitter": "StratifiedGroupKFold",
+        "group_key": "physical_instance_track_id",
+        "primary_mean_view_cap": 3.0,
+        "secondary_mean_view_caps": [
+          2.0,
+          4.0
+        ],
+        "matched_random_assignments": 2000,
+        "bootstrap_resamples": 5000,
+        "bootstrap_unit": "physical_instance_track_id"
+      },
+      "development_gate": {
+        "primary_gain_over_exact_budget_matched_random_pp_min": 0.5,
+        "primary_one_sided_group_bootstrap_90pct_lower_gain_pp_min": 0.0,
+        "mean_view_cap_must_hold": true,
+        "max_supported_visibility_stratum_regression_pp": 2.0,
+        "all_conditions_required": true
+      },
+      "on_fail": "Do not open legacy M3 holdout and do not start M4-R1; revise under a new protocol version or stop."
+    },
+    "M4-R1": {
+      "prerequisite": "M3-R1 development gate passes and its output contract is frozen.",
+      "question": "Does CAD-derived visibility add ranking value beyond camera geometry and acquired-prefix confidence?",
+      "evaluation_population": "Targets for which the M3-R1 primary nested-OOF policy selects more than one view.",
+      "prefix_confidence_role": "M3-R1 cross-fitted marginal value controls eligibility; it is not repeated as a constant candidate-ranking feature.",
+      "anchor": "Frozen M2 best static candidate slot 2; the ranker predicts each other slot's utility difference from this anchor and deviates only when the best predicted difference is at least 0.01 combined-AR.",
+      "required_ablations": [
+        "camera_geometry_only",
+        "camera_geometry_plus_front_facing_cad_visibility",
+        "camera_geometry_plus_occlusion_aware_cad_visibility",
+        "camera_geometry_plus_occlusion_aware_cad_visibility_plus_m3_prefix_gate"
+      ],
+      "development_gate": {
+        "primary": "On the M3-R1 continue population, grouped-CV ranking utility gain over both fixed-slot and uniform-random baselines",
+        "minimum_predicted_gain_to_deviate_from_fixed_slot": 0.01,
+        "gain_pp_min": 0.5,
+        "one_sided_group_bootstrap_90pct_lower_gain_pp_min": 0.0,
+        "each_seed_ensemble_member_gain_vs_fixed_slot_pp_min": 0.5,
+        "all_conditions_required": true
+      },
+      "on_fail": "Stop M4-R1 and do not train M6-R1."
+    },
+    "M6-R1": {
+      "prerequisite": "The final M3-R1/M4-R1 multi-view output is frozen.",
+      "input_rule": "Train risk only on the exact frozen multi-view output; no post-risk pose reselection.",
+      "feature_contract": {
+        "allowed": [
+          "raw FoundationPose score and score margin for acquired views",
+          "input mask, depth validity, and predicted-pose geometry",
+          "cross-fitted M3-R1 allocation confidence and M4-R1 ranking confidence",
+          "two-view score, mask, and transformed-pose disagreement",
+          "continuous CAD geometry and visibility signals already available to the frozen M4-R1 acquisition path"
+        ],
+        "forbidden": [
+          "object ID as a model feature",
+          "difficulty or visibility bins as model features",
+          "physical-instance, scene, sample, or group IDs as model features",
+          "joint-success labels, evaluator pose errors, or oracle quantities"
+        ],
+        "separation": "Persist inference features and evaluator labels in different streams before fitting."
+      },
+      "development_gate": {
+        "nested_grouped_cv_auroc_gain_over_raw_score_min": 0.05,
+        "aurc_relative_reduction_min": 0.1,
+        "positive_direction_outer_folds_min": 4
+      }
+    },
+    "M5-R1": {
+      "dependency": "independent of M3-R1, M4-R1, and M6-R1",
+      "phase_1": "Beat nearest-equivalent baseline on symmetry-aligned synthetic corruption metrics.",
+      "phase_1_protocol": {
+        "design": "4 symmetry classes x 4 motion families x 6 stress families x 8 fresh deterministic replicates",
+        "methods": [
+          "NEAREST_REPRESENTATIVE_CT",
+          "QUOTIENT_CV_KALMAN"
+        ],
+        "equal_configuration_budget_per_method": 4,
+        "selection": "Four outer folds grouped by replicate; each method configuration is selected on the other three replicate folds and evaluated only on the held-out fold.",
+        "primary_loss": "Per-trajectory mean sqrt((symmetry-aligned translation error / 0.01 m)^2 + (symmetry-aligned rotation error / 5 deg)^2).",
+        "bootstrap_resamples": 5000,
+        "bootstrap_unit": "complete paired synthetic trajectory"
+      },
+      "phase_2_prerequisite": "Phase 1 development gate passes.",
+      "phase_2": "Replay frozen real pose-predictor sequences with timestamps and observed dropouts.",
+      "phase_2_input_gate": [
+        "timestamps or a predeclared frame-clock mapping",
+        "at least five ordered pose-predictor outputs per sequence",
+        "missing measurements come from absent/failed observations, not evaluator-selected deletion",
+        "ground-truth poses and object symmetry are evaluator-only"
+      ],
+      "phase_2_protocol": {
+        "source": "XYZ-IBD validation RealSense recorded multi-view frame sequences",
+        "clock": "Source metadata has no hardware timestamp; map the sorted common-frame ordinal to 20 Hz before inference and freeze that mapping.",
+        "observation_available": "Visible input mask area is at least 0.001 of the 1280x720 image and valid-depth ratio inside that mask is at least 0.5; otherwise the frame is an observed missing measurement.",
+        "sequence_selection": "For each object, choose the associated physical track whose available-observation count is closest to that object's median, tie-breaking by track ID. Selection may use mask/depth support but no predictor or pose-error outcome.",
+        "methods": [
+          "the phase-1 frozen NEAREST_REPRESENTATIVE_CT configuration",
+          "the phase-1 frozen QUOTIENT_CV_KALMAN configuration"
+        ],
+        "minimum_sequence_count": 10,
+        "minimum_sequences_with_observed_missing_frames": 5,
+        "minimum_total_observed_missing_frames": 15,
+        "development_gate": {
+          "paired_relative_trajectory_loss_improvement_min": 0.05,
+          "one_sided_sequence_bootstrap_90pct_lower_improvement_min": 0.0
+        },
+        "claim_boundary": "Real recorded-frame replay with a nominal frame clock; not a hardware-timestamp or unseen-sensor claim."
+      },
+      "development_gate": {
+        "primary": "paired symmetry-aligned trajectory loss improvement over nearest",
+        "relative_improvement_min": 0.1,
+        "one_sided_sequence_bootstrap_90pct_lower_improvement_min": 0.0
+      }
+    }
+  },
+  "execution_order": [
+    "freeze legacy M3-M6",
+    "M3-R1 development",
+    "M4-R1 development if M3-R1 passes",
+    "M6-R1 development if M4-R1 passes",
+    "M5-R1 phase 1 independently",
+    "M5-R1 real replay if phase 1 passes",
+    "single sealed validation after all promoted components are frozen"
+  ]
+}

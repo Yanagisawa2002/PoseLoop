@@ -1,0 +1,212 @@
+{
+  "accuracy_claim_permitted": false,
+  "auto_deploy": false,
+  "base_commit": "709d2f5d100c195b8a0160abe92a0d516a194e6e",
+  "boundary": {
+    "auto_trigger_gpu_c": false,
+    "evaluator_path_open_count": 0,
+    "gt_path_open_count": 0,
+    "label_access_count": 0,
+    "official_scorer_run": false,
+    "sealed_split_access_count": 0,
+    "server_shutdown_permitted": false
+  },
+  "content_gate": {
+    "human_visual_review_required": true,
+    "machine_score_substitution_permitted": false,
+    "multiple_objects_permitted": false,
+    "required_pass_count": 10,
+    "single_target_instance_required": true,
+    "tray_border_permitted": false,
+    "visualization_roles": [
+      "rgb",
+      "proposal_overview",
+      "selected_mask",
+      "contours"
+    ]
+  },
+  "input_lock": {
+    "allowed_input_roles": [
+      "rgb",
+      "camera",
+      "cad",
+      "cad_render_descriptors"
+    ],
+    "cad_assets": [
+      {
+        "bytes": 127492,
+        "object_id": 1,
+        "sha256": "177bf8313fc8feb749e86ab8953d9f97102842e54a08c63f32b8adfb663321e1"
+      },
+      {
+        "bytes": 319240,
+        "object_id": 2,
+        "sha256": "c6cc5f76b73782415a44362ee8853542f1da580fc49aac8b165767cfc6e2a24e"
+      },
+      {
+        "bytes": 658929,
+        "object_id": 4,
+        "sha256": "2885f809073970da906e5192d848dde4f15f844e1ef1e80d13a6ad7a603c9ef9"
+      },
+      {
+        "bytes": 679427,
+        "object_id": 5,
+        "sha256": "33dbf9fec3fa2a68fe6ec847507221feac8f00c002f61619bce1344395383a01"
+      },
+      {
+        "bytes": 708278,
+        "object_id": 6,
+        "sha256": "0e9ce0f575f104f97c4baf857b5449101eecc9658382b04f893905858a75eece"
+      }
+    ],
+    "forbidden_proposal_cues": [
+      "depth_component_mask",
+      "depth_component_bbox",
+      "bbox_mask",
+      "legacy_predicted_mask",
+      "gt_or_evaluator_asset"
+    ],
+    "frame_size": {
+      "height": 1080,
+      "width": 1440
+    },
+    "object_ids": [
+      1,
+      2,
+      4,
+      5,
+      6
+    ],
+    "sample_count": 10,
+    "samples": [
+      {
+        "image_id": 0,
+        "item_id": "s000000-i000000-o000001",
+        "object_id": 1,
+        "scene_id": 0
+      },
+      {
+        "image_id": 1,
+        "item_id": "s000000-i000001-o000001",
+        "object_id": 1,
+        "scene_id": 0
+      },
+      {
+        "image_id": 0,
+        "item_id": "s000003-i000000-o000002",
+        "object_id": 2,
+        "scene_id": 3
+      },
+      {
+        "image_id": 1,
+        "item_id": "s000003-i000001-o000002",
+        "object_id": 2,
+        "scene_id": 3
+      },
+      {
+        "image_id": 0,
+        "item_id": "s000009-i000000-o000004",
+        "object_id": 4,
+        "scene_id": 9
+      },
+      {
+        "image_id": 1,
+        "item_id": "s000009-i000001-o000004",
+        "object_id": 4,
+        "scene_id": 9
+      },
+      {
+        "image_id": 0,
+        "item_id": "s000012-i000000-o000005",
+        "object_id": 5,
+        "scene_id": 12
+      },
+      {
+        "image_id": 1,
+        "item_id": "s000012-i000001-o000005",
+        "object_id": 5,
+        "scene_id": 12
+      },
+      {
+        "image_id": 0,
+        "item_id": "s000015-i000000-o000006",
+        "object_id": 6,
+        "scene_id": 15
+      },
+      {
+        "image_id": 1,
+        "item_id": "s000015-i000001-o000006",
+        "object_id": 6,
+        "scene_id": 15
+      }
+    ],
+    "scene_ids": [
+      0,
+      3,
+      9,
+      12,
+      15
+    ],
+    "workload_sha256": "dd9f9c4ce9b9ca380614064f58e332661aee9ce63c9602918d52ae391267dfb3"
+  },
+  "mask_contract": {
+    "background_value": 0,
+    "bbox_semantics": "tight_half_open_xyxy",
+    "connected_components_connectivity": 8,
+    "coverage_denominator": "frame_pixels",
+    "foreground_value": 255,
+    "format": "PNG",
+    "mode": "L"
+  },
+  "namespace": "pose_accuracy_recovery_prep.instance_proposal_v1",
+  "prior_no_go": {
+    "immutable": true,
+    "receipt_sha256": "ba744c3e62ede30356ad79dc4ccee710d2585a0cfcf1e65b3f50675ba8eebda5",
+    "rerun_permitted": false,
+    "result_tuning_permitted": false
+  },
+  "proposal_policy": {
+    "prompt_source": null,
+    "proposal_source": "independent_rgb_instance_proposals",
+    "ranking_algorithm_id": "cad-similarity_then_proposal-score_then_stability_v1",
+    "ranking_order": [
+      "cad_similarity_desc",
+      "proposal_score_desc",
+      "mask_stability_desc",
+      "proposal_index_asc"
+    ],
+    "score_tuning_permitted": false,
+    "selection": "frozen_rank_1_for_target_object"
+  },
+  "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-proposal.v1",
+  "protocol_lock_sha256": "e50e61f6fea430a81e916a648fdd1bfa4e111a28f3be15287bd571d6d046fd81",
+  "remote_audit": {
+    "available_runtime": [
+      "segment-anything-vit-b-excluded-prior-no-go",
+      "torchvision"
+    ],
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "host_role": "GPU-A",
+    "missing_runtime": [
+      "cnos_or_sam6d_source",
+      "cad_conditioned_checkpoint",
+      "cad_renderer",
+      "cad_render_descriptors",
+      "independent_instance_proposal_runtime"
+    ],
+    "observed_at": "2026-08-18T00:25:06+08:00",
+    "safe_cad_count": 5,
+    "status": "RUNTIME_NOT_READY"
+  },
+  "role": "DEVELOPMENT_ONLY",
+  "runtime_requirements": {
+    "backend_family": "CAD_CONDITIONED_INSTANCE_PROPOSAL",
+    "checkpoint_sha256_required": true,
+    "execution_ready_at_audit": false,
+    "renderer_and_descriptor_locks_required": true,
+    "runtime_lock_schema": "poseloop.pose-accuracy-recovery.instance-proposal-runtime-lock.v1",
+    "source_commit_required": true
+  },
+  "schema_version": "poseloop.pose-accuracy-recovery.instance-proposal-protocol.v1",
+  "state": "PREFROZEN_RUNTIME_NOT_READY_AT_AUDIT"
+}

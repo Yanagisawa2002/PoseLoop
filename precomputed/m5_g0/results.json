@@ -1,0 +1,337 @@
+{
+  "claim_boundary": "Synthetic only; no real-video, FoundationPose, official BOP benchmark, robot-control, or hardware claim.",
+  "classification": "NO-GO",
+  "criteria": {
+    "asymmetric_guardrails": {
+      "lag_worsening_frames": 0.0,
+      "pass": true,
+      "rotation_degradation": {
+        "comparator_zero": false,
+        "pass": true,
+        "threshold": 0.03,
+        "value": 0.0
+      },
+      "translation_degradation": {
+        "comparator_zero": false,
+        "pass": true,
+        "threshold": 0.03,
+        "value": 0.0
+      },
+      "values": {
+        "STANDARD_SE3_CT": {
+          "median_max_direction_lag_frames": 1.0,
+          "rotation_rmse_deg": 0.9960405037686156,
+          "translation_rmse_m": 0.0025715976631855344
+        },
+        "SYMQUOT_CT": {
+          "median_max_direction_lag_frames": 1.0,
+          "rotation_rmse_deg": 0.9960405037686156,
+          "translation_rmse_m": 0.0025715976631855344
+        }
+      }
+    },
+    "continuous_observability": {
+      "axial_velocity_rms_rad_s": {
+        "STANDARD_SE3_CT": 8.501954503352902,
+        "SYMQUOT_CT": 0.0005186830322874675
+      },
+      "pass": true,
+      "reduction_vs_standard": {
+        "comparator_zero": false,
+        "pass": true,
+        "threshold": 0.8,
+        "value": 0.9999389924949512
+      },
+      "track_explosion_count": 0,
+      "unobservable_yaw_accuracy_claimed": false
+    },
+    "dynamic_symmetric_guardrail": {
+      "best_non_oracle_baseline_lag_frames": 1.0,
+      "median_max_lag_frames": {
+        "NEAREST_REPRESENTATIVE_CT": 1.0,
+        "STANDARD_SE3_CT": 1.0,
+        "SYMQUOT_CT": 1.0
+      },
+      "pass": true,
+      "symquot_worsening_frames": 0.0
+    },
+    "numerical_runtime_and_contract": {
+      "failed_symquot_trajectory_count": 0,
+      "hidden_truth_access": false,
+      "identical_measurement_streams": true,
+      "nonfinite_symquot_output_value_count": 0,
+      "nonfinite_symquot_uncertainty_value_count": 0,
+      "p95_limit_s": 0.01,
+      "p95_symquot_cpu_latency_s": 0.0005499000000000001,
+      "pass": true
+    },
+    "outlier_diagnostic": {
+      "formal_classification_gate": false,
+      "scope": "OUTLIER_BURST and COMBINED across all symmetry classes",
+      "values": {
+        "NEAREST_REPRESENTATIVE_CT": {
+          "accepted_outlier_frame_count": 0.0,
+          "evaluation_failure_count": 0,
+          "injected_frame_rejection_rate": 1.0,
+          "mean_contamination_duration_frames": 0.0,
+          "median_maximum_error_after_onset": 0.49186922556710316,
+          "median_recovery_frames_after_burst": 0.0,
+          "recovery_failure_count": 0,
+          "recovery_failure_rate": 0.0,
+          "rejected_outlier_frame_count": 2304.0,
+          "trajectory_count": 768
+        },
+        "RAW_HOLD": {
+          "accepted_outlier_frame_count": 2304.0,
+          "evaluation_failure_count": 0,
+          "injected_frame_rejection_rate": 0.0,
+          "mean_contamination_duration_frames": 0.0,
+          "median_maximum_error_after_onset": 5.164063824377272,
+          "median_recovery_frames_after_burst": 0.0,
+          "recovery_failure_count": 0,
+          "recovery_failure_rate": 0.0,
+          "rejected_outlier_frame_count": 0.0,
+          "trajectory_count": 768
+        },
+        "STANDARD_SE3_CT": {
+          "accepted_outlier_frame_count": 107.0,
+          "evaluation_failure_count": 0,
+          "injected_frame_rejection_rate": 0.9535590277777778,
+          "mean_contamination_duration_frames": 0.1953125,
+          "median_maximum_error_after_onset": 0.5352245631404215,
+          "median_recovery_frames_after_burst": 0.0,
+          "recovery_failure_count": 0,
+          "recovery_failure_rate": 0.0,
+          "rejected_outlier_frame_count": 2197.0,
+          "trajectory_count": 768
+        },
+        "SYMQUOT_CT": {
+          "accepted_outlier_frame_count": 0.0,
+          "evaluation_failure_count": 0,
+          "injected_frame_rejection_rate": 1.0,
+          "mean_contamination_duration_frames": 0.0,
+          "median_maximum_error_after_onset": 0.49186922556710316,
+          "median_recovery_frames_after_burst": 0.0,
+          "recovery_failure_count": 0,
+          "recovery_failure_rate": 0.0,
+          "rejected_outlier_frame_count": 2304.0,
+          "trajectory_count": 768
+        }
+      }
+    },
+    "symmetric_combined_accuracy": {
+      "degradation_vs_nearest": {
+        "comparator_zero": false,
+        "pass": true,
+        "threshold": 0.03,
+        "value": 0.0
+      },
+      "improvement_vs_standard": {
+        "comparator_zero": false,
+        "pass": true,
+        "threshold": 0.15,
+        "value": 0.16222881442119755
+      },
+      "median_errors": {
+        "NEAREST_REPRESENTATIVE_CT": 0.291155223371368,
+        "STANDARD_SE3_CT": 0.3475354946353444,
+        "SYMQUOT_CT": 0.291155223371368
+      },
+      "pass": true
+    },
+    "symmetric_dropout_10": {
+      "improvement_vs_standard": {
+        "comparator_zero": false,
+        "pass": false,
+        "threshold": 0.2,
+        "value": -0.003597456233740597
+      },
+      "median_first_accepted_errors": {
+        "STANDARD_SE3_CT": 0.4617417539096416,
+        "SYMQUOT_CT": 0.4634028496606222
+      },
+      "pass": false
+    },
+    "symmetric_switch_jump_reduction": {
+      "conditions": [
+        {
+          "jump_totals": {
+            "NEAREST_REPRESENTATIVE_CT": 0.0,
+            "STANDARD_SE3_CT": 703.0,
+            "SYMQUOT_CT": 0.0
+          },
+          "pass": false,
+          "reduction_vs_nearest": {
+            "comparator_zero": true,
+            "pass": false,
+            "threshold": 0.3,
+            "value": null
+          },
+          "reduction_vs_standard": {
+            "comparator_zero": false,
+            "pass": true,
+            "threshold": 0.8,
+            "value": 1.0
+          },
+          "stress_family": "REPRESENTATION_SWITCH",
+          "symmetry_class": "C2"
+        },
+        {
+          "jump_totals": {
+            "NEAREST_REPRESENTATIVE_CT": 0.0,
+            "STANDARD_SE3_CT": 598.0,
+            "SYMQUOT_CT": 0.0
+          },
+          "pass": false,
+          "reduction_vs_nearest": {
+            "comparator_zero": true,
+            "pass": false,
+            "threshold": 0.3,
+            "value": null
+          },
+          "reduction_vs_standard": {
+            "comparator_zero": false,
+            "pass": true,
+            "threshold": 0.8,
+            "value": 1.0
+          },
+          "stress_family": "COMBINED",
+          "symmetry_class": "C2"
+        },
+        {
+          "jump_totals": {
+            "NEAREST_REPRESENTATIVE_CT": 0.0,
+            "STANDARD_SE3_CT": 463.0,
+            "SYMQUOT_CT": 0.0
+          },
+          "pass": false,
+          "reduction_vs_nearest": {
+            "comparator_zero": true,
+            "pass": false,
+            "threshold": 0.3,
+            "value": null
+          },
+          "reduction_vs_standard": {
+            "comparator_zero": false,
+            "pass": true,
+            "threshold": 0.8,
+            "value": 1.0
+          },
+          "stress_family": "REPRESENTATION_SWITCH",
+          "symmetry_class": "C4"
+        },
+        {
+          "jump_totals": {
+            "NEAREST_REPRESENTATIVE_CT": 0.0,
+            "STANDARD_SE3_CT": 402.0,
+            "SYMQUOT_CT": 0.0
+          },
+          "pass": false,
+          "reduction_vs_nearest": {
+            "comparator_zero": true,
+            "pass": false,
+            "threshold": 0.3,
+            "value": null
+          },
+          "reduction_vs_standard": {
+            "comparator_zero": false,
+            "pass": true,
+            "threshold": 0.8,
+            "value": 1.0
+          },
+          "stress_family": "COMBINED",
+          "symmetry_class": "C4"
+        },
+        {
+          "jump_totals": {
+            "NEAREST_REPRESENTATIVE_CT": 0.0,
+            "STANDARD_SE3_CT": 1150.0,
+            "SYMQUOT_CT": 0.0
+          },
+          "pass": false,
+          "reduction_vs_nearest": {
+            "comparator_zero": true,
+            "pass": false,
+            "threshold": 0.3,
+            "value": null
+          },
+          "reduction_vs_standard": {
+            "comparator_zero": false,
+            "pass": true,
+            "threshold": 0.8,
+            "value": 1.0
+          },
+          "stress_family": "REPRESENTATION_SWITCH",
+          "symmetry_class": "CONTINUOUS_AXIAL"
+        },
+        {
+          "jump_totals": {
+            "NEAREST_REPRESENTATIVE_CT": 0.0,
+            "STANDARD_SE3_CT": 975.0,
+            "SYMQUOT_CT": 0.0
+          },
+          "pass": false,
+          "reduction_vs_nearest": {
+            "comparator_zero": true,
+            "pass": false,
+            "threshold": 0.3,
+            "value": null
+          },
+          "reduction_vs_standard": {
+            "comparator_zero": false,
+            "pass": true,
+            "threshold": 0.8,
+            "value": 1.0
+          },
+          "stress_family": "COMBINED",
+          "symmetry_class": "CONTINUOUS_AXIAL"
+        }
+      ],
+      "pass": false
+    }
+  },
+  "measurement_identity": {
+    "identical_stream_trajectory_count": 2304,
+    "mismatch_count": 0,
+    "mismatched_trajectory_ids": [],
+    "pass": true,
+    "trajectory_count": 2304
+  },
+  "plots": [
+    "timeline_c2_representation_switch.png",
+    "timeline_continuous_axial.png",
+    "timeline_dropout_10.png",
+    "timeline_outlier_burst.png",
+    "timeline_direction_reversal.png",
+    "aggregate_quotient_error_by_symmetry.png",
+    "aggregate_jump_counts.png",
+    "aggregate_dropout_recovery.png",
+    "aggregate_asymmetric_guardrail.png",
+    "aggregate_runtime_distribution.png"
+  ],
+  "record_type": "m5_g0_compact_results",
+  "representative_rule": "middle seed in sorted sealed-seed order",
+  "representative_trajectory_ids": {
+    "c2_outlier_burst": "sea-c2-constant_twist-outlier_burst-12",
+    "c2_representation_switch": "sea-c2-constant_twist-representation_switch-12",
+    "c4_direction_reversal": "sea-c4-direction_reversal-nominal-12",
+    "c4_dropout_10": "sea-c4-constant_twist-dropout_10-12",
+    "continuous_representation_switch": "sea-continuous_axial-constant_twist-representation_switch-12"
+  },
+  "schema_version": 1,
+  "sealed_result_row_count": 9216,
+  "sealed_trajectory_count": 2304,
+  "selected_config_ids": {
+    "NEAREST_REPRESENTATIVE_CT": "balanced",
+    "STANDARD_SE3_CT": "balanced",
+    "SYMQUOT_CT": "balanced"
+  },
+  "source_hashes": {
+    "acceptance": "eb9e21c8deb89fd7855ae6ecb61abc2b465c9dad786cca539eed1d8d0103bc67",
+    "aggregate_statistics": "ae79d39e41c30508940889f9ec4e0fc93b0f321ee1abf770c9b01f8fdeac0c07",
+    "representative_traces": "e2a71d09afc7f6f54c7bfab55533d27e3500219ebf56015f3a37cfb38e3508b4",
+    "sealed_results": "7087462e06a7d9b0ee0678328617432d8f1f40bcc5ab1d5dbe69d81e523492a1",
+    "selected_configs": "2ea13e644f0360c1796b5ec141b48a56027605f7f4043c594fc4dc1ab8df1a16"
+  },
+  "title": "PoseLoop M5-G0 Synthetic Mechanism Validation"
+}

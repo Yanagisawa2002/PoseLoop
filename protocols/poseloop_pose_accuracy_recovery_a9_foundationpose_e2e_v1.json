@@ -1,0 +1,101 @@
+{
+  "schema_version": "poseloop.a-r9-foundationpose-e2e.protocol.v1",
+  "protocol_id": "poseloop.pose-accuracy-recovery.a-r9-foundationpose-e2e.v1",
+  "dataset_role": "ALREADY_CONSUMED_REAL_DEVELOPMENT",
+  "dataset": {
+    "family": "XYZ-IBD",
+    "sensor": "realsense",
+    "split": "val",
+    "a9_dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+    "a9_prediction_manifest_sha256": "dded85d8d9bec68f3c6d80343183635bd80e738a28e9a93a87531d93fbe7441b",
+    "a9_protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+    "frame_count": 25,
+    "ground_truth_instance_count": 770,
+    "scenes": [10, 25, 30, 40, 65],
+    "image_ids": [0, 10, 20, 30, 40],
+    "scene_object_ids": {
+      "10": 2,
+      "25": 1,
+      "30": 5,
+      "40": 4,
+      "65": 6
+    },
+    "scene9_read_permitted": false
+  },
+  "upstream_detector": {
+    "implementation_commit": "958d1a66857e2ac928cac1eb34d825e65121c64d",
+    "result_commit": "f2eb9047386c014de1840485868966504c11e4af",
+    "checkpoint_sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+    "operating_score_threshold": 0.25,
+    "expected_ranked_prediction_count": 997,
+    "expected_operating_prediction_count": 820,
+    "threshold_tuning_permitted": false
+  },
+  "foundationpose": {
+    "repository": "https://github.com/NVlabs/FoundationPose.git",
+    "commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "refiner_checkpoint": {
+      "relative_path": "weights/2023-10-28-18-33-37/model_best.pth",
+      "size_bytes": 68220109,
+      "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60"
+    },
+    "scorer_checkpoint": {
+      "relative_path": "weights/2024-01-11-20-02-45/model_best.pth",
+      "size_bytes": 190229389,
+      "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26"
+    },
+    "refiner_config_sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686",
+    "scorer_config_sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f",
+    "nvdiffrast_commit": "253ac4fcea7de5f396371124af597e6cc957bfae",
+    "pytorch3d_commit": "3143b3baf8ef8b1023ed76f225af59e2e8a71e06",
+    "iterations": 5,
+    "seed": 0,
+    "candidate_count": 252,
+    "resource_batches": {
+      "warp": 32,
+      "refine": 32,
+      "score_data": 8,
+      "score_feature": 32
+    },
+    "candidate_pruning_permitted": false,
+    "parameter_tuning_permitted": false
+  },
+  "runtime_boundary": {
+    "prediction_before_label_open_required": true,
+    "runtime_gt_path_open_count": 0,
+    "runtime_evaluator_path_open_count": 0,
+    "runtime_official_scorer_run_count": 0,
+    "task_target_object_id_is_public_input": true,
+    "proposal_to_gt_association_permitted": false
+  },
+  "evaluation": {
+    "mask_iou_threshold": 0.5,
+    "joint_pose_threshold": {
+      "mssd_fraction_of_diameter": 0.1,
+      "mspd_pixels": 10.0
+    },
+    "mssd_ar_thresholds_fraction_of_diameter": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
+    "mspd_ar_thresholds_pixels": [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+    "claim": "custom already-consumed development pipeline metric; not official BOP leaderboard AR or AP"
+  },
+  "promotion_gate": {
+    "runtime_completion_fraction_min": 0.98,
+    "joint_pose_recall_min": 0.25,
+    "joint_pose_ap_min": 0.2,
+    "combined_ar_mssd_mspd_min": 0.25,
+    "positive_scene_count_min": 4,
+    "per_scene_joint_recall_positive_threshold": 0.1,
+    "all_conditions_required": true
+  },
+  "failure_policy": {
+    "oracle_diagnostic_run_limit": 1,
+    "rescue_run_limit": 1,
+    "oracle_samples_per_scene": 2,
+    "oracle_may_open_labels_only_after_primary_receipt": true,
+    "rescue_must_be_oracle_causal": true,
+    "threshold_tuning_for_rescue_permitted": false,
+    "second_rescue_permitted": false
+  },
+  "sealed_claim_permitted": false,
+  "scene9_replay_permitted": false
+}

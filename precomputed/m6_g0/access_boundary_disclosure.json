@@ -1,0 +1,16 @@
+{
+  "record_type": "m6_g0_access_boundary_disclosure",
+  "schema_version": 1,
+  "strict_m3_access_boundary_passed": false,
+  "m3_raw_artifact_structured_content_accessed": false,
+  "m3_target_level_rows_accessed": false,
+  "m3_target_ids_accessed": false,
+  "m3_target_labels_or_predictions_accessed": false,
+  "m3_candidate_values_accessed": false,
+  "m3_per_target_metrics_accessed": false,
+  "m3_object_level_report_context_displayed": true,
+  "affected_path": "reports/m3_active_budget.md",
+  "m3_information_used_for_features_models_thresholds_folds_or_decisions": false,
+  "required_consequence": "SIGNAL GO is prohibited and the M3 holdout remains unauthorized.",
+  "note": "Read-only documentation searches returned broader context than intended. No raw artifacts/m3 file was parsed, no displayed M3 outcome value is reproduced here, and all M6 computation remains M2-only."
+}

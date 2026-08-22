@@ -1,0 +1,107 @@
+{
+  "schema_version": "poseloop.r4a.development-final-evaluation.protocol.v1",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-final-evaluation.v1",
+  "created_utc": "2026-08-16T18:20:00Z",
+  "state": "frozen_before_gpu_c_prediction_bundle_open_and_before_any_official_development_evaluator_call",
+  "role": "DEVELOPMENT_ONLY",
+  "upstream_r4a": {
+    "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development.multi-object.v3",
+    "protocol_sha256": "cd2cfb54486af547e942be633daa10d9233b3724be1edb2b439554767ee52bc6",
+    "source_commit": "4eebb040cd047ab85783c06448bf82f23367e534",
+    "gpu_a_commit": "5a916262c8aee215304af1101e123ed1feb25b37",
+    "exact_selection_sha256": "c3bcfb24287f3a76742e8f2f3a103e6eca80cdffdf0dc4c77cf7b79f5fd35975",
+    "no_gt_archive_sha256": "806b4c3c7d297b533ce79e7db0efbccc409d93d917fbf5dae72b7a3a6935235a",
+    "no_gt_archive_bytes": 16549946,
+    "transfer_descriptor_sha256": "8d4196315bdcf354d26c04070ec047b17ea3992ce6fb3b46b9c3b56af77fce4c",
+    "workload_sha256": "dd9f9c4ce9b9ca380614064f58e332661aee9ce63c9602918d52ae391267dfb3",
+    "coco_sha256": "77e74506e80d4ac0851b72f5663657ec9a1ad619c3adc087e359b7bd9b231454",
+    "evaluator_only_archive_sha256": "86c5ee3bf9d44ea985133b9c85c5541c1942a2b5dc8984101a07351abe2d5d9d",
+    "evaluator_only_archive_bytes": 819536
+  },
+  "upstream_r4c": {
+    "execution_commit": "841e4c0198e45f651236f9cd125a168a831b5222",
+    "execution_protocol_sha256": "cde77b31db875cedd5ce85c0e2f8e3e17095f6d9bdd0ab71b7ab2a1ce508acbc",
+    "adapter_protocol_sha256": "228361ab8d19af4c8a3f8378e3cd1ff27b4116971c65e52a14fdf446bada0a97",
+    "adapter_lock_sha256": "aec18814e54109a16eb74d7fa5d7a9f18f70afca2d2d95ab4020af2743059811",
+    "flat_camera_intrinsics_amendment_commit": "4dbcd4adb0453c5664df118c9a271a9c7768a657",
+    "flat_camera_intrinsics_amendment_protocol_sha256": "7ddf93d6d050e10d5b47944ce7545967faa0a94ca1b9534ccc2bec3e3195115f",
+    "flat_camera_intrinsics_amendment_lock_sha256": "cf6f67bec88cbc5cc0b4ebe41f28c4fb20543d624ded55453f52bc6228dc34a8",
+    "required_output": {
+      "item_count": 10,
+      "coverage": 1.0,
+      "status": "success",
+      "candidate_limit": 252,
+      "pose_hypothesis_count": 252,
+      "label_access_count": 0,
+      "official_scorer_run": false,
+      "finite_legal_se3": true
+    }
+  },
+  "single_view": {
+    "definition": "one frozen c252 FoundationPose model-to-camera prediction per manifest item",
+    "result_order": "upstream workload order",
+    "missing_behavior": "explicit failure and infinite ADD_or_ADI; never omitted"
+  },
+  "multi_view": {
+    "group_key": ["scene_id", "object_id"],
+    "world_pose_conversion": "T_world_model = inverse(T_camera_world) @ T_camera_model",
+    "fixed_medoid_cost": "translation_distance_m + rotation_geodesic_radians * 0.001",
+    "tie_break": "lowest detection_index",
+    "target_projection": "T_camera_model_target = T_camera_world_target @ T_world_model_medoid",
+    "emit_policy": "one prediction for every original manifest item",
+    "score": 1.0,
+    "score_or_gt_guided_selection": false
+  },
+  "toolkit": {
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "eval_bop24_pose_sha256": "d3aa46b4a67b563eb11772636e1532a206e1bbbce20d23b6c4d50c5d30c4a1d4",
+    "supported_errors": ["mssd", "mspd"],
+    "workers": 8
+  },
+  "bop24_development": {
+    "entrypoint": "scripts/eval_bop24_pose.py",
+    "variant_order": ["single_view", "multi_view"],
+    "maximum_calls_per_variant": 1,
+    "continue_after_failure": true,
+    "result_filenames": {
+      "single_view": "poseloopr4av3single_xyzibd-train.csv",
+      "multi_view": "poseloopr4av3multi_xyzibd-train.csv"
+    },
+    "targets_filename": "r4a_v3_targets_bop24.json",
+    "materialization": "isolated evaluator-only BOP_PATH/xyzibd/train using exact filtered official train_pbr labels renamed to XYZ sensor annotation filenames without changing values",
+    "claim": "official pinned BOP24 calculation on a custom exact DEVELOPMENT_ONLY subset; not an official train/test leaderboard result"
+  },
+  "add_adi": {
+    "symmetric_rule": "ADI iff models_info declares any discrete or continuous symmetry; otherwise ADD",
+    "units": "millimetres",
+    "recall_threshold": "0.1 * official model diameter",
+    "group_by": ["object_id", "scene_id"],
+    "missing_prediction_error": "infinity"
+  },
+  "visualization": {
+    "one_png_per_manifest_item": true,
+    "panel_order": ["input_rgb_plus_predicted_mask", "single_view_cad_plus_axes", "multi_view_cad_plus_axes"],
+    "video_fps": 2.0,
+    "label_free": true
+  },
+  "development_gate": {
+    "coverage_required": 1.0,
+    "finite_legal_se3_required": true,
+    "multi_bop24_map_nonzero_required": true,
+    "multi_minus_single_bop24_map_strictly_positive_required": true,
+    "multi_minus_single_mean_add_adi_mm_strictly_negative_required": true,
+    "failure_action": "NO_GO_stop_without_prediction_or_checkpoint_tuning"
+  },
+  "immutable_boundaries": {
+    "xyzibd_val_access_permitted": false,
+    "xyzibd_val_evaluator_permitted": false,
+    "prediction_checkpoint_candidate_or_input_change_permitted": false,
+    "score_guided_selection_or_rerun_permitted": false,
+    "official_evaluator_rerun_after_success_or_failure_permitted": false,
+    "evaluator_bundle_transfer_to_gpu_c_permitted": false,
+    "push_merge_tag_permitted": false,
+    "release_or_delete_instance_or_disk_permitted": false,
+    "gpu_a_poweroff_permitted_only_after_local_final_archive_hash_verification": true
+  }
+}

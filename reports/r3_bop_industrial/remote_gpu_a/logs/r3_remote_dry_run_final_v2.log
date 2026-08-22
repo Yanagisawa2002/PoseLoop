@@ -1,0 +1,5 @@
+R3 dry-run status: blocked
+receipt: /root/autodl-tmp/poseloop_r3_20260816_01a003cf/evidence/r3_remote_dry_run_final_v2.json
+blocker: missing public dataset inputs: test_targets_bop19.json, test_targets_bop24.json, val
+blocker: missing prediction roles: coco_predictions, predicted_association, single_view_pose, multi_view_pose, provenance
+blocker: could not verify declared R3 baseline ancestry

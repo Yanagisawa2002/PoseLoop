@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-m5-r6a-ycbv-sealed-v1",
+  "stage_id": "M5-R6A-S1",
+  "purpose": "Perform one final outcome-blind YCB-V RGB-D validation of the RU-APC-developed measurement-first confidence gate.",
+  "development_freeze": {
+    "protocol_id": "poseloop-m5-r6a-v1",
+    "result_commit": "38d861f",
+    "result_path": "artifacts/r2/m5_r6a/development_result.json",
+    "result_sha256": "1ee295ccc8aa2c2c06675b30694819e01e5ca23b61bdffb7d60190a3b5247aa7",
+    "track_results_sha256": "78b5ad6cfe873ffabc0691c8f47fe9069f48988be96f5401270e7ab326d5fc45",
+    "status": "PASS_M5_R6A_DEVELOPMENT",
+    "cross_fitted_macro_object_relative_improvement": 0.2133388270130856,
+    "one_sided_90pct_lower_relative_improvement": 0.1766089383963702,
+    "missing_frame_uncertainty_error_spearman": 0.4164825878233495,
+    "fold_winner_counts": {
+      "measurement_first": 14
+    },
+    "modal_candidate_id": "measurement_first"
+  },
+  "source": {
+    "dataset": "BOP YCB-V",
+    "license": "ycbv-license",
+    "official_repository": "https://huggingface.co/datasets/bop-benchmark/ycbv",
+    "physical_object_overlap_with_ruapc": 0,
+    "object_ids": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+    "scene_discovery": "Use every numeric scene directory supplied under test/ by the hash-pinned official ycbv_test_all.zip; sort by integer scene ID.",
+    "archives": {
+      "base": {
+        "filename": "ycbv_base.zip",
+        "size_bytes": 15805,
+        "sha256": "98440f8bd403100b21cf11a6729fabe8b3d5ce714472edc57a18b7f1fcd4bb18"
+      },
+      "models": {
+        "filename": "ycbv_models.zip",
+        "size_bytes": 524634729,
+        "sha256": "1e517a9b513cadb8eaf406ac3ce3c5f1d6fc4a80161c866b4e2a73d13de5e554"
+      },
+      "sealed": {
+        "filename": "ycbv_test_all.zip",
+        "size_bytes": 14969383039,
+        "sha256": "fea2ab5f18aba1857acd320827cec10d9dbf258e4940ea4b52f5dd51cb2356a7"
+      }
+    },
+    "clock": "Order frames by BOP image ID within each scene and use a nominal 30 Hz clock; hardware timestamps are unavailable.",
+    "coordinate_frame": "Model-to-camera.",
+    "association": "Oracle object identity from scene_gt.json. A repeated instance of the same target object in one frame is forbidden.",
+    "source_encoding_adapter": {
+      "rotation": "Use the shared strict BOP parser when it passes. Otherwise permit nearest-SO(3) SVD projection only inside the predeclared LM-O-derived bounds: orthogonality infinity norm <= 0.02, determinant > 0, singular values in [0.99, 1.01], projected determinant +1, projection max-absolute correction <= 0.01, and Frobenius correction <= 0.02.",
+      "visible_mask_metadata": "The decoded PNG is authoritative. Accept archived px_count_visib only when actual-minus-declared differs by at most two pixels; reject larger differences before selection.",
+      "adapter_selection_reads_pose_error": false
+    },
+    "limitations": [
+      "nominal timing",
+      "oracle target association",
+      "ground-truth visible masks as isolated pose-estimator inputs",
+      "camera-relative rather than world-frame motion",
+      "sealed replay rather than live hardware"
+    ]
+  },
+  "selection": {
+    "image_height": 480,
+    "image_width": 640,
+    "minimum_mask_area_fraction": 0.001,
+    "minimum_valid_depth_ratio": 0.5,
+    "minimum_valid_depth_pixels": 4,
+    "observation_available": "A GT-present target frame is available only when decoded visible-mask area is at least 0.001 of the image, valid-depth ratio inside the mask is at least 0.5, and at least four visible masked depth pixels are valid.",
+    "gt_absent_frame_policy": "Exclude from replay because pose error is not evaluable; never count it as natural missing.",
+    "artificial_frame_deletion": false,
+    "window_length_frames": 128,
+    "window_rule": "For each of the 21 target object IDs, split GT-present rows by scene and source-frame continuity. Among eligible 128-frame windows starting available, choose the window with most naturally unavailable frames and break ties by lowest scene ID then earliest source image ID.",
+    "eligible_window": {
+      "available_frame_count_min": 64,
+      "natural_missing_frame_count_min": 0
+    },
+    "track_rule": "Select at most one deterministic window per object. Retain every eligible object and require at least 14 represented objects/tracks.",
+    "missing_gap_frame_minimums": {
+      "short_gap_1_2": 8,
+      "medium_gap_3_7": 16,
+      "long_gap_8_plus": 8
+    },
+    "selection_reads_method_prediction_or_pose_error": false,
+    "preinitialization": "Every selected window starts with an available FoundationPose measurement."
+  },
+  "methods": {
+    "baseline": {
+      "method": "NEAREST_REPRESENTATIVE_CT",
+      "configuration_id": "nearest_smooth",
+      "configuration_source": "artifacts/r1/m5_r1/frozen_phase1_configurations.json",
+      "role": "Sole persistent pose-state owner for baseline and proposed outputs."
+    },
+    "proposed": {
+      "method": "MEASUREMENT_FIRST_OBJECT_CONFIDENCE_GATE",
+      "candidate_id": "measurement_first",
+      "selection_source": "Modal winner in all 14 M5-R6A leave-one-object-out folds.",
+      "configuration": {
+        "translation_scale_m": 0.01,
+        "rotation_scale_deg": 5.0,
+        "blend_gain": 1.0,
+        "minimum_measurement_confidence": 0.35,
+        "dropout_decay_frames": 3.0,
+        "quality_floor": 0.05,
+        "anchor_staleness_scale": 5.0,
+        "motion_innovation_scale_floor": 1.0
+      },
+      "raw_foundationpose_score_policy": "Record top score and margin for audit, but exclude both from filtering and confidence.",
+      "forced_reacquisition_policy": "Forbidden. No counter or measurement can take persistent pose ownership.",
+      "sealed_candidate_reselection": false
+    }
+  },
+  "evaluation": {
+    "primary_loss": "Per-frame sqrt((translation_m/0.01)^2 + (symmetry-aware rotation_deg/5)^2).",
+    "primary_aggregation": "One track per represented object followed by equal-weight macro mean across all selected objects.",
+    "missing_frame_loss": "The same macro-object aggregation restricted to naturally unavailable GT-present frames and objects with at least one such frame.",
+    "confidence_metric": "Spearman correlation between proposed uncertainty and proposed normalized pose error on all naturally unavailable frames.",
+    "bootstrap": {
+      "seed": 5606,
+      "resamples": 5000,
+      "unit": "Paired hierarchical resampling of represented objects, then complete tracks within sampled objects.",
+      "reported_bound": "10th percentile of paired all-frame relative macro-object improvement."
+    },
+    "sealed_gate": {
+      "represented_object_count_min": 14,
+      "track_count_min": 14,
+      "missing_represented_object_count_min": 12,
+      "natural_missing_frame_count_min": 96,
+      "macro_object_relative_improvement_min": 0.05,
+      "natural_missing_frame_relative_improvement_min": 0.0,
+      "one_sided_hierarchical_bootstrap_90pct_lower_improvement_min": 0.0,
+      "missing_frame_uncertainty_error_spearman_min": 0.2,
+      "missing_anchor_mismatch_count_max": 0,
+      "unsafe_forced_reacquisition_count_max": 0,
+      "nonfinite_output_count_max": 0,
+      "all_conditions_required": true
+    }
+  },
+  "single_open_policy": {
+    "archive_and_labels_unavailable_at_freeze": true,
+    "first_label_open": "The committed builder's first read of any YCB-V scene_gt.json or scene_gt_info.json is the sealed label open.",
+    "evaluation_invocation_count_before_open": 0,
+    "reselection_or_retuning_after_open": false,
+    "failure_policy": "Any input-feasibility, inference-completeness, numerical, structural, or uncertainty gate failure is the final sealed result. Do not alter the method, candidate, support rule, selection, metric, or gate on YCB-V."
+  },
+  "claim_boundary": {
+    "allowed_if_passed": "One object-disjoint YCB-V RGB-D replay validation with nominal timing, oracle association, GT visible masks, deterministic outcome-blind track selection, fixed measurement-first candidate, exact nearest missing fallback, and object-local uncertainty.",
+    "forbidden": [
+      "hardware-timestamp validation",
+      "deployable association",
+      "detector or segmenter robustness",
+      "live robot validation",
+      "claiming missing-frame pose improvement from structural equality alone",
+      "any YCB-V-driven method or threshold adjustment",
+      "a second sealed evaluator open"
+    ]
+  },
+  "execution_order": [
+    "commit this protocol, builder, sealed inference runner, sealed evaluator, and tests while every YCB-V archive and extracted directory is absent",
+    "download and verify the three hash-pinned YCB-V archives",
+    "extract official models and test data",
+    "invoke the builder once; an input-feasibility failure is final",
+    "run label-blind FoundationPose inference once on every available selected frame",
+    "validate inference completeness and integrity without reading evaluator labels",
+    "invoke the fixed-candidate sealed evaluator once",
+    "record the final pass or failure without retuning"
+  ]
+}

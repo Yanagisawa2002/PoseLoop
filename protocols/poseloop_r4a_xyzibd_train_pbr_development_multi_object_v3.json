@@ -1,0 +1,143 @@
+{
+  "schema_version": "poseloop.r4a.development-multi-object.protocol.v3",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development.multi-object.v3",
+  "created_utc": "2026-08-16T16:20:00Z",
+  "state": "frozen_before_any_new_v3_development_id_label_access",
+  "required_branch": "codex/poseloop/r4a-development-coverage-geometry",
+  "role_declaration": {
+    "role": "DEVELOPMENT_ONLY",
+    "dataset": "xyzibd",
+    "split": "train_pbr",
+    "distinct_from_consumed_split": "xyzibd/val",
+    "sealed_split_eligible": false,
+    "leaderboard_claim_eligible": false
+  },
+  "immutable_v2_failure": {
+    "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-readiness.v2",
+    "protocol_sha256": "8f7553acfb4db10427c961b1fc4be0717d49776e2488c996242401958f143fa8",
+    "prefreeze_receipt_sha256": "951f65a3dba33223cedd0cd6d987f404ff2c1ecd1252f295da71fe091d15c1bd",
+    "job_log_sha256": "3bc9dce602d6fdfa8209f7833c9cddc09221b7bb9508896d3b0257d7a97eb280",
+    "job_exit_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "failure_receipt_sha256": "125a0aca441470d4377ca327181717a0454a633c399a70102689df700a2d5b8c",
+    "failure_receipt_lock_sha256": "a5dd0a7ded625693d47eeda487a1ecef27bda031265317de05ec28b6caa3cb5e",
+    "object_diagnosis_sha256": "ffd58c01d5775802ab2547f889ce38c88709a51a95e94c8adff13aac77cc78c7",
+    "exit_code": 1,
+    "failure_stage": "development_scene_object_grouping_gate",
+    "observed_object_ids": [11],
+    "rerun_permitted": false,
+    "immutable": true
+  },
+  "source_catalog": {
+    "sha256": "2ca0c82c2741a9e0a41a77362f7eb619dbd4b40baa85f74b724b3114ddc563e4",
+    "bytes": 640055050,
+    "mode": "zip_central_directory_names_sizes_crc_offsets_only"
+  },
+  "official_distribution": {
+    "repository": "bop-benchmark/xyzibd",
+    "revision": "4fe4671783172622313ac0c7182012cee618f217",
+    "archives": [
+      {
+        "filename": "xyzibd_train_pbr.z01",
+        "disk_index": 0,
+        "bytes": 37580963840,
+        "sha256": "fcf5d099258ba726f57905530042b28d8257f1aedf3dbbe2894f847cc3b48842",
+        "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.z01"
+      },
+      {
+        "filename": "xyzibd_train_pbr.zip",
+        "disk_index": 1,
+        "bytes": 34090250556,
+        "sha256": "004fd4e2ae9d7f0d6953634c6b06c72dac415c63f18984e06292fd807c721444",
+        "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.zip"
+      }
+    ]
+  },
+  "id_only_selection": {
+    "candidate_scene_ids": [0, 3, 9, 12, 15, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48],
+    "candidate_derivation": "sort all 45 catalog scene_gt scene IDs, partition into consecutive catalog-order blocks of three, take the first ID of each block",
+    "candidate_entry": "train_pbr/{scene_id:06d}/scene_gt.json",
+    "allowed_decoded_fields": ["top_level_image_id", "obj_id", "instance_ordinal"],
+    "forbidden_decoded_fields": ["cam_R_m2c", "cam_t_m2c", "visib_fract", "score", "pose_error"],
+    "pose_value_handling": "lexically_skip_value_without_numeric_conversion_or_export",
+    "object_order": "first_occurrence_by_candidate_scene_order_then_numeric_object_id",
+    "eligible_object_rule": "object_has_at_least_two_distinct_scene_image_pairs_in_scanned_prefix",
+    "combination_rule": "first five-object combination in encounter-index combination order whose earliest-two-pairs-per-object span_at_least_three_scenes",
+    "pair_order": "candidate_scene_order_then_numeric_image_id",
+    "instance_rule": "lowest_instance_ordinal_for_object_in_selected_scene_image",
+    "scan_stop": "first_candidate_prefix_with_a_valid_combination",
+    "required_object_count": 5,
+    "required_scene_count": 3,
+    "required_images_per_object": 2,
+    "maximum_selected_object_count": 5,
+    "maximum_selected_image_count": 10,
+    "maximum_selected_target_count": 10,
+    "maximum_candidate_scene_gt_entries": 15
+  },
+  "id_discovery_download_contract": {
+    "source_network_turbo_before_hf_access": true,
+    "whole_archive_download_permitted": false,
+    "http_range_required": true,
+    "maximum_compressed_entry_bytes": 67108864,
+    "maximum_network_bytes_including_headers": 100663296,
+    "range_chunk_bytes": 8388608,
+    "maximum_attempts_per_chunk": 4,
+    "retry_http_statuses": [429, 500, 502, 503, 504],
+    "retry_backoff_seconds": [2, 5, 10],
+    "short_body_retryable": true,
+    "persistent_chunk_cache": true,
+    "stop_if_range_is_ignored": true
+  },
+  "exact_asset_selection": {
+    "inference_roles": ["gray", "depth", "predicted_depth_component_mask", "selected_camera", "selected_public_cad"],
+    "evaluator_only_roles": ["selected_scene_gt", "selected_scene_gt_info", "models_info"],
+    "target_policy": "exactly_one_lowest_ordinal_instance_for_each_selected_object_scene_image_key",
+    "maximum_compressed_entry_bytes": 536870912,
+    "maximum_uncompressed_entry_bytes": 1073741824,
+    "maximum_network_bytes_including_headers": 671088640
+  },
+  "bundle_contract": {
+    "inference_bundle": {
+      "role": "NO_OBJECT_POSE_GT_INFERENCE",
+      "allowed": ["gray_loaded_as_rgb", "depth", "predicted_depth_component_mask", "camera_intrinsics_and_world_to_camera", "public_cad", "coco_rle", "manifest", "hash_receipts"],
+      "forbidden": ["cam_R_m2c", "cam_t_m2c", "scene_gt", "scene_gt_info", "visib_fract", "pose_error", "evaluator_output"],
+      "input_mask_disclosure": "label-blind deterministic depth-only foreground: center 3/4 ROI, valid-depth 0.35 quantile threshold, 5x5 morphological close, then stable connected component minimizing center_distance/max_dimension minus area/image_area",
+      "input_mask_source_commit": "9d75eb14fb0634490f8fe5de27a5d1138e0e7c66",
+      "label_access_count": 0
+    },
+    "evaluator_bundle": {
+      "role": "GPU_A_EVALUATOR_ONLY",
+      "must_not_leave_gpu_a": true,
+      "contains_exact_selected_object_pose_gt": true,
+      "contains_visibility_for_reporting_only": true
+    },
+    "deterministic_archive": true,
+    "archive_mtime": 0
+  },
+  "evaluation_contract": {
+    "manifest_coverage_required": 1.0,
+    "finite_legal_se3_required": true,
+    "group_by": ["object_id", "scene_id"],
+    "metrics": ["ADD_or_ADI_mean_mm", "ADD_or_ADI_median_mm", "ADD_or_ADI_recall_0.1d", "BOP24_development_mAP", "missing_rate", "failure_rate", "throughput"],
+    "baseline_policy": "frozen_v3_emitter_exact_key_join_with_missing_predictions_counted_as_failures",
+    "visualization": "before=input_gray_rgb_plus_input_mask_and_cad; after=prediction_cad_overlay_plus_axes"
+  },
+  "frozen_foundationpose": {
+    "execution_owner": "GPU-C",
+    "source_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "refiner_checkpoint_sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60",
+    "scorer_checkpoint_sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26",
+    "candidate_count": 252,
+    "chunk_size": 8,
+    "change_permitted": false
+  },
+  "immutable_boundaries": {
+    "xyzibd_val_access_permitted": false,
+    "xyzibd_val_evaluator_permitted": false,
+    "xyzibd_val_score_json_access_permitted": false,
+    "score_guided_pose_or_target_selection_permitted": false,
+    "foundationpose_setup_on_gpu_a_permitted": false,
+    "push_merge_tag_permitted": false,
+    "release_or_delete_instance_or_disk_permitted": false,
+    "gpu_a_poweroff_permitted_after_local_archive_hash_verification": true
+  }
+}

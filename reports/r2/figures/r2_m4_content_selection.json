@@ -1,0 +1,51 @@
+{
+  "diagnostic_summary": {
+    "continue_target_count": 72,
+    "micro_active_success_count": 48,
+    "micro_fixed_success_count": 47,
+    "micro_mean_utility_delta": 0.022222222222222223,
+    "r2_deviated_from_fixed_slot_2_count": 20,
+    "regression_count": 1,
+    "rescue_count": 2,
+    "utility_improved_count": 5,
+    "utility_regressed_count": 1,
+    "utility_tied_count": 66
+  },
+  "protocol_id": "poseloop-r2-v1",
+  "rule": "Select the two largest fixed-slot-2 failure to R2 success rescues with distinct objects when available, then the largest R2 regression; fill any missing category by largest absolute utility change. Stable ties use object ID then group ID.",
+  "schema_version": 1,
+  "selected": [
+    {
+      "active_slot": 3,
+      "active_success": true,
+      "active_utility": 0.95,
+      "delta_utility": 0.85,
+      "fixed_success": false,
+      "fixed_utility": 0.1,
+      "group_id": "xyzibd-val-pn-s000020-i000028-g000035-o000008",
+      "object_id": 8
+    },
+    {
+      "active_slot": 1,
+      "active_success": true,
+      "active_utility": 0.9,
+      "delta_utility": 0.4,
+      "fixed_success": false,
+      "fixed_utility": 0.5,
+      "group_id": "xyzibd-val-pn-s000025-i000026-g000055-o000001",
+      "object_id": 1
+    },
+    {
+      "active_slot": 3,
+      "active_success": false,
+      "active_utility": 0.8500000000000001,
+      "delta_utility": -0.1499999999999999,
+      "fixed_success": true,
+      "fixed_utility": 1.0,
+      "group_id": "xyzibd-val-pn-s000000-i000027-g000028-o000016",
+      "object_id": 16
+    }
+  ],
+  "selection_timing": "post_evaluation_visualization_only",
+  "used_for_model_policy_threshold_or_gate": false
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "poseloop.r4a.development-v3-final-report.v1",
+  "status": "NO_GO",
+  "role": "DEVELOPMENT_ONLY",
+  "coverage": {
+    "items": 10,
+    "scenes": 5,
+    "objects": 5,
+    "fraction": 1.0,
+    "missing": 0,
+    "failed": 0
+  },
+  "protocol": {
+    "id": "poseloop.r4a.xyzibd-train-pbr.development-final-evaluation.v4",
+    "sha256": "b15359855924dcd7ed24bd5db42ee44d9a5e4b0d94b88ca06527997067fbea3a",
+    "local_implementation_commit": "38e963187c8182bbe713edba2076c63c30d0221c",
+    "gpu_a_implementation_commit": "17bddf0a0dcce8bb40e414c081600567858a5c6d"
+  },
+  "gpu_c": {
+    "archive_sha256": "87d32fcdbb4be77fa63f284d11ddb1c59285411385c457cd25abd77094641136",
+    "success_failed_oom": [10, 0, 0],
+    "registration_p50_ms": 825.3227714449167,
+    "registration_p95_ms": 1555.4152205586433,
+    "items_per_active_worker_second": 0.35023277051303453,
+    "peak_allocated_vram_bytes": 7240450048
+  },
+  "metrics": {
+    "single": {
+      "bop24_mAP": 0.0,
+      "mean_add_adi_mm": 125.72122130647294,
+      "median_add_adi_mm": 116.52532223778232,
+      "recall_0_1d": 0.0
+    },
+    "multi": {
+      "bop24_mAP": 0.0,
+      "mean_add_adi_mm": 124.84217147692125,
+      "median_add_adi_mm": 118.93966205748907,
+      "recall_0_1d": 0.0
+    },
+    "multi_minus_single": {
+      "bop24_mAP": 0.0,
+      "mean_add_adi_mm": -0.8790498295516898,
+      "median_add_adi_mm": 2.414339819706754
+    }
+  },
+  "evidence": {
+    "official_once_sha256": "41518d5e79029396cf9aa72ad1e8f200b34007952dabea604d105a4c26d06b89",
+    "single_score_sha256": "c193b3a37c379a847c03d285e7b5841120a59cdbc8cc14b4db169c0e610645b1",
+    "multi_score_sha256": "eaa75ffc02515d24696d5c5724fb1afa329f066ef6531c00d14e684a0f59ca0f",
+    "archive_sha256": "03779c41b4e4a0cd2aa377e483fe295b08a4ce7642d8c66985477bf7474dae21",
+    "archive_bytes": 8559564,
+    "archive_receipt_sha256": "cb16bce400849d387b732467de1d94b02715449616f8903b1447b8f647111af9f",
+    "internal_sha256sums_sha256": "73dd2dfa4a651bd7c96e296eb9ec16f067c79dfe0b4b317bb5f1ad19745085c6",
+    "internal_entry_count": 53,
+    "local_bad_entries": []
+  },
+  "boundaries": {
+    "prediction_label_access_count": 0,
+    "visualization_label_access_count": 0,
+    "xyzibd_val_access_count": 0,
+    "rerun_permitted": false,
+    "prediction_or_checkpoint_tuning_permitted": false,
+    "push_merge_tag_performed": false
+  },
+  "next_action": "new sealed sensor/data split only"
+}

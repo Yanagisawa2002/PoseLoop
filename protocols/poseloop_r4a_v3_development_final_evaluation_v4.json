@@ -1,0 +1,34 @@
+{
+  "schema_version": "poseloop.r4a.development-final-evaluation.protocol.v4",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-final-evaluation.v4",
+  "created_utc": "2026-08-16T19:20:00Z",
+  "state": "frozen_after_v3_static_hash_rejection_before_any_v4_official_development_evaluator_call",
+  "role": "DEVELOPMENT_ONLY",
+  "inherits_protocol": {
+    "relative_path": "poseloop_r4a_v3_development_final_evaluation_v3.json",
+    "sha256": "9dd72269331f5ae315d3395741b5d9ee6b0b396de8ec687867ed0932207248ee"
+  },
+  "v3_static_rejection": {
+    "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-final-evaluation.v3",
+    "protocol_sha256": "9dd72269331f5ae315d3395741b5d9ee6b0b396de8ec687867ed0932207248ee",
+    "local_implementation_commit": "dfe535259fe5a41f6ca3e503f26cc152c1e1d554",
+    "gpu_a_implementation_commit": "c2e9e698f1c2eed72ebd8e1f8ea80a7c51b02759",
+    "rejected_fields": {
+      "supersedes_without_scoring.invocation_started_sha256": 62,
+      "supersedes_without_scoring.official_once_sha256": 65
+    },
+    "pre_score_created": false,
+    "official_evaluator_invocation_count": 0,
+    "score_file_count": 0
+  },
+  "supersedes_without_scoring": {
+    "invocation_started_sha256": "e0579f06f861084d6eb61a211b5f0a3edea9081b897ac32323ae46e93f666f1d",
+    "official_once_sha256": "844fed46ab9c97c21a70af27790d1bacd612be18fdfeeef68af370e58f6233fd"
+  },
+  "bop24_development": {
+    "result_filenames": {
+      "single_view": "poseloopr4av3singlev4_xyzibd-train.csv",
+      "multi_view": "poseloopr4av3multiv4_xyzibd-train.csv"
+    }
+  }
+}

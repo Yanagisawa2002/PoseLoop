@@ -1,0 +1,58 @@
+{
+  "schema_version": "poseloop.r4a.development-readiness.protocol.v1",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-readiness.v1",
+  "created_utc": "2026-08-16T15:15:00Z",
+  "state": "frozen_before_development_label_parse",
+  "required_branch": "codex/poseloop/r4a-development-coverage-geometry",
+  "role": "DEVELOPMENT_ONLY",
+  "frozen_slice": {
+    "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-slice.v2",
+    "protocol_sha256": "0f2a54651b849ebe360645379fabb164965ed00f01b3b0dc6f623786e7601810",
+    "prefreeze_receipt_sha256": "443fabb778813904097f220a5a8c7eb8507309a802abb45fd1ee5a5e5c49d875",
+    "plan_sha256": "b8ec0ce6b93064d689b10be656eb0961cc2ccb41a154b4798ec9a9f6861bc768",
+    "extraction_result_sha256": "35a1a84f2ebb624feecf8a5c3757b06d1670dc0d764858fecd44938741297dda",
+    "extraction_job_log_sha256": "f19fcbf34ea29a1af966596e30ffc6fd069214646b14275f6462514ba83e98af",
+    "extraction_job_exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "extraction_job_exit_code": 0,
+    "entry_count": 188,
+    "target_count": 173
+  },
+  "selection": {
+    "scene_ids": [0, 1, 2],
+    "image_ids": [0],
+    "input_modality": "gray",
+    "target_policy": "all_instances_in_selected_frames",
+    "minimum_object_groups": 2
+  },
+  "public_model_object_ids": [1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+  "pinned_toolkit": {
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "allowed_entrypoints": ["bop_toolkit_lib.inout.load_scene_gt", "bop_toolkit_lib.inout.load_scene_camera"],
+    "evaluator_entrypoints_permitted": false
+  },
+  "readiness_gates": {
+    "extracted_file_count": 188,
+    "target_count": 173,
+    "scene_count": 3,
+    "minimum_object_count": 2,
+    "json_parse": true,
+    "official_loader_schema": true,
+    "png_dimensions_consistent": true,
+    "public_object_mapping_complete": true,
+    "finite_gt_schema_for_development_metrics": true
+  },
+  "manifest_contract": {
+    "includes": ["scene_id", "image_id", "instance_id", "object_id", "gray/depth/mask/model paths", "camera intrinsics", "depth scale"],
+    "excludes": ["GT rotation", "GT translation", "pose error", "score", "candidate rank"],
+    "candidate_selection_from_gt": false
+  },
+  "boundaries": {
+    "xyzibd_val_access_permitted": false,
+    "evaluator_invocation_permitted": false,
+    "gt_pose_export_to_prediction_manifest": false,
+    "score_guided_pose_selection_permitted": false,
+    "foundationpose_checkpoint_change_permitted": false,
+    "remote_shutdown_release_delete_permitted": false
+  }
+}

@@ -1,0 +1,25 @@
+# Upstream source, model weights, and datasets are external M0 assets.
+/third_party/
+/weights/
+/data/
+/archives/
+
+# Reproducible generated outputs.
+/artifacts/
+
+# Python/build by-products.
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+/.tmp_*_test/
+/build/
+/dist/
+
+# Local environments and editor state.
+/.venv/
+/.env
+/.idea/
+/.vscode/

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-m5-r5-v1",
+  "purpose": "Test whether object-local confidence can safely improve observed poses while a frozen nearest estimator remains the sole persistent pose owner, using genuinely unused LM-O RGB-D development data and permitting a separate YCB-V sealed validation only after a full development pass.",
+  "predecessor": {
+    "stage": "M5-R4A HB Primesense development",
+    "status": "FAIL_M5_R4A_DEVELOPMENT",
+    "positive_result_retained": "Missing-frame uncertainty/error Spearman was +0.721 with zero nonfinite outputs.",
+    "negative_result_addressed": "The adaptive pose state reached -10.49% all-frame and -197.67% missing-frame improvement. Long dropout drift and low-confidence forced reacquisition were the dominant failures.",
+    "consumed_development_data_forbidden_for_selection": [
+      "XYZ-IBD RealSense M5-R2",
+      "XYZ-IBD Photoneo M5-R3",
+      "HB Primesense M5-R4/M5-R4A"
+    ]
+  },
+  "source": {
+    "dataset": "BOP LM-O",
+    "license": "CC BY-SA 4.0",
+    "official_repository": "https://huggingface.co/datasets/bop-benchmark/lmo",
+    "development_object_ids": [1, 5, 6, 8, 9, 10, 11, 12],
+    "archives": {
+      "base": {
+        "filename": "lmo_base.zip",
+        "size_bytes": 5684,
+        "sha256": "d0e99cf6ab1acef7040a56ddf1f5b3d486449ef7b9927ce7898a62b07dee08e2"
+      },
+      "models": {
+        "filename": "lmo_models.zip",
+        "size_bytes": 5367178,
+        "sha256": "48e4cbe0aac6c2d2da03339d5110496b2fb1201a16043f9e04ae85a5022a7842"
+      },
+      "development": {
+        "filename": "lmo_test_all.zip",
+        "size_bytes": 720158597,
+        "sha256": "33c9de88c15d0fb21a08d686c7eb45c2fa335a4a96e10384756f946be71c73e2"
+      },
+      "sealed_ycbv": {
+        "repository": "https://huggingface.co/datasets/bop-benchmark/ycbv",
+        "base_filename": "ycbv_base.zip",
+        "base_size_bytes": 15805,
+        "base_sha256": "98440f8bd403100b21cf11a6729fabe8b3d5ce714472edc57a18b7f1fcd4bb18",
+        "models_filename": "ycbv_models.zip",
+        "models_size_bytes": 524634729,
+        "models_sha256": "1e517a9b513cadb8eaf406ac3ce3c5f1d6fc4a80161c866b4e2a73d13de5e554",
+        "data_filename": "ycbv_test_all.zip",
+        "data_size_bytes": 14969383039,
+        "data_sha256": "fea2ab5f18aba1857acd320827cec10d9dbf258e4940ea4b52f5dd51cb2356a7",
+        "development_access": "FORBIDDEN"
+      }
+    },
+    "clock": "Order frames by BOP image ID and use a nominal 30 Hz clock; hardware timestamps are unavailable.",
+    "coordinate_frame": "Model-to-camera. LM-O scene_camera records intrinsics and depth scale but no world-to-camera trajectory.",
+    "association": "Oracle scene_id plus object_id association. Duplicate instances of an object ID in a frame are forbidden.",
+    "limitations": [
+      "single recorded development scene",
+      "nominal timing",
+      "oracle association",
+      "ground-truth visible masks as isolated pose-estimator inputs",
+      "camera-relative rather than world-frame motion"
+    ]
+  },
+  "splits": {
+    "development": {
+      "dataset": "LM-O",
+      "directory": "test",
+      "scene_id": 2,
+      "sensor_modality": "linemod_rgbd",
+      "labels": "scene_gt.json and scene_gt_info.json may be opened only after this protocol, builder, inference runner, estimator, evaluator, and tests are committed together."
+    },
+    "sealed": {
+      "dataset": "YCB-V",
+      "directory": "test",
+      "labels": "The archives must not be downloaded or inspected until every M5-R5 development condition passes and a separate sealed protocol implementation is committed."
+    },
+    "dataset_overlap": 0,
+    "object_overlap": 0
+  },
+  "selection": {
+    "image_height": 480,
+    "image_width": 640,
+    "minimum_mask_area_fraction": 0.001,
+    "minimum_valid_depth_ratio": 0.5,
+    "minimum_valid_depth_pixels": 4,
+    "observation_available": "A GT-present frame is available only when visible mask area is at least 0.001 of the image, valid-depth ratio inside the mask is at least 0.5, and at least four visible masked depth pixels are valid.",
+    "gt_absent_frame_policy": "Exclude from replay because pose error is not evaluable; never count it as natural missing.",
+    "artificial_frame_deletion": false,
+    "window_length_frames": 192,
+    "window_rule": "For each object, split GT-present rows into source-frame-consecutive segments. Among eligible 192-frame windows starting available, choose the window with most naturally unavailable frames and break ties by earliest source image ID.",
+    "eligible_window": {
+      "available_frame_count_min": 96,
+      "natural_missing_frame_count_min": 2
+    },
+    "missing_gap_frame_minimums": {
+      "short_gap_1_2": 4,
+      "medium_gap_3_7": 8,
+      "long_gap_8_plus": 8
+    },
+    "track_rule": "Exactly one selected window per represented object.",
+    "selection_reads_pose_or_error_outcome": false,
+    "preinitialization": "Every selected window starts with an available FoundationPose measurement."
+  },
+  "methods": {
+    "baseline": {
+      "method": "NEAREST_REPRESENTATIVE_CT",
+      "configuration_id": "nearest_smooth",
+      "configuration_source": "artifacts/r1/m5_r1/frozen_phase1_configurations.json",
+      "role": "Sole persistent pose-state owner for both baseline and proposed outputs."
+    },
+    "proposed_family": {
+      "method": "NEAREST_ANCHORED_OBJECT_CONFIDENCE_GATE",
+      "description": "Compute mask/depth/anchor-innovation confidence from causal track-local histories. On available frames, optionally move the current output a bounded fraction from the nearest anchor toward the fresh measurement only when confidence and disagreement gates pass. Never feed the correction back into the anchor. On missing frames, output the anchor pose bit-for-bit while confidence decays and uncertainty grows.",
+      "raw_foundationpose_score_policy": "Record top score and margin for audit, but exclude both from filtering and confidence.",
+      "forced_reacquisition_policy": "Forbidden. No rejection counter can transfer persistent pose ownership to a measurement.",
+      "shared_configuration": {
+        "translation_scale_m": 0.01,
+        "rotation_scale_deg": 5.0,
+        "dropout_decay_frames": 3.0,
+        "quality_floor": 0.05
+      },
+      "candidate_order": [
+        "anchor_calibrated",
+        "anchored_conservative",
+        "anchored_balanced",
+        "anchored_responsive"
+      ],
+      "candidates": {
+        "anchor_calibrated": {
+          "blend_gain": 0.0,
+          "minimum_correction_confidence": 1.0,
+          "maximum_anchor_measurement_disagreement": 0.0
+        },
+        "anchored_conservative": {
+          "blend_gain": 0.25,
+          "minimum_correction_confidence": 0.7,
+          "maximum_anchor_measurement_disagreement": 1.5
+        },
+        "anchored_balanced": {
+          "blend_gain": 0.5,
+          "minimum_correction_confidence": 0.6,
+          "maximum_anchor_measurement_disagreement": 2.0
+        },
+        "anchored_responsive": {
+          "blend_gain": 0.75,
+          "minimum_correction_confidence": 0.5,
+          "maximum_anchor_measurement_disagreement": 3.0
+        }
+      },
+      "candidate_selection": "Leave one object ID out. In each fold select the candidate with greatest training macro-object relative improvement, breaking exact ties by candidate_order. Development evidence is the cross-fitted held-out concatenation. The sealed candidate is the modal fold winner with the same tie rule."
+    }
+  },
+  "evaluation": {
+    "primary_loss": "Per-frame sqrt((translation_m/0.01)^2 + (symmetry-aware rotation_deg/5)^2).",
+    "primary_aggregation": "One track per object followed by equal-weight macro mean across represented objects.",
+    "missing_frame_loss": "The same macro-object aggregation restricted to naturally unavailable GT-present frames.",
+    "confidence_metric": "Spearman correlation between proposed scalar uncertainty and proposed normalized pose error on naturally unavailable cross-fitted frames.",
+    "bootstrap": {
+      "seed": 5505,
+      "resamples": 5000,
+      "unit": "Paired hierarchical resampling of represented objects, then complete tracks within sampled objects.",
+      "reported_bound": "10th percentile of cross-fitted paired relative macro-object improvement."
+    },
+    "development_gate": {
+      "represented_object_count_min": 8,
+      "track_count_min": 8,
+      "natural_missing_frame_count_min": 64,
+      "cross_fitted_macro_object_relative_improvement_min": 0.05,
+      "cross_fitted_natural_missing_frame_relative_improvement_min": 0.0,
+      "one_sided_hierarchical_bootstrap_90pct_lower_improvement_min": 0.0,
+      "missing_frame_uncertainty_error_spearman_min": 0.2,
+      "missing_anchor_mismatch_count_max": 0,
+      "unsafe_forced_reacquisition_count_max": 0,
+      "nonfinite_output_count_max": 0,
+      "all_conditions_required": true
+    },
+    "stop_rule": "Any failed development condition stops M5-R5. Do not download or inspect YCB-V sealed archives."
+  },
+  "sealed_policy": {
+    "single_open": true,
+    "method": "After a full development pass, freeze the modal candidate and the outcome-blind YCB-V track selection in a separate commit before downloading YCB-V archives.",
+    "gate": "Reuse all numerical and structural development gates without relaxation.",
+    "reopen_policy": "The first YCB-V evaluator-label open is final. Any method, configuration, metric, selection, or gate change requires another genuinely new data source and protocol ID."
+  },
+  "claim_boundary": {
+    "development_allowed": "Recorded single-scene LM-O RGB-D replay with nominal timing, oracle association, GT visible masks, object-grouped cross-fitting, natural support loss, nearest-anchored pose safety, and object-local uncertainty.",
+    "sealed_allowed_if_passed": "One object-disjoint YCB-V validation of the LM-O-developed nearest-anchor confidence gate.",
+    "forbidden": [
+      "hardware-timestamp validation",
+      "deployable association",
+      "detector or segmenter robustness",
+      "claiming missing-frame pose improvement from structural equality alone",
+      "retuning on consumed XYZ-IBD or HB outcomes",
+      "accessing YCB-V after a failed development gate"
+    ]
+  },
+  "execution_order": [
+    "commit protocol, method, LM-O builder, inference runner, evaluator, and tests before reading LM-O pose labels",
+    "build the LM-O development bundle and record exact source/code/data hashes",
+    "run label-blind FoundationPose inference on every available selected frame",
+    "evaluate all frozen candidates with leave-one-object-out cross-fitting",
+    "apply every numerical and structural development gate",
+    "only after a full pass, commit a separate modal-candidate and YCB-V sealed implementation",
+    "only then download YCB-V and perform one sealed-label open"
+  ]
+}

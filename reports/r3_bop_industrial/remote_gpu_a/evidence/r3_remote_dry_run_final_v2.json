@@ -1,0 +1,223 @@
+{
+  "created_utc": "2026-08-16T05:25:54.033492Z",
+  "dataset": {
+    "accessed_paths": [
+      "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/data/xyzibd/models_eval/models_info.json"
+    ],
+    "dataset_name_matches": true,
+    "errors": [
+      "missing public dataset inputs: test_targets_bop19.json, test_targets_bop24.json, val"
+    ],
+    "evaluator_only_label_paths_accessed": [],
+    "ready": false,
+    "required_public_inputs": {
+      "models_eval/models_info.json": {
+        "exists": true,
+        "kind": "file",
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/data/xyzibd/models_eval/models_info.json",
+        "sha256": "25b876a00ed7585f083f4b634c32fe13a3a548bee1f6fb033722932331e62374"
+      },
+      "test_targets_bop19.json": {
+        "exists": false,
+        "kind": "file",
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/data/xyzibd/test_targets_bop19.json"
+      },
+      "test_targets_bop24.json": {
+        "exists": false,
+        "kind": "file",
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/data/xyzibd/test_targets_bop24.json"
+      },
+      "val": {
+        "exists": false,
+        "kind": "file",
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/data/xyzibd/val"
+      }
+    },
+    "root": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/data/xyzibd"
+  },
+  "errors": [
+    "missing public dataset inputs: test_targets_bop19.json, test_targets_bop24.json, val",
+    "missing prediction roles: coco_predictions, predicted_association, single_view_pose, multi_view_pose, provenance",
+    "could not verify declared R3 baseline ancestry"
+  ],
+  "evaluator_only_label_paths_accessed": [],
+  "fingerprint": {
+    "dataset_public_input_sha256": {
+      "models_eval/models_info.json": "25b876a00ed7585f083f4b634c32fe13a3a548bee1f6fb033722932331e62374"
+    },
+    "prediction_sha256": {},
+    "protocol_sha256": "86b403e0343800c9cbc6b66d665e1141f12cf82df62c58d043763b9346627f8a",
+    "toolkit_commit": null,
+    "toolkit_evaluator_sha256": {
+      "scripts/eval_bop19_pose.py": "953a016e47a31ed05a5032302b8154722049d8dd953aeb7794ecedbf607bfcce",
+      "scripts/eval_bop22_coco.py": "4ef31672df3a1584cd01aca8a749e8437c1b57e9388d1e774e5df790ef578c9f",
+      "scripts/eval_bop24_pose.py": "d3aa46b4a67b563eb11772636e1532a206e1bbbce20d23b6c4d50c5d30c4a1d4"
+    },
+    "toolkit_pinned_source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "toolkit_verified_revision": "cea62d651c7e395b2e1962b9749e4e89693c6ac4"
+  },
+  "fingerprint_sha256": "f6558889f27086657073af58cb10930f9adefdc0f5617065f0903afd50741fae",
+  "official_commands": [
+    {
+      "argv": [
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/../workspace/.venv/bin/python",
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop19_pose.py",
+        "--renderer_type=vispy",
+        "--result_filenames=poseloop-r3-single_xyzibd-val.csv",
+        "--results_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval/poseloop-r3-single_xyzibd-val/scores_bop19.json",
+      "metric": "official_bop19_localization_ar",
+      "variant": "single_view"
+    },
+    {
+      "argv": [
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/../workspace/.venv/bin/python",
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop24_pose.py",
+        "--result_filenames=poseloop-r3-single_xyzibd-val.csv",
+        "--results_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop24.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval/poseloop-r3-single_xyzibd-val/scores_bop24.json",
+      "metric": "official_bop24_pose_detection_ap",
+      "variant": "single_view"
+    },
+    {
+      "argv": [
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/../workspace/.venv/bin/python",
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop19_pose.py",
+        "--renderer_type=vispy",
+        "--result_filenames=poseloop-r3-multiview_xyzibd-val.csv",
+        "--results_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval/poseloop-r3-multiview_xyzibd-val/scores_bop19.json",
+      "metric": "official_bop19_localization_ar",
+      "variant": "multi_view"
+    },
+    {
+      "argv": [
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/../workspace/.venv/bin/python",
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop24_pose.py",
+        "--result_filenames=poseloop-r3-multiview_xyzibd-val.csv",
+        "--results_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop24.json",
+        "--num_workers=1"
+      ],
+      "expected_score": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval/poseloop-r3-multiview_xyzibd-val/scores_bop24.json",
+      "metric": "official_bop24_pose_detection_ap",
+      "variant": "multi_view"
+    },
+    {
+      "argv": [
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/../workspace/.venv/bin/python",
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop22_coco.py",
+        "--result_filenames=poseloop-r3-input_xyzibd-val.json",
+        "--results_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--ann_type=bbox",
+        "--bbox_type=amodal"
+      ],
+      "expected_score": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval/poseloop-r3-input_xyzibd-val/scores_bop22_coco_bbox.json",
+      "metric": "official_bop22_coco_bbox_ap",
+      "variant": "shared_predicted_input"
+    },
+    {
+      "argv": [
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/../workspace/.venv/bin/python",
+        "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop22_coco.py",
+        "--result_filenames=poseloop-r3-input_xyzibd-val.json",
+        "--results_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs",
+        "--eval_path=/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval",
+        "--targets_filename=test_targets_bop19.json",
+        "--ann_type=segm",
+        "--bbox_type=amodal"
+      ],
+      "expected_score": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/eval/poseloop-r3-input_xyzibd-val/scores_bop22_coco_segm.json",
+      "metric": "official_bop22_coco_segm_ap",
+      "variant": "shared_predicted_input"
+    }
+  ],
+  "official_evaluation_executed": false,
+  "package_version": "1.0.0",
+  "prediction_bundle": {
+    "errors": [
+      "missing prediction roles: coco_predictions, predicted_association, single_view_pose, multi_view_pose, provenance"
+    ],
+    "expected_files": {
+      "coco_predictions": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs/poseloop-r3-input_xyzibd-val.json",
+      "multi_view_pose": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs/poseloop-r3-multiview_xyzibd-val.csv",
+      "predicted_association": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs/poseloop-r3-predicted-association_xyzibd-val.jsonl",
+      "provenance": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs/poseloop-r3-provenance_xyzibd-val.json",
+      "single_view_pose": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs/poseloop-r3-single_xyzibd-val.csv"
+    },
+    "missing_roles": [
+      "coco_predictions",
+      "predicted_association",
+      "single_view_pose",
+      "multi_view_pose",
+      "provenance"
+    ],
+    "ready": false,
+    "root": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/artifacts/r3_bop_industrial/inputs"
+  },
+  "protocol": {
+    "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/protocols/poseloop_r3_bop_industrial_protocol.json",
+    "sha256": "86b403e0343800c9cbc6b66d665e1141f12cf82df62c58d043763b9346627f8a",
+    "state": "frozen_before_r3_predictions"
+  },
+  "protocol_id": "poseloop.r3.bop-industrial.e2e.v1",
+  "repository": {
+    "baseline_commit": "e5e14ab6cf5f0b4adf97ca161ec04f188f6ea7e5",
+    "baseline_is_ancestor": null,
+    "branch": null,
+    "git_query_errors": [
+      "fatal: not a git repository (or any parent up to mount point /root)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).",
+      "fatal: not a git repository (or any parent up to mount point /root)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).",
+      "fatal: not a git repository (or any parent up to mount point /root)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).",
+      "fatal: not a git repository (or any parent up to mount point /root)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set)."
+    ],
+    "head": null,
+    "status_entries": []
+  },
+  "schema_version": "poseloop.r3.preflight.v1",
+  "status": "blocked",
+  "toolkit": {
+    "actual_commit": null,
+    "errors": [],
+    "expected_commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "expected_source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "official_evaluators": {
+      "scripts/eval_bop19_pose.py": {
+        "exists": true,
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop19_pose.py",
+        "sha256": "953a016e47a31ed05a5032302b8154722049d8dd953aeb7794ecedbf607bfcce"
+      },
+      "scripts/eval_bop22_coco.py": {
+        "exists": true,
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop22_coco.py",
+        "sha256": "4ef31672df3a1584cd01aca8a749e8437c1b57e9388d1e774e5df790ef578c9f"
+      },
+      "scripts/eval_bop24_pose.py": {
+        "exists": true,
+        "path": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/scripts/eval_bop24_pose.py",
+        "sha256": "d3aa46b4a67b563eb11772636e1532a206e1bbbce20d23b6c4d50c5d30c4a1d4"
+      }
+    },
+    "ready": true,
+    "root": "/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive",
+    "source_kind": "pinned_archive_tree",
+    "source_tree_file_count": 93,
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "tracked_sources_clean": true
+  }
+}

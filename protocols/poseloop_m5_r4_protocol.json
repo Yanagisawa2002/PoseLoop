@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-m5-r4-v1",
+  "purpose": "Develop an online object-local confidence estimator on genuinely new HomebrewedDB Primesense sequences, then permit one sensor-and-scene-disjoint Kinect 2 sealed validation only if every development gate passes.",
+  "predecessor": {
+    "stage": "M5-R3 track-disjoint Photoneo sealed replay",
+    "status": "FAIL_M5_R3_SEALED",
+    "reason": "The static all-history quotient medoid reached +4.50% on all frames, -1.57% on natural missing frames, and a -7.10% hierarchical-bootstrap lower bound.",
+    "consumed_data_may_not_be_reused_for_selection": [
+      "XYZ-IBD RealSense M5-R2",
+      "XYZ-IBD Photoneo M5-R3"
+    ]
+  },
+  "source": {
+    "dataset": "BOP HomebrewedDB",
+    "license": "CC0 1.0 Universal",
+    "official_repository": "https://huggingface.co/datasets/bop-benchmark/hb",
+    "archives": {
+      "base": {
+        "filename": "hb_base.zip",
+        "size_bytes": 6046,
+        "sha256": "15de59e56148d7fa2bc137d1d52900f99e982f29f0b937a5447570749502055e"
+      },
+      "models": {
+        "filename": "hb_models.zip",
+        "size_bytes": 200027497,
+        "sha256": "026a9417387e7225463e63fd0f4ac9b1b15a961d85f3095f9dbf416f0b8bd9b8"
+      },
+      "development": {
+        "filename": "hb_val_primesense.zip",
+        "size_bytes": 2354714266,
+        "sha256": "8dd87de6eed1067063081bd4aed3d32a9f0bb6e00887bde78b941eaefc6fec0f"
+      },
+      "sealed": {
+        "filename": "hb_val_kinect.zip",
+        "size_bytes": 12930702833,
+        "sha256": "4c65d412dd553de3b9006c68c2d1cb4c2846951fbca7ff614f630d8ca1c801df",
+        "development_access": "FORBIDDEN"
+      }
+    },
+    "clock": "Order frames by BOP image ID and use a nominal 30 Hz clock; hardware timestamps are unavailable.",
+    "coordinate_frame": "Model-to-camera. HB scene_camera records intrinsics and depth scale but no world-to-camera trajectory.",
+    "association": "Oracle scene_id plus object_id association. HB is a single-instance, multiple-object dataset; the builder must reject any frame containing duplicate instances of an object ID.",
+    "limitations": [
+      "nominal timing",
+      "oracle association",
+      "ground-truth visible masks as isolated pose-estimator inputs",
+      "camera-relative rather than world-frame motion"
+    ]
+  },
+  "splits": {
+    "development": {
+      "directory": "val_primesense",
+      "sensor_modality": "primesense",
+      "scene_ids": [1, 2, 3, 4, 5, 6, 7, 8],
+      "labels": "May be opened only after protocol, builder, inference runner, estimator, evaluator, and tests are committed together."
+    },
+    "sealed": {
+      "directory": "val_kinect",
+      "sensor_modality": "kinect2",
+      "scene_ids": [9, 10, 11, 12, 13],
+      "labels": "Must remain unavailable until the frozen development gate passes. A failed development gate forbids download, bundle construction, or label access."
+    },
+    "scene_overlap": 0,
+    "sensor_overlap": 0
+  },
+  "selection": {
+    "image_height": 480,
+    "image_width": 640,
+    "minimum_mask_area_fraction": 0.001,
+    "minimum_valid_depth_ratio": 0.5,
+    "minimum_valid_depth_pixels": 4,
+    "observation_available": "Visible mask area is at least 0.001 of the image, valid-depth ratio inside the visible mask is at least 0.5, and at least four visible masked depth pixels are valid.",
+    "artificial_frame_deletion": false,
+    "window_length_frames": 128,
+    "window_rule": "For each scene/object track, among windows starting at an available frame choose the 128-source-frame window containing the most naturally unavailable frames; break ties by earliest start. Short final windows are ineligible.",
+    "eligible_window": {
+      "available_frame_count_min": 64,
+      "natural_missing_frame_count_min": 8
+    },
+    "track_cap": 16,
+    "track_cap_per_object": 2,
+    "track_selection": "Sort eligible tracks by SHA-256 of 'poseloop-m5-r4-development:' plus track_id and greedily retain tracks while enforcing the per-object cap.",
+    "selection_reads_pose_or_error_outcome": false,
+    "preinitialization": "A selected window always starts at an available frame."
+  },
+  "methods": {
+    "baseline": {
+      "method": "NEAREST_REPRESENTATIVE_CT",
+      "configuration_id": "nearest_smooth",
+      "configuration_source": "artifacts/r1/m5_r1/frozen_phase1_configurations.json"
+    },
+    "proposed_family": {
+      "method": "OBJECT_LOCAL_ADAPTIVE_CONFIDENCE_CT",
+      "description": "A causal quotient constant-twist estimator whose mask support, depth support, innovation scale, measurement gain, velocity gain, missing-frame motion permission, and reported uncertainty adapt only from the current track's past input and accepted measurements.",
+      "raw_foundationpose_score_policy": "Record top score and margin for audit, but exclude both from filtering and confidence because consumed R3 diagnostics show they are not calibrated reliability probabilities.",
+      "shared_configuration": {
+        "translation_scale_m": 0.01,
+        "rotation_scale_deg": 5.0,
+        "pose_gain_min": 0.2,
+        "pose_gain_max": 0.85,
+        "innovation_history_min": 4,
+        "innovation_gate_multiplier": 4.0,
+        "reacquire_after": 3,
+        "dropout_decay_frames": 3.0,
+        "quality_floor": 0.05
+      },
+      "candidate_order": [
+        "adaptive_hold",
+        "adaptive_short",
+        "adaptive_medium",
+        "adaptive_agile"
+      ],
+      "candidates": {
+        "adaptive_hold": {
+          "velocity_update_gain": 0.15,
+          "max_predict_gap_frames": 0
+        },
+        "adaptive_short": {
+          "velocity_update_gain": 0.15,
+          "max_predict_gap_frames": 2
+        },
+        "adaptive_medium": {
+          "velocity_update_gain": 0.2,
+          "max_predict_gap_frames": 4
+        },
+        "adaptive_agile": {
+          "velocity_update_gain": 0.3,
+          "max_predict_gap_frames": 8
+        }
+      },
+      "candidate_selection": "Leave one object ID out. In each fold choose the candidate with the greatest training macro-object relative improvement, breaking exact ties by candidate_order. Development evidence is the cross-fitted concatenation of held-out objects. The candidate frozen for sealed use is the modal fold winner, breaking ties by candidate_order."
+    }
+  },
+  "evaluation": {
+    "primary_loss": "Per-frame sqrt((translation_m/0.01)^2 + (symmetry-aware rotation_deg/5)^2).",
+    "primary_aggregation": "Equal-weight track mean within object, then equal-weight macro mean across represented objects.",
+    "missing_frame_loss": "The same track-then-object macro aggregation restricted to naturally unavailable frames.",
+    "confidence_metric": "Spearman correlation between proposed scalar uncertainty and proposed normalized pose error on naturally unavailable frames, computed over the cross-fitted held-out frames.",
+    "bootstrap": {
+      "seed": 5404,
+      "resamples": 5000,
+      "unit": "Paired hierarchical resampling of represented objects, then complete tracks within sampled objects.",
+      "reported_bound": "10th percentile of cross-fitted paired relative macro-object improvement."
+    },
+    "development_gate": {
+      "represented_object_count_min": 8,
+      "track_count_min": 8,
+      "natural_missing_frame_count_min": 64,
+      "cross_fitted_macro_object_relative_improvement_min": 0.05,
+      "cross_fitted_natural_missing_frame_relative_improvement_min": 0.0,
+      "one_sided_hierarchical_bootstrap_90pct_lower_improvement_min": 0.0,
+      "missing_frame_uncertainty_error_spearman_min": 0.2,
+      "nonfinite_output_count_max": 0,
+      "all_conditions_required": true
+    },
+    "stop_rule": "Any failed development condition stops M5-R4. Do not download or inspect the Kinect 2 sealed archive."
+  },
+  "sealed_policy": {
+    "single_open": true,
+    "method": "Freeze the modal development fold winner and every parameter before downloading sealed data.",
+    "gate": "Reuse every numerical development gate without relaxation.",
+    "reopen_policy": "The first evaluator-label open is final. Any method, configuration, selection, metric, or gate change requires a new protocol ID and genuinely new sensor/data split."
+  },
+  "claim_boundary": {
+    "development_allowed": "Recorded HB Primesense development replay with nominal timing, oracle association, ground-truth visible masks, object-grouped cross-fitting, and natural input unavailability.",
+    "sealed_allowed_if_passed": "One Kinect 2, scene-disjoint HB validation of a Primesense-developed object-local adaptive confidence estimator.",
+    "forbidden": [
+      "hardware-timestamp validation",
+      "deployable association",
+      "detector or segmenter robustness",
+      "independent physical-instance count equal to frame or track count",
+      "retuning on consumed XYZ-IBD R2/R3 outcomes",
+      "accessing Kinect 2 sealed data after a failed development gate"
+    ]
+  },
+  "execution_order": [
+    "commit protocol, method, development builder, inference runner, evaluator, and tests before reading HB development pose labels",
+    "build the Primesense development bundle and record exact source/code/data hashes",
+    "run label-blind FoundationPose inference on every available selected development frame",
+    "evaluate all frozen candidates with leave-one-object-out cross-fitting",
+    "apply every frozen development gate",
+    "only after a full pass, freeze the modal candidate and create a separate sealed implementation commit",
+    "only then download Kinect 2 scenes 9-13 and perform one sealed-label open"
+  ]
+}

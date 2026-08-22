@@ -1,0 +1,15 @@
+usage: eval_bop22_coco.py [-h] [--result_filenames RESULT_FILENAMES]
+                          [--results_path RESULTS_PATH]
+                          [--eval_path EVAL_PATH]
+                          [--targets_filename TARGETS_FILENAME]
+                          [--ann_type ANN_TYPE] [--bbox_type BBOX_TYPE]
+
+options:
+  -h, --help            show this help message and exit
+  --result_filenames RESULT_FILENAMES
+                        Comma-separated names of files with results.
+  --results_path RESULTS_PATH
+  --eval_path EVAL_PATH
+  --targets_filename TARGETS_FILENAME
+  --ann_type ANN_TYPE
+  --bbox_type BBOX_TYPE

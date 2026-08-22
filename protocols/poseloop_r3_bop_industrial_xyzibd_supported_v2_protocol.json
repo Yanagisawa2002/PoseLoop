@@ -1,0 +1,143 @@
+{
+  "schema_version": "poseloop.r3.xyzibd-supported.protocol.v2",
+  "protocol_id": "poseloop.r3.bop-industrial.xyzibd-supported.official.v2",
+  "created_utc": "2026-08-16T00:00:00Z",
+  "state": "frozen_before_supported_official_evaluation",
+  "required_execution_branch": "codex/poseloop/r3-xyzibd-supported-official-run-v2",
+  "source_evidence": {
+    "immutable_commit": "36a3aaf4698b5d3ef4440ffade731e4d1d903c8f",
+    "source_protocol_id": "poseloop.r3.bop-industrial.e2e.v1",
+    "source_protocol_path": "protocols/poseloop_r3_bop_industrial_protocol.json",
+    "source_protocol_sha256": "86b403e0343800c9cbc6b66d665e1141f12cf82df62c58d043763b9346627f8a",
+    "source_preflight_fingerprint_sha256": "d02659e9669d9aae2a56a9ec4bbafe042eb8df9e7a72123c6ca42fb0d2ee48d1",
+    "prediction_archive": {
+      "filename": "poseloop-r3-xyzibd-val-cd2a274-d02659e9.tar.gz",
+      "bytes": 195822,
+      "sha256": "9a4de5cd0b475fd3a930d596a95e90f75df1f82503d48681d11357c9e527f473"
+    },
+    "prediction_sha256": {
+      "coco_predictions": "5ef98c1ea24a9ecc141d3f1af6a319dba1ce00f4cb21d522b99b4f1d3ab1a719",
+      "predicted_association": "6883a6ff9ea8fffaa835eb92e2f717a1fb6ff4eb6e5194924bd76becbb26d7b2",
+      "single_view_pose": "459ca38d8f7d6d9d7ebafad6c7a65a3147b8776e79e03517f3e93c4d412eb017",
+      "multi_view_pose": "145f19e1d545472a49e16a0954a291d734e3109a59e71f2ba533fcf576244066",
+      "provenance": "ecc8dd05ae38bbd739a1330701746ef1ba7b5c2f4898282bd010efdf7f4759b1"
+    },
+    "source_artifact_sha256": {
+      "producer_code": "b729e15348a5b6afcfd0f0ac9cb228d88c0cc9619907839725d97fbf29fdf7bd",
+      "model": "c057f4c507d0a10acf08de84bb16754497f39638fc53e317833b49efc0953f96"
+    },
+    "prior_failed_protocol_evidence": {
+      "rerun_permitted": false,
+      "invocation_marker_sha256": "1a2b187671111b749232cb15149117a7e01316ec2cf9606ff06aefc7e9490414",
+      "failure_receipt_sha256": "37b44d5f869502be3ce8b5f3ee3e5814297961ae3b67ef374707692ec87fc5fe"
+    },
+    "prior_supported_v1_failure_evidence": {
+      "protocol_id": "poseloop.r3.bop-industrial.xyzibd-supported.official.v1",
+      "protocol_sha256": "99afcaa801de2aa088776e3a2efdb3189802f92139fe8cba44ca2faaa3d160bb",
+      "invocation_marker_sha256": "254228e4a1ca105846750aa414bf0760630dced428944e343656cbdc2735c087",
+      "sealed_receipt_sha256": "ca4b040d3f7639d9dc52e4b0327d838b2ccad7ee9cafc2d32283526adaa92cb9",
+      "raw_log_sha256": "abeb31400727099b6d37e674ffdd9328e22d6c420ee1d3df18560f0040019f1e",
+      "failure_type": "ModuleNotFoundError: bop_toolkit_lib",
+      "rerun_permitted": false
+    }
+  },
+  "dataset": {
+    "name": "xyzibd",
+    "split": "val",
+    "source_revision": "4fe4671783172622313ac0c7182012cee618f217",
+    "val_archive": {
+      "bytes": 7710607370,
+      "sha256": "09c5639c6e55b8c9a0708a344037e98918c5935ddbd91b5db5a9b06f5484c659"
+    },
+    "verification_receipt_sha256": "fac51255fd85242b8274834148dfb0e32c6c5c8f66410425639b84b3e33fbbb7",
+    "public_input_sha256": {
+      "test_targets_bop19.json": "6ebafd20964d09f649a2e1acc98e5b8b1c39d89e746a0b8865c887f6d74fa011",
+      "test_targets_bop24.json": "7f620e5bdf8d6f11201d90464c5a93963ea37718ff662e5a392ca41eb10d6ebe",
+      "models_eval/models_info.json": "25b876a00ed7585f083f4b634c32fe13a3a548bee1f6fb033722932331e62374"
+    },
+    "renderer_smoke_public_model": "models_eval/obj_000001.ply",
+    "prediction_and_selection_label_access_count": 0,
+    "official_evaluator_only_globs": [
+      "**/scene_gt*.json",
+      "**/scene_gt_info*.json",
+      "**/scene_gt_coco*.json",
+      "**/mask*/**"
+    ]
+  },
+  "toolkit": {
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "source_tree_file_count": 93,
+    "workers": 8,
+    "entrypoint_sha256": {
+      "scripts/eval_bop19_pose.py": "953a016e47a31ed05a5032302b8154722049d8dd953aeb7794ecedbf607bfcce",
+      "scripts/eval_bop24_pose.py": "d3aa46b4a67b563eb11772636e1532a206e1bbbce20d23b6c4d50c5d30c4a1d4",
+      "scripts/eval_bop22_coco.py": "4ef31672df3a1584cd01aca8a749e8437c1b57e9388d1e774e5df790ef578c9f",
+      "bop_toolkit_lib/dataset_params.py": "a935fc4f6fd42f367a0bbf816036f783fb4c5d87200a8615ce1e08e6d51af05e"
+    },
+    "xyzibd_supported_error_types": ["ad", "add", "adi", "mssd", "mspd"]
+  },
+  "support_matrix": {
+    "official_bop19_average_recall": {
+      "status": "unavailable",
+      "must_not_invoke": true,
+      "entrypoint": "scripts/eval_bop19_pose.py",
+      "required_error_types": ["vsd", "mssd", "mspd"],
+      "missing_xyzibd_definition": "vsd",
+      "reason": "The pinned official BOP19 aggregate is mean(VSD, MSSD, MSPD), while pinned XYZ-IBD dataset parameters do not support VSD and define no XYZ-IBD VSD delta."
+    },
+    "official_bop24_pose_map": {
+      "status": "available",
+      "entrypoint": "scripts/eval_bop24_pose.py",
+      "target_file": "test_targets_bop24.json",
+      "aggregate_score_key": "bop24_mAP",
+      "aggregate_error_types": ["mssd", "mspd"],
+      "variants": ["single_view", "multi_view"]
+    },
+    "official_bop22_bbox_ap": {
+      "status": "available",
+      "entrypoint": "scripts/eval_bop22_coco.py",
+      "target_file": "test_targets_bop19.json",
+      "annotation_type": "bbox",
+      "bbox_type": "amodal",
+      "aggregate_score_key": "AP",
+      "variant": "shared_predicted_input"
+    },
+    "official_bop22_segm_ap": {
+      "status": "available",
+      "entrypoint": "scripts/eval_bop22_coco.py",
+      "target_file": "test_targets_bop19.json",
+      "annotation_type": "segm",
+      "bbox_type": "amodal",
+      "aggregate_score_key": "AP",
+      "variant": "shared_predicted_input"
+    }
+  },
+  "evaluation": {
+    "maximum_evaluate_invocations": 1,
+    "maximum_invocations_per_command": 1,
+    "continue_after_command_failure": true,
+    "authorized_command_count": 4,
+    "command_order": [
+      "official_bop24_pose_map:single_view",
+      "official_bop24_pose_map:multi_view",
+      "official_bop22_bbox_ap:shared_predicted_input",
+      "official_bop22_segm_ap:shared_predicted_input"
+    ],
+    "official_once_relative_path": "artifacts/r3_bop_industrial_supported_v2/official_once",
+    "pre_score_relative_path": "artifacts/r3_bop_industrial_supported_v2/pre_score",
+    "report_relative_path": "reports/r3_bop_industrial_supported_v2",
+    "result_tuning_after_score": false,
+    "rerun_after_score_or_error": false
+  },
+  "authorization": {
+    "reference": "codex_delegation:01a003cf-9081-7cc1-b89d-9842143a1ec3",
+    "scope": "four_supported_official_bop_commands_evaluator_only"
+  },
+  "claim_boundary": {
+    "bop19_average_recall": "unavailable, not a reduced-error surrogate",
+    "bop24_pose_map": "official pinned BOP Toolkit output for fixed single/multi predictions",
+    "bop22_bbox_segm_ap": "official pinned BOP Toolkit output for the shared frozen COCO predictions",
+    "single_vs_multiview": "BOP24 pose mAP comparison on identical official XYZ-IBD val targets; not a BOP-2025 multiview leaderboard claim"
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-m5-r5a-v1",
+  "stage_id": "M5-R5A",
+  "purpose": "Outcome-blind successor to M5-R5: evaluate all eight unused LM-O objects for object adaptivity while requiring at least one natural missing frame from every object and retaining the aggregate dropout gates.",
+  "predecessor": {
+    "protocol_id": "poseloop-m5-r5-v1",
+    "status": "FAIL_M5_R5_INPUT_FEASIBILITY",
+    "result_commit": "ea5ac85",
+    "failure": "Seven of eight objects had eligible 192-frame windows. Object 8 had one unavailable frame among its 1214 GT-present source frames, so the per-object minimum of two missing frames made the eight-object gate impossible.",
+    "pose_or_error_outcome_observed": false,
+    "gpu_inference_started": false
+  },
+  "source": {
+    "dataset": "BOP LM-O",
+    "license": "CC BY-SA 4.0",
+    "official_repository": "https://huggingface.co/datasets/bop-benchmark/lmo",
+    "development_object_ids": [1, 5, 6, 8, 9, 10, 11, 12],
+    "archives": {
+      "base": {
+        "filename": "lmo_base.zip",
+        "size_bytes": 5684,
+        "sha256": "d0e99cf6ab1acef7040a56ddf1f5b3d486449ef7b9927ce7898a62b07dee08e2"
+      },
+      "models": {
+        "filename": "lmo_models.zip",
+        "size_bytes": 5367178,
+        "sha256": "48e4cbe0aac6c2d2da03339d5110496b2fb1201a16043f9e04ae85a5022a7842"
+      },
+      "development": {
+        "filename": "lmo_test_all.zip",
+        "size_bytes": 720158597,
+        "sha256": "33c9de88c15d0fb21a08d686c7eb45c2fa335a4a96e10384756f946be71c73e2"
+      },
+      "sealed_ycbv": {
+        "repository": "https://huggingface.co/datasets/bop-benchmark/ycbv",
+        "base_filename": "ycbv_base.zip",
+        "base_size_bytes": 15805,
+        "base_sha256": "98440f8bd403100b21cf11a6729fabe8b3d5ce714472edc57a18b7f1fcd4bb18",
+        "models_filename": "ycbv_models.zip",
+        "models_size_bytes": 524634729,
+        "models_sha256": "1e517a9b513cadb8eaf406ac3ce3c5f1d6fc4a80161c866b4e2a73d13de5e554",
+        "data_filename": "ycbv_test_all.zip",
+        "data_size_bytes": 14969383039,
+        "data_sha256": "fea2ab5f18aba1857acd320827cec10d9dbf258e4940ea4b52f5dd51cb2356a7",
+        "development_access": "FORBIDDEN"
+      }
+    },
+    "clock": "Order frames by BOP image ID and use a nominal 30 Hz clock; hardware timestamps are unavailable.",
+    "coordinate_frame": "Model-to-camera.",
+    "association": "Oracle scene_id plus object_id association; duplicate object instances in a frame are forbidden.",
+    "limitations": [
+      "single recorded development scene",
+      "nominal timing",
+      "oracle association",
+      "ground-truth visible masks as isolated pose-estimator inputs",
+      "camera-relative rather than world-frame motion"
+    ]
+  },
+  "splits": {
+    "development": {
+      "dataset": "LM-O",
+      "directory": "test",
+      "scene_id": 2,
+      "sensor_modality": "linemod_rgbd",
+      "labels": "Already opened only for the failed M5-R5 source-feasibility audit. M5-R5A may use support structure for the frozen selection but no FoundationPose prediction or pose-error outcome existed when this successor was frozen."
+    },
+    "sealed": {
+      "dataset": "YCB-V",
+      "directory": "test",
+      "labels": "Do not download or inspect until every M5-R5A development condition passes and a separate sealed protocol is committed."
+    },
+    "dataset_overlap": 0,
+    "object_overlap": 0
+  },
+  "selection": {
+    "image_height": 480,
+    "image_width": 640,
+    "minimum_mask_area_fraction": 0.001,
+    "minimum_valid_depth_ratio": 0.5,
+    "minimum_valid_depth_pixels": 4,
+    "observation_available": "A GT-present frame is available only when decoded visible-mask area is at least 0.001 of the image, valid-depth ratio inside the mask is at least 0.5, and at least four visible masked depth pixels are valid.",
+    "gt_absent_frame_policy": "Exclude from replay because pose error is not evaluable; never count it as natural missing.",
+    "artificial_frame_deletion": false,
+    "window_length_frames": 192,
+    "window_rule": "For each object, split GT-present rows into source-frame-consecutive segments. Among eligible 192-frame windows starting available, choose the window with most naturally unavailable frames and break ties by earliest source image ID. Every selected object must contribute at least one natural missing frame.",
+    "eligible_window": {
+      "available_frame_count_min": 96,
+      "natural_missing_frame_count_min": 1
+    },
+    "missing_gap_frame_minimums": {
+      "short_gap_1_2": 4,
+      "medium_gap_3_7": 8,
+      "long_gap_8_plus": 8
+    },
+    "track_rule": "Exactly one selected window per represented object; require all eight LM-O objects.",
+    "selection_reads_pose_or_error_outcome": false,
+    "preinitialization": "Every selected window starts with an available FoundationPose measurement."
+  },
+  "methods": {
+    "baseline": {
+      "method": "NEAREST_REPRESENTATIVE_CT",
+      "configuration_id": "nearest_smooth",
+      "configuration_source": "artifacts/r1/m5_r1/frozen_phase1_configurations.json",
+      "role": "Sole persistent pose-state owner for baseline and proposed outputs."
+    },
+    "proposed_family": {
+      "method": "NEAREST_ANCHORED_OBJECT_CONFIDENCE_GATE",
+      "description": "Use causal object-local mask, depth, and anchor-innovation confidence. Available frames may receive a bounded current-frame correction that never feeds back. Missing frames output the nearest anchor bit-for-bit while confidence decays and uncertainty grows.",
+      "raw_foundationpose_score_policy": "Record for audit only; exclude from filtering and confidence.",
+      "forced_reacquisition_policy": "Forbidden.",
+      "shared_configuration": {
+        "translation_scale_m": 0.01,
+        "rotation_scale_deg": 5.0,
+        "dropout_decay_frames": 3.0,
+        "quality_floor": 0.05
+      },
+      "candidate_order": [
+        "anchor_calibrated",
+        "anchored_conservative",
+        "anchored_balanced",
+        "anchored_responsive"
+      ],
+      "candidates": {
+        "anchor_calibrated": {
+          "blend_gain": 0.0,
+          "minimum_correction_confidence": 1.0,
+          "maximum_anchor_measurement_disagreement": 0.0
+        },
+        "anchored_conservative": {
+          "blend_gain": 0.25,
+          "minimum_correction_confidence": 0.7,
+          "maximum_anchor_measurement_disagreement": 1.5
+        },
+        "anchored_balanced": {
+          "blend_gain": 0.5,
+          "minimum_correction_confidence": 0.6,
+          "maximum_anchor_measurement_disagreement": 2.0
+        },
+        "anchored_responsive": {
+          "blend_gain": 0.75,
+          "minimum_correction_confidence": 0.5,
+          "maximum_anchor_measurement_disagreement": 3.0
+        }
+      },
+      "candidate_selection": "Leave one object ID out. Select by training all-frame macro-object improvement, with candidate_order as the exact-tie rule. Concatenate held-out tracks for cross-fitted evidence; choose any future sealed candidate by modal fold winner."
+    }
+  },
+  "evaluation": {
+    "primary_loss": "Per-frame sqrt((translation_m/0.01)^2 + (symmetry-aware rotation_deg/5)^2).",
+    "primary_aggregation": "Equal-weight macro mean over all eight represented objects.",
+    "missing_frame_loss": "The same loss restricted to naturally unavailable GT-present frames and equal-weight macro-averaged over all eight objects, each of which must contribute at least one such frame.",
+    "confidence_metric": "Spearman correlation between proposed uncertainty and proposed normalized pose error on all naturally unavailable cross-fitted frames.",
+    "bootstrap": {
+      "seed": 5505,
+      "resamples": 5000,
+      "unit": "Paired hierarchical resampling of represented objects, then complete tracks within sampled objects.",
+      "reported_bound": "10th percentile of cross-fitted paired all-frame relative macro-object improvement."
+    },
+    "development_gate": {
+      "represented_object_count_min": 8,
+      "track_count_min": 8,
+      "missing_represented_object_count_min": 8,
+      "natural_missing_frame_count_min": 64,
+      "cross_fitted_macro_object_relative_improvement_min": 0.05,
+      "cross_fitted_natural_missing_frame_relative_improvement_min": 0.0,
+      "one_sided_hierarchical_bootstrap_90pct_lower_improvement_min": 0.0,
+      "missing_frame_uncertainty_error_spearman_min": 0.2,
+      "missing_anchor_mismatch_count_max": 0,
+      "unsafe_forced_reacquisition_count_max": 0,
+      "nonfinite_output_count_max": 0,
+      "all_conditions_required": true
+    },
+    "stop_rule": "Any failed development condition stops M5-R5A and forbids YCB-V access."
+  },
+  "sealed_policy": {
+    "single_open": true,
+    "method": "After a full development pass, freeze the modal candidate and outcome-blind YCB-V track selection in a separate commit before downloading YCB-V.",
+    "gate": "Reuse all numerical and structural development gates without relaxation.",
+    "reopen_policy": "The first YCB-V evaluator-label open is final. Any method, configuration, metric, selection, or gate change requires another genuinely new data source and protocol ID."
+  },
+  "claim_boundary": {
+    "development_allowed": "Recorded single-scene LM-O RGB-D replay with nominal timing, oracle association, GT visible masks, eight-object all-frame cross-fitting, eight-object natural-support-loss evaluation, nearest-anchored pose safety, and object-local uncertainty.",
+    "sealed_allowed_if_passed": "One object-disjoint YCB-V validation of the LM-O-developed nearest-anchor confidence gate.",
+    "forbidden": [
+      "hardware-timestamp validation",
+      "deployable association",
+      "detector or segmenter robustness",
+      "claiming missing-frame pose improvement from structural equality alone",
+      "retuning on consumed XYZ-IBD or HB outcomes",
+      "treating an available-only object as missing-frame evidence",
+      "accessing YCB-V after a failed development gate"
+    ]
+  },
+  "execution_order": [
+    "commit this protocol, generalized builder/inference/evaluator, core, and tests before any LM-O FoundationPose prediction or pose-error outcome",
+    "build the M5-R5A input bundle and record exact source/code/data hashes",
+    "run label-blind FoundationPose inference once on all available selected frames",
+    "evaluate the frozen candidates with leave-one-object-out cross-fitting",
+    "apply every numerical and structural gate",
+    "only after a full pass, commit a separate modal-candidate and YCB-V sealed implementation",
+    "only then download YCB-V and perform one sealed-label open"
+  ]
+}

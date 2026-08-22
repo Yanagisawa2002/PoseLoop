@@ -1,0 +1,162 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.instance-deblend-protocol.v1r7",
+  "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-deblend.v1r7",
+  "role": "PREP_ONLY_NEW_INSTANCE_BACKEND_SYNTHETIC_CALIBRATION",
+  "predecessor_freeze": {
+    "commit": "b9e6e4b6e0172135142ace74718b3d65a635509e",
+    "tree": "49350f81eca5c9055b32595103171c81cf6b3c6a",
+    "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-selection.v1r6",
+    "protocol_lock_sha256": "3761a567e138e7f5c28235f04f3cac82e7936c9610f0f2450e4b6bc7cec1f319",
+    "selection_policy_sha256": "bc5bdbf433715a43ff594b7cab12184a5f3e09df25e524a6a58052d6fac0701c",
+    "selection_policy_mutation_permitted": false,
+    "output_lock_sha256": "75780180f823c5a77bb19ae023b63632bdd2142cc0bbad09b67e709065949d13",
+    "output_sha256": "eab0901fd4b277fa261d52b872a92b0564d80aa1ef1b1e53c478665857189704",
+    "receipt_lock_sha256": "f3de0f1ef7c83f7c8f6a06c3982379a72d3cb411e84a7b3de718d55a0a9b9ef6",
+    "receipt_sha256": "745892890367e0e6cdcd268eb1fc197c7962210135b7c9a9e1cc1da9224d96e0",
+    "replay_frame_ids": [
+      "scene-000000-image-000000",
+      "scene-000000-image-000001",
+      "scene-000003-image-000000",
+      "scene-000003-image-000001",
+      "scene-000009-image-000000",
+      "scene-000009-image-000001",
+      "scene-000012-image-000000",
+      "scene-000012-image-000001",
+      "scene-000015-image-000000",
+      "scene-000015-image-000001"
+    ],
+    "historical_diagnostic_exposure": {
+      "a_r6_output_bundle_opened": true,
+      "human_content_review_completed": true,
+      "identified_failure_frame_id": "scene-000009-image-000000",
+      "identified_failure_taxonomy": "MERGED_ADJACENT_OCCLUDED_INSTANCES",
+      "raw_rgb_or_depth_opened_for_a_r7_configuration": false,
+      "numeric_threshold_or_weight_change_permitted": false
+    },
+    "post_freeze_replay_role": "ONE_SHOT_POST_COMMIT_CONTENT_REPLAY_ONLY",
+    "post_freeze_replay_may_influence_configuration": false
+  },
+  "new_method": {
+    "proposal_family": "SAM2_1_RGBD_NEGATIVE_PROMPT_INSTANCE_DEBLEND",
+    "sam2_repository": "https://github.com/facebookresearch/sam2",
+    "observed_main_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "source_tree_sha1": null,
+    "source_archive_sha256": null,
+    "model_config": "configs/sam2.1/sam2.1_hiera_l.yaml",
+    "checkpoint_url": "https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_large.pt",
+    "checkpoint_bytes": null,
+    "checkpoint_sha256": null,
+    "prompt_sources": [
+      "RGB_IMAGE_EMBEDDING",
+      "RAW_SENSOR_DEPTH_DISCONTINUITY_SEEDS",
+      "RIVAL_SEEDS_AS_NEGATIVE_PROMPTS"
+    ],
+    "prompt_rule": "SYNTHETIC_CALIBRATION_ONLY_UNTIL_FROZEN",
+    "negative_prompt_exclusion_required": true,
+    "visible_masks_must_be_mutually_exclusive": true,
+    "a_r6_policy_reused_byte_exact": true,
+    "threshold_override_permitted": false
+  },
+  "synthetic_development": {
+    "label_source": "CAD_RENDERER_VISIBLE_INSTANCE_IDS_ONLY",
+    "required_strata": [
+      "clean_single_instance",
+      "touching_pair_different_cad",
+      "touching_pair_same_cad",
+      "depth_ordered_occlusion_pair",
+      "same_cad_pile_three_plus",
+      "container_and_frame_boundary_distractor"
+    ],
+    "training_seed_interval": [
+      0,
+      4095
+    ],
+    "development_seed_interval": [
+      4096,
+      5119
+    ],
+    "seed_intervals_disjoint": true,
+    "real_replay_frames_permitted": false,
+    "gt_sensor_or_evaluator_assets_permitted": false,
+    "result_driven_stratum_replacement_permitted": false
+  },
+  "gates": {
+    "matching_iou_thresholds": [
+      0.5,
+      0.75
+    ],
+    "occlusion_strata_require_strict_recall75_improvement": true,
+    "occlusion_strata_require_strict_merge_reduction": true,
+    "clean_singleton_recall75_may_decrease": false,
+    "unmatched_prediction_count_may_increase": false,
+    "split_count_may_increase": false,
+    "every_required_stratum_must_pass": true,
+    "scene9_pass_is_a_development_gate": false,
+    "failure_action": "NO_GO_NO_THRESHOLD_TUNING_ON_REPLAY"
+  },
+  "access_boundary": {
+    "post_freeze_replay_rgb_open_count": 0,
+    "post_freeze_replay_depth_open_count": 0,
+    "post_freeze_replay_prediction_open_count": 0,
+    "gt_pose_open_count": 0,
+    "gt_mask_open_count": 0,
+    "evaluator_open_count": 0,
+    "foundationpose_run_count": 0,
+    "official_scorer_run_count": 0,
+    "downstream_export_count": 0
+  },
+  "readiness": {
+    "prep_contract_ready": true,
+    "formal_workload_permitted": false,
+    "scene9_replay_permitted": false,
+    "blockers": [
+      "SAM2_SOURCE_TREE_AND_ARCHIVE_UNFROZEN",
+      "SAM2_1_HIERA_LARGE_CHECKPOINT_BYTES_UNFROZEN",
+      "SAM2_RUNTIME_AND_CAD_SCORER_UNINTEGRATED",
+      "SYNTHETIC_CAD_OCCLUSION_BENCHMARK_UNBUILT"
+    ]
+  },
+  "wrapper_files": [
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/__init__.py",
+      "bytes": 883,
+      "sha256": "25b83e25cabd59781b52d8881e0f7df42dfb8fa144377f5c97598b5393ce72ba"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/__main__.py",
+      "bytes": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/adapter.py",
+      "bytes": 8871,
+      "sha256": "86ddde29b50e4a02f9155cb430c481d971c1ff799270a8aee09405ccafe51ed0"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/cli.py",
+      "bytes": 1607,
+      "sha256": "fc16db72dfc7f0e9f30f8350fac96f831b08a1516b8d3b5a7f82fc0a0503b8eb"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/contracts.py",
+      "bytes": 13360,
+      "sha256": "e6657455c742928e6f88e69234b8b4f17e031e315b97ec4cb502e82a8b552707"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/core.py",
+      "bytes": 11458,
+      "sha256": "c8f598e663772dd0ca796b38a170e0707af1ccfbb1f1e890fb3821bad827c687"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/core.py",
+      "bytes": 21064,
+      "sha256": "606afda49f1aab0a3062fba50bc341f01e1423eb860ee40880bc86eaab16ca91"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_selection_v1r6.py",
+      "bytes": 53812,
+      "sha256": "714325de7558e2f0c02c2e75a2c6e371132a1fbe65b31a4d2e0e71a46270b5d4"
+    }
+  ],
+  "protocol_lock_sha256": "4fbae675e2f1ce7e096cb81680a7f1e982ae6fbeaa095de2baf4390ed6ac5504"
+}

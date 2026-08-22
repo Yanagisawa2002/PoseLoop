@@ -1,0 +1,31 @@
+{
+  "accuracy_claim_permitted": false,
+  "base_sample_count": 1,
+  "checkpoint_sha256": "21df95a95a83243f26cfd8920c8410a5d54882d114359c6133c06de2f9a7fe9e",
+  "evaluator_path_open_count_on_gpu_c": 0,
+  "gt_path_open_count_on_gpu_c": 0,
+  "implementation_commit": "ad3affc9aed1f0ef9a12b3f0423703152e6ad481",
+  "implementation_sha256": "a842e45de69d84ab0c23ea5bc21419cef38ed5863c899b5a2b3060058bdbd642",
+  "item_count": 5,
+  "label_access_count_on_gpu_c": 0,
+  "manifest_lock_sha256": "5dd9f81b06956fe8eeed9b2e7f76df95ef7d6732c7feb89d0a3ae0317e314607",
+  "model_sha256": "6c500cbaf9e3b40ec7d41fbef7cea966538e37ffe96f4ac81394f5fc979c1bf2",
+  "per_variant_item_count": {
+    "bbox_mask": 1,
+    "depth_component_mask": 1,
+    "official_known_sample_sanity": 1,
+    "oracle_mask_control": 1,
+    "predicted_mask": 1
+  },
+  "results_sha256": "0b2d4018d943e0bcca81531e15f41ae4ce847c6d49d1c7999c12f863e31ca454",
+  "schema_version": "poseloop.pose-accuracy-recovery.producer-output-validation.v1",
+  "scorer_path_open_count_on_gpu_c": 0,
+  "status": "valid",
+  "status_counts": {
+    "failed": 0,
+    "oom": 0,
+    "success": 5
+  },
+  "validation_lock_sha256": "d2c8056bd5f7d104bae3aad777cc43a24b9331fa1c3827a3154556b1c8bbfa2f",
+  "variant_count": 5
+}

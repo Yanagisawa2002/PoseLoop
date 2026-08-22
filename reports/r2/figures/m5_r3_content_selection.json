@@ -1,0 +1,31 @@
+{
+  "protocol_id": "poseloop-m5-r3-v1",
+  "rule": "Among tracks with at least 10 natural missing frames and baseline missing-frame loss at most 2.0, choose the greatest and least missing-frame relative improvement. Within each, show the missing frame with the greatest rescue or greatest regression; stable ties use the earliest replay frame.",
+  "schema_version": 1,
+  "selected": [
+    {
+      "baseline_normalized_pose_error": 0.9348750740398046,
+      "natural_missing_frame_count": 20,
+      "object_id": 8,
+      "proposed_normalized_pose_error": 0.5270433508623125,
+      "replay_frame_index": 36,
+      "role": "rescue",
+      "sample_id": "xyzibd-val-pn-s000020-i000036-g000024-o000008",
+      "track_id": "xyzibd-val-s000020-o000008-r000024",
+      "track_missing_relative_improvement": 0.287689019213358
+    },
+    {
+      "baseline_normalized_pose_error": 0.5606916417432395,
+      "natural_missing_frame_count": 28,
+      "object_id": 14,
+      "proposed_normalized_pose_error": 0.8882100135264024,
+      "replay_frame_index": 33,
+      "role": "regression",
+      "sample_id": "xyzibd-val-pn-s000070-i000034-g000016-o000014",
+      "track_id": "xyzibd-val-s000070-o000014-r000016",
+      "track_missing_relative_improvement": -0.18253672249598185
+    }
+  ],
+  "selection_timing": "post_evaluation_visualization_only",
+  "used_for_method_configuration_threshold_metric_or_gate": false
+}

@@ -1,0 +1,16 @@
+{
+  "base_sample_count": 1,
+  "contains_gt_derived_control_inputs": true,
+  "contains_raw_gt_paths": false,
+  "coverage_percent": 100,
+  "dry_run_is_accuracy_result": false,
+  "item_count": 5,
+  "label_access_count_on_gpu_c": 0,
+  "manifest_lock_sha256": "5dd9f81b06956fe8eeed9b2e7f76df95ef7d6732c7feb89d0a3ae0317e314607",
+  "manifest_relative_path": "manifest.json",
+  "manifest_sha256": "73216883abbb78bf7c9e81e3623ffc9a4869c8a8d75dd7221a4b2c1014586597",
+  "schema_version": "poseloop.pose-accuracy-recovery.c-handoff-receipt.v2",
+  "sha256sums_relative_path": "SHA256SUMS",
+  "sha256sums_sha256": "e7567e50dd3106b279e198bc8aecd37c116098a5cc53f410f00a52f4f145cc8c",
+  "variant_count": 5
+}

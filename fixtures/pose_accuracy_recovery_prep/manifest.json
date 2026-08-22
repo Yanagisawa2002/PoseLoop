@@ -1,0 +1,108 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.manifest.v1",
+  "protocol_id": "poseloop.pose-accuracy-recovery.development-prep.v1",
+  "role": "DEVELOPMENT_ONLY",
+  "auto_deploy": false,
+  "accuracy_claim_permitted": false,
+  "input_kind": "SYNTHETIC_COMMITTED_FIXTURE",
+  "roots": {
+    "producer": "producer",
+    "evaluator_only": "evaluator_only"
+  },
+  "units": {
+    "pose_translation": "m",
+    "depth_storage": "mm",
+    "depth_scale_to_m": 0.001,
+    "cad_vertices": "m",
+    "metric_translation": "mm",
+    "rotation_error": "degrees"
+  },
+  "coordinate_conventions": {
+    "pose_direction": "model_to_camera",
+    "camera_frame": "opencv_x_right_y_down_z_forward",
+    "matrix_layout": "row_major_4x4",
+    "rotation_handedness": "right_handed",
+    "homogeneous_last_row": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "mask_variants": [
+    "official_known_sample_sanity",
+    "oracle_mask_control",
+    "predicted_mask",
+    "depth_component_mask",
+    "bbox_mask"
+  ],
+  "samples": [
+    {
+      "key": {
+        "scene_id": 0,
+        "image_id": 0,
+        "object_id": 1
+      },
+      "producer_inputs": {
+        "rgb": {
+          "path": "producer/rgb/sample-000.json",
+          "sha256": "b95851b5f2c71cc62c53cb94f501ddea386b10499126eddb1e299f32e59a4acf",
+          "role": "producer"
+        },
+        "depth": {
+          "path": "producer/depth/sample-000.json",
+          "sha256": "6c391186c6a75b58b7a13e2c49f294f4dabe27329393d5f084e0a010795f0c78",
+          "role": "producer"
+        },
+        "camera": {
+          "path": "producer/camera/sample-000.json",
+          "sha256": "6e766891c4abdb904b2b77fc19e0a8439baa2e2aca65e0d5a15589bb1f015428",
+          "role": "producer"
+        },
+        "cad": {
+          "path": "producer/cad/object-001.json",
+          "sha256": "96a2128bf951093da3073a2526d696a4e0a92b73006af703e52855c1603b0845",
+          "role": "producer"
+        },
+        "masks": {
+          "predicted_mask": {
+            "path": "producer/masks/predicted-mask-000.json",
+            "sha256": "89f4dbad684d382565113b27d3022e7f4508277cc4beb3d724de359d953408ca",
+            "role": "producer"
+          },
+          "depth_component_mask": {
+            "path": "producer/masks/depth-component-mask-000.json",
+            "sha256": "775fb62c86e4c80b62606226e6a850c00311919342bbabe62c9c79cc5cbde926",
+            "role": "producer"
+          },
+          "bbox_mask": {
+            "path": "producer/masks/bbox-mask-000.json",
+            "sha256": "be1febdfdeb5e9ff90ca3471e849e0e31274c0e05f03874bbcbd4adfb67cd284",
+            "role": "producer"
+          }
+        }
+      },
+      "evaluator_only": {
+        "gt_pose": {
+          "path": "evaluator_only/poses/gt-pose-000.json",
+          "sha256": "d0e5337cbe73086bc189ec4a1ddf4bd53bfc33cbb6bfc532d36ddf5d34398f65",
+          "role": "evaluator_only"
+        },
+        "masks": {
+          "official_known_sample_sanity": {
+            "path": "evaluator_only/masks/known-sample-mask-000.json",
+            "sha256": "f81ae12d58d4143e6fd4fd5d8a50f6af97cd33507419b3b334db0b8f4a23283c",
+            "role": "evaluator_only"
+          },
+          "oracle_mask_control": {
+            "path": "evaluator_only/masks/oracle-mask-000.json",
+            "sha256": "5f42679d9d75213359fe7462358d564b0e10a72707ee32531de3873c41708986",
+            "role": "evaluator_only"
+          }
+        },
+        "oracle_deployment_conclusion_permitted": false
+      },
+      "symmetric_object": false
+    }
+  ]
+}

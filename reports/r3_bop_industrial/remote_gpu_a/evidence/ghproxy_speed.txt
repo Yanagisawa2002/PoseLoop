@@ -1,0 +1,2 @@
+ghproxy_http=200 size=1739 speed=1384 time=1.255693 remote_ip=104.21.11.15
+ghproxy_exit=0

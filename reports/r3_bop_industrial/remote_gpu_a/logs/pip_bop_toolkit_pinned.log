@@ -1,0 +1,89 @@
+Looking in indexes: https://mirrors.aliyun.com/pypi/simple
+Collecting numpy==1.26.4
+  Using cached https://mirrors.aliyun.com/pypi/packages/0f/50/de23fde84e45f5c4fda2488c759b69990fd4512387a8632860f3ac9cd225/numpy-1.26.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.0 MB)
+Collecting opencv-python==4.11.0.86
+  Downloading https://mirrors.aliyun.com/pypi/packages/2c/8b/90eb44a40476fa0e71e05a0283947cfd74a5d36121a11d926ad6f3193cc4/opencv_python-4.11.0.86-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (63.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.0/63.0 MB 6.8 MB/s eta 0:00:00
+Collecting pypng>=0.20220715.0
+  Using cached https://mirrors.aliyun.com/pypi/packages/3e/b9/3766cc361d93edb2ce81e2e1f87dd98f314d7d513877a342d31b30741680/pypng-0.20220715.0-py3-none-any.whl (58 kB)
+Collecting pytz>=2025.2
+  Using cached https://mirrors.aliyun.com/pypi/packages/0f/7b/39c34ca613b0b198cb866466651b26b045e2009864c5183c979a3b83f383/pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+Collecting webdataset>=0.2.100
+  Using cached https://mirrors.aliyun.com/pypi/packages/d9/00/aca6beb3658dab4ed3dbb41a78e6e7f31342e0b41d28088f205525751601/webdataset-1.0.2-py3-none-any.whl (74 kB)
+Collecting pyopengl>=3.1.0
+  Using cached https://mirrors.aliyun.com/pypi/packages/de/e4/1ba6f44e491c4eece978685230dde56b14d51a0365bc1b774ddaa94d14cd/pyopengl-3.1.10-py3-none-any.whl (3.2 MB)
+Collecting imageio>=2.35.1
+  Using cached https://mirrors.aliyun.com/pypi/packages/3e/2d/ca050652104bab2cf55e569db2a178b1b61cb041fef28307f2db383f6d9f/imageio-2.37.4-py3-none-any.whl (318 kB)
+Collecting scikit-image>=0.21.0
+  Using cached https://mirrors.aliyun.com/pypi/packages/f4/a2/70401a107d6d7466d64b466927e6b96fcefa99d57494b972608e2f8be50f/scikit_image-0.26.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (13.6 MB)
+Collecting scipy>=1.10.1
+  Using cached https://mirrors.aliyun.com/pypi/packages/dd/aa/1b939f6c67ed68635bb538e6752d3dacc02f66535182e939a89581a44e9c/scipy-1.18.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+Collecting vispy>=0.14.2
+  Using cached https://mirrors.aliyun.com/pypi/packages/32/59/a793f838b1400ce04f8bca54b38bbfe09efc9fe20c0000b8bddf87658600/vispy-0.16.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.9 MB)
+Collecting tqdm>=4.67.1
+  Using cached https://mirrors.aliyun.com/pypi/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl (80 kB)
+Collecting braceexpand (from webdataset>=0.2.100)
+  Downloading https://mirrors.aliyun.com/pypi/packages/fa/93/e8c04e80e82391a6e51f218ca49720f64236bc824e92152a2633b74cf7ab/braceexpand-0.1.7-py2.py3-none-any.whl (5.9 kB)
+Requirement already satisfied: pyyaml in /root/miniconda3/lib/python3.12/site-packages (from webdataset>=0.2.100) (6.0.2)
+Requirement already satisfied: pillow>=8.3.2 in /root/miniconda3/lib/python3.12/site-packages (from imageio>=2.35.1) (11.3.0)
+Requirement already satisfied: networkx>=3.0 in /root/miniconda3/lib/python3.12/site-packages (from scikit-image>=0.21.0) (3.5)
+Collecting tifffile>=2022.8.12 (from scikit-image>=0.21.0)
+  Downloading https://mirrors.aliyun.com/pypi/packages/b5/49/819b902ecebb2ae136432981dd25b1600e5b0f3633644ac40ae7c11c71f6/tifffile-2026.8.16-py3-none-any.whl (271 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 271.5/271.5 kB 42.5 MB/s eta 0:00:00
+Requirement already satisfied: packaging>=21 in /root/miniconda3/lib/python3.12/site-packages (from scikit-image>=0.21.0) (23.2)
+Collecting lazy-loader>=0.4 (from scikit-image>=0.21.0)
+  Downloading https://mirrors.aliyun.com/pypi/packages/8a/a1/8d812e53a5da1687abb10445275d41a8b13adb781bbf7196ddbcf8d88505/lazy_loader-0.5-py3-none-any.whl (8.0 kB)
+INFO: pip is looking at multiple versions of scipy to determine which version is compatible with other requirements. This could take a while.
+Collecting scipy>=1.10.1
+  Downloading https://mirrors.aliyun.com/pypi/packages/01/8e/1e35281b8ab6d5d72ebe9911edcdffa3f36b04ed9d51dec6dd140396e220/scipy-1.17.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.2/35.2 MB 6.4 MB/s eta 0:00:00
+Collecting freetype-py (from vispy>=0.14.2)
+  Downloading https://mirrors.aliyun.com/pypi/packages/b6/36/853cad240ec63e21a37a512ee19c896b655ce1772d803a3dd80fccfe63fe/freetype_py-2.5.1-py3-none-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 20.2 MB/s eta 0:00:00
+Collecting hsluv (from vispy>=0.14.2)
+  Downloading https://mirrors.aliyun.com/pypi/packages/96/36/5bddefea3d7adf22a64f9aa9701492f8a9fe6948223f5cf2602c22ec9be7/hsluv-5.0.4-py2.py3-none-any.whl (5.3 kB)
+Requirement already satisfied: kiwisolver in /root/miniconda3/lib/python3.12/site-packages (from vispy>=0.14.2) (1.4.8)
+INFO: pip is looking at multiple versions of tifffile to determine which version is compatible with other requirements. This could take a while.
+Collecting tifffile>=2022.8.12 (from scikit-image>=0.21.0)
+  Downloading https://mirrors.aliyun.com/pypi/packages/da/ed/75bf4d6ae6fec7233ef466f27dffc99f91fde53a31e69f02640b418317ec/tifffile-2026.7.31-py3-none-any.whl (271 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 271.6/271.6 kB 51.0 MB/s eta 0:00:00
+  Downloading https://mirrors.aliyun.com/pypi/packages/c8/e8/d381de4a3cc4e3682cba0338f43250893508aad0b310af1d0635f7b04413/tifffile-2026.7.14-py3-none-any.whl (270 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 270.6/270.6 kB 42.6 MB/s eta 0:00:00
+  Downloading https://mirrors.aliyun.com/pypi/packages/81/59/208f71d70ddc6184f79b8c6d87d46eb7d7b12c19186a817dec9c9c3f3693/tifffile-2026.6.1-py3-none-any.whl (267 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 267.1/267.1 kB 48.7 MB/s eta 0:00:00
+  Downloading https://mirrors.aliyun.com/pypi/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl (266 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 266.7/266.7 kB 46.8 MB/s eta 0:00:00
+  Downloading https://mirrors.aliyun.com/pypi/packages/b4/af/ce4df3ca29122d219c45d3e86e5ff9a9df03b8cf31afd76817b662c803a3/tifffile-2026.5.2-py3-none-any.whl (266 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 266.4/266.4 kB 5.7 MB/s eta 0:00:00
+  Downloading https://mirrors.aliyun.com/pypi/packages/3f/9f/74f110b4271ded519c7add4341cbabc824de26817ff1c345b3109df9e99c/tifffile-2026.4.11-py3-none-any.whl (248 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 248.2/248.2 kB 7.0 MB/s eta 0:00:00
+  Downloading https://mirrors.aliyun.com/pypi/packages/1a/e4/e804505f87627cd8cdae9c010c47c4485fd8c1ce31a7dd0ab7fcc4707377/tifffile-2026.3.3-py3-none-any.whl (243 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 244.0/244.0 kB 31.1 MB/s eta 0:00:00
+Installing collected packages: pytz, pypng, pyopengl, braceexpand, tqdm, numpy, lazy-loader, hsluv, freetype-py, webdataset, vispy, tifffile, scipy, opencv-python, imageio, scikit-image
+  Attempting uninstall: tqdm
+    Found existing installation: tqdm 4.66.2
+    Not uninstalling tqdm at /root/miniconda3/lib/python3.12/site-packages, outside environment /root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/.venv
+    Can't uninstall 'tqdm'. No files were found to uninstall.
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.3.2
+    Not uninstalling numpy at /root/miniconda3/lib/python3.12/site-packages, outside environment /root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/.venv
+    Can't uninstall 'numpy'. No files were found to uninstall.
+Successfully installed braceexpand-0.1.7 freetype-py-2.5.1 hsluv-5.0.4 imageio-2.37.4 lazy-loader-0.5 numpy-1.26.4 opencv-python-4.11.0.86 pyopengl-3.1.10 pypng-0.20220715.0 pytz-2026.3.post1 scikit-image-0.26.0 scipy-1.17.1 tifffile-2026.3.3 tqdm-4.70.0 vispy-0.16.2 webdataset-1.0.2
+Looking in indexes: http://mirrors.aliyun.com/pypi/simple
+Obtaining file:///root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: bop_toolkit_lib
+  Building editable for bop_toolkit_lib (pyproject.toml): started
+  Building editable for bop_toolkit_lib (pyproject.toml): finished with status 'done'
+  Created wheel for bop_toolkit_lib: filename=bop_toolkit_lib-0.1.0-0.editable-py3-none-any.whl size=4335 sha256=47e5046143b1d9dde63ca3eaf74fd853726cf6d840d826cb1c933edd8788433d
+  Stored in directory: /tmp/pip-ephem-wheel-cache-1qd7qt7b/wheels/70/cf/54/9142c0a7145f6b81bb91c58aed7ab454498d1af2036f4c3dd5
+Successfully built bop_toolkit_lib
+Installing collected packages: bop_toolkit_lib
+Successfully installed bop_toolkit_lib-0.1.0

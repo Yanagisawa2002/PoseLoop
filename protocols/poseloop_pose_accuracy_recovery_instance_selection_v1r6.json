@@ -1,0 +1,101 @@
+{
+  "boundary": {
+    "depth_visibility_access_count": 0,
+    "downstream_export_count": 0,
+    "evaluator_access_count": 0,
+    "foundationpose_run_count": 0,
+    "label_access_count": 0,
+    "mask_visib_access_count": 0,
+    "official_scorer_run_count": 0,
+    "oracle_association_count": 0,
+    "scene_gt_access_count": 0,
+    "scene_gt_info_access_count": 0,
+    "sealed_access_count": 0,
+    "source_mask_access_count": 0
+  },
+  "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-selection.v1r6",
+  "protocol_lock_sha256": "3761a567e138e7f5c28235f04f3cac82e7936c9610f0f2450e4b6bc7cec1f319",
+  "role": "DEVELOPMENT_ONLY_LABEL_BLIND_POST_SELECTION",
+  "schema_version": "poseloop.pose-accuracy-recovery.instance-selection-protocol.v1r6",
+  "scientific_boundary": {
+    "accuracy_claim_permitted": false,
+    "downstream_export_permitted": false,
+    "foundationpose_run_permitted": false,
+    "human_content_acceptance_required": true,
+    "official_scorer_run_permitted": false
+  },
+  "selection_policy": {
+    "calibration_formula": "0.970*cad_similarity+0.015*proposal_score+0.010*cad_margin+0.005*mask_stability",
+    "calibration_weights": {
+      "cad_margin": 0.01,
+      "cad_similarity": 0.97,
+      "mask_stability": 0.005,
+      "proposal_score": 0.015
+    },
+    "container_bbox_tolerance_px": 3,
+    "container_child_max_area_ratio": 0.8,
+    "container_containment_threshold": 0.95,
+    "container_minimum_contained_children": 3,
+    "container_minimum_coverage": 0.1,
+    "eligible_tie_break": [
+      "calibrated_score_desc",
+      "cad_similarity_desc",
+      "proposal_score_desc",
+      "mask_stability_desc",
+      "proposal_index_asc"
+    ],
+    "frame_edge_margin_px": 2,
+    "low_margin_action": "ABSTAIN_NO_DOWNSTREAM_EXPORT",
+    "maximum_mask_coverage": 0.25,
+    "minimum_cad_margin_for_selection": 0.05,
+    "minimum_selection_proposal_score": 0.3,
+    "rectangular_container_fill_threshold": 0.8,
+    "rectangular_container_normalized_span_threshold": 0.65,
+    "source_candidate_population_mutation_permitted": false
+  },
+  "source_contract": {
+    "candidate_population_mutation_permitted": false,
+    "frame_count": 10,
+    "frame_manifest_lock_sha256": "36afc3d29d7196e73bce274f1d7715b89d964824ab315cc6567beea1a5a1fc53",
+    "frame_manifest_sha256": "1597071a4ca49e763022f2fe20a3aa97e4e67d8e848b25abddb847cf8ec1d569",
+    "independent_disk_validation_required": true,
+    "independent_validation_sha256": "937de11962befb09617463a01b2debaee5ebbdbe7f2811a6fe13123c775798f4",
+    "output_bundle_lock_sha256": "e35c414efed9cfeac08c50977bff1dd28e2d70e1ec83c34d43265737eab2f2a2",
+    "output_schema": "poseloop.pose-accuracy-recovery.instance-producer-output.v1r5",
+    "producer_manifest_sha256": "308c0f14391e330f1f84a1c58a77f1e3d430ee57d9bac0b404b2a311e7b5161e",
+    "proposal_count": 628,
+    "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-proposal.v1r5",
+    "protocol_lock_sha256": "90f23acd34021bd0fe58ff5da2b80e6748005cbe57e5fd2161477a26123d05e2",
+    "run_receipt_lock_sha256": "468ebda07ccd8c0a0d653d918403432e08f5e3079e10b30a997e4764bf63812d",
+    "run_receipt_sha256": "837e1fe2bbeeafbccbc7c9a3d44891a29f2b6f4cbdd9d369616631f4ffbf5f93",
+    "runtime_request_lock_sha256": "32944d62f624da16f65cf89d7de47f10f94a5bab6f1e9ade3c075dec3bd97a45",
+    "scene_count": 5
+  },
+  "wrapper_files": [
+    {
+      "bytes": 403,
+      "relative_path": "pose_accuracy_recovery_prep/__init__.py",
+      "sha256": "265ab28dc2bec498e4fe9c119ee6afcc0762a2487757433fa3c8df553a25d4ab"
+    },
+    {
+      "bytes": 21064,
+      "relative_path": "pose_accuracy_recovery_prep/core.py",
+      "sha256": "606afda49f1aab0a3062fba50bc341f01e1423eb860ee40880bc86eaab16ca91"
+    },
+    {
+      "bytes": 1105,
+      "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/__init__.py",
+      "sha256": "2723baad8a1cfd5582978ef9541bbbd1721a65b6ae72a2e10b3069988904bdfb"
+    },
+    {
+      "bytes": 77165,
+      "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/contracts.py",
+      "sha256": "4dc284f92dfe0502fe6807474a8fb864f22de43ca204cfc5179aebed65fd199d"
+    },
+    {
+      "bytes": 53812,
+      "relative_path": "pose_accuracy_recovery_prep/instance_selection_v1r6.py",
+      "sha256": "714325de7558e2f0c02c2e75a2c6e371132a1fbe65b31a4d2e0e71a46270b5d4"
+    }
+  ]
+}

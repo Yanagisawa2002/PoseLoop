@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "poseloop.pose-accuracy-recovery.manifest.v1",
+  "title": "PoseLoop pose-accuracy recovery evaluator-owned manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "role",
+    "auto_deploy",
+    "accuracy_claim_permitted",
+    "input_kind",
+    "roots",
+    "units",
+    "coordinate_conventions",
+    "mask_variants",
+    "samples"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "poseloop.pose-accuracy-recovery.manifest.v1"
+    },
+    "protocol_id": {
+      "const": "poseloop.pose-accuracy-recovery.development-prep.v1"
+    },
+    "role": {
+      "const": "DEVELOPMENT_ONLY"
+    },
+    "auto_deploy": {
+      "const": false
+    },
+    "accuracy_claim_permitted": {
+      "const": false
+    },
+    "input_kind": {
+      "enum": [
+        "SYNTHETIC_COMMITTED_FIXTURE",
+        "DEVELOPMENT_DATA"
+      ]
+    },
+    "roots": {
+      "const": {
+        "producer": "producer",
+        "evaluator_only": "evaluator_only"
+      }
+    },
+    "units": {
+      "type": "object",
+      "required": [
+        "pose_translation",
+        "depth_storage",
+        "depth_scale_to_m",
+        "cad_vertices",
+        "metric_translation",
+        "rotation_error"
+      ]
+    },
+    "coordinate_conventions": {
+      "type": "object",
+      "required": [
+        "pose_direction",
+        "camera_frame",
+        "matrix_layout",
+        "rotation_handedness",
+        "homogeneous_last_row"
+      ]
+    },
+    "mask_variants": {
+      "const": [
+        "official_known_sample_sanity",
+        "oracle_mask_control",
+        "predicted_mask",
+        "depth_component_mask",
+        "bbox_mask"
+      ]
+    },
+    "samples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/sample"
+      }
+    }
+  },
+  "$defs": {
+    "key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scene_id",
+        "image_id",
+        "object_id"
+      ],
+      "properties": {
+        "scene_id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "image_id": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "object_id": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "role"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "role": {
+          "enum": [
+            "producer",
+            "evaluator_only"
+          ]
+        }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "producer_inputs",
+        "evaluator_only",
+        "symmetric_object"
+      ],
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/key"
+        },
+        "symmetric_object": {
+          "type": "boolean"
+        },
+        "producer_inputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rgb",
+            "depth",
+            "camera",
+            "cad",
+            "masks"
+          ],
+          "properties": {
+            "rgb": {
+              "$ref": "#/$defs/asset"
+            },
+            "depth": {
+              "$ref": "#/$defs/asset"
+            },
+            "camera": {
+              "$ref": "#/$defs/asset"
+            },
+            "cad": {
+              "$ref": "#/$defs/asset"
+            },
+            "masks": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "predicted_mask",
+                "depth_component_mask",
+                "bbox_mask"
+              ],
+              "properties": {
+                "predicted_mask": {
+                  "$ref": "#/$defs/asset"
+                },
+                "depth_component_mask": {
+                  "$ref": "#/$defs/asset"
+                },
+                "bbox_mask": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            }
+          }
+        },
+        "evaluator_only": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "gt_pose",
+            "masks",
+            "oracle_deployment_conclusion_permitted"
+          ],
+          "properties": {
+            "gt_pose": {
+              "$ref": "#/$defs/asset"
+            },
+            "oracle_deployment_conclusion_permitted": {
+              "const": false
+            },
+            "masks": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "official_known_sample_sanity",
+                "oracle_mask_control"
+              ],
+              "properties": {
+                "official_known_sample_sanity": {
+                  "$ref": "#/$defs/asset"
+                },
+                "oracle_mask_control": {
+                  "$ref": "#/$defs/asset"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

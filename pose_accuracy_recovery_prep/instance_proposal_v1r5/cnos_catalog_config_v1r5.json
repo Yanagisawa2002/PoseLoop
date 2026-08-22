@@ -1,0 +1,65 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.cnos-catalog-adapter.v1r5",
+  "route": "OFFICIAL_CNOS_FASTSAM_X_DINOV2_VITL14_ALL_CAD_CATALOG",
+  "frame_size": {
+    "height": 1080,
+    "width": 1440
+  },
+  "fastsam": {
+    "architecture": "FastSAM-x",
+    "configured_conf_threshold": 0.05,
+    "effective_wrapper_conf_threshold": 0.25,
+    "iou_threshold": 0.9,
+    "mask_threshold": 0.5,
+    "max_det": 200,
+    "segmentor_width_size": 640,
+    "stability_high_threshold": 0.55,
+    "stability_low_threshold": 0.5
+  },
+  "dinov2": {
+    "architecture": "ViT-L/14",
+    "descriptor_width_size": 640,
+    "feature_chunk_size": 16,
+    "model_name": "dinov2_vitl14",
+    "normalize_features": true,
+    "proposal_image_size": 224,
+    "score_storage_transform": "raw_cosine_plus_one_divide_two_without_clamp",
+    "template_aggregation": "average_top_5_cosine",
+    "token_name": "x_norm_clstoken"
+  },
+  "catalog_scoring": {
+    "cad_object_order": [1, 2, 4, 5, 6],
+    "cad_ranking_order": [
+      "normalized_cad_similarity_desc",
+      "object_id_asc"
+    ],
+    "frame_proposal_order": [
+      "proposal_score_desc",
+      "mask_stability_desc",
+      "proposal_index_asc"
+    ],
+    "frame_selected_mask_order": [
+      "selected_cad_similarity_desc",
+      "proposal_score_desc",
+      "mask_stability_desc",
+      "proposal_index_asc"
+    ],
+    "top_k_objects": 5,
+    "runtime_target_object_id_input_permitted": false,
+    "gt_association_permitted": false
+  },
+  "postprocessing": {
+    "confidence_filter": null,
+    "min_box_side_relative": 0.05,
+    "min_mask_area_relative": 0.0003,
+    "nms": null,
+    "proposal_policy": "all_post_geometric_filter_independent_instance_masks"
+  },
+  "oom_policy": {
+    "formula_changes_permitted": false,
+    "initial_proposal_chunk_size": 16,
+    "max_chunk_reductions": 4,
+    "minimum_proposal_chunk_size": 1,
+    "reduction": "integer_halve_retry_same_slice"
+  }
+}

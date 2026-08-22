@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-m5-r2-v1",
+  "purpose": "Replace the blocked median-support M5-R1 real replay selection with a label-blind, observed-dropout-enriched recorded-sequence development replay while preserving the frozen phase-1 methods.",
+  "predecessor": {
+    "stage": "M5-R1 phase 2",
+    "status": "BLOCKED_REAL_REPLAY_INPUT_GATE",
+    "reason": "The frozen per-object median-support selector chose 15 complete-observation tracks even though the audited pool contains tracks with natural input dropouts.",
+    "reuse_as_positive_evidence": false
+  },
+  "source": {
+    "dataset": "XYZ-IBD validation RealSense",
+    "scene_ids": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70],
+    "clock": "Sort each associated physical track by common frame ID and map source-frame ordinal differences to a nominal 20 Hz clock; hardware timestamps are unavailable.",
+    "coordinate_frame": "Transform each independent FoundationPose model-to-camera measurement into the dataset world frame using the recorded world-to-camera calibration before temporal filtering.",
+    "motion_scope": "The physical objects are static while the recorded camera viewpoint changes; this tests temporal stabilization and natural missing observations, not moving-object dynamics."
+  },
+  "selection": {
+    "observation_available": "Visible input mask area is at least 0.001 of the 1280x720 image, valid-depth ratio inside that mask is at least 0.5, and at least four masked depth pixels are valid.",
+    "track_rule": "Retain every associated track with at least five available observations and at least one naturally unavailable observation at or after its first available observation.",
+    "initialization": "Start replay at the first naturally available observation. Earlier unavailable frames are excluded because neither causal method can initialize without a measurement.",
+    "outcome_blind": "Selection may read scene, object, oracle physical association, frame order, input mask area, and valid-depth support. It may not read FoundationPose predictions, scores, ground-truth pose error, or either temporal method output.",
+    "artificial_deletion": false,
+    "expected_after_audit": {
+      "track_count": 21,
+      "object_count": 5,
+      "replay_frame_count": 1048,
+      "inference_sample_count": 973,
+      "natural_missing_frame_count": 75,
+      "object_ids": [1, 9, 12, 14, 17]
+    }
+  },
+  "methods": {
+    "baseline": "NEAREST_REPRESENTATIVE_CT using the frozen M5-R1 phase-1 nearest_smooth configuration.",
+    "proposed": "QUOTIENT_CV_KALMAN using the frozen M5-R1 phase-1 qcvk_balanced configuration.",
+    "configuration_source": "artifacts/r1/m5_r1/frozen_phase1_configurations.json",
+    "pose_predictor": "FoundationPose with the frozen commit, checkpoints, seed, five refinement iterations, full 252-candidate attention, and resource-bounded warp/score/refine execution used by R2.",
+    "symmetry": "Use exact discrete transforms from models_eval/models_info.json. For a declared continuous axis, apply a deterministic fixed object-coordinate basis that maps that axis to canonical z, run the byte-frozen z-axis temporal kernels unchanged, then map outputs back to the original object coordinates."
+  },
+  "evaluation": {
+    "primary_loss": "For each track, mean sqrt((symmetry-quotient translation error / 0.01 m)^2 + (symmetry-quotient rotation error / 5 deg)^2) across every retained replay frame.",
+    "primary_aggregation": "Compute a track mean, then an equal-weight mean across tracks within each object, then an equal-weight macro mean across the five represented objects.",
+    "missing_frame_loss": "Apply the same track-then-object macro aggregation using only naturally unavailable frames.",
+    "bootstrap": {
+      "seed": 5202,
+      "resamples": 5000,
+      "unit": "Hierarchical paired resampling: sample represented objects with replacement, then sample complete tracks with replacement within each sampled object; preserve all frames and both methods in every sampled track.",
+      "reported_bound": "10th percentile of paired relative macro-object improvement."
+    },
+    "development_gate": {
+      "macro_object_relative_trajectory_loss_improvement_min": 0.05,
+      "one_sided_hierarchical_bootstrap_90pct_lower_improvement_min": 0.0,
+      "natural_missing_frame_macro_object_relative_improvement_min": 0.0,
+      "nonfinite_output_count_max": 0,
+      "all_conditions_required": true
+    },
+    "single_open": true,
+    "reopen_policy": "The first evaluator-label open is final for this protocol. Any method, configuration, selection, symmetry, metric, or gate change requires a new protocol ID and a newly frozen bundle."
+  },
+  "claim_boundary": {
+    "allowed": "Observed-dropout-enriched development replay on recorded XYZ-IBD RealSense multi-view sequences with a nominal clock and oracle track association.",
+    "forbidden": [
+      "sealed or unseen-sensor validation",
+      "hardware-timestamp validation",
+      "moving-object tracking",
+      "deployable association",
+      "synthetically deleted-frame evidence",
+      "independent physical-instance count equal to frame or track count"
+    ]
+  },
+  "execution_order": [
+    "freeze protocol, label-blind selection, exact symmetry handling, and evaluator code",
+    "build separate inference and evaluator-label streams",
+    "run complete label-blind FoundationPose inference for every naturally available retained frame",
+    "verify prediction coverage and provenance",
+    "open evaluator labels exactly once and compare the two frozen temporal methods",
+    "generate content and quantitative visualizations only from the completed result"
+  ]
+}

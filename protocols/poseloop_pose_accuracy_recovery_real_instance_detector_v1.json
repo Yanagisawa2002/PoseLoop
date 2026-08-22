@@ -1,0 +1,85 @@
+{
+  "schema_version": "poseloop.a-r9.real-instance-detector-protocol.v1",
+  "protocol_id": "poseloop.pose-accuracy-recovery.real-instance-detector.v1",
+  "dataset_role": "ALREADY_CONSUMED_REAL_DEVELOPMENT",
+  "object_disjoint_split": {
+    "train_scenes": [0, 5, 15, 20, 35, 45, 50, 55],
+    "internal_validation_scenes": [60, 70],
+    "fixed_evaluation_scenes": [10, 25, 30, 40, 65],
+    "train_and_internal_image_ids": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+      10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+      20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+      30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+      40, 41, 42, 43, 44, 45, 46, 47, 48, 49
+    ],
+    "fixed_evaluation_image_ids": [0, 10, 20, 30, 40],
+    "scene_and_object_disjoint": true,
+    "expected_scene_object_ids": {
+      "000000": 16,
+      "000005": 17,
+      "000010": 2,
+      "000015": 13,
+      "000020": 8,
+      "000025": 1,
+      "000030": 5,
+      "000035": 12,
+      "000040": 4,
+      "000045": 9,
+      "000050": 10,
+      "000055": 15,
+      "000060": 11,
+      "000065": 6,
+      "000070": 14
+    }
+  },
+  "frozen_a8_comparison": {
+    "result_sha256": "2adec52736b3010f6b7d0ebbb58fb7da0d0f9d32d7a82765f31f3f2b489b49cc",
+    "prediction_manifest_sha256": "9680fdad88bc7d95c840337d9a9f086033e80ef5a8c37281c30e6a92f64b5079",
+    "comparison_variant": "raw_fastsam_eligible"
+  },
+  "model": {
+    "architecture": "torchvision.maskrcnn_resnet50_fpn_v2",
+    "foreground_classes": 1,
+    "class_agnostic": true,
+    "trainable_backbone_layers": 3,
+    "minimum_image_side": 800,
+    "maximum_image_side": 1333,
+    "detections_per_image": 100,
+    "prediction_score_floor": 0.01,
+    "operating_score_threshold": 0.25,
+    "mask_probability_threshold": 0.5,
+    "official_pretrained_weight": {
+      "url": "https://download.pytorch.org/models/maskrcnn_resnet50_fpn_v2_coco-73cbd019.pth",
+      "size_bytes": 185828065,
+      "sha256": "73cbd0190fcbe3ba339921fbce2c3a0b6bb9126c9a133c85e43a2a8e060a109e"
+    }
+  },
+  "training": {
+    "epochs": 8,
+    "physical_batch_size": 1,
+    "gradient_accumulation": 2,
+    "optimizer": "SGD",
+    "learning_rate": 0.005,
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "scheduler": "StepLR(step_size=4,gamma=0.1)",
+    "horizontal_flip_probability": 0.5,
+    "internal_validation_health_image_ids": [0, 10, 20, 30, 40],
+    "cublas_workspace_config": ":4096:8",
+    "seed": 314159,
+    "workers": 8
+  },
+  "promotion_gate": {
+    "paired_frame_f1_bootstrap_lower_gt_zero": true,
+    "positive_scene_count_minimum": 4,
+    "recall_strictly_above_raw_fastsam": true,
+    "ap50_strictly_above_raw_fastsam": true,
+    "pq_strictly_above_raw_fastsam": true,
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 314159
+  },
+  "scene9_read_permitted": false,
+  "sealed_claim_permitted": false,
+  "successor_if_no_go": "3D_INSTANCE_PROPOSALS"
+}

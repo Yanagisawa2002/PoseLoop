@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "poseloop.r4c.prep.runtime-isolated-manifest.v2",
+  "title": "PoseLoop GPU-C runtime-isolated five-variant handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "protocol_sha256",
+    "input_kind",
+    "source_contract",
+    "producer_runtime_lock",
+    "mask_variants",
+    "coverage",
+    "items",
+    "boundary",
+    "manifest_lock_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "poseloop.r4c.prep.runtime-isolated-manifest.v2"},
+    "protocol_id": {"const": "poseloop-r4c-foundationpose-runtime-prep-v1"},
+    "protocol_sha256": {"const": "d915325a5be8201a5b489c52c3c0720520bcfcebf9a3a06d7c5ec55c17efb0c9"},
+    "input_kind": {"enum": ["SYNTHETIC_COMMITTED_FIXTURE", "DEVELOPMENT_DATA"]},
+    "source_contract": {"$ref": "#/$defs/source_contract"},
+    "producer_runtime_lock": {"$ref": "#/$defs/producer_runtime_lock"},
+    "mask_variants": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/mask_variant"}
+    },
+    "coverage": {"$ref": "#/$defs/coverage"},
+    "items": {"type": "array", "minItems": 5, "items": {"$ref": "#/$defs/item"}},
+    "boundary": {"$ref": "#/$defs/boundary"},
+    "manifest_lock_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "git_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol_id", "protocol_sha256", "bundle_sha256", "a_manifest_lock_sha256"],
+      "properties": {
+        "protocol_id": {"const": "poseloop.pose-accuracy-recovery.development-prep.v1"},
+        "protocol_sha256": {"const": "20380305a7fbd92b2c563baea7df1e4f82c39605379543cd8e9443925eae0b8b"},
+        "bundle_sha256": {"$ref": "#/$defs/sha256"},
+        "a_manifest_lock_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "producer_runtime_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation_commit", "implementation_sha256", "model_sha256", "checkpoint_sha256"],
+      "properties": {
+        "implementation_commit": {"$ref": "#/$defs/git_commit"},
+        "implementation_sha256": {"$ref": "#/$defs/sha256"},
+        "model_sha256": {"$ref": "#/$defs/sha256"},
+        "checkpoint_sha256": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["refiner", "scorer"],
+          "properties": {
+            "refiner": {"$ref": "#/$defs/sha256"},
+            "scorer": {"$ref": "#/$defs/sha256"}
+          }
+        }
+      }
+    },
+    "mask_variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mask_variant_id", "input_role", "plugin_id", "source_boundary", "development_control"],
+      "properties": {
+        "mask_variant_id": {"enum": ["official_known_sample_sanity", "oracle_mask_control", "predicted_mask", "depth_component_mask", "bbox_mask"]},
+        "input_role": {"enum": ["development-control-input", "predicted-segmentation", "depth-component-segmentation", "bbox-segmentation"]},
+        "plugin_id": {"enum": ["manifest-mask-file-v1", "coco-rle-inline-v1"]},
+        "source_boundary": {"const": "opaque-upstream-input-only"},
+        "development_control": {"type": "boolean"}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_percent", "item_count", "unique_execution_key_count", "base_sample_count", "mask_variant_ids", "per_variant_item_count", "execution_keys_sha256"],
+      "properties": {
+        "required_percent": {"const": 100},
+        "item_count": {"type": "integer", "minimum": 5},
+        "unique_execution_key_count": {"type": "integer", "minimum": 5},
+        "base_sample_count": {"type": "integer", "minimum": 1},
+        "mask_variant_ids": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"enum": ["official_known_sample_sanity", "oracle_mask_control", "predicted_mask", "depth_component_mask", "bbox_mask"]}
+        },
+        "per_variant_item_count": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["official_known_sample_sanity", "oracle_mask_control", "predicted_mask", "depth_component_mask", "bbox_mask"],
+          "properties": {
+            "official_known_sample_sanity": {"type": "integer", "minimum": 1},
+            "oracle_mask_control": {"type": "integer", "minimum": 1},
+            "predicted_mask": {"type": "integer", "minimum": 1},
+            "depth_component_mask": {"type": "integer", "minimum": 1},
+            "bbox_mask": {"type": "integer", "minimum": 1}
+          }
+        },
+        "execution_keys_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "relative_path", "sha256", "bytes"],
+      "properties": {
+        "role": {"enum": ["public_rgb", "public_depth", "input_mask", "public_camera", "public_cad"]},
+        "relative_path": {"type": "string", "pattern": "^assets/"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "sample_key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scene_id", "image_id", "object_id"],
+      "properties": {
+        "scene_id": {"type": "integer", "minimum": 0},
+        "image_id": {"type": "integer", "minimum": 0},
+        "object_id": {"type": "integer", "minimum": 1}
+      }
+    },
+    "frame_size": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      }
+    },
+    "coverage_fraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nonzero_pixels", "fraction"],
+      "properties": {
+        "nonzero_pixels": {"type": "integer", "minimum": 1},
+        "fraction": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      }
+    },
+    "mask_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plugin_id", "input_role", "source_artifact_sha256", "generator_id", "generator_version", "model_sha256", "score", "coverage", "derivation_class", "development_control", "source_path_disclosed_to_gpu_c", "gpu_c_resolves_derivation", "label_access_count_on_gpu_c"],
+      "properties": {
+        "plugin_id": {"enum": ["manifest-mask-file-v1", "coco-rle-inline-v1"]},
+        "input_role": {"enum": ["development-control-input", "predicted-segmentation", "depth-component-segmentation", "bbox-segmentation"]},
+        "source_artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "generator_id": {"const": "pose-accuracy-recovery-a-export"},
+        "generator_version": {"const": "v2"},
+        "model_sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "score": {"type": "number", "minimum": 0, "maximum": 1},
+        "coverage": {"$ref": "#/$defs/coverage_fraction"},
+        "derivation_class": {"enum": ["gt-derived-development-control", "predicted-segmentation", "depth-component", "bbox-from-predicted-detection"]},
+        "development_control": {"type": "boolean"},
+        "source_path_disclosed_to_gpu_c": {"const": false},
+        "gpu_c_resolves_derivation": {"const": false},
+        "label_access_count_on_gpu_c": {"const": 0}
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_id", "sample_key", "mask_variant_id", "frame_size", "inputs", "camera_intrinsics", "depth_scale", "mask_provenance"],
+      "properties": {
+        "item_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,159}$"},
+        "sample_key": {"$ref": "#/$defs/sample_key"},
+        "mask_variant_id": {"enum": ["official_known_sample_sanity", "oracle_mask_control", "predicted_mask", "depth_component_mask", "bbox_mask"]},
+        "frame_size": {"$ref": "#/$defs/frame_size"},
+        "inputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rgb", "depth", "mask", "camera", "cad"],
+          "properties": {
+            "rgb": {"$ref": "#/$defs/asset"},
+            "depth": {"$ref": "#/$defs/asset"},
+            "mask": {"$ref": "#/$defs/asset"},
+            "camera": {"$ref": "#/$defs/asset"},
+            "cad": {"$ref": "#/$defs/asset"}
+          }
+        },
+        "camera_intrinsics": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}}
+        },
+        "depth_scale": {"type": "number", "exclusiveMinimum": 0},
+        "mask_provenance": {"$ref": "#/$defs/mask_provenance"}
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contains_gt_derived_control_inputs", "contains_raw_gt_paths", "gpu_c_resolves_derivation", "label_access_count_on_gpu_c", "gt_path_open_count_on_gpu_c", "evaluator_path_open_count_on_gpu_c", "official_scorer_run", "contains_evaluator_output", "contains_sealed_data", "accuracy_claim_permitted"],
+      "properties": {
+        "contains_gt_derived_control_inputs": {"const": true},
+        "contains_raw_gt_paths": {"const": false},
+        "gpu_c_resolves_derivation": {"const": false},
+        "label_access_count_on_gpu_c": {"const": 0},
+        "gt_path_open_count_on_gpu_c": {"const": 0},
+        "evaluator_path_open_count_on_gpu_c": {"const": 0},
+        "official_scorer_run": {"const": false},
+        "contains_evaluator_output": {"const": false},
+        "contains_sealed_data": {"const": false},
+        "accuracy_claim_permitted": {"const": false}
+      }
+    }
+  }
+}

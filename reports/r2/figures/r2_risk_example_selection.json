@@ -1,0 +1,41 @@
+{
+  "protocol_id": "poseloop-r2-v1",
+  "rule": "Select the two lowest learned-risk successes and two highest learned-risk failures, requiring distinct objects within each category; stable ties use object ID then group ID.",
+  "schema_version": 1,
+  "selected": [
+    {
+      "group_id": "xyzibd-val-pn-s000030-i000035-g000008-o000005",
+      "joint_success": true,
+      "learned_failure_risk": 0.0005365019811334423,
+      "mspd_px": 10.836584569610915,
+      "normalized_mssd": 0.040250067453955145,
+      "object_id": 5
+    },
+    {
+      "group_id": "xyzibd-val-pn-s000035-i000009-g000000-o000012",
+      "joint_success": true,
+      "learned_failure_risk": 0.00112996020383934,
+      "mspd_px": 23.84012303801286,
+      "normalized_mssd": 0.031619576814235203,
+      "object_id": 12
+    },
+    {
+      "group_id": "xyzibd-val-pn-s000015-i000035-g000013-o000013",
+      "joint_success": false,
+      "learned_failure_risk": 0.9766796648381983,
+      "mspd_px": 325.0511997188267,
+      "normalized_mssd": 0.965381783299859,
+      "object_id": 13
+    },
+    {
+      "group_id": "xyzibd-val-pn-s000045-i000043-g000015-o000009",
+      "joint_success": false,
+      "learned_failure_risk": 0.9731751353254934,
+      "mspd_px": 51.58065653361817,
+      "normalized_mssd": 0.1618991794310865,
+      "object_id": 9
+    }
+  ],
+  "selection_timing": "post_evaluation_visualization_only",
+  "used_for_model_policy_threshold_or_gate": false
+}

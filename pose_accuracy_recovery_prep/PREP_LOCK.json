@@ -1,0 +1,27 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.prep-lock.v1",
+  "protocol_id": "poseloop.pose-accuracy-recovery.development-prep.v1",
+  "state": "frozen_local_prep_awaiting_controller_commit",
+  "auto_deploy": false,
+  "base_commit": "58939e69960f2227c4fa20be547e61df23fe391d",
+  "protocol": {
+    "path": "protocols/poseloop_pose_accuracy_recovery_prep_v1.json",
+    "sha256": "20380305a7fbd92b2c563baea7df1e4f82c39605379543cd8e9443925eae0b8b"
+  },
+  "manifest_schema": {
+    "path": "contracts/poseloop_pose_accuracy_recovery_manifest_v1.schema.json",
+    "sha256": "846cdd7b93b37c31a84a8f5c46c4248fdf6afd777ec6a658826f348e480f0ffb"
+  },
+  "fixture_manifest": {
+    "path": "fixtures/pose_accuracy_recovery_prep/manifest.json",
+    "sha256": "1d740a31372ccfdb77dd82efe3a87c823addf014b8d21e327d612f04a1eea6b6"
+  },
+  "cpu_dry_run": {
+    "path": "artifacts/pose_accuracy_recovery_prep/final-dry-run-v3/dry-run-summary.json",
+    "sha256": "6282c9d09117dbb9951c0ad0621fdedb02bd436492834aacf4b0e99bd610fa36",
+    "tracked": false,
+    "accuracy_claim_permitted": false
+  },
+  "implementation_commit": null,
+  "expected_commit_message": "Add pose accuracy recovery PREP contracts and diagnostics"
+}

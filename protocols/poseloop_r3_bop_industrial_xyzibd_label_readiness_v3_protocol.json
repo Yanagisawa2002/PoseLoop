@@ -1,0 +1,89 @@
+{
+  "schema_version": "poseloop.r3.xyzibd-label-readiness.protocol.v3",
+  "protocol_id": "poseloop.r3.bop-industrial.xyzibd-label-readiness.v3",
+  "state": "frozen_before_label_readiness_derivation",
+  "required_branch": "codex/poseloop/r3-xyzibd-label-readiness-v3",
+  "source_v2": {
+    "implementation_commit": "1278f690d9714e213ff5dd7ab23a0ae67c16c67e",
+    "final_evidence_commit": "f49e6ba3f16f61656b334aecafa2b0c7a1fa7d0b",
+    "protocol_id": "poseloop.r3.bop-industrial.xyzibd-supported.official.v2",
+    "protocol_sha256": "b23860399ed43e268921070e7ccee15e82375c5514850b96b1507417c18740dc",
+    "invocation_started_sha256": "2ac08339d5951915dc2affdf24ff4f772d969be8911e1826e04603a59ff785c6",
+    "sealed_receipt_sha256": "0ce1482fa4febdd5134d266b9be4b098f12439435a669e7924020d85bbac7e64",
+    "all_four_exit_codes": [1, 1, 1, 1],
+    "rerun_permitted": false,
+    "immutable": true
+  },
+  "dataset": {
+    "name": "xyzibd",
+    "split": "val",
+    "source_revision": "4fe4671783172622313ac0c7182012cee618f217",
+    "official_repository": "https://huggingface.co/datasets/bop-benchmark/xyzibd",
+    "official_readme": "https://huggingface.co/datasets/bop-benchmark/xyzibd/blob/4fe4671783172622313ac0c7182012cee618f217/README.md",
+    "val_archive": {
+      "filename": "xyzibd_val.zip",
+      "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_val.zip",
+      "bytes": 7710607370,
+      "sha256": "09c5639c6e55b8c9a0708a344037e98918c5935ddbd91b5db5a9b06f5484c659",
+      "published_lfs_oid_sha256": "09c5639c6e55b8c9a0708a344037e98918c5935ddbd91b5db5a9b06f5484c659",
+      "published_xet_hash": "4ef2ecd9630bc6118b07749fe59f3dbe53a7642fe45cf96e181ff0d1a8697a1c"
+    },
+    "distributed_xyz_labels": [
+      "scene_camera_xyz.json",
+      "scene_gt_xyz.json",
+      "scene_gt_info_xyz.json",
+      "mask_xyz",
+      "mask_visib_xyz"
+    ],
+    "derived_xyz_labels": {
+      "scene_gt_coco_xyz.json": "not distributed; derive only with pinned scripts/calc_gt_coco.py in evaluator-only overlay"
+    },
+    "expected_val_scene_ids": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70],
+    "images_per_val_scene": 50
+  },
+  "toolkit": {
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "source_tree_file_count": 93,
+    "source_tree_contract": {
+      "included_roots": ["bop_toolkit_lib", "scripts", "pyproject.toml"],
+      "text_eol_normalized_extensions": [".csv", ".json", ".md", ".py", ".sh", ".toml", ".txt", ".yaml", ".yml"],
+      "file_count": 93,
+      "sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307"
+    },
+    "required_file_sha256": {
+      "scripts/calc_gt_coco.py": "3dc737fb04c9979b28925a77f6447fc0d171aba13efff949024cf0c681db5f61",
+      "bop_toolkit_lib/dataset_params.py": "a935fc4f6fd42f367a0bbf816036f783fb4c5d87200a8615ce1e08e6d51af05e",
+      "bop_toolkit_lib/inout.py": "d9c1154126e9c4eecf90dcdbc2d783d8dcde25eb340294c5c94a4292fe007ba0",
+      "bop_toolkit_lib/pycoco_utils.py": "81335be0d5301b2f49feb9440d134792a25e763d6b7b59355c18e15a2ee0d25e",
+      "scripts/eval_bop24_pose.py": "d3aa46b4a67b563eb11772636e1532a206e1bbbce20d23b6c4d50c5d30c4a1d4",
+      "scripts/eval_bop22_coco.py": "4ef31672df3a1584cd01aca8a749e8437c1b57e9388d1e774e5df790ef578c9f"
+    }
+  },
+  "frozen_prediction_sha256": {
+    "poseloop-r3-input_xyzibd-val.json": "5ef98c1ea24a9ecc141d3f1af6a319dba1ce00f4cb21d522b99b4f1d3ab1a719",
+    "poseloop-r3-predicted-association_xyzibd-val.jsonl": "6883a6ff9ea8fffaa835eb92e2f717a1fb6ff4eb6e5194924bd76becbb26d7b2",
+    "poseloop-r3-single_xyzibd-val.csv": "459ca38d8f7d6d9d7ebafad6c7a65a3147b8776e79e03517f3e93c4d412eb017",
+    "poseloop-r3-multiview_xyzibd-val.csv": "145f19e1d545472a49e16a0954a291d734e3109a59e71f2ba533fcf576244066",
+    "poseloop-r3-provenance_xyzibd-val.json": "ecc8dd05ae38bbd739a1330701746ef1ba7b5c2f4898282bd010efdf7f4759b1"
+  },
+  "target_derivation": {
+    "bop19_filename": "val_targets_bop19.json",
+    "bop24_filename": "val_targets_bop24.json",
+    "min_visibility": 0.1,
+    "bop19_rule": "pinned scripts/enumerate_test_targets.py logic: per scene/image/object visible instance count",
+    "bop24_rule": "one scene_id/im_id record for every public validation image"
+  },
+  "label_boundary": {
+    "evaluator_namespace_basename": "r3_xyzibd_supported_v3_evaluator_only",
+    "prediction_selection_label_access": 0,
+    "source_dataset_read_only": true,
+    "labels_must_not_enter_prediction_or_candidate_selection": true
+  },
+  "scoring": {
+    "evaluator_invocations_allowed": 0,
+    "authorization_receipt_allowed": false,
+    "bop19_status": "unavailable_vsd_undefined",
+    "next_gate": "a ready frozen label-assets lock is required before creating a separate v3 scoring protocol"
+  }
+}

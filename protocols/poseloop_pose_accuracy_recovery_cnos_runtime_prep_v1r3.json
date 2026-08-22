@@ -1,0 +1,233 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.cnos-runtime-route.v1r3",
+  "route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1r3",
+  "route_lock_sha256": "cb83957708fe25eca809c36ff8c11e85811ce18e214fc4e9b2e40da48f348c77",
+  "auto_deploy": false,
+  "role": "DEVELOPMENT_ONLY_DESCRIPTOR_RENDERER",
+  "predecessor": {
+    "implementation_commit": "ff9bd13248d4d707c7dc9e41efa4773168db7ba3",
+    "implementation_tree": "0351534d5317505e699f1a954d11523b5a9a72d9",
+    "r2_route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1r2",
+    "r2_route_lock_sha256": "ed89bfbdaa5589e22576a94ad020c9ff9b82d4aa5c84273ea4488c45225cdad8",
+    "blocker": {
+      "status": "BLOCKED_BEFORE_DESCRIPTOR_FREEZE",
+      "receipt": {
+        "relative_path": "evidence/predecessor/producer-blocker-closeout-v1r2.json",
+        "bytes": 4034,
+        "sha256": "b45fa38c1928c9d72717eff570c1bba3a03b4b6a5a065a0f54a478c7ad5b848e"
+      },
+      "safe_archive": {
+        "relative_path": "evidence/predecessor/poseloop-a-r2-ff9bd132-safe-closeout.tar.gz",
+        "bytes": 68089,
+        "sha256": "464ea2e2f091167d812f8d5e91bfbd4baf473aeb4e15f3a02363a22c9e02f946"
+      },
+      "immutable": true,
+      "reinterpretation_permitted": false,
+      "remote_hotfix_permitted": false
+    }
+  },
+  "source": {
+    "repository": "https://github.com/nv-nguyen/cnos",
+    "commit": "298d1f3366171464ca271659f0e2f7a6eb8e39b4",
+    "tree": "595ba390ad1fdcd2141c8004e505b5da1eb403c9",
+    "archive": {
+      "relative_path": "sources/cnos-298d1f3366171464ca271659f0e2f7a6eb8e39b4-source.tar.gz",
+      "bytes": 17114735,
+      "sha256": "07c52c95f31ddae7fce14f5741c2fe5d7eab88369905237b2a52a5f4a8ebd6e5"
+    },
+    "checkout_relative_path": "sources/cnos",
+    "interface_files": [
+      {
+        "relative_path": "src/poses/pyrender.py",
+        "archive_member": {
+          "bytes": 5044,
+          "sha256": "646a7c32ca31a855520fe97387c0ee544ce305a98b8e4740b60d4f79613d46a1",
+          "line_endings": "CRLF"
+        },
+        "checkout_file": {
+          "bytes": 4912,
+          "sha256": "8dbe52bbb7c6d2fc419786ce1d8602fca4fe82ce6d80af708ff85feff31ed215",
+          "line_endings": "LF"
+        }
+      },
+      {
+        "relative_path": "src/utils/trimesh_utils.py",
+        "archive_member": {
+          "bytes": 2070,
+          "sha256": "adf533469f9382ff984994d43309c794bb2f2eff3c01885a45c99a0175f48b86",
+          "line_endings": "CRLF"
+        },
+        "checkout_file": {
+          "bytes": 1983,
+          "sha256": "d2111f22b1266466e67b5917996b217d7a0923790a95a9ac83283841f1d07a6d",
+          "line_endings": "LF"
+        }
+      }
+    ],
+    "object_poses_level0": {
+      "relative_path": "src/poses/predefined_poses/obj_poses_level0.npy",
+      "bytes": 5504,
+      "sha256": "9316d96402b82d5057a19405cd6e56f92c9cc1cff0b03aa2a170f8cb83000c10"
+    }
+  },
+  "wrapper_contract": {
+    "mode": "THIN_IMPORT_OFFICIAL_RENDER_WITH_PATH_DIAMETER",
+    "official_render_function": "src.poses.pyrender.render",
+    "official_as_mesh_function": "src.utils.trimesh_utils.as_mesh",
+    "official_diameter_function": "src.utils.trimesh_utils.get_obj_diameter",
+    "diameter_argument": "hash_bound_cad_file_path",
+    "mesh_argument_for_diameter_permitted": false,
+    "source_checkout_modification_permitted": false,
+    "camera_sampling": {
+      "id": "cnos_obj_poses_level0_all",
+      "template_level": 0,
+      "view_count_per_object": 42,
+      "translation_scale": "divide_by_1000_once"
+    },
+    "renderer": {
+      "backend": "pyrender",
+      "intrinsic": [
+        [572.4114, 0.0, 325.2611],
+        [0.0, 573.57043, 242.04899],
+        [0.0, 0.0, 1.0]
+      ],
+      "image_size": {"height": 480, "width": 640},
+      "light_intensity": 0.6,
+      "standard_non_tless_non_hot3d_branch_only": true
+    },
+    "process": {
+      "venv_python": "explicit_absolute_venv_bin_python",
+      "path_policy": "prepend_exact_bound_venv_bin",
+      "pythonpath_policy": "prepend_exact_bound_implementation_checkout",
+      "gpu_override": "0",
+      "gpu_override_json_type": "string",
+      "child_count": 5,
+      "child_failure_policy": "nonzero_or_invalid_output_fails_parent",
+      "output_policy": "create_only_attempt_root"
+    }
+  },
+  "objects": [
+    {
+      "object_id": 1,
+      "relative_path": "inputs/cad/obj_000001.ply",
+      "bytes": 127492,
+      "sha256": "177bf8313fc8feb749e86ab8953d9f97102842e54a08c63f32b8adfb663321e1"
+    },
+    {
+      "object_id": 2,
+      "relative_path": "inputs/cad/obj_000002.ply",
+      "bytes": 319240,
+      "sha256": "c6cc5f76b73782415a44362ee8853542f1da580fc49aac8b165767cfc6e2a24e"
+    },
+    {
+      "object_id": 4,
+      "relative_path": "inputs/cad/obj_000004.ply",
+      "bytes": 658929,
+      "sha256": "2885f809073970da906e5192d848dde4f15f844e1ef1e80d13a6ad7a603c9ef9"
+    },
+    {
+      "object_id": 5,
+      "relative_path": "inputs/cad/obj_000005.ply",
+      "bytes": 679427,
+      "sha256": "33dbf9fec3fa2a68fe6ec847507221feac8f00c002f61619bce1344395383a01"
+    },
+    {
+      "object_id": 6,
+      "relative_path": "inputs/cad/obj_000006.ply",
+      "bytes": 708278,
+      "sha256": "0e9ce0f575f104f97c4baf857b5449101eecc9658382b04f893905858a75eece"
+    }
+  ],
+  "output_gate": {
+    "png_count_per_object": 42,
+    "filename_sequence": "000000.png-through-000041.png",
+    "image_size": {"height": 480, "width": 640},
+    "allowed_modes": ["RGB", "RGBA"],
+    "require_nonempty_nonfull_rgb_foreground": true,
+    "minimum_unique_png_sha256_per_object": 2,
+    "object_coverage": "5_of_5"
+  },
+  "boundary": {
+    "label_access_count": 0,
+    "depth_path_open_count": 0,
+    "mask_path_open_count": 0,
+    "mask_visib_path_open_count": 0,
+    "gt_path_open_count": 0,
+    "evaluator_path_open_count": 0,
+    "sealed_split_access_count": 0,
+    "official_scorer_run_count": 0,
+    "fastsam_import_count": 0,
+    "dinov2_model_import_count": 0,
+    "foundationpose_run_count": 0,
+    "gpu_c_call_count": 0
+  },
+  "r2_dependency_files": [
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r2/__init__.py",
+      "bytes": 1485,
+      "sha256": "81cfe87aa0ecd974ea982a050c8c64842b47e85880c562154869898ea16a9ca4"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r2/__main__.py",
+      "bytes": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r2/cli.py",
+      "bytes": 9453,
+      "sha256": "6cf967c0688f9fa1e4bef3d298667b43ef698ab3d372786f8aba8fdac43db577"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r2/contracts.py",
+      "bytes": 54665,
+      "sha256": "32498a79c79b40d1b0633831ad13cf9002a262d4d80805e094073df8ee463155"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r2/producer.py",
+      "bytes": 5389,
+      "sha256": "63b91ac3d456628d1c30e5e0c2db37844b186accb4e4be9cf8a8e1934134ef44"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r2/SERVER_RUNBOOK_CNOS_RUNTIME_PREP_V1R2.md",
+      "bytes": 5684,
+      "sha256": "fe98a5d66c017498652e224707dfff2e85b990407b49872fe65bf382fa569d49"
+    },
+    {
+      "relative_path": "protocols/poseloop_pose_accuracy_recovery_cnos_runtime_prep_v1r2.json",
+      "bytes": 6729,
+      "sha256": "da987f1ca93a9a45faa3335b34698745cbc9f214d66cbc760303d6dd0a4ffd5c"
+    }
+  ],
+  "wrapper_files": [
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r3/__init__.py",
+      "bytes": 914,
+      "sha256": "fb56e81ca4b4c8da85e1fe39bf9e46732003e96c25d98008be4354c4c00b6872"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r3/__main__.py",
+      "bytes": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r3/cli.py",
+      "bytes": 5220,
+      "sha256": "354cc865c1f929178574a752915873a08d89c27a78dc0d8d7bb94fd73ce7148c"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r3/contracts.py",
+      "bytes": 26198,
+      "sha256": "3d12e39c269d0d2cae2e172efcfe54b33b3603131fdbf856602ef56176f67239"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r3/renderer.py",
+      "bytes": 15859,
+      "sha256": "1e4d06598b9e194336f07bfdf83582c247815e0ebe8768ff66349df36dae3b51"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r3/SERVER_RUNBOOK_CNOS_RUNTIME_PREP_V1R3.md",
+      "bytes": 5957,
+      "sha256": "d4af2a4b8f1151e9823a74d5901538552b4075fbf7231d6bad660086d93a3780"
+    }
+  ]
+}

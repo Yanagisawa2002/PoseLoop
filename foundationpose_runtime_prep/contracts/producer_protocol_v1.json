@@ -1,0 +1,119 @@
+{
+  "schema_version": "poseloop.r4c.prep.protocol.v1",
+  "protocol_id": "poseloop-r4c-foundationpose-runtime-prep-v1",
+  "purpose": "Prepare a label-free, manifest-driven FoundationPose producer/runtime package without contacting a GPU server.",
+  "freeze_parent_commit": "53babbf61fda2a529b756bed39af4fab10d3ba60",
+  "execution_mode": {
+    "auto_deploy_default": false,
+    "network_allowed_during_prep": false,
+    "download_install_compile_allowed_during_prep": false,
+    "server_contact_allowed_during_prep": false
+  },
+  "input_contract": {
+    "formal_schema_version": "poseloop.r4c.prep.runtime-isolated-manifest.v2",
+    "legacy_fixture_schema_version": "poseloop.r4c.prep.label-free-manifest.v1",
+    "required_roles": [
+      "public_rgb",
+      "public_depth",
+      "input_mask",
+      "public_camera",
+      "public_cad"
+    ],
+    "mask_variant_ids": [
+      "official_known_sample_sanity",
+      "oracle_mask_control",
+      "predicted_mask",
+      "depth_component_mask",
+      "bbox_mask"
+    ],
+    "gt_derived_control_semantics": "A-side DEVELOPMENT controls may be GT-derived, but only a hash-locked opaque mask asset crosses into GPU-C; derivation and raw paths remain unavailable to GPU-C.",
+    "contains_gt_derived_control_inputs_required": true,
+    "contains_raw_gt_paths_required": false,
+    "gpu_c_resolves_derivation_required": false,
+    "label_access_count_on_gpu_c_required": 0,
+    "dataset_scan_allowed": false,
+    "exact_path_hash_and_byte_match_required": true,
+    "variant_base_sample_sets_must_match": true,
+    "required_coverage_percent": 100
+  },
+  "producer_output_contract": {
+    "schema_version": "poseloop.pose-accuracy-recovery.producer-output.v1",
+    "backend_transport_schema": "poseloop.r4c.prep.backend-transport-contract.v2",
+    "top_k_count": 5,
+    "refiner_trace_state_count": 6,
+    "candidate_top_score_may_substitute_for_top_k": false,
+    "self_validation_required": true,
+    "coverage_percent_required": 100
+  },
+  "inference": {
+    "seed": 0,
+    "iterations": 5,
+    "candidate_limit": 252,
+    "pose_hypothesis_count": 252,
+    "candidate_pruning_allowed": false,
+    "resource_batches": {
+      "warp": 32,
+      "score_data": 8,
+      "score_feature": 32,
+      "refine": 32
+    }
+  },
+  "checkpoint_resume": {
+    "atomic_success_checkpoint_per_item": true,
+    "run_lock_binding_required": true,
+    "failed_attempts_must_not_be_success_cached": true,
+    "silent_retry_forbidden": true,
+    "crash_after_n_fixture_required": true,
+    "resume_requires_exact_protocol_manifest_backend_and_item_fingerprints": true
+  },
+  "equivalence": {
+    "promotion_requires_bitwise_prediction_equality": true,
+    "numeric_tolerance_is_diagnostic_only": true,
+    "diagnostic_numeric_tolerance": {
+      "pose_abs": 1e-7,
+      "score_abs": 1e-8,
+      "margin_abs": 1e-8
+    },
+    "missing_extra_duplicate_or_pruned_candidate_fails": true
+  },
+  "profiling": {
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    },
+    "warmup_and_steady_separate": true,
+    "required_metrics": [
+      "p50_ms",
+      "p95_ms",
+      "throughput_items_per_second",
+      "peak_allocated_vram_bytes",
+      "peak_reserved_vram_bytes",
+      "pose_hypothesis_count",
+      "stage_timings_ms"
+    ],
+    "external_reference_target_ms": 89.0,
+    "external_reference_comparable": false,
+    "external_reference_claim_allowed": false
+  },
+  "visualization": {
+    "layout": "baseline-left-improved-right",
+    "layers": [
+      "public_rgb",
+      "input_mask",
+      "public_cad_wireframe",
+      "predicted_pose_axes"
+    ],
+    "cad_scale_metres": 0.001,
+    "video": {
+      "codec": "mp4v",
+      "fps": 2.0
+    },
+    "pixel_equality_claim": "no-regression-only-not-accuracy"
+  },
+  "boundary": {
+    "label_access_count": 0,
+    "official_scorer_allowed": false,
+    "gt_or_evaluator_reads_allowed": false,
+    "accuracy_claim_allowed": false
+  }
+}

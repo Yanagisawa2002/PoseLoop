@@ -1,0 +1,61 @@
+{
+  "schema_version": "poseloop.r4c.prep.python-runtime-contract.v1",
+  "runtime_id": "official-foundationpose-python-v1",
+  "protocol_id": "poseloop-r4c-foundationpose-runtime-prep-v1",
+  "auto_deploy_default": false,
+  "backend_transport_contract": {
+    "relative_path": "backend_transport_v1.json",
+    "schema_version": "poseloop.r4c.prep.backend-transport-contract.v2",
+    "sha256": "e1c92930b045227d4b760a18481fee7fd03ee555072b419dfc25c3254e5085ea"
+  },
+  "foundationpose_source": {
+    "repository": "https://github.com/NVlabs/FoundationPose.git",
+    "commit": "a1b694b83e633c2cb6115b9063d940a687759392"
+  },
+  "environment": {
+    "python": "3.12.5",
+    "torch": "2.8.0+cu128",
+    "required_imports": [
+      "torch",
+      "numpy",
+      "cv2",
+      "trimesh",
+      "nvdiffrast.torch",
+      "estimater",
+      "learning.training.predict_pose_refine",
+      "learning.training.predict_score"
+    ],
+    "gpu_required_for_live_run": true
+  },
+  "checkpoints": {
+    "refiner": {
+      "relative_path": "weights/2023-10-28-18-33-37/model_best.pth",
+      "bytes": 68220109,
+      "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60"
+    },
+    "scorer": {
+      "relative_path": "weights/2024-01-11-20-02-45/model_best.pth",
+      "bytes": 190229389,
+      "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26"
+    }
+  },
+  "checkpoint_configs": {
+    "refiner": {
+      "relative_path": "weights/2023-10-28-18-33-37/config.yml",
+      "bytes": 708,
+      "sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686"
+    },
+    "scorer": {
+      "relative_path": "weights/2024-01-11-20-02-45/config.yml",
+      "bytes": 778,
+      "sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f"
+    }
+  },
+  "runtime_sources": {
+    "pytorch3d_commit": "3143b3baf8ef8b1023ed76f225af59e2e8a71e06",
+    "nvdiffrast_commit": "253ac4fcea7de5f396371124af597e6cc957bfae"
+  },
+  "production_runner_status": "implemented-unverified-on-gpu",
+  "label_access_count": 0,
+  "official_scorer_run": false
+}

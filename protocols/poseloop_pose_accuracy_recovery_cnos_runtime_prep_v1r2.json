@@ -1,0 +1,173 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.cnos-runtime-route.v1r2",
+  "route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1r2",
+  "route_lock_sha256": "ed89bfbdaa5589e22576a94ad020c9ff9b82d4aa5c84273ea4488c45225cdad8",
+  "auto_deploy": false,
+  "role": "DEVELOPMENT_ONLY",
+  "predecessor": {
+    "implementation_commit": "7e15f06bc97c3466aa482b98b807e8f1cc211e2b",
+    "implementation_tree": "f57d944cc00acc3c72a13dc58f72d90a28aad3df",
+    "r1_route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1r1",
+    "r1_route_lock_sha256": "5fe80c54b38ba0d1cc6016207d8c5d69efe654eba056004f9e419779a3f4923a",
+    "camera_blocker_closeout": {
+      "status": "READY_FOR_R2_CODE_FIX",
+      "sha256": "998436f319d56db3e3e22df587bd7b79251353f1c7d6d9057e10fdecc610aceb",
+      "camera_audit_sha256": "b89744505c5a89c1e003139b1a59e5d3721e88759b1a4eec6f3773eca9d02867",
+      "immutable": true,
+      "reinterpretation_permitted": false
+    }
+  },
+  "camera_contract": {
+    "source_mode": "HASH_ONLY_PUBLIC_PROVENANCE",
+    "source_json_parse_permitted": false,
+    "source_field_access_permitted": false,
+    "source_runtime_inclusion_permitted": false,
+    "source_root": "inputs/provenance/camera",
+    "source_item_count": 10,
+    "source_items": [
+      {
+        "item_id": "s000000-i000000-o000001",
+        "sample_key": {"scene_id": 0, "image_id": 0, "object_id": 1},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000000-i000001-o000001",
+        "sample_key": {"scene_id": 0, "image_id": 1, "object_id": 1},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000003-i000000-o000002",
+        "sample_key": {"scene_id": 3, "image_id": 0, "object_id": 2},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000003-i000001-o000002",
+        "sample_key": {"scene_id": 3, "image_id": 1, "object_id": 2},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000009-i000000-o000004",
+        "sample_key": {"scene_id": 9, "image_id": 0, "object_id": 4},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000009-i000001-o000004",
+        "sample_key": {"scene_id": 9, "image_id": 1, "object_id": 4},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000012-i000000-o000005",
+        "sample_key": {"scene_id": 12, "image_id": 0, "object_id": 5},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000012-i000001-o000005",
+        "sample_key": {"scene_id": 12, "image_id": 1, "object_id": 5},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000015-i000000-o000006",
+        "sample_key": {"scene_id": 15, "image_id": 0, "object_id": 6},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      },
+      {
+        "item_id": "s000015-i000001-o000006",
+        "sample_key": {"scene_id": 15, "image_id": 1, "object_id": 6},
+        "bytes": 418,
+        "sha256": "bf93b9cb8c2a94515b8cec410b0aa6da60ab637d5dd79354ea80083f63fb8430"
+      }
+    ],
+    "transform": {
+      "id": "poseloop.cnos.public-intrinsics-runtime-camera",
+      "version": 1,
+      "workload_fields": ["camera_intrinsics"],
+      "external_pose_included": false,
+      "serialization": "utf8-json-indent2-sort-keys-lf",
+      "derived_schema": "poseloop.pose-accuracy-recovery.cnos-derived-runtime-camera.v1r2",
+      "derived_root": "inputs/runtime-camera"
+    },
+    "provenance_manifest_path": "inputs/manifests/camera-provenance-v1r2.json",
+    "derivation_manifest_path": "inputs/manifests/derived-camera-manifest-v1r2.json",
+    "forbidden_runtime_tokens": [
+      "depth",
+      "depth_component",
+      "depth_component_bbox",
+      "bbox_mask",
+      "legacy_mask",
+      "legacy_predicted_mask",
+      "oracle",
+      "gt",
+      "ground_truth",
+      "evaluator",
+      "sealed",
+      "sam_vit_b",
+      "sam_vit_h",
+      "sam_vit_l",
+      "sam6d_pose",
+      "sam_6d_pose"
+    ]
+  },
+  "execution_identity": {
+    "deployment_namespace": "poseloop_ga_cnos_v1r2",
+    "screen_session_prefix": "poseloop_ga_cnos_v1r2",
+    "output_namespace": "output-v1r2",
+    "compatibility_payload_namespace": "compat-v1-payload"
+  },
+  "boundary": {
+    "label_access_count": 0,
+    "gt_path_open_count": 0,
+    "evaluator_path_open_count": 0,
+    "sealed_split_access_count": 0,
+    "official_scorer_run": false,
+    "depth_provenance_asset_open_count": 0,
+    "legacy_mask_provenance_asset_open_count": 0,
+    "provenance_asset_resolve_count": 0,
+    "provenance_asset_copy_count": 0
+  },
+  "r1_dependency_files": [
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r1/__init__.py",
+      "bytes": 1016,
+      "sha256": "3def5c677b7c986fca49024dc35549180742718f0376198a23aa098cd1680d4a"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r1/__main__.py",
+      "bytes": 79,
+      "sha256": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r1/cli.py",
+      "bytes": 8727,
+      "sha256": "a34d2ad2e86b21440b7c8deb14d30e79cbe82698d35492b3f95de56e7b376b14"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r1/contracts.py",
+      "bytes": 34964,
+      "sha256": "6d39a8b1fa70d5658b0ba1f41978f50c21521238870ec517657b1157647093a3"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r1/producer.py",
+      "bytes": 5230,
+      "sha256": "26d5a65a449e96332cee51c69f17055b4b02f9d40821754724ca92c8bba05ef5"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1r1/SERVER_RUNBOOK_CNOS_RUNTIME_PREP_V1R1.md",
+      "bytes": 4645,
+      "sha256": "fb5d81780cd5a79766747ccb312f4f4897cd5567ee720c4f9777a4ce99e83733"
+    },
+    {
+      "relative_path": "protocols/poseloop_pose_accuracy_recovery_cnos_runtime_prep_v1r1.json",
+      "bytes": 5893,
+      "sha256": "e0bbf02c112f3e1c9022590b010e32b28aca53b7cc68eb6e9e05aea31a4fc9b1"
+    }
+  ]
+}

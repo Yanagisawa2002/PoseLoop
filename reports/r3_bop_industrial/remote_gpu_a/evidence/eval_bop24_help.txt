@@ -1,0 +1,26 @@
+/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/bop_toolkit_lib/transform.py:33: SyntaxWarning: invalid escape sequence '\*'
+  """Homogeneous Transformation Matrices and Quaternions.
+/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/bop_toolkit_lib/transform.py:899: SyntaxWarning: invalid escape sequence '\*'
+  """Return affine transform matrix to register two point sets.
+/root/autodl-tmp/poseloop_r3_20260816_01a003cf/workspace/third_party/bop_toolkit_archive/bop_toolkit_lib/transform.py:1010: SyntaxWarning: invalid escape sequence '\*'
+  """Return matrix to transform given 3D point set into second point set.
+usage: eval_bop24_pose.py [-h] [--renderer_type RENDERER_TYPE]
+                          [--result_filenames RESULT_FILENAMES]
+                          [--results_path RESULTS_PATH]
+                          [--eval_path EVAL_PATH]
+                          [--targets_filename TARGETS_FILENAME]
+                          [--num_workers NUM_WORKERS] [--use_gpu]
+                          [--device DEVICE] [--cleanup_eval]
+
+options:
+  -h, --help            show this help message and exit
+  --renderer_type RENDERER_TYPE
+  --result_filenames RESULT_FILENAMES
+                        Comma-separated names of files with results.
+  --results_path RESULTS_PATH
+  --eval_path EVAL_PATH
+  --targets_filename TARGETS_FILENAME
+  --num_workers NUM_WORKERS
+  --use_gpu
+  --device DEVICE
+  --cleanup_eval        Delete error folders after evaluation (default: False)

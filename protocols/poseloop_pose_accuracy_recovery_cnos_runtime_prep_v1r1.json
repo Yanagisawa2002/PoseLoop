@@ -1,0 +1,164 @@
+{
+  "schema_version": "poseloop.pose-accuracy-recovery.cnos-runtime-route.v1r1",
+  "route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1r1",
+  "route_lock_sha256": "5fe80c54b38ba0d1cc6016207d8c5d69efe654eba056004f9e419779a3f4923a",
+  "auto_deploy": false,
+  "role": "DEVELOPMENT_ONLY",
+  "predecessor": {
+    "implementation_commit": "0389cb3ac3f0b7854e9ca7c57eedda345aaa2fd6",
+    "implementation_tree": "e40a12ee4cbfc41052f4547ea1c2d90b9d46e021",
+    "v1_route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1",
+    "v1_route_lock_sha256": "f369893e4b4cb6e86ef92e6cf0a5e2e3711ba6fec1451d6c750f98fec84f21d6",
+    "pre_model_blocker": {
+      "status": "PRE_MODEL_SCHEMA_BLOCKER",
+      "remote_root": "/root/autodl-tmp/poseloop_ga_cnos_0389cb3_20260818_blocked_v1",
+      "receipt_sha256": "68b112abe9c654440a1306749d93aa4e3bd27951b76f541ee81d45b85d856a67",
+      "workload_bytes": 10864,
+      "workload_sha256": "dd9f9c4ce9b9ca380614064f58e332661aee9ce63c9602918d52ae391267dfb3",
+      "workload_jsonl_line_count": 10,
+      "immutable": true,
+      "reinterpretation_permitted": false
+    }
+  },
+  "workload_contract": {
+    "format": "JSONL",
+    "bytes": 10864,
+    "sha256": "dd9f9c4ce9b9ca380614064f58e332661aee9ce63c9602918d52ae391267dfb3",
+    "line_count": 10,
+    "row_fields": [
+      "camera_intrinsics",
+      "camera_relative_path",
+      "camera_sha256",
+      "camera_world_to_camera_pose_m",
+      "category_id",
+      "coco_prediction_sha256",
+      "coco_score",
+      "depth_relative_path",
+      "depth_scale",
+      "depth_sha256",
+      "detection_index",
+      "image_id",
+      "item_id",
+      "model_relative_path",
+      "model_sha256",
+      "object_id",
+      "rgb_relative_path",
+      "rgb_sha256",
+      "scene_id",
+      "segmentation_sha256",
+      "sensor"
+    ],
+    "identity_fields": [
+      "item_id",
+      "scene_id",
+      "image_id",
+      "object_id"
+    ],
+    "declared_only_fields": [
+      "camera_intrinsics",
+      "camera_world_to_camera_pose_m",
+      "category_id",
+      "coco_prediction_sha256",
+      "coco_score",
+      "depth_relative_path",
+      "depth_scale",
+      "depth_sha256",
+      "detection_index",
+      "segmentation_sha256",
+      "sensor"
+    ],
+    "runtime_hash_fields": {
+      "rgb": "rgb_sha256",
+      "camera": "camera_sha256",
+      "cad": "model_sha256"
+    },
+    "declared_path_resolution_permitted": false,
+    "declared_asset_open_permitted": false,
+    "declared_asset_copy_permitted": false,
+    "declared_metadata_runtime_input_permitted": false
+  },
+  "execution_identity": {
+    "deployment_namespace": "poseloop_ga_cnos_v1r1",
+    "screen_session_prefix": "poseloop_ga_cnos_v1r1",
+    "output_namespace": "output-v1r1",
+    "compatibility_payload_namespace": "compat-v1-payload"
+  },
+  "boundary": {
+    "label_access_count": 0,
+    "gt_path_open_count": 0,
+    "evaluator_path_open_count": 0,
+    "sealed_split_access_count": 0,
+    "official_scorer_run": false,
+    "depth_provenance_asset_open_count": 0,
+    "legacy_mask_provenance_asset_open_count": 0,
+    "provenance_asset_resolve_count": 0,
+    "provenance_asset_copy_count": 0
+  },
+  "v1_dependency_files": [
+    {
+      "relative_path": "pose_accuracy_recovery_prep/core.py",
+      "bytes": 21064,
+      "sha256": "606afda49f1aab0a3062fba50bc341f01e1423eb860ee40880bc86eaab16ca91"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/__init__.py",
+      "bytes": 956,
+      "sha256": "91647a98d3dbb753698685d146cc20c0f2235d41300376f0d9efc6430012f9e3"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/__main__.py",
+      "bytes": 79,
+      "sha256": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/adapter.py",
+      "bytes": 19194,
+      "sha256": "9f9b2fb4ccf9b712d54e50c5fb08e19692dd25b0795d07bf7a2a1632513e7b99"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/cli.py",
+      "bytes": 9007,
+      "sha256": "5d6e0ffb3be7fcd805be6cbb53707ba739fa75fe80dbee8440427ba1ecbcaa4e"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/cnos_adapter_config_v1.json",
+      "bytes": 2042,
+      "sha256": "ec194d809605e7e8fc67708578688565cf3795fc5dd4788de3282e7c0b48d3aa"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/contracts.py",
+      "bytes": 55878,
+      "sha256": "7e3acedda1008d7dcfa304cc84bffdb8ec2eb96bd65b38c14bad1313dfa96479"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/producer.py",
+      "bytes": 48126,
+      "sha256": "68ee1b3118c91fb05e8cfc022b4e057b2f6e62fe4d613ee52feb12c22fd57d10"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/SERVER_RUNBOOK_CNOS_RUNTIME_PREP.md",
+      "bytes": 10555,
+      "sha256": "028a47dd515ee79a30472f0cbc22f2bd4bf044734dab93e4acd09c1ce3016296"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1/__init__.py",
+      "bytes": 791,
+      "sha256": "22d4bc461e9b5d6aed0453ced6fe41781b89557812f5c9bcf74850e95c8713d8"
+    },
+    {
+      "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1/contracts.py",
+      "bytes": 51107,
+      "sha256": "69e9698348113640db97b0d3e5d5785e2f35759e88d34fb19fc1a5c927bc063c"
+    },
+    {
+      "relative_path": "protocols/poseloop_pose_accuracy_recovery_cnos_runtime_prep_v1.json",
+      "bytes": 6296,
+      "sha256": "90f0bd124565020513df4d13c522cec058c90fb5677c12af58d827520a618360"
+    },
+    {
+      "relative_path": "protocols/poseloop_pose_accuracy_recovery_instance_proposal_v1.json",
+      "bytes": 5690,
+      "sha256": "ed860b2ba57683891f5e1585b84067ee62481fbba5f537219112adb6544e7457"
+    }
+  ]
+}

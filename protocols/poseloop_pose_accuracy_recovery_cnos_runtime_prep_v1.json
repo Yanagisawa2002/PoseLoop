@@ -1,0 +1,176 @@
+{
+  "adapter_config": {
+    "bytes": 2042,
+    "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/cnos_adapter_config_v1.json",
+    "sha256": "ec194d809605e7e8fc67708578688565cf3795fc5dd4788de3282e7c0b48d3aa"
+  },
+  "auto_deploy": false,
+  "base_commit": "b5eea0522321721e08d3bef067f0f53e16b52b24",
+  "boundary": {
+    "auto_trigger_gpu_c": false,
+    "depth_path_open_count": 0,
+    "evaluator_path_open_count": 0,
+    "gt_path_open_count": 0,
+    "label_access_count": 0,
+    "legacy_mask_open_count": 0,
+    "official_scorer_run": false,
+    "old_sam_checkpoint_open_count": 0,
+    "sealed_split_access_count": 0,
+    "server_shutdown_permitted": false
+  },
+  "execution_ready_now": false,
+  "forbidden_inputs": [
+    "depth",
+    "depth_component",
+    "depth_component_bbox",
+    "bbox_mask",
+    "legacy_mask",
+    "legacy_predicted_mask",
+    "oracle",
+    "ground_truth",
+    "evaluator",
+    "sealed",
+    "sam_vit_b",
+    "sam_vit_h",
+    "sam_vit_l",
+    "sam6d_pose",
+    "sam_6d_pose"
+  ],
+  "formula": {
+    "cad_similarity_raw": "l2_normalized_dinov2_cls_cosine_then_avg_top_5_templates",
+    "cad_similarity_stored": "monotonic_affine_raw_cosine_plus_one_divide_two",
+    "mask_binarization": "resized_fastsam_probability_greater_equal_0.50",
+    "mask_stability": "iou_probability_greater_equal_0.50_vs_greater_equal_0.55",
+    "proposal_score": "raw_fastsam_box_confidence",
+    "ranking_order": [
+      "cad_similarity_desc",
+      "proposal_score_desc",
+      "mask_stability_desc",
+      "proposal_index_asc"
+    ],
+    "target_candidates": "all_post_geometric_filter_fastsam_proposals_scored_for_target_cad"
+  },
+  "parent_protocol": {
+    "protocol_file_sha256": "ed860b2ba57683891f5e1585b84067ee62481fbba5f537219112adb6544e7457",
+    "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-proposal.v1",
+    "protocol_lock_sha256": "e50e61f6fea430a81e916a648fdd1bfa4e111a28f3be15287bd571d6d046fd81"
+  },
+  "required_runtime_assets": {
+    "implementation_source_archive": {
+      "available_now": false,
+      "relative_path": "sources/poseloop-cnos-runtime-prep-source.tar.gz"
+    },
+    "implementation_source_checkout": {
+      "available_now": false,
+      "relative_path": "sources/poseloop"
+    },
+    "dinov2_checkpoint": {
+      "available_now": false,
+      "relative_path": "models/dinov2_vitl14_pretrain.pth"
+    },
+    "dinov2_source_archive": {
+      "available_now": false,
+      "relative_path": "sources/dinov2-source.tar.gz"
+    },
+    "dinov2_source_checkout": {
+      "available_now": false,
+      "relative_path": "sources/dinov2"
+    },
+    "fastsam_checkpoint": {
+      "available_now": false,
+      "relative_path": "models/FastSAM-x.pt"
+    },
+    "render_manifest": {
+      "available_now": false,
+      "relative_path": "inputs/render/render-manifest.json"
+    }
+  },
+  "resume_policy": {
+    "completed_item_overwrite_permitted": false,
+    "formula_changes_on_resume_permitted": false,
+    "item_receipt_required": true,
+    "output_mode": "atomic_content_addressed_per_item",
+    "planned_crash_after_items": null,
+    "resume_requires_identical_deployment_and_runtime_locks": true
+  },
+  "role": "DEVELOPMENT_ONLY",
+  "route_id": "poseloop.pose-accuracy-recovery.development.cnos-runtime-prep.v1",
+  "route_lock_sha256": "f369893e4b4cb6e86ef92e6cf0a5e2e3711ba6fec1451d6c750f98fec84f21d6",
+  "runtime_route": {
+    "descriptor": "official_dinov2_vitl14_local_hub_source_and_checkpoint",
+    "implementation": "official_cnos_fastsam_dinov2_pyrender",
+    "pose_module": null,
+    "proposal_generator": "official_fastsam_x",
+    "renderer": "official_cnos_pyrender"
+  },
+  "schema_version": "poseloop.pose-accuracy-recovery.cnos-runtime-route.v1",
+  "source": {
+    "archive": {
+      "bytes": 17114735,
+      "relative_path": "sources/cnos-298d1f3366171464ca271659f0e2f7a6eb8e39b4-source.tar.gz",
+      "sha256": "07c52c95f31ddae7fce14f5741c2fe5d7eab88369905237b2a52a5f4a8ebd6e5"
+    },
+    "checkout_relative_path": "sources/cnos",
+    "commit": "298d1f3366171464ca271659f0e2f7a6eb8e39b4",
+    "interface_files": [
+      {
+        "bytes": 816,
+        "relative_path": "configs/model/cnos_fast.yaml",
+        "sha256": "31cd6be1c50de8e7be93a645c5fd311d81174ec2e40aba83406563a4512e4b4c"
+      },
+      {
+        "bytes": 230,
+        "relative_path": "configs/model/segmentor_model/fast_sam.yaml",
+        "sha256": "84e33cf477cf90f502615ca7603f673ed0008a3cc63b068ffe1fefad848cd7e2"
+      },
+      {
+        "bytes": 327,
+        "relative_path": "configs/model/descriptor_model/dinov2.yaml",
+        "sha256": "bc5f8809071fc5f4f95bb383f7bfd1a0188f3d86cf3bb7a734f91818190ec872"
+      },
+      {
+        "bytes": 4327,
+        "relative_path": "src/model/fast_sam.py",
+        "sha256": "fb6ebf53eba9b029798206ad852855a997425fe582e814673be643a900b13f58"
+      },
+      {
+        "bytes": 3651,
+        "relative_path": "src/model/dinov2.py",
+        "sha256": "720805c99083a43411b07e9064ce409bfaee620f83943aa07acc088b0c55c703"
+      },
+      {
+        "bytes": 11521,
+        "relative_path": "src/model/detector.py",
+        "sha256": "f2008860b940823de2d2b1b319f416f768cce31fe685cab40f3880e0f4230052"
+      },
+      {
+        "bytes": 1751,
+        "relative_path": "src/model/loss.py",
+        "sha256": "035733a03053a5cd68b8d46b6c9c4959d015302c7587940e23b435780a7faaa4"
+      },
+      {
+        "bytes": 5044,
+        "relative_path": "src/poses/pyrender.py",
+        "sha256": "646a7c32ca31a855520fe97387c0ee544ce305a98b8e4740b60d4f79613d46a1"
+      },
+      {
+        "bytes": 4805,
+        "relative_path": "src/scripts/render_template_with_pyrender.py",
+        "sha256": "8ac8e3b3822b52a971371a9bcb3ead818dd9a84a6a62990719258be595d5b5a8"
+      },
+      {
+        "bytes": 5504,
+        "relative_path": "src/poses/predefined_poses/cam_poses_level0.npy",
+        "sha256": "6c2d299bf3038510b4318428e7b41294717035394eb7b13beba5537fdb46c279"
+      },
+      {
+        "bytes": 5504,
+        "relative_path": "src/poses/predefined_poses/obj_poses_level0.npy",
+        "sha256": "9316d96402b82d5057a19405cd6e56f92c9cc1cff0b03aa2a170f8cb83000c10"
+      }
+    ],
+    "repository": "https://github.com/nv-nguyen/cnos",
+    "tree": "595ba390ad1fdcd2141c8004e505b5da1eb403c9"
+  },
+  "weights_downloaded_now": false
+}

@@ -1,0 +1,17 @@
+test_association_schema_rejects_oracle_field (test_contract.R3ContractTests.test_association_schema_rejects_oracle_field) ... ok
+test_audited_predictions_require_code_and_model_hashes (test_contract.R3ContractTests.test_audited_predictions_require_code_and_model_hashes) ... ok
+test_coco_schema_rejects_legacy_gt_field (test_contract.R3ContractTests.test_coco_schema_rejects_legacy_gt_field) ... ok
+test_commands_cover_official_ar_pose_ap_and_coco_ap (test_contract.R3ContractTests.test_commands_cover_official_ar_pose_ap_and_coco_ap) ... ok
+test_dataset_preflight_does_not_enumerate_evaluator_labels (test_contract.R3ContractTests.test_dataset_preflight_does_not_enumerate_evaluator_labels) ... ok
+test_lock_and_label_access_are_hash_bound (test_contract.R3ContractTests.test_lock_and_label_access_are_hash_bound) ... ok
+test_output_scope_cannot_touch_frozen_report_namespace (test_contract.R3ContractTests.test_output_scope_cannot_touch_frozen_report_namespace) ... ok
+test_pinned_archive_tree_is_accepted_without_git_metadata (test_contract.R3ContractTests.test_pinned_archive_tree_is_accepted_without_git_metadata) ... ok
+test_predicted_track_ids_are_scoped_by_scene (test_contract.R3ContractTests.test_predicted_track_ids_are_scoped_by_scene) ... ok
+test_protocol_freezes_new_id_and_leakage_boundary (test_contract.R3ContractTests.test_protocol_freezes_new_id_and_leakage_boundary) ... ok
+test_provenance_hash_detects_post_freeze_candidate_mutation (test_contract.R3ContractTests.test_provenance_hash_detects_post_freeze_candidate_mutation) ... ok
+test_valid_bundle_links_coco_association_and_pose_outputs (test_contract.R3ContractTests.test_valid_bundle_links_coco_association_and_pose_outputs) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.020s
+
+OK

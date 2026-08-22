@@ -1,0 +1,97 @@
+{
+  "schema_version": "poseloop.r4a.development.protocol.v3",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development.coverage-geometry.v3",
+  "created_utc": "2026-08-16T14:00:00Z",
+  "state": "frozen_before_any_v3_development_label_access",
+  "required_branch": "codex/poseloop/r4a-development-coverage-geometry",
+  "immutable_v2_failure": {
+    "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development.coverage-geometry.v2",
+    "protocol_sha256": "aa55574043e5ed0914d3661cac368b37eae0bdea9bd923e74f56804c91d131b3",
+    "prefreeze_receipt_sha256": "999ff12a1c8e3ba64d70c19078d9b2b2109f82a62b21b96099e6912fd2406dfe",
+    "job_log_sha256": "9057926458d5b71d863883c0929adb8164a5b0d666a626ba6cb41c8ac6b9d475",
+    "job_exit_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "exit_code": 1,
+    "failure": "transient_official_cdn_http_503_after_fifteen_successful_range_chunks",
+    "last_completed_cumulative_bytes": 109314104,
+    "development_label_files_opened": 0,
+    "rerun_permitted": false,
+    "immutable": true
+  },
+  "role_declaration": {
+    "role": "DEVELOPMENT_ONLY",
+    "dataset": "xyzibd",
+    "split": "train_pbr",
+    "distinct_from_consumed_v3_split": "xyzibd/val",
+    "sealed_split_eligible": false,
+    "leaderboard_claim_eligible": false
+  },
+  "immutable_boundaries": {
+    "xyzibd_val_evaluator_permitted": false,
+    "xyzibd_val_gt_access_permitted": false,
+    "xyzibd_val_threshold_score_json_access_permitted": false,
+    "v3_result_reinterpretation_permitted": false,
+    "checkpoint_change_permitted": false,
+    "score_guided_pose_selection_permitted": false,
+    "push_merge_tag_permitted": false,
+    "remote_shutdown_release_delete_permitted": false
+  },
+  "development_split": {
+    "repository": "bop-benchmark/xyzibd",
+    "revision": "4fe4671783172622313ac0c7182012cee618f217",
+    "archives": [
+      {
+        "filename": "xyzibd_train_pbr.z01",
+        "disk_index": 0,
+        "bytes": 37580963840,
+        "sha256": "fcf5d099258ba726f57905530042b28d8257f1aedf3dbbe2894f847cc3b48842",
+        "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.z01"
+      },
+      {
+        "filename": "xyzibd_train_pbr.zip",
+        "disk_index": 1,
+        "bytes": 34090250556,
+        "sha256": "004fd4e2ae9d7f0d6953634c6b06c72dac415c63f18984e06292fd807c721444",
+        "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.zip"
+      }
+    ],
+    "selection": {
+      "scene_ids": [0, 1, 2],
+      "image_ids_per_scene": [0, 1, 2, 3],
+      "target_policy": "all_gt_instances_in_source_order",
+      "mask_policy": "matching_mask_visib_instance_without_pose_candidate_selection",
+      "minimum_scene_count": 3,
+      "minimum_object_count": 2,
+      "maximum_target_count_stop_gate": 128,
+      "selection_expansion_after_label_access_permitted": false
+    },
+    "network_contract": {
+      "source_network_turbo_before_hf_access": true,
+      "whole_archive_download_permitted": false,
+      "http_range_required": true,
+      "central_directory_max_bytes": 536870912,
+      "range_chunk_bytes": 8388608,
+      "selected_compressed_payload_max_bytes": 1610612736,
+      "total_download_stop_gate_bytes": 2281701376,
+      "maximum_attempts_per_chunk": 4,
+      "retry_http_statuses": [429, 500, 502, 503, 504],
+      "retry_backoff_seconds": [2, 5, 10],
+      "persistent_chunk_cache": true,
+      "stop_if_range_is_ignored": true,
+      "stop_if_selected_slice_exceeds_gate": true
+    }
+  },
+  "repair_contract": {
+    "only_change_from_v2": "bounded transient HTTP retry and per-range persistent cache",
+    "data_selection_changed": false,
+    "byte_stop_gates_changed": false,
+    "pose_or_model_changed": false,
+    "development_labels_read_before_v3_freeze": false,
+    "v2_job_rerun": false
+  },
+  "execution_contract": {
+    "job_name": "poseloop_r4a_trainpbr_catalog_v3",
+    "output_root": "r4a_development_coverage_geometry/jobs/poseloop_r4a_trainpbr_catalog_v3",
+    "detached_screen_with_tee_exit_and_progress": true,
+    "gpu_a_must_remain_running": true
+  }
+}

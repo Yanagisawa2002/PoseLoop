@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-m5-r3-v1",
+  "purpose": "Test a static-scene quotient medoid, selected only on consumed RealSense development data, once on naturally incomplete Photoneo tracks unused by both earlier Photoneo stages.",
+  "predecessor": {
+    "stage": "M5-R2 observed-dropout recorded replay",
+    "status": "FAIL_M5_R2_REAL_REPLAY",
+    "reason": "The constant-velocity quotient Kalman candidate reached only +3.44% on all frames, -0.01% on natural missing frames, and a -0.33% bootstrap lower bound.",
+    "reuse_as_positive_evidence": false
+  },
+  "development": {
+    "source": "Consumed M5-R2 RealSense replay with evaluator labels already opened",
+    "candidate_grid": [
+      "last_5_measurements",
+      "last_10_measurements",
+      "last_20_measurements",
+      "all_history"
+    ],
+    "selection": "Leave one object out; on the other four objects choose the candidate with greatest macro-object relative improvement, breaking exact ties by the listed candidate order.",
+    "selected_candidate": "all_history",
+    "selected_in_every_leave_one_object_out_fold": true,
+    "cross_fitted_macro_object_relative_improvement": 0.05693953915029708,
+    "cross_fitted_natural_missing_relative_improvement": 0.04273692537322833,
+    "one_sided_90pct_bootstrap_lower_relative_improvement": -0.1075901595097649,
+    "bootstrap_interpretation": "Recorded uncertainty warning, not positive evidence and not a development pass claim.",
+    "frozen_result": {
+      "path": "reports/r2/m5_r3_development.json",
+      "sha256": "a344d98a6bd17f34972b8bbf39b6552920b67aebeefeab0a24737255b249f37a"
+    }
+  },
+  "source": {
+    "dataset": "XYZ-IBD validation Photoneo",
+    "scene_ids": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70],
+    "sensor_modality": "photoneo",
+    "clock": "Sort each associated physical track by common frame ID and map source-frame ordinal differences to a nominal 20 Hz clock; hardware timestamps are unavailable.",
+    "coordinate_frame": "Transform each independent FoundationPose model-to-camera measurement into the dataset world frame using recorded world-to-camera calibration before temporal estimation.",
+    "motion_scope": "Objects are static in dataset world coordinates while the recorded camera viewpoint changes.",
+    "prior_photoneo_boundaries": {
+      "r1_groups": {
+        "path": "artifacts/r1/sealed_photoneo/groups_inference.jsonl",
+        "sha256": "ea74e5c9f0ca56f4b84415c2c7bdc55251c6b877a1a80944e94b4f77a14e2f75"
+      },
+      "r2_groups": {
+        "path": "artifacts/r2/sealed_photoneo/groups_inference.jsonl",
+        "sha256": "715d900a0220b49a51dda680f7b72406edcd2f4c45b244fccae2fb902fb4e6ef"
+      },
+      "expected_unique_consumed_track_count": 259
+    }
+  },
+  "selection": {
+    "observation_available": "Visible input mask area is at least 0.001 of the 2064x1544 image, valid-depth ratio inside that mask is at least 0.5, and at least four masked depth pixels are valid.",
+    "track_rule": "After excluding the union of all R1 and R2 Photoneo group tracks, retain every remaining associated track with at least five available observations and at least one naturally unavailable observation at or after its first available observation.",
+    "initialization": "Start replay at the first naturally available observation; exclude earlier unavailable frames.",
+    "outcome_blind": "The availability audit and bundle builder may read input mask/depth support, frame order, object ID, and oracle track identity for isolation. They may not read FoundationPose predictions, temporal outputs, or pose-error outcomes from the retained tracks.",
+    "artificial_deletion": false,
+    "expected_after_availability_only_audit": {
+      "track_count": 23,
+      "object_count": 8,
+      "replay_frame_count": 1146,
+      "inference_sample_count": 837,
+      "natural_missing_frame_count": 309,
+      "preinitialization_missing_frame_count": 4,
+      "object_ids": [1, 4, 8, 9, 11, 14, 16, 17],
+      "track_counts_by_object": {
+        "1": 2,
+        "4": 1,
+        "8": 7,
+        "9": 1,
+        "11": 1,
+        "14": 6,
+        "16": 2,
+        "17": 3
+      }
+    }
+  },
+  "methods": {
+    "baseline": "NEAREST_REPRESENTATIVE_CT using the byte-frozen M5-R1 nearest_smooth configuration.",
+    "proposed": "STATIC_QUOTIENT_ALL_HISTORY_MEDOID: at every available frame, select the earliest minimum-sum medoid of all causally observed measurements under the frozen normalized quotient pose distance; align only its symmetry-equivalent representation to the previous output; hold it during missing frames; never estimate velocity.",
+    "configuration_source": "artifacts/r1/m5_r1/frozen_phase1_configurations.json",
+    "pose_predictor": "FoundationPose with frozen commit, checkpoints, seed, five refinement iterations, full 252-candidate attention, and resource-bounded warp/score/refine execution.",
+    "distance": "sqrt((translation / 0.01 m)^2 + (quotient rotation / 5 deg)^2)",
+    "history_limit": null,
+    "symmetry": "Use exact discrete transforms from models_eval/models_info.json. Map any declared continuous object axis to canonical z, run the estimator, and map output representations back."
+  },
+  "evaluation": {
+    "primary_loss": "For each track, mean frozen normalized quotient pose error across every retained replay frame.",
+    "primary_aggregation": "Equal-weight track mean within object, then equal-weight macro mean across represented objects.",
+    "missing_frame_loss": "Apply the same track-then-object macro aggregation only to naturally unavailable frames.",
+    "bootstrap": {
+      "seed": 5304,
+      "resamples": 5000,
+      "unit": "Hierarchical paired resampling of represented objects, then complete tracks within sampled objects.",
+      "reported_bound": "10th percentile of paired relative macro-object improvement."
+    },
+    "sealed_gate": {
+      "macro_object_relative_trajectory_loss_improvement_min": 0.05,
+      "one_sided_hierarchical_bootstrap_90pct_lower_improvement_min": 0.0,
+      "natural_missing_frame_macro_object_relative_improvement_min": 0.0,
+      "nonfinite_output_count_max": 0,
+      "all_conditions_required": true
+    },
+    "single_open": true,
+    "reopen_policy": "The first evaluator-label open is final. Any method, configuration, selection, symmetry, metric, or gate change requires a new protocol ID and a genuinely new untouched data split."
+  },
+  "claim_boundary": {
+    "allowed": "Single sealed validation of a RealSense-developed static quotient medoid on 23 naturally incomplete Photoneo tracks disjoint from every R1/R2 Photoneo group track, with nominal timing and oracle association.",
+    "forbidden": [
+      "an unseen sensor claim for the project as a whole",
+      "unseen physical-object or independent-instance generalization",
+      "hardware-timestamp validation",
+      "moving-object tracking",
+      "deployable association",
+      "synthetically deleted-frame evidence",
+      "claiming the availability-only audit as outcome evidence",
+      "reopening or retuning after the sealed outcome"
+    ]
+  },
+  "execution_order": [
+    "freeze and commit protocol, method, split builder, inference runner, evaluator, and tests",
+    "build separate inference and evaluator streams while excluding all prior Photoneo group tracks",
+    "verify unopened contract hashes, exact audited counts, zero prior-track overlap, and complete label-blind manifest",
+    "run FoundationPose on every naturally available retained frame",
+    "run evaluator preflight with labels unopened",
+    "open evaluator labels exactly once and apply every frozen gate",
+    "generate quantitative and content visualizations without changing the outcome"
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "protocol_id": "poseloop-r2-v1",
+  "purpose": "Replace cross-sensor absolute M3 thresholds with a label-free sequential batch-budget scheduler and validate unchanged M4/M6 models on Photoneo tracks disjoint from calibration.",
+  "predecessor": {
+    "protocol_id": "poseloop-r1-v1",
+    "status": "invalid_sealed_run_before_stage_metrics",
+    "code_commit_before_open": "355d24e0013729c420a96422bd7e403ae28e3d94",
+    "failure_record_commit": "606a855",
+    "open_receipt": {
+      "path": "artifacts/r1/sealed_photoneo/sealed_open_receipt.json",
+      "sha256": "ba9e212717a582b6978aab630e7834bcfef75ec4c835176578dd3d374ea68be0",
+      "evaluation_invocation_count": 1,
+      "labels_opened": true
+    },
+    "reuse_as_sealed_forbidden": true
+  },
+  "claim_boundary": {
+    "allowed": "Zero-label Photoneo score calibration with evaluation on calibration-track-disjoint Photoneo observations.",
+    "forbidden": [
+      "zero-shot unseen-sensor generalization",
+      "150 independent physical-instance claims",
+      "reuse of the consumed R1 Photoneo split as sealed evidence",
+      "M5 real-sequence replay success"
+    ]
+  },
+  "splits": {
+    "realsense_development": {
+      "source": "R1 M3 nested physical-instance-grouped OOF rows",
+      "allowed_use": "Validate the scheduler using already cross-fitted predictions and development outcomes.",
+      "forbidden_use": "Refit or select a new marginal-value model."
+    },
+    "photoneo_calibration": {
+      "source": "Consumed R1 Photoneo split",
+      "target_groups": 150,
+      "physical_tracks": 120,
+      "allowed_uses": [
+        "label-free marginal-score distribution audit",
+        "label-free scheduler dry run",
+        "cross-view GT transform consistency audit only"
+      ],
+      "forbidden_uses": [
+        "pose utility or success label tuning",
+        "M3 model fitting or quota selection",
+        "M4 feature, ranker, or threshold selection",
+        "M6 feature or risk-model selection",
+        "sealed metric claims"
+      ]
+    },
+    "photoneo_sealed": {
+      "sensor_modality": "Photoneo",
+      "target_count": 150,
+      "targets_per_object": 10,
+      "object_count": 15,
+      "calibration_track_overlap": 0,
+      "calibration_sample_id_overlap": 0,
+      "inventory": {
+        "path": "artifacts/r2/photoneo_inventory.json",
+        "sha256": "0e07caf649d735e7f524ce0fbe07fcba1f2ffe3bd301bd8ec8cc990196962898",
+        "eligible_tracks": 392,
+        "calibration_tracks": 120,
+        "untouched_tracks": 272,
+        "minimum_untouched_tracks_for_any_object": 3
+      },
+      "target_selection": [
+        "Exclude every R1 calibration track before choosing targets or candidate views.",
+        "Within each object, order untouched tracks by SHA-256 of 'r2-track|' plus track ID.",
+        "Within each track, order input-valid observations by SHA-256 of 'r2-sample|' plus sample ID.",
+        "Round-robin one observation per ordered track before reusing a track until ten targets are selected.",
+        "For each target, select four same-track candidate views using the frozen camera-center diversity rule."
+      ],
+      "selection_may_read": [
+        "input mask and depth availability",
+        "object ID",
+        "oracle track association for split isolation only",
+        "camera poses for candidate diversity"
+      ],
+      "selection_may_not_read": [
+        "FoundationPose prediction",
+        "pose error or AR outcome",
+        "M3, M4, or M6 score",
+        "visibility fraction or difficulty label"
+      ],
+      "single_open": true,
+      "reopen_policy": "Any failure after label open is final for this split. Any method or audit change requires a new protocol version and different untouched tracks."
+    }
+  },
+  "M3-R2": {
+    "marginal_value_model": {
+      "action": "reuse unchanged",
+      "source": "artifacts/r1/m3_r1/frozen_policy.joblib",
+      "sha256": "9edda78cbefdf48905a0b51740351cec014ac2c01bb1f5c6f32cbdf3cebc1264"
+    },
+    "scheduler": {
+      "type": "sequential label-free batch quantile scheduler",
+      "batch_definition": "All target poses in the frozen evaluation invocation.",
+      "stage_1": "After target-only inference, rank positive k1 predicted marginal values and acquire views two and three for at most q1 targets.",
+      "stage_2": "After the selected targets have three acquired views, rank their positive k3 predicted marginal values and acquire views four and five for at most q2 targets.",
+      "q1": {
+        "numerator": 144,
+        "denominator": 300,
+        "source": "Frozen R1 primary OOF count with budget greater than one"
+      },
+      "q2": {
+        "numerator": 33,
+        "denominator": 300,
+        "source": "Frozen R1 primary OOF count with budget five"
+      },
+      "integer_rounding": "floor(batch_size * numerator / denominator + 0.5)",
+      "tie_break": "descending predicted marginal value, then ascending SHA-256 of group ID",
+      "score_floor": 0.0,
+      "nesting": "q2 selections must be a subset of q1 selections",
+      "future_view_features_before_acquisition": false,
+      "object_id_used_for_ranking": false,
+      "sealed_batch_quotas": {
+        "batch_size": 150,
+        "q1": 72,
+        "q2": 17,
+        "maximum_mean_views": 2.1866666666666665
+      }
+    },
+    "development_gate": {
+      "gain_over_exact_budget_matched_random_pp_min": 0.5,
+      "one_sided_group_bootstrap_90pct_lower_gain_pp_min": 0.0,
+      "mean_views_max": 3.0,
+      "max_supported_visibility_stratum_regression_pp": 2.0,
+      "all_conditions_required": true
+    }
+  },
+  "M4-R2": {
+    "action": "reuse the unchanged R1 CAD visibility ranker on the M3-R2 continue population",
+    "model": {
+      "path": "artifacts/r1/m4_r1/frozen_ranker.joblib",
+      "sha256": "c66f56bae0af410be372e0576329a97603f038937753d2b3f31b8beb69e4b7cb"
+    },
+    "minimum_predicted_gain_to_deviate_from_fixed_slot": 0.01,
+    "sealed_gates": {
+      "gain_over_fixed_slot_2_pp_min": 0.0,
+      "gain_over_uniform_random_pp_min": 0.0
+    }
+  },
+  "M6-R2": {
+    "action": "Rerun nested grouped CV with only final selected-output features, then refit that restricted family on the full development set.",
+    "source_feature_stream": "artifacts/r1/m6_r1/features.jsonl",
+    "source_label_stream": "artifacts/r1/m6_r1/labels.jsonl",
+    "allowed_feature_names": [
+      "acquired_view_count",
+      "selected_is_target",
+      "selected_mask_area_fraction",
+      "selected_pose_usable",
+      "selected_predicted_depth_over_diameter",
+      "selected_predicted_lateral_over_depth",
+      "selected_predicted_translation_norm_over_diameter",
+      "selected_raw_score",
+      "selected_raw_score_margin",
+      "selected_valid_depth_ratio"
+    ],
+    "forbidden_feature_families": [
+      "output_plus_prefix_policy",
+      "full_multiview_cad"
+    ],
+    "development_gate": {
+      "nested_grouped_cv_auroc_gain_over_raw_score_min": 0.05,
+      "aurc_relative_reduction_min": 0.1,
+      "positive_direction_outer_folds_min": 4
+    },
+    "pose_reselection_after_risk": false,
+    "sealed_gates": {
+      "auroc_gain_over_raw_score_min": 0.05,
+      "aurc_relative_reduction_min": 0.1
+    }
+  },
+  "evaluator_transform_audit": {
+    "normalized_mssd_max": 0.0005,
+    "mspd_px_max_formula": "0.01 * target_image_width / 1280",
+    "photoneo_image_width": 2064,
+    "photoneo_mspd_px_max": 0.016125,
+    "derivation": "Preserve the inherited 0.01-pixel audit tolerance in width-normalized image coordinates instead of applying a 1280-pixel threshold to 2064-pixel images.",
+    "use_for_pose_success_thresholds": false
+  },
+  "single_open_gates": {
+    "M3_gain_over_exact_budget_matched_random_pp_min": 0.0,
+    "M3_mean_views_max": 3.0,
+    "M4_gain_over_fixed_slot_pp_min": 0.0,
+    "M4_gain_over_uniform_random_pp_min": 0.0,
+    "M6_auroc_gain_over_raw_score_min": 0.05,
+    "M6_aurc_relative_reduction_min": 0.1
+  },
+  "execution_order": [
+    "validate M3-R2 scheduler on frozen RealSense nested OOF rows",
+    "dry-run M3-R2 scheduler on R1 Photoneo label-free scores",
+    "freeze code, protocol, scheduler receipt, and new track-disjoint sealed package",
+    "run FoundationPose inference with the already validated resource chunks",
+    "freeze M3-R2, M4-R2, final pose, and M6-R2 decisions without evaluator access",
+    "run evaluator preflight",
+    "open the new evaluator exactly once"
+  ]
+}

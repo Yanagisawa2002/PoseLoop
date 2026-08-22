@@ -1,0 +1,159 @@
+{
+  "schema_version": "poseloop.r4a.development.protocol.v1",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development.coverage-geometry.v1",
+  "created_utc": "2026-08-16T13:37:25Z",
+  "state": "frozen_before_any_development_label_access",
+  "required_branch": "codex/poseloop/r4a-development-coverage-geometry",
+  "baseline_commit": "915ca2dadc2065a1fc35d2860a07656cfeab667a",
+  "role_declaration": {
+    "role": "DEVELOPMENT_ONLY",
+    "dataset": "xyzibd",
+    "split": "train_pbr",
+    "distinct_from_consumed_v3_split": "xyzibd/val",
+    "sealed_split_eligible": false,
+    "leaderboard_claim_eligible": false,
+    "development_labels_may_be_opened_only_after_prefreeze": true,
+    "oracle_input_disclosure": "GT object IDs and visible masks are fixed development-only diagnostic inputs shared by before and after; they may not select among pose candidates and do not establish sealed end-to-end performance"
+  },
+  "immutable_boundaries": {
+    "frozen_v3_commit": "915ca2dadc2065a1fc35d2860a07656cfeab667a",
+    "frozen_v3_protocol_id": "poseloop.r3.bop-industrial.xyzibd-supported.official.v3",
+    "xyzibd_val_evaluator_permitted": false,
+    "xyzibd_val_gt_access_permitted": false,
+    "xyzibd_val_threshold_score_json_access_permitted": false,
+    "v3_result_reinterpretation_permitted": false,
+    "checkpoint_change_permitted": false,
+    "score_guided_pose_selection_permitted": false,
+    "push_merge_tag_permitted": false,
+    "remote_shutdown_release_delete_permitted": false
+  },
+  "frozen_foundationpose": {
+    "source_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "refiner_checkpoint_sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60",
+    "scorer_checkpoint_sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26",
+    "core_model_change_permitted": false
+  },
+  "frozen_v3_predictions": {
+    "role": "read_only_label_free_structural_postmortem_only",
+    "files": {
+      "coco": "poseloop-r3-input_xyzibd-val.json",
+      "association": "poseloop-r3-predicted-association_xyzibd-val.jsonl",
+      "single": "poseloop-r3-single_xyzibd-val.csv",
+      "multi": "poseloop-r3-multiview_xyzibd-val.csv",
+      "provenance": "poseloop-r3-provenance_xyzibd-val.json"
+    },
+    "sha256": {
+      "poseloop-r3-input_xyzibd-val.json": "5ef98c1ea24a9ecc141d3f1af6a319dba1ce00f4cb21d522b99b4f1d3ab1a719",
+      "poseloop-r3-predicted-association_xyzibd-val.jsonl": "6883a6ff9ea8fffaa835eb92e2f717a1fb6ff4eb6e5194924bd76becbb26d7b2",
+      "poseloop-r3-single_xyzibd-val.csv": "459ca38d8f7d6d9d7ebafad6c7a65a3147b8776e79e03517f3e93c4d412eb017",
+      "poseloop-r3-multiview_xyzibd-val.csv": "145f19e1d545472a49e16a0954a291d734e3109a59e71f2ba533fcf576244066",
+      "poseloop-r3-provenance_xyzibd-val.json": "ecc8dd05ae38bbd739a1330701746ef1ba7b5c2f4898282bd010efdf7f4759b1"
+    },
+    "public_aggregate_domain": {
+      "image_count": 750,
+      "scene_ids": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70],
+      "object_ids": [1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    }
+  },
+  "development_split": {
+    "repository": "bop-benchmark/xyzibd",
+    "revision": "4fe4671783172622313ac0c7182012cee618f217",
+    "license": "CC-BY-NC-SA-4.0",
+    "archives": [
+      {
+        "filename": "xyzibd_train_pbr.z01",
+        "disk_index": 0,
+        "bytes": 37580963840,
+        "sha256": "fcf5d099258ba726f57905530042b28d8257f1aedf3dbbe2894f847cc3b48842",
+        "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.z01"
+      },
+      {
+        "filename": "xyzibd_train_pbr.zip",
+        "disk_index": 1,
+        "bytes": 34090250556,
+        "sha256": "004fd4e2ae9d7f0d6953634c6b06c72dac415c63f18984e06292fd807c721444",
+        "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.zip"
+      }
+    ],
+    "selection": {
+      "scene_ids": [0, 1, 2],
+      "image_ids_per_scene": [0, 1, 2, 3],
+      "target_policy": "all_gt_instances_in_source_order",
+      "mask_policy": "matching_mask_visib_instance_without_pose_candidate_selection",
+      "minimum_scene_count": 3,
+      "minimum_object_count": 2,
+      "maximum_target_count_stop_gate": 128,
+      "selection_expansion_after_label_access_permitted": false
+    },
+    "network_contract": {
+      "source_network_turbo_before_hf_access": true,
+      "whole_archive_download_permitted": false,
+      "http_range_required": true,
+      "central_directory_max_bytes": 67108864,
+      "selected_compressed_payload_max_bytes": 2147483648,
+      "total_download_stop_gate_bytes": 2415919104,
+      "stop_if_range_is_ignored": true,
+      "stop_if_selected_slice_exceeds_gate": true,
+      "resume_uses_same_receipt_and_partial_files": true
+    },
+    "required_entry_roles": [
+      "scene_camera.json",
+      "scene_gt.json",
+      "scene_gt_info.json",
+      "rgb selected images",
+      "depth selected images",
+      "mask_visib all selected GT instances"
+    ]
+  },
+  "repair_contract": {
+    "before_emitter": "frozen_global_max_images_fixed_category_smoke_enumerator",
+    "after_emitter": "complete_selected_frame_all_instance_enumerator_with_identity_bop_object_mapping",
+    "object_mapping": "obj_id N maps exactly to models/obj_NNNNNN.ply and is validated against the public model domain",
+    "depth_units": "raw_depth * depth_scale * 0.001 gives meters",
+    "cad_units": "XYZ-IBD CAD millimeters are scaled by 0.001 for FoundationPose meters",
+    "camera_transform": "cam_R_w2c and cam_t_w2c form world-to-camera; cam_t_w2c millimeters are scaled by 0.001",
+    "pose_transform": "FoundationPose returns model-to-camera in meters; BOP R is unchanged and t is multiplied by 1000 to millimeters",
+    "no_detection_behavior": "emit a machine-readable failed target result; never silently omit a declared target; coverage gate fails",
+    "candidate_selection": "one frozen FoundationPose invocation per declared target; no GT-error or metric based selection",
+    "multiview": "not changed or unfrozen during R4-A until all development gates pass"
+  },
+  "development_evaluation": {
+    "split": "train_pbr deterministic slice only",
+    "toolkit_commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "comparison": "same selected scenes/images/targets and same fixed diagnostic masks for before and after",
+    "metrics": [
+      "development BOP24 pose mAP",
+      "ADD or ADD-S selected only by public model symmetry metadata",
+      "per-scene grouped metrics",
+      "per-object grouped metrics"
+    ],
+    "official_xyzibd_val_claim": false,
+    "label_access_for_prediction_selection": false,
+    "score_guided_rerun_or_tuning": false
+  },
+  "visualization_contract": {
+    "required_layers": ["RGB", "fixed development mask", "CAD overlay", "camera axes", "projected pose"],
+    "required_variants": ["before", "after"],
+    "machine_readable_frames_manifest": true,
+    "frame_sequence_or_video_required": true
+  },
+  "development_gates": {
+    "target_coverage": 1.0,
+    "official_loader_schema_pass": true,
+    "finite_legal_se3": true,
+    "minimum_scene_groups": 3,
+    "minimum_object_groups": 2,
+    "after_bop24_pose_map_nonzero": true,
+    "after_add_or_adds_nonzero": true,
+    "after_bop24_pose_map_strictly_greater_than_before": true,
+    "after_add_or_adds_strictly_greater_than_before": true,
+    "stop_after_failed_coverage_or_geometry_gate": true
+  },
+  "execution_contract": {
+    "long_jobs": "detached_screen_with_tee_exit_and_progress_files",
+    "first_failure": "preserve_unchanged",
+    "repair_after_failure": "new_receipt_and_new_output_root",
+    "gpu_a_must_remain_running": true,
+    "next_official_evaluation": "new_unconsumed_sealed_sensor_or_data_split_only"
+  }
+}

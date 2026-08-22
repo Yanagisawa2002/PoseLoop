@@ -1,0 +1,125 @@
+{
+  "a_r4_render_provenance": {
+    "attempt_receipt_lock_sha256": "b36a9aacfe57f58292c0aaaaca2333fb763b4c38b50a3bdf723a600d9621fc570",
+    "attempt_receipt_sha256": "7efb8e76a1e4d0c602f6c6ed4896a35774fe2575fcd50b69ce0e721f8d8d80cd",
+    "authorization_receipt_sha256": "d32366d74278e49b8e055d9f2a432dcc9320034297b485e42e8e41889d72fd8c",
+    "content_audit_sha256": "353dae87b5350511c7d131322eead76c6383ab01916cf3682107657cdfa12816",
+    "deployment_inventory_sha256": "1630ce2c5ba906e61fb3f3867248a8b9e345e19b2f59112cb71fc1795585b1fe",
+    "exit_receipt_sha256": "9bbb4ef9f4b9aa94a308c3120a5e4b144eebac13e5413d0dc777235b0b8d2b82",
+    "implementation_commit": "844a7c48a767e579b3c799851d8ab2a3961283d5",
+    "implementation_tree": "da2cbb40f606242087c553260e3c795455226f38",
+    "job_sha256": "52ac3d5e935a76a8e932ad03fec4083c23d5bee8186ea37f61fc213f8494d89e",
+    "objects": [
+      {"object_id": 1, "unique_content_count": 42, "view_count": 42},
+      {"object_id": 2, "unique_content_count": 42, "view_count": 42},
+      {"object_id": 4, "unique_content_count": 42, "view_count": 42},
+      {"object_id": 5, "unique_content_count": 42, "view_count": 42},
+      {"object_id": 6, "unique_content_count": 42, "view_count": 42}
+    ],
+    "preflight_sha256": "3c6b6760cdb93a602d0ab0ece54adda9ecf6735bb705ba4e4cd5c2742bf59c0a",
+    "protocol_sha256": "b3d9b1fb810f6928e369a233d3a1a9e7276d0eefa71b6966afa956583b3f4e8d",
+    "request_file_sha256": "3aee98342efc47e279811b074083743d0cbe07ec7bf56b26430b5a929bc342c2",
+    "rgba_png_count": 210,
+    "route_lock_sha256": "5c189080581d386f83702131c134aad5fcd07054454f8374811a6f5dac6c53f4",
+    "runtime_request_lock_sha256": "ba15896143c4cef39fd536c738b0e43960cbfca017f9765ccefa233adec4c5650",
+    "safe_archive_bytes": 1653423,
+    "safe_archive_member_count": 256,
+    "safe_archive_sha256": "c997f4f6d65f2398527b55bcdffbb40cf4881783cbe50580e712697646f118bb",
+    "status": "PASS_RGBA_5_OBJECTS_X_42_VIEWS"
+  },
+  "accuracy_claim_permitted": false,
+  "auto_deploy": false,
+  "development_slice": {
+    "catalog_object_ids": [1, 2, 4, 5, 6],
+    "frame_count": 10,
+    "frame_keys": [
+      {"image_id": 0, "scene_id": 0},
+      {"image_id": 1, "scene_id": 0},
+      {"image_id": 0, "scene_id": 3},
+      {"image_id": 1, "scene_id": 3},
+      {"image_id": 0, "scene_id": 9},
+      {"image_id": 1, "scene_id": 9},
+      {"image_id": 0, "scene_id": 12},
+      {"image_id": 1, "scene_id": 12},
+      {"image_id": 0, "scene_id": 15},
+      {"image_id": 1, "scene_id": 15}
+    ],
+    "historical_object_stratification_is_provenance_only": true,
+    "runtime_target_identity_exposed": false,
+    "scene_count": 5,
+    "single_object_fallback_permitted": false,
+    "workload_sha256": "dd9f9c4ce9b9ca380614064f58e332661aee9ce63c9602918d52ae391267dfb3"
+  },
+  "execution_policy": {
+    "create_only": true,
+    "failed_attempt_overwrite_permitted": false,
+    "model_run_authorized_now": false,
+    "planned_crash_permitted": true,
+    "result_export_permitted": false,
+    "resume_completed_prefix_only": true,
+    "server_connection_authorized_now": false
+  },
+  "method": {
+    "catalog_recognition": "official_cnos_dinov2_vitl14_top5_template_cosine",
+    "catalog_scope": "all_five_objects_for_every_proposal",
+    "foundationpose_participates": false,
+    "gt_association_permitted": false,
+    "instance_proposals": "official_cnos_fastsam_x_independent_instance_masks",
+    "normalization": "raw_cosine_plus_one_divide_two_without_clamp",
+    "whole_foreground_proposal_permitted": false
+  },
+  "model_provenance": {
+    "dinov2_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "dinov2_repository": "https://github.com/facebookresearch/dinov2",
+    "dinov2_tree": "2a27257b79b0633b027a21014bc9360e3c1b3f43",
+    "dinov2_vitl14_bytes": 1217586395,
+    "dinov2_vitl14_sha256": "d5383ea8f4877b2472eb973e0fd72d557c7da5d3611bd527ceeb1d7162cbf428",
+    "dinov2_vitl14_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_pretrain.pth",
+    "remote_identity_receipt_sha256": "7f417bba08ea1dd8eb5d1481a06d76a45d32410bc7fcf495591dc196c8ef338e"
+  },
+  "predecessor": {
+    "a_r3_read_only": true,
+    "a_r4_read_only": true,
+    "b2_p1_design_reference_only": "5162dfa"
+  },
+  "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-proposal.v1r5",
+  "protocol_lock_sha256": "90f23acd34021bd0fe58ff5da2b80e6748005cbe57e5fd2161477a26123d05e2",
+  "role": "DEVELOPMENT_ONLY_LABEL_BLIND_INSTANCE_PROPOSALS",
+  "runtime_boundary": {
+    "depth_visibility_access_count": 0,
+    "downstream_export_count": 0,
+    "evaluator_access_count": 0,
+    "foundationpose_run_count": 0,
+    "label_access_count": 0,
+    "mask_visib_access_count": 0,
+    "official_scorer_run_count": 0,
+    "oracle_association_count": 0,
+    "scene_gt_access_count": 0,
+    "scene_gt_info_access_count": 0,
+    "sealed_access_count": 0,
+    "source_mask_access_count": 0
+  },
+  "schema_version": "poseloop.pose-accuracy-recovery.instance-proposal-protocol.v1r5",
+  "visualization_contract": {
+    "charts_satisfy_contract": false,
+    "must_be_scene_content": true,
+    "roles": [
+      "rgb_all_instance_contours",
+      "selected_mask",
+      "cad_topk_overlay",
+      "adjacency_overlay"
+    ]
+  },
+  "wrapper_files": [
+    {"bytes": 21064, "relative_path": "pose_accuracy_recovery_prep/core.py", "sha256": "606afda49f1aab0a3062fba50bc341f01e1423eb860ee40880bc86eaab16ca91"},
+    {"bytes": 19194, "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/adapter.py", "sha256": "9f9b2fb4ccf9b712d54e50c5fb08e19692dd25b0795d07bf7a2a1632513e7b99"},
+    {"bytes": 1105, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/__init__.py", "sha256": "2723baad8a1cfd5582978ef9541bbbd1721a65b6ae72a2e10b3069988904bdfb"},
+    {"bytes": 48, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/__main__.py", "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"},
+    {"bytes": 17549, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/adapter.py", "sha256": "d8d2136df4a61cc0453d7c8b874a0cdeb19da58560d6c29645ae19c6ff4976e8"},
+    {"bytes": 9588, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/cli.py", "sha256": "e34d4ce3eed75cfeed6dd4b77df3c1ddb31e611c9bc42d79d5f742d6d74f2c15"},
+    {"bytes": 77165, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/contracts.py", "sha256": "4dc284f92dfe0502fe6807474a8fb864f22de43ca204cfc5179aebed65fd199d"},
+    {"bytes": 31573, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/producer.py", "sha256": "e76dbb49240b9d5000feb0a0b72fae83e637e7c2e41dac967900cd1334a22df2"},
+    {"bytes": 1927, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/cnos_catalog_config_v1r5.json", "sha256": "b1ee1d3638b3ce9f1659118c3b7f243fea8c35bfcd3640a4fc62f58c48207898"},
+    {"bytes": 9633, "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/SERVER_RUNBOOK_A_R5.md", "sha256": "1c40b1745d4829188c772dc68180e8c6d2b2f92263caa4eb13cabc70d484b021"}
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": "poseloop.r3.protocol.v1",
+  "protocol_id": "poseloop.r3.bop-industrial.e2e.v1",
+  "baseline_commit": "e5e14ab6cf5f0b4adf97ca161ec04f188f6ea7e5",
+  "created_utc": "2026-08-16T00:00:00Z",
+  "state": "frozen_before_r3_predictions",
+  "claim_scope": {
+    "primary": "BOP-Industrial XYZ-IBD validation scaffold with evaluator-only label access",
+    "single_vs_multiview": "Two fixed PoseLoop acquisition variants evaluated on the same official target files; this is not a BOP-2025 multi-view leaderboard claim.",
+    "no_result_claim_without_scores": true
+  },
+  "dataset": {
+    "name": "xyzibd",
+    "split": "val",
+    "source": {
+      "repository": "https://huggingface.co/datasets/bop-benchmark/xyzibd",
+      "revision": "4fe4671783172622313ac0c7182012cee618f217",
+      "archives": {
+        "xyzibd_base.zip": {
+          "bytes": 3121,
+          "sha256": "0eac3085c378001cd942515e85ee38ba6c0fbd9c4c5ccfd067f52f50810a96aa"
+        },
+        "xyzibd_models.zip": {
+          "bytes": 4077458,
+          "sha256": "5ca56d98177c1ec3d083de661449dd0f532554a7af61fb18524730d2a6da7fc9"
+        },
+        "xyzibd_val.zip": {
+          "bytes": 7710607370,
+          "sha256": "09c5639c6e55b8c9a0708a344037e98918c5935ddbd91b5db5a9b06f5484c659"
+        }
+      }
+    },
+    "required_public_inputs": [
+      "test_targets_bop19.json",
+      "test_targets_bop24.json",
+      "models_eval/models_info.json",
+      "val"
+    ],
+    "evaluator_only_globs": [
+      "**/scene_gt*.json",
+      "**/scene_gt_info*.json",
+      "**/scene_gt_coco*.json",
+      "**/mask*/**"
+    ]
+  },
+  "toolkit": {
+    "repository": "https://github.com/thodan/bop_toolkit.git",
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_archive_url": "https://github.com/thodan/bop_toolkit/archive/cea62d651c7e395b2e1962b9749e4e89693c6ac4.tar.gz",
+    "source_archive_sha256": "d7cb1397e21cf4622a11bde64fc0cdc8c0e855d8d6a91b2815ad8df7a8ad5526",
+    "source_tree_contract": {
+      "algorithm": "sha256 over sorted relpath, NUL, per-file SHA-256, newline; listed text extensions normalize CRLF to LF",
+      "included_roots": [
+        "bop_toolkit_lib",
+        "scripts",
+        "pyproject.toml"
+      ],
+      "text_eol_normalized_extensions": [
+        ".csv",
+        ".json",
+        ".md",
+        ".py",
+        ".sh",
+        ".toml",
+        ".txt",
+        ".yaml",
+        ".yml"
+      ],
+      "file_count": 93,
+      "sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307"
+    },
+    "official_evaluators": {
+      "localization_ar": "scripts/eval_bop19_pose.py",
+      "pose_detection_ap": "scripts/eval_bop24_pose.py",
+      "bbox_segmentation_ap": "scripts/eval_bop22_coco.py"
+    },
+    "localization_targets": "test_targets_bop19.json",
+    "detection_targets": "test_targets_bop24.json",
+    "workers": 1
+  },
+  "prediction_bundle": {
+    "allowed_origins": [
+      "bop_default",
+      "audited_prediction"
+    ],
+    "files": {
+      "coco_predictions": "poseloop-r3-input_xyzibd-val.json",
+      "predicted_association": "poseloop-r3-predicted-association_xyzibd-val.jsonl",
+      "single_view_pose": "poseloop-r3-single_xyzibd-val.csv",
+      "multi_view_pose": "poseloop-r3-multiview_xyzibd-val.csv",
+      "provenance": "poseloop-r3-provenance_xyzibd-val.json"
+    },
+    "hash_algorithm": "sha256",
+    "pose_csv_header": "scene_id,im_id,obj_id,score,R,t,time",
+    "coco_required": [
+      "scene_id",
+      "image_id",
+      "category_id",
+      "score",
+      "bbox",
+      "segmentation",
+      "time"
+    ],
+    "association_required": [
+      "scene_id",
+      "image_id",
+      "category_id",
+      "detection_index",
+      "predicted_track_id",
+      "association_score",
+      "view_rank",
+      "is_target_view"
+    ],
+    "source_artifact_required_fields": [
+      "role",
+      "uri",
+      "sha256"
+    ],
+    "audited_prediction_required_artifact_roles": [
+      "producer_code",
+      "model"
+    ],
+    "bop_default_required_artifact_roles": [
+      "default_prediction_source"
+    ]
+  },
+  "replacement_boundary": {
+    "gt_visible_mask": {
+      "legacy_sources": [
+        "scene_gt_info*.json:px_count_visib",
+        "mask_visib*/**"
+      ],
+      "r3_replacement": "BOP-format predicted COCO RLE segmentation and its predicted bbox/score",
+      "rule": "No GT mask path, GT visible-pixel count, or visibility fraction may enter inference, selection, association, or risk features."
+    },
+    "oracle_association": {
+      "legacy_source": "group.oracle_association.track_id",
+      "r3_replacement": "predicted_association JSONL linked by detection_index to the frozen COCO prediction file",
+      "rule": "Association must be produced label-blind before either pose result is scored."
+    },
+    "ground_truth_pose": {
+      "legacy_sources": [
+        "gt_model_to_camera_pose_m",
+        "scene_gt*.json"
+      ],
+      "r3_replacement": "none in inference; official BOP Toolkit evaluator only",
+      "rule": "The R3 adapter never parses evaluator labels."
+    }
+  },
+  "lineage": {
+    "single_view_pose": [
+      "coco_predictions"
+    ],
+    "predicted_association": [
+      "coco_predictions"
+    ],
+    "multi_view_pose": [
+      "coco_predictions",
+      "predicted_association"
+    ]
+  },
+  "metrics": {
+    "single_view": [
+      "bop19_average_recall",
+      "bop24_mAP"
+    ],
+    "multi_view": [
+      "bop19_average_recall",
+      "bop24_mAP"
+    ],
+    "shared_input_quality": [
+      "bop22_coco_bbox_AP",
+      "bop22_coco_segm_AP"
+    ],
+    "aggregation": "official evaluator outputs only"
+  },
+  "anti_leakage": {
+    "forbidden_prediction_fields": [
+      "gt_instance_index",
+      "gt_model_to_camera_pose_m",
+      "oracle_association",
+      "px_count_visib",
+      "visib_fract",
+      "visible_fraction",
+      "visible_mask_pixel_count",
+      "joint_success",
+      "evaluator_pose_error"
+    ],
+    "prediction_files_must_be_outside_dataset_root": true,
+    "result_selection_uses_evaluator_metrics": false,
+    "result_tuning_after_score": false,
+    "official_evaluation_requires_explicit_label_access_receipt": true
+  },
+  "frozen_legacy_namespaces": [
+    "artifacts/m1",
+    "artifacts/m2",
+    "artifacts/m3",
+    "artifacts/m4",
+    "artifacts/m5_g0",
+    "artifacts/m6_g0",
+    "artifacts/r1",
+    "artifacts/r2",
+    "precomputed",
+    "reports/m6_g0",
+    "reports/r1",
+    "reports/r2"
+  ],
+  "r3_output_namespaces": [
+    "artifacts/r3_bop_industrial",
+    "reports/r3_bop_industrial"
+  ]
+}

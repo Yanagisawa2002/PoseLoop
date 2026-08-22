@@ -1,0 +1,29 @@
+{
+  "accuracy_claim_permitted": false,
+  "auto_deploy": false,
+  "boundary": {
+    "accuracy_claim_permitted": false,
+    "contains_evaluator_output": false,
+    "contains_gt_derived_control_inputs": true,
+    "contains_raw_gt_paths": false,
+    "contains_sealed_data": false,
+    "evaluator_path_open_count_on_gpu_c": 0,
+    "gpu_c_resolves_derivation": false,
+    "gt_path_open_count_on_gpu_c": 0,
+    "label_access_count_on_gpu_c": 0,
+    "official_scorer_run": false
+  },
+  "handoff_schema_version": "poseloop.r4c.prep.runtime-isolated-manifest.v2",
+  "mask_variant_ids": [
+    "official_known_sample_sanity",
+    "oracle_mask_control",
+    "predicted_mask",
+    "depth_component_mask",
+    "bbox_mask"
+  ],
+  "protocol_id": "poseloop-r4c-foundationpose-runtime-prep-v1",
+  "protocol_sha256": "d915325a5be8201a5b489c52c3c0720520bcfcebf9a3a06d7c5ec55c17efb0c9",
+  "schema_version": "poseloop.pose-accuracy-recovery.c-runtime-protocol-pin.v1",
+  "source_protocol_id": "poseloop.pose-accuracy-recovery.development-prep.v1",
+  "source_protocol_sha256": "20380305a7fbd92b2c563baea7df1e4f82c39605379543cd8e9443925eae0b8b"
+}

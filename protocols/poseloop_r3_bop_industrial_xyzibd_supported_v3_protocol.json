@@ -1,0 +1,128 @@
+{
+  "schema_version": "poseloop.r3.xyzibd-supported.protocol.v3",
+  "protocol_id": "poseloop.r3.bop-industrial.xyzibd-supported.official.v3",
+  "created_utc": "2026-08-16T00:00:00Z",
+  "state": "frozen_before_supported_official_evaluation",
+  "required_execution_branch": "codex/poseloop/r3-xyzibd-supported-official-run-v3",
+  "immutable_v2_failure": {
+    "protocol_id": "poseloop.r3.bop-industrial.xyzibd-supported.official.v2",
+    "invocation_started_sha256": "2ac08339d5951915dc2affdf24ff4f772d969be8911e1826e04603a59ff785c6",
+    "sealed_receipt_sha256": "0ce1482fa4febdd5134d266b9be4b098f12439435a669e7924020d85bbac7e64",
+    "all_four_exit_codes": [1, 1, 1, 1],
+    "rerun_permitted": false,
+    "immutable": true
+  },
+  "label_readiness": {
+    "protocol_id": "poseloop.r3.bop-industrial.xyzibd-label-readiness.v3",
+    "protocol_sha256": "5f69bd278ed1d5d594efec6348fa7babc581485bd8cde526cd5e6adbdf0798f5",
+    "implementation_commit": "6bd973a908cc8717487270455cc848f93004812f",
+    "lock_sha256": "d7d33bb2c780385a7ebedea3985348084e1d21d9540f8f338c94d411412fbf12",
+    "fingerprint_sha256": "a64d38bc5f46025f4e10d9cfcbaeef73b0c1e13981139e302b25e4b97bb47e0a",
+    "state": "label_assets_ready_frozen_before_v3_scoring_protocol",
+    "scene_count": 15,
+    "image_count": 750,
+    "annotation_count": 19950,
+    "target_coverage_missing": 0
+  },
+  "dataset": {
+    "name": "xyzibd",
+    "split": "val",
+    "eval_sensor": "xyz",
+    "eval_modality": "gray",
+    "expected_val_scene_ids": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70],
+    "bop19_targets_filename": "val_targets_bop19.json",
+    "bop24_targets_filename": "val_targets_bop24.json",
+    "bop19_targets_sha256": "6256aac91ddee43294cbe452f284c4bd7b17039fc2199b7744e13767edfdf6f3",
+    "bop24_targets_sha256": "0c0780b0aaabb55f20a8f5419fa01fdd6014ff1e482f6cbc6dc8f859076ae3a1",
+    "renderer_smoke_model": "models_eval/obj_000001.ply"
+  },
+  "toolkit": {
+    "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+    "source_tree_sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307",
+    "source_tree_contract": {
+      "included_roots": ["bop_toolkit_lib", "scripts", "pyproject.toml"],
+      "text_eol_normalized_extensions": [".csv", ".json", ".md", ".py", ".sh", ".toml", ".txt", ".yaml", ".yml"],
+      "file_count": 93,
+      "sha256": "9726f6d1f189bd75e665205f62e9afcf021876270aadedcb41af8e8b1e8ff307"
+    },
+    "workers": 8,
+    "required_file_sha256": {
+      "scripts/calc_gt_coco.py": "3dc737fb04c9979b28925a77f6447fc0d171aba13efff949024cf0c681db5f61",
+      "bop_toolkit_lib/dataset_params.py": "a935fc4f6fd42f367a0bbf816036f783fb4c5d87200a8615ce1e08e6d51af05e",
+      "bop_toolkit_lib/inout.py": "d9c1154126e9c4eecf90dcdbc2d783d8dcde25eb340294c5c94a4292fe007ba0",
+      "bop_toolkit_lib/pycoco_utils.py": "81335be0d5301b2f49feb9440d134792a25e763d6b7b59355c18e15a2ee0d25e",
+      "scripts/eval_bop24_pose.py": "d3aa46b4a67b563eb11772636e1532a206e1bbbce20d23b6c4d50c5d30c4a1d4",
+      "scripts/eval_bop22_coco.py": "4ef31672df3a1584cd01aca8a749e8437c1b57e9388d1e774e5df790ef578c9f"
+    }
+  },
+  "prediction_files": {
+    "coco_predictions": "poseloop-r3-input_xyzibd-val.json",
+    "predicted_association": "poseloop-r3-predicted-association_xyzibd-val.jsonl",
+    "single_view_pose": "poseloop-r3-single_xyzibd-val.csv",
+    "multi_view_pose": "poseloop-r3-multiview_xyzibd-val.csv",
+    "provenance": "poseloop-r3-provenance_xyzibd-val.json"
+  },
+  "frozen_prediction_sha256": {
+    "poseloop-r3-input_xyzibd-val.json": "5ef98c1ea24a9ecc141d3f1af6a319dba1ce00f4cb21d522b99b4f1d3ab1a719",
+    "poseloop-r3-predicted-association_xyzibd-val.jsonl": "6883a6ff9ea8fffaa835eb92e2f717a1fb6ff4eb6e5194924bd76becbb26d7b2",
+    "poseloop-r3-single_xyzibd-val.csv": "459ca38d8f7d6d9d7ebafad6c7a65a3147b8776e79e03517f3e93c4d412eb017",
+    "poseloop-r3-multiview_xyzibd-val.csv": "145f19e1d545472a49e16a0954a291d734e3109a59e71f2ba533fcf576244066",
+    "poseloop-r3-provenance_xyzibd-val.json": "ecc8dd05ae38bbd739a1330701746ef1ba7b5c2f4898282bd010efdf7f4759b1"
+  },
+  "support_matrix": {
+    "official_bop19_average_recall": {
+      "status": "unavailable",
+      "must_not_invoke": true,
+      "required_error_types": ["vsd", "mssd", "mspd"],
+      "missing_xyzibd_definition": "vsd"
+    },
+    "official_bop24_pose_map": {
+      "status": "available",
+      "entrypoint": "scripts/eval_bop24_pose.py",
+      "target_file": "val_targets_bop24.json",
+      "aggregate_score_key": "bop24_mAP",
+      "variants": ["single_view", "multi_view"]
+    },
+    "official_bop22_bbox_ap": {
+      "status": "available",
+      "entrypoint": "scripts/eval_bop22_coco.py",
+      "target_file": "val_targets_bop19.json",
+      "aggregate_score_key": "AP",
+      "annotation_type": "bbox"
+    },
+    "official_bop22_segm_ap": {
+      "status": "available",
+      "entrypoint": "scripts/eval_bop22_coco.py",
+      "target_file": "val_targets_bop19.json",
+      "aggregate_score_key": "AP",
+      "annotation_type": "segm"
+    }
+  },
+  "evaluation": {
+    "maximum_evaluate_invocations": 1,
+    "maximum_invocations_per_command": 1,
+    "continue_after_command_failure": true,
+    "authorized_command_count": 4,
+    "command_order": [
+      "official_bop24_pose_map:single_view",
+      "official_bop24_pose_map:multi_view",
+      "official_bop22_bbox_ap:shared_predicted_input",
+      "official_bop22_segm_ap:shared_predicted_input"
+    ],
+    "pre_score_relative_path": "artifacts/r3_bop_industrial_supported_v3/pre_score",
+    "official_once_relative_path": "artifacts/r3_bop_industrial_supported_v3/official_once",
+    "report_relative_path": "reports/r3_bop_industrial_supported_v3",
+    "result_tuning_after_score": false,
+    "rerun_after_score_or_error": false
+  },
+  "authorization": {
+    "reference": "codex_delegation:01a003cf-9081-7cc1-b89d-9842143a1ec3:r3-v3-label-assets-complete",
+    "scope": "unique_supported_v3_four_command_evaluator_only_batch"
+  },
+  "claim_boundary": {
+    "bop19_average_recall": "unavailable; VSD is undefined for XYZ-IBD and no reduced surrogate is reported",
+    "bop24_pose_map": "official pinned BOP Toolkit metric on the frozen public XYZ-IBD validation target derivation",
+    "bop22_bbox_segm_ap": "official pinned BOP Toolkit metrics on frozen evaluator-only COCO GT derivation",
+    "single_vs_multiview": "validation-set comparison on identical frozen targets; not a BOP-2025 test leaderboard claim"
+  }
+}

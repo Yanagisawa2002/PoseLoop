@@ -1,0 +1,85 @@
+{
+  "dinov2": {
+    "descriptor_width_size": 640,
+    "feature_chunk_size": 16,
+    "model_name": "dinov2_vitl14",
+    "normalize_features": true,
+    "proposal_image_size": 224,
+    "score_storage_transform": "monotonic_affine_raw_cosine_plus_one_divide_two",
+    "template_aggregation": "avg_top_5_cosine",
+    "token_name": "x_norm_clstoken"
+  },
+  "fastsam": {
+    "configured_conf_threshold": 0.05,
+    "effective_wrapper_conf_threshold": 0.25,
+    "iou_threshold": 0.9,
+    "mask_threshold": 0.5,
+    "max_det": 200,
+    "segmentor_width_size": 640,
+    "stability_high_threshold": 0.55,
+    "stability_low_threshold": 0.5
+  },
+  "frame_size": {
+    "height": 1080,
+    "width": 1440
+  },
+  "oom_policy": {
+    "formula_changes_permitted": false,
+    "initial_proposal_chunk_size": 16,
+    "max_chunk_reductions": 4,
+    "minimum_proposal_chunk_size": 1,
+    "reduction": "integer_halve_retry_same_slice"
+  },
+  "postprocessing": {
+    "confidence_filter": null,
+    "min_box_side_relative": 0.05,
+    "min_mask_area_relative": 0.0003,
+    "nms": null,
+    "target_candidate_policy": "all_post_geometric_filter_proposals_scored_for_target_cad"
+  },
+  "ranking": {
+    "order": [
+      "cad_similarity_desc",
+      "proposal_score_desc",
+      "mask_stability_desc",
+      "proposal_index_asc"
+    ],
+    "selection": "frozen_rank_1_for_target_object"
+  },
+  "renderer": {
+    "ambient_light": [
+      0.02,
+      0.02,
+      0.02,
+      1.0
+    ],
+    "backend": "pyrender",
+    "camera_intrinsics": [
+      [
+        572.4114,
+        0.0,
+        325.2611
+      ],
+      [
+        0.0,
+        573.57043,
+        242.04899
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "image_size": {
+      "height": 480,
+      "width": 640
+    },
+    "light_intensity": 0.6,
+    "template_level": 0,
+    "view_count_per_object": 42,
+    "view_sampling_id": "cnos_obj_poses_level0_all"
+  },
+  "route": "OFFICIAL_CNOS_FASTSAM_DINOV2_PYRENDER",
+  "schema_version": "poseloop.pose-accuracy-recovery.cnos-adapter-config.v1"
+}

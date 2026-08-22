@@ -1,0 +1,139 @@
+{
+  "a_r5_asset_freeze": {
+    "adapter_config_bytes": 1927,
+    "adapter_config_sha256": "b1ee1d3638b3ce9f1659118c3b7f243fea8c35bfcd3640a4fc62f58c48207898",
+    "catalog_object_ids": [1, 2, 4, 5, 6],
+    "runtime_request_bytes": 11033,
+    "runtime_request_sha256": "2d1220987eee7cd32e7feb917363a4080116fa38853fc857d027e8d70ed30469",
+    "template_manifest_bytes": 82509,
+    "template_manifest_sha256": "6cc2c958401a209ac3b69f3c93c730dc9c7d2b111a122d911bac9cdfc395b031"
+  },
+  "access_boundary": {
+    "downstream_export_count": 0,
+    "evaluator_open_count": 0,
+    "foundationpose_run_count": 0,
+    "gt_mask_open_count": 0,
+    "gt_pose_open_count": 0,
+    "official_scorer_run_count": 0,
+    "post_freeze_replay_depth_open_count": 0,
+    "post_freeze_replay_prediction_open_count": 0,
+    "post_freeze_replay_rgb_open_count": 0
+  },
+  "authorization": {
+    "development_gate_permitted": true,
+    "downstream_export_permitted": false,
+    "foundationpose_permitted": false,
+    "official_scorer_permitted": false,
+    "sam2_asset_freeze_permitted": true,
+    "scene9_replay_permitted_before_gate_pass": false,
+    "train_smoke_permitted": true
+  },
+  "gates": {
+    "clean_singleton_recall75_regression_permitted": false,
+    "every_stratum_required": true,
+    "failure_action": "NO_GO_NO_SCENE9_REPLAY",
+    "matching_iou_thresholds": [0.5, 0.75],
+    "occlusion_strict_recall75_improvement": true,
+    "positive_baseline_merge_strict_reduction": true,
+    "split_count_increase_permitted": false,
+    "unmatched_prediction_increase_permitted": false,
+    "zero_baseline_merge_action": "REQUIRE_ZERO_CANDIDATE_MERGE_WITH_STRICT_RECALL_GAIN"
+  },
+  "implementation_files": [
+    {
+      "bytes": 21064,
+      "relative_path": "pose_accuracy_recovery_prep/core.py",
+      "sha256": "606afda49f1aab0a3062fba50bc341f01e1423eb860ee40880bc86eaab16ca91"
+    },
+    {
+      "bytes": 19194,
+      "relative_path": "pose_accuracy_recovery_prep/cnos_runtime_prep_v1/adapter.py",
+      "sha256": "9f9b2fb4ccf9b712d54e50c5fb08e19692dd25b0795d07bf7a2a1632513e7b99"
+    },
+    {
+      "bytes": 17549,
+      "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/adapter.py",
+      "sha256": "d8d2136df4a61cc0453d7c8b874a0cdeb19da58560d6c29645ae19c6ff4976e8"
+    },
+    {
+      "bytes": 77165,
+      "relative_path": "pose_accuracy_recovery_prep/instance_proposal_v1r5/contracts.py",
+      "sha256": "4dc284f92dfe0502fe6807474a8fb864f22de43ca204cfc5179aebed65fd199d"
+    },
+    {
+      "bytes": 53812,
+      "relative_path": "pose_accuracy_recovery_prep/instance_selection_v1r6.py",
+      "sha256": "714325de7558e2f0c02c2e75a2c6e371132a1fbe65b31a4d2e0e71a46270b5d4"
+    },
+    {
+      "bytes": 8871,
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/adapter.py",
+      "sha256": "86ddde29b50e4a02f9155cb430c481d971c1ff799270a8aee09405ccafe51ed0"
+    },
+    {
+      "bytes": 13360,
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/contracts.py",
+      "sha256": "e6657455c742928e6f88e69234b8b4f17e031e315b97ec4cb502e82a8b552707"
+    },
+    {
+      "bytes": 11458,
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/core.py",
+      "sha256": "c8f598e663772dd0ca796b38a170e0707af1ccfbb1f1e890fb3821bad827c687"
+    },
+    {
+      "bytes": 9265,
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/execution_contract.py",
+      "sha256": "998ff7b5f0ef80af485923866d02e60629eb3797564249b3786a50924a99c2be"
+    },
+    {
+      "bytes": 49846,
+      "relative_path": "pose_accuracy_recovery_prep/instance_deblend_v1r7/synthetic_runtime.py",
+      "sha256": "4603267308907c9ddb6abb86de9394e60c6de19201bce134b8f10a223b97fcdd"
+    }
+  ],
+  "predecessor": {
+    "a_r6_policy_mutation_permitted": false,
+    "prep_commit": "6617ac717372bbc5c06f25534d3f3c1dc9a2cca5",
+    "prep_protocol_lock_sha256": "4fbae675e2f1ce7e096cb81680a7f1e982ae6fbeaa095de2baf4390ed6ac5504",
+    "prep_tree": "9daf9e47fd79b4c0580e6ae145db8664f363abe4"
+  },
+  "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-deblend.synthetic.v1r7.1",
+  "protocol_lock_sha256": "a249f9927f5a046a31fc1c5497baeb2f22685867218cf3bd039909eab979fd00",
+  "role": "DEVELOPMENT_ONLY_SYNTHETIC_OCCLUSION_GATE_V1R7_1",
+  "sam2_freeze": {
+    "checkpoint_bytes": 898083611,
+    "checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+    "commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "model_config_bytes": 3798,
+    "model_config_relative_path": "sam2/configs/sam2.1/sam2.1_hiera_l.yaml",
+    "model_config_sha256": "1dbd6cb6dfebeaf588c7006ee222c6efbfa9049a7ad472a3cdfb2f5d919e8107",
+    "repository": "https://github.com/facebookresearch/sam2",
+    "source_archive_sha256": "a9b182a4e502160a22226a32f1db4c31ea6a93000ca0f4502ddebdb7682d9209",
+    "source_manifest_sha256": "d7ffdda54476ef486083e4cd3e7ba89a39c4fabc030315f362da39dabbdd1d4f",
+    "tree": "64becbca23f880e0056449377496da248a74da43"
+  },
+  "schema_version": "poseloop.pose-accuracy-recovery.instance-deblend-execution-protocol.v1r7.1",
+  "supersedes": {
+    "old_protocol_mutation_permitted": false,
+    "protocol_id": "poseloop.pose-accuracy-recovery.development.instance-deblend.synthetic.v1r7",
+    "protocol_lock_sha256": "36721d50fd28d3e74b4000cc2bb40dc08f17af3cd8e565d78cdda2f324df2aec",
+    "semantic_change": "ZERO_BASELINE_MERGE_REQUIRES_ZERO_CANDIDATE_MERGE_WITH_STRICT_RECALL_GAIN"
+  },
+  "synthetic_development": {
+    "development_first_seed": 4096,
+    "development_row_count": 48,
+    "development_seed_interval": [4096, 4143],
+    "real_replay_path_argument_permitted": false,
+    "required_strata": [
+      "clean_single_instance",
+      "touching_pair_different_cad",
+      "touching_pair_same_cad",
+      "depth_ordered_occlusion_pair",
+      "same_cad_pile_three_plus",
+      "container_and_frame_boundary_distractor"
+    ],
+    "result_driven_stratum_replacement_permitted": false,
+    "rows_per_stratum": 8,
+    "train_seed_interval": [0, 47]
+  }
+}

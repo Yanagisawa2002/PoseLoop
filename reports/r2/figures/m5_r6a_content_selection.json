@@ -1,0 +1,174 @@
+{
+  "claim_boundary": "Recorded RU-APC cluttered-shelf development replay with nominal timing, oracle target association, and GT visible masks; not simulation, hardware deployment, deployable association, or unseen-sensor validation.",
+  "global_cross_fitted_macro_object_relative_improvement": 0.2133388270130856,
+  "inputs": {
+    "contract": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/artifacts/r2/m5_r6a/contract.json",
+      "sha256": "f213c04aa858e26cec3cfb606b17ec5ed9f61670860d4b6e3db6bc9fc0edd0a5"
+    },
+    "development_result": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/artifacts/r2/m5_r6a/development_result.json",
+      "sha256": "1ee295ccc8aa2c2c06675b30694819e01e5ca23b61bdffb7d60190a3b5247aa7"
+    },
+    "development_track_results": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/artifacts/r2/m5_r6a/development_track_results.jsonl",
+      "sha256": "78b5ad6cfe873ffabc0691c8f47fe9069f48988be96f5401270e7ab326d5fc45"
+    },
+    "inference_manifest": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/artifacts/r2/m5_r6a/inference_manifest.jsonl",
+      "sha256": "27376d223ecb3de064459aaadb726add8f7bee79983325e15a1281cab737702e"
+    }
+  },
+  "missing_confidence_storyboard": {
+    "frames": [
+      {
+        "baseline_equals_proposed_pose": true,
+        "confidence": 0.7829721901356377,
+        "gap_frames": 0,
+        "natural_input_missing": false,
+        "replay_frame_index": 26,
+        "sample_id": "ruapc-test-s000013-i000215-g000000-o000013",
+        "uncertainty": 8.531267012678585
+      },
+      {
+        "baseline_equals_proposed_pose": true,
+        "confidence": 0.5610240895407184,
+        "gap_frames": 1,
+        "natural_input_missing": true,
+        "replay_frame_index": 27,
+        "sample_id": "ruapc-test-s000013-i000216-g000000-o000013",
+        "uncertainty": 17.853004298325484
+      },
+      {
+        "baseline_equals_proposed_pose": true,
+        "confidence": 0.10596376311839746,
+        "gap_frames": 6,
+        "natural_input_missing": true,
+        "replay_frame_index": 32,
+        "sample_id": "ruapc-test-s000013-i000221-g000000-o000013",
+        "uncertainty": 252.06014300928783
+      },
+      {
+        "baseline_equals_proposed_pose": true,
+        "confidence": 0.001940794020567937,
+        "gap_frames": 18,
+        "natural_input_missing": true,
+        "replay_frame_index": 44,
+        "sample_id": "ruapc-test-s000013-i000233-g000000-o000013",
+        "uncertainty": 1335.4620642712782
+      },
+      {
+        "baseline_equals_proposed_pose": true,
+        "confidence": 4.810747402943826e-06,
+        "gap_frames": 36,
+        "natural_input_missing": true,
+        "replay_frame_index": 62,
+        "sample_id": "ruapc-test-s000013-i000251-g000000-o000013",
+        "uncertainty": 2537.377922115428
+      },
+      {
+        "baseline_equals_proposed_pose": false,
+        "confidence": 0.7540880502601891,
+        "gap_frames": 0,
+        "natural_input_missing": false,
+        "replay_frame_index": 63,
+        "sample_id": "ruapc-test-s000013-i000252-g000000-o000013",
+        "uncertainty": 8.8548151890916
+      }
+    ],
+    "last_available_confidence": 0.7829721901356377,
+    "last_available_uncertainty": 8.531267012678585,
+    "maximum_gap_frames": 36,
+    "object_id": 13,
+    "post_gap_confidence": 0.7540880502601891,
+    "post_gap_uncertainty": 8.8548151890916,
+    "terminal_missing_confidence": 4.810747402943826e-06,
+    "terminal_missing_uncertainty": 2537.377922115428,
+    "track_id": "ruapc-test-s000013-o000013"
+  },
+  "missing_rule": "Select the natural-missing frame with greatest causal gap length, then highest uncertainty, then stable track/frame identifiers. Show its immediately preceding available frame, gap lengths 1, 6, 18, and maximum, and the next available frame.",
+  "outputs": {
+    "m5_r6a_content_examples.pdf": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/reports/r2/figures/m5_r6a_content_examples.pdf",
+      "sha256": "8501e49a3c80ab413e028a9826c8898171db412a96a7a9c65b578831ef5a1a92",
+      "size_bytes": 2601185
+    },
+    "m5_r6a_content_examples.png": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/reports/r2/figures/m5_r6a_content_examples.png",
+      "sha256": "b2fcf77358d2903cd347c30ae8eadc206a138afc217555c27959742081fbf5aa",
+      "size_bytes": 2052899
+    },
+    "m5_r6a_missing_confidence.pdf": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/reports/r2/figures/m5_r6a_missing_confidence.pdf",
+      "sha256": "8c97d6cbd2db4bb4ac5ad81e824dac04f9b2b705aeab778acb0f741c0d6847ef",
+      "size_bytes": 2589893
+    },
+    "m5_r6a_missing_confidence.png": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/reports/r2/figures/m5_r6a_missing_confidence.png",
+      "sha256": "7d401f262fe32e73d9e999843c9d82fa56ba6a48a1d906e74e5342c002bcdb9b",
+      "size_bytes": 3215633
+    },
+    "m5_r6a_typical_replay.mp4": {
+      "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/reports/r2/figures/m5_r6a_typical_replay.mp4",
+      "sha256": "49a39bb5077c08fe08ee784d598218b3cdda09fc1cecfbb3779cc1465eefcd2e",
+      "size_bytes": 4959233
+    }
+  },
+  "protocol_id": "poseloop-m5-r6a-v1",
+  "range_examples": [
+    {
+      "baseline_normalized_pose_error": 43.30034171135957,
+      "confidence": 0.7335343646317277,
+      "frame_error_reduction": 39.81384188271139,
+      "object_id": 10,
+      "proposed_normalized_pose_error": 3.486499828648188,
+      "replay_frame_index": 85,
+      "role": "weakest",
+      "sample_id": "ruapc-test-s000010-i000205-g000000-o000010",
+      "track_id": "ruapc-test-s000010-o000010",
+      "track_relative_improvement": 0.08126595448282505,
+      "uncertainty": 8.461495765691353
+    },
+    {
+      "baseline_normalized_pose_error": 41.82428299446434,
+      "confidence": 0.9924937166445309,
+      "frame_error_reduction": 24.128169911096908,
+      "object_id": 8,
+      "proposed_normalized_pose_error": 17.696113083367432,
+      "replay_frame_index": 38,
+      "role": "typical",
+      "sample_id": "ruapc-test-s000008-i000038-g000000-o000008",
+      "track_id": "ruapc-test-s000008-o000008",
+      "track_relative_improvement": 0.20615609127678472,
+      "uncertainty": 1.9985874609703558
+    },
+    {
+      "baseline_normalized_pose_error": 45.03327745104156,
+      "confidence": 0.9593585274719648,
+      "frame_error_reduction": 44.32233226643544,
+      "object_id": 9,
+      "proposed_normalized_pose_error": 0.7109451846061282,
+      "replay_frame_index": 66,
+      "role": "strongest",
+      "sample_id": "ruapc-test-s000009-i000110-g000000-o000009",
+      "track_id": "ruapc-test-s000009-o000009",
+      "track_relative_improvement": 0.5465861361264736,
+      "uncertainty": 3.7798587351053086
+    }
+  ],
+  "range_rule": "Among the 14 fixed measurement-first object tracks, select the lowest relative improvement, the relative improvement closest to the global macro improvement, and the highest relative improvement. Within each selected track, show the available corrected frame with largest baseline-minus-proposed normalized error; stable ties use the earliest replay frame.",
+  "schema_version": 1,
+  "selection_timing": "after_frozen_development_evaluation",
+  "stage_id": "M5-R6A",
+  "status": "POST_EVALUATION_VISUALIZATION_ONLY",
+  "typical_full_replay_video": {
+    "frame_count": 128,
+    "nominal_source_rate_hz": 30.0,
+    "object_id": 8,
+    "path": "/mnt/c/Users/cgliu/OneDrive/Documents/PoseLoop/reports/r2/figures/m5_r6a_typical_replay.mp4",
+    "render_rate_fps": 24.0,
+    "sha256": "49a39bb5077c08fe08ee784d598218b3cdda09fc1cecfbb3779cc1465eefcd2e",
+    "track_id": "ruapc-test-s000008-o000008"
+  },
+  "used_for_method_configuration_threshold_metric_or_gate": false
+}

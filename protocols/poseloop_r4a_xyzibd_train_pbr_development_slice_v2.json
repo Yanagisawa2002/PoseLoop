@@ -1,0 +1,114 @@
+{
+  "schema_version": "poseloop.r4a.development-slice.protocol.v2",
+  "protocol_id": "poseloop.r4a.xyzibd-train-pbr.development-slice.v2",
+  "created_utc": "2026-08-16T14:55:00Z",
+  "state": "frozen_before_selected_development_label_bytes_download",
+  "required_branch": "codex/poseloop/r4a-development-coverage-geometry",
+  "immutable_slice_v1_plan_failure": {
+    "job_name": "poseloop_r4a_catalog_plan_watch_v1",
+    "plan_log_sha256": "2dcfbdb15bce416b39438335f7b2dc8bee2ebd1671e6ab8de7b4f76821db5fe4",
+    "plan_exit_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "exit_code": 1,
+    "failure": "twelve selected frames contained 692 mask instances above the frozen 128-target gate and the public modality directory is gray rather than rgb",
+    "source": "ZIP central-directory names and sizes only",
+    "development_label_bytes_opened": 0,
+    "rerun_permitted": false,
+    "immutable": true
+  },
+  "source_catalog": {
+    "v4_protocol_id": "poseloop.r4a.xyzibd-train-pbr.development.coverage-geometry.v4",
+    "v4_protocol_sha256": "ddbcde7707042a9bf252894d604b4fab61760e16bea992b51c7357739cd00f0a",
+    "v4_prefreeze_receipt_sha256": "765e3cc4e5b881fcfe4095fd617f0b1b01c3b53eb27e019b2c12afb114193c32",
+    "catalog_sha256": "2ca0c82c2741a9e0a41a77362f7eb619dbd4b40baa85f74b724b3114ddc563e4",
+    "catalog_bytes": 640055050,
+    "catalog_job_log_sha256": "c6eca2da60ab92af72876f626e6e1b0445c2729ba1ca15c469c58b2ead281641",
+    "catalog_job_exit_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "catalog_job_exit_code": 0,
+    "development_label_bytes_opened": 0
+  },
+  "role_declaration": {
+    "role": "DEVELOPMENT_ONLY",
+    "dataset": "xyzibd",
+    "split": "train_pbr",
+    "input_modality": "gray",
+    "sealed_split_eligible": false,
+    "leaderboard_claim_eligible": false,
+    "oracle_input_disclosure": "GT object IDs and mask_visib are fixed development-only diagnostic inputs; one pose is produced per declared target without GT-error candidate selection"
+  },
+  "slice_plan": {
+    "sha256": "b8ec0ce6b93064d689b10be656eb0961cc2ccb41a154b4798ec9a9f6861bc768",
+    "schema_version": "poseloop.r4a.development-slice.plan.v2",
+    "scene_ids": [0, 1, 2],
+    "image_ids_per_scene": [0],
+    "input_modality": "gray",
+    "target_policy": "all_mask_visib_entries_for_selected_images",
+    "entry_count": 188,
+    "target_count": 173,
+    "role_counts": {
+      "depth": 3,
+      "gray": 3,
+      "mask_visib": 173,
+      "scene_camera": 3,
+      "scene_gt": 3,
+      "scene_gt_info": 3
+    },
+    "compressed_entry_bytes": 34225110,
+    "uncompressed_entry_bytes": 146319957,
+    "development_label_bytes_opened": 0,
+    "selection_reason": "smallest label-free catalog reduction that preserves the frozen minimum of three scene groups while enumerating every instance in each selected frame"
+  },
+  "archives": [
+    {
+      "filename": "xyzibd_train_pbr.z01",
+      "disk_index": 0,
+      "bytes": 37580963840,
+      "sha256": "fcf5d099258ba726f57905530042b28d8257f1aedf3dbbe2894f847cc3b48842",
+      "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.z01"
+    },
+    {
+      "filename": "xyzibd_train_pbr.zip",
+      "disk_index": 1,
+      "bytes": 34090250556,
+      "sha256": "004fd4e2ae9d7f0d6953634c6b06c72dac415c63f18984e06292fd807c721444",
+      "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/4fe4671783172622313ac0c7182012cee618f217/xyzibd_train_pbr.zip"
+    }
+  ],
+  "download_contract": {
+    "source_network_turbo_before_hf_access": true,
+    "whole_archive_download_permitted": false,
+    "http_range_required": true,
+    "maximum_compressed_entry_bytes": 536870912,
+    "maximum_network_bytes_including_headers": 67108864,
+    "maximum_target_count": 192,
+    "range_chunk_bytes": 8388608,
+    "maximum_attempts_per_chunk": 4,
+    "retry_http_statuses": [429, 500, 502, 503, 504],
+    "retry_backoff_seconds": [2, 5, 10],
+    "short_body_retryable": true,
+    "persistent_chunk_cache": true,
+    "stop_if_range_is_ignored": true,
+    "selection_expansion_after_label_access_permitted": false
+  },
+  "frozen_foundationpose": {
+    "source_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "refiner_checkpoint_sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60",
+    "scorer_checkpoint_sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26",
+    "model_change_permitted": false
+  },
+  "immutable_boundaries": {
+    "xyzibd_val_access_permitted": false,
+    "official_evaluator_invocation_permitted": false,
+    "score_guided_pose_selection_permitted": false,
+    "checkpoint_change_permitted": false,
+    "push_merge_tag_permitted": false,
+    "remote_shutdown_release_delete_permitted": false
+  },
+  "execution_contract": {
+    "job_name": "poseloop_r4a_trainpbr_slice_extract_v2",
+    "output_root": "r4a_development_coverage_geometry/slice_extract_v2",
+    "first_failure": "preserve unchanged and repair only in a new receipt/root",
+    "detached_screen_with_tee_exit_and_progress": true,
+    "parse_or_use_labels_before_successful_extraction_receipt": false,
+    "gpu_a_must_remain_running": true
+  }
+}
