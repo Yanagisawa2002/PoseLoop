@@ -50,26 +50,6 @@ flowchart LR
 The public entry point runs this exact inference path. It deliberately excludes
 the retired exploratory branches and does not retune on the evaluation split.
 
-## Implementation and upstream responsibilities
-
-| Layer | Work in this repository | Upstream capability |
-| --- | --- | --- |
-| Instance detection | Dataset preparation, class-agnostic detector training/inference, mask handoff and evaluation. | Mask R-CNN architecture and its framework implementation. |
-| 6D pose | FoundationPose adapter, frozen inputs, bounded execution/resume and per-mask orchestration. | FoundationPose's pose model, checkpoints and registration/refinement algorithms. |
-| End-to-end evidence | Symmetry-aware evaluation, failure analysis, release checks and reproducible result packaging. | XYZ-IBD data, CAD models and BOP Toolkit utilities, under their respective terms. |
-
-The engineering contribution is the measured detector-to-pose system and its
-evaluation boundary. This project does not claim authorship of FoundationPose
-or a new underlying pose network.
-
-## Start with the release path
-
-The supported entry point is `scripts/run_release_pipeline.sh`; the repository
-map below identifies its implementation. Earlier experiment packages remain at
-their original paths because archived tests and experiment modules import them.
-Use the [source navigation and dependency audit](docs/SOURCE_NAVIGATION.md) to
-separate the release path from historical exploration without breaking replay.
-
 ## Run the frozen pipeline
 
 The full path requires Ubuntu, an NVIDIA GPU, the pinned XYZ-IBD development
@@ -103,12 +83,8 @@ complete, and emits a hashable evidence archive.
 For a CPU-only check of the tracked release summary and media:
 
 ```bash
-python -B scripts/verify_portfolio.py
+python -B scripts/verify_release.py
 ```
-
-The verifier checks the original release manifest against the frozen README
-snapshot and the unchanged result/media/script files. The editable project
-overview is separate from that release snapshot.
 
 ## Evaluation boundary
 
