@@ -17,6 +17,12 @@ its masks to FoundationPose, and evaluates the complete chain.
 Measured on a fixed XYZ-IBD development split: 25 frames, five scenes and 770
 ground-truth instances. [Watch the 73-second walkthrough](docs/media/poseloop-demo.mp4).
 
+## Visual walkthrough
+
+[![Engineering overview and evidence](docs/portfolio/overview.svg)](docs/portfolio/overview.png)
+
+The stage diagram complements the real-scene video above; the paired bars show how pose correctness changes the end-to-end metrics. [Sources and reproduction](docs/portfolio/README.md).
+
 ## Engineering challenges
 
 1. **Separate heavily occluded instances.** A downstream pose model needs usable

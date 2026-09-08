@@ -1,0 +1,49 @@
+{
+  "title": "PoseLoop: evaluate detection and pose together",
+  "subtitle": "XYZ-IBD development evaluation \u00b7 25 frames \u00b7 five scenes \u00b7 770 ground-truth instances",
+  "flow": [
+    "RGB-D\nframe",
+    "Mask R-CNN\ninstance masks",
+    "FoundationPose\n+ CAD / calibration",
+    "Symmetry-aware\njoint evaluation"
+  ],
+  "kind": "grouped",
+  "panel": {
+    "title": "Detection and end-to-end joint metrics",
+    "labels": [
+      "Precision",
+      "Recall",
+      "F1"
+    ],
+    "values": [
+      [
+        0.7036585365853658,
+        0.5878048780487805
+      ],
+      [
+        0.7493506493506493,
+        0.625974025974026
+      ],
+      [
+        0.7257861635220125,
+        0.6062893081761006
+      ]
+    ]
+  },
+  "note": "Instance detection uses IoU 0.50. Joint metrics additionally require a successful pose.\n820/820 registrations completed execution; that count is not pose accuracy. Metrics are custom development metrics.",
+  "source_label": "release/v1.1.0/results.json",
+  "sources": [
+    {
+      "path": "release/v1.1.0/results.json",
+      "sha256": "3e74ff1ccaa59cbcbde35e1fbe56f9c7ad8a93c5e5776923815dfe6b7cb65984",
+      "hash_normalization": "CRLF to LF"
+    }
+  ],
+  "chart_contract": {
+    "surface": "GitHub README; static SVG and PNG",
+    "palette": "single blue root plus neutrals; explicit labels and hatching",
+    "footprint": "1200 x 860 logical pixels",
+    "question": "PoseLoop: evaluate detection and pose together",
+    "data_grain": "As labeled per panel; schematic flow has no timing or dimensional scale."
+  }
+}
