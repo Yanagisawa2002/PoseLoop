@@ -1,39 +1,42 @@
 # PoseLoop
 
-PoseLoop is an auditable RGB-D instance-to-6D-pose pipeline for crowded
-industrial bin-picking scenes. A class-agnostic Mask R-CNN separates object
-instances, FoundationPose estimates one 6D pose per predicted mask, and a
-symmetry-aware evaluator checks the complete handoff.
+**Turn crowded RGB-D scenes into separate object instances and 6D poses.**
 
-[![Release](https://img.shields.io/badge/release-v1.1.0-2ea44f)](https://github.com/Yanagisawa2002/PoseLoop/releases/tag/v1.1.0)
-[![Scope](https://img.shields.io/badge/evaluation-real%20development%20data-blue)](#evaluation-boundary)
+In industrial bin-picking, touching and occluded parts make the detection-to-pose
+handoff difficult. I built a pipeline that trains an instance detector, passes
+its masks to FoundationPose, and evaluates the complete chain.
 
-[![PoseLoop demo poster](docs/media/poseloop-demo-poster.jpg)](docs/media/poseloop-demo.mp4)
+## Results
 
-**[Watch the 73-second result walkthrough](docs/media/poseloop-demo.mp4)** — raw
-RGB, instance masks, FoundationPose CAD projections, and development GT for a
-strong scene and the most clutter-sensitive scene.
+[![RGB-D, instance masks and projected 6D poses](docs/media/poseloop-demo-poster.jpg)](docs/media/poseloop-demo.mp4)
 
-## Result
+- **Instance F1: 0.038 → 0.726** at IoU 0.50, replacing the preceding generic
+  proposal stack with a supervised class-agnostic Mask R-CNN on the same evaluation.
+- **End-to-end joint pose F1: 0.606**, measuring successful detection and pose together.
 
-The detector was evaluated on a fixed 25-frame, five-scene split containing
-770 ground-truth instances. The frozen masks were then passed through
-FoundationPose without changing its model, checkpoints, candidate count,
-refinement count, or promotion thresholds.
+Measured on a fixed XYZ-IBD development split: 25 frames, five scenes and 770
+ground-truth instances. [Watch the 73-second walkthrough](docs/media/poseloop-demo.mp4).
 
-| Stage | Metric | Result |
-| --- | --- | ---: |
-| Instance segmentation | Precision / recall / F1 at IoU 0.50 | 0.704 / 0.749 / **0.726** |
-| Instance segmentation | AP50 / AP75 / PQ | **0.702** / 0.101 / **0.510** |
-| End-to-end pose | Runtime completion | **820 / 820** |
-| End-to-end pose | Joint precision / recall / F1 | 0.588 / 0.626 / **0.606** |
-| End-to-end pose | Joint AP | **0.532** |
-| End-to-end pose | Combined AR MSSD/MSPD | **0.638** |
+## Engineering challenges
 
-The preceding generic proposal stack reached only 0.038 instance F1 on the
-same evaluation. Replacing that stack with a true supervised instance detector
-produced a paired mean frame-F1 gain of +0.699 with a 95% bootstrap interval of
-[0.655, 0.737], positive on all 25 frames and all five scenes.
+1. **Separate heavily occluded instances.** A downstream pose model needs usable
+   per-object masks; proposal quality determines how much of the scene reaches it.
+2. **Evaluate the whole handoff.** Camera/CAD inputs, object symmetries and missed
+   detections must remain consistent through pose execution and scoring.
+
+## My contribution
+
+I implemented detector preparation/training/inference, the FoundationPose
+adapter and resumable per-mask execution, plus symmetry-aware evaluation and
+release packaging. FoundationPose supplies the pose model and registration
+algorithms; the implementation table below documents the upstream boundaries.
+
+## Evidence and reproduction
+
+[Detector evaluation](pose_accuracy_recovery_prep/real_instance_detector_v1/DEVELOPMENT_RESULT.md) ·
+[End-to-end results](pose_accuracy_recovery_prep/a9_foundationpose_e2e/RESULT.md) ·
+[Run the pipeline](#run-the-frozen-pipeline) · [Source navigation](docs/SOURCE_NAVIGATION.md).
+The full metric table and development-evaluation context are available below.
 
 ## Pipeline
 
@@ -110,19 +113,6 @@ The verifier checks the original release manifest against the frozen README
 snapshot and the unchanged result/media/script files. The editable project
 overview is separate from that release snapshot.
 
-## Evaluation boundary
-
-This is a positive result on already-consumed XYZ-IBD RealSense development
-data. Training and evaluation scenes and object identities are disjoint, but
-they come from the same corpus. The reported pose AP and AR are custom frozen
-metrics, not official BOP leaderboard scores. This release is not sealed, does
-not claim state of the art, and does not claim production real-time behavior.
-
-Scene 10 is the strongest representative example. Scene 25 remains the hardest:
-its end-to-end joint recall is 0.437, exposing misses and pose ambiguity among
-thin, heavily occluded parts. AP75 of 0.101 also shows that high-IoU mask
-boundaries remain substantially weaker than IoU50 instance recovery.
-
 ## Evidence and design choices
 
 - [End-to-end result and immutable evidence identity](pose_accuracy_recovery_prep/a9_foundationpose_e2e/RESULT.md)
@@ -149,6 +139,45 @@ attention or scoring semantics.
 - `protocols/` — immutable experiment contracts.
 - `release/v1.1.0/` — compact public result bundle.
 - `docs/media/` — release video, poster, and attribution.
+
+<details>
+<summary>Evaluation details, tradeoffs and supported scope</summary>
+
+## Result
+
+The detector was evaluated on a fixed 25-frame, five-scene split containing
+770 ground-truth instances. The frozen masks were then passed through
+FoundationPose without changing its model, checkpoints, candidate count,
+refinement count, or promotion thresholds.
+
+| Stage | Metric | Result |
+| --- | --- | ---: |
+| Instance segmentation | Precision / recall / F1 at IoU 0.50 | 0.704 / 0.749 / **0.726** |
+| Instance segmentation | AP50 / AP75 / PQ | **0.702** / 0.101 / **0.510** |
+| End-to-end pose | Runtime completion | **820 / 820** |
+| End-to-end pose | Joint precision / recall / F1 | 0.588 / 0.626 / **0.606** |
+| End-to-end pose | Joint AP | **0.532** |
+| End-to-end pose | Combined AR MSSD/MSPD | **0.638** |
+
+The preceding generic proposal stack reached only 0.038 instance F1 on the
+same evaluation. Replacing that stack with a true supervised instance detector
+produced a paired mean frame-F1 gain of +0.699 with a 95% bootstrap interval of
+[0.655, 0.737], positive on all 25 frames and all five scenes.
+
+## Evaluation boundary
+
+This is a positive result on already-consumed XYZ-IBD RealSense development
+data. Training and evaluation scenes and object identities are disjoint, but
+they come from the same corpus. The reported pose AP and AR are custom frozen
+metrics, not official BOP leaderboard scores. This release is not sealed, does
+not claim state of the art, and does not claim production real-time behavior.
+
+Scene 10 is the strongest representative example. Scene 25 remains the hardest:
+its end-to-end joint recall is 0.437, exposing misses and pose ambiguity among
+thin, heavily occluded parts. AP75 of 0.101 also shows that high-IoU mask
+boundaries remain substantially weaker than IoU50 instance recovery.
+
+</details>
 
 ## License boundary
 
