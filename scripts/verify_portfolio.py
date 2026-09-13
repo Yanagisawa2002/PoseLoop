@@ -18,7 +18,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def validate() -> dict[str, object]:
     sums = load_sums(ROOT / "release/v1.1.0/SHA256SUMS")
-    mappings = {"README.md": "release/v1.1.0/README.snapshot.md"}
+    mappings = {
+        "README.md": "release/v1.1.0/README.snapshot.md",
+        "scripts/run_release_pipeline.sh": "release/v1.1.0/run_release_pipeline.snapshot.sh",
+    }
     checked = []
     for original, expected in sums.items():
         actual = mappings.get(original, original)

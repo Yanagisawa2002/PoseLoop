@@ -526,8 +526,13 @@ def validate_input_manifest(
     if not isinstance(frames, list) or not isinstance(items, list):
         raise ContractError("Frozen input inventory is missing")
     item_ids = [str(item.get("item_id", "")) for item in items]
-    if len(set(item_ids)) != 820 or any(not item_id for item_id in item_ids):
+    if len(items) != 820 or len(set(item_ids)) != 820 or any(not item_id for item_id in item_ids):
         raise ContractError("Frozen item IDs are missing or duplicated")
+    frame_ids = [str(frame.get("frame_id", "")) for frame in frames]
+    if len(frames) != 25 or len(set(frame_ids)) != 25 or any(not frame_id for frame_id in frame_ids):
+        raise ContractError("Frozen frame IDs are missing or duplicated")
+    if any(str(item.get("frame_id", "")) not in set(frame_ids) for item in items):
+        raise ContractError("Frozen item refers to an unknown frame")
     if any(int(item.get("scene_id", -1)) == 9 for item in items):
         raise ContractError("Scene 9 entered the A-R9 FoundationPose input")
     if verify_assets:
@@ -688,6 +693,39 @@ def _pose_list(value: Any) -> list[list[float]]:
     return matrix.tolist()
 
 
+def preflight_primary_output(
+    output_root: Path, *, resume: bool, expected: dict[str, Any]
+) -> dict[str, Any] | None:
+    """Reject incompatible output before importing or allocating GPU models."""
+    if not output_root.exists():
+        if resume:
+            raise ContractError("Cannot resume an absent primary output root")
+        return None
+    if not resume:
+        raise ContractError("Primary output root exists; use --resume only for the same run")
+    lock_path = output_root / "run-lock.json"
+    if not lock_path.is_file():
+        raise ContractError("Primary resume run lock is missing")
+    lock = _read_json(lock_path)
+    if (
+        lock.get("run_lock_sha256") != _canonical_sha256(_without_lock(lock, "run_lock_sha256"))
+        or any(lock.get(key) != value for key, value in expected.items())
+    ):
+        raise ContractError("Primary resume run lock changed")
+    completion = output_root / "completion-receipt.json"
+    if completion.exists():
+        receipt = _read_json(completion)
+        predictions = output_root / "predictions.jsonl"
+        if (
+            receipt.get("run_lock_sha256") != lock["run_lock_sha256"]
+            or not predictions.is_file()
+            or receipt.get("predictions_sha256") != _sha256_file(predictions)
+        ):
+            raise ContractError("Completed primary predictions or run lock changed")
+        return receipt
+    return None
+
+
 def run_primary(
     *,
     protocol_path: Path,
@@ -723,6 +761,20 @@ def run_primary(
     if implementation_status.strip():
         raise ContractError("Implementation files differ from the deployed Git commit")
     foundationpose_assets = _verify_foundationpose(protocol, foundationpose_root)
+    completion = preflight_primary_output(
+        output_root, resume=resume, expected={
+            "schema_version": RUN_LOCK_SCHEMA,
+            "protocol_sha256": _sha256_file(protocol_path),
+            "manifest_sha256": _sha256_file(manifest_path),
+            "manifest_lock_sha256": manifest["manifest_lock_sha256"],
+            "implementation_commit": implementation_commit,
+            "implementation": implementation,
+            "foundationpose_commit": protocol["foundationpose"]["commit"],
+            "foundationpose_assets": foundationpose_assets,
+        },
+    )
+    if completion is not None:
+        return completion
     try:
         import cv2
         import nvdiffrast.torch as dr

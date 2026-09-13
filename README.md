@@ -1,5 +1,7 @@
 # PoseLoop
 
+Current code and validation boundary: [2026-09-13 fixes and reproduction](docs/REVIEW_FIXES_20260913.md). Historical measurements below retain their original conditions.
+
 **Turn crowded RGB-D scenes into separate object instances and 6D poses.**
 
 In industrial bin-picking, touching and occluded parts make the detection-to-pose
