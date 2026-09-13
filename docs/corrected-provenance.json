@@ -1,0 +1,9 @@
+{
+  "status": "transcription_erratum_no_prediction_change",
+  "frozen_file": "release/v1.1.0/results.json",
+  "field": "pose_prediction_sha256",
+  "original": "a029289f61afe1222b4b45562784076287c36ed952b85820e78fba1187ed39c06",
+  "corrected": "a029289f61afe1222b4b45562784076287c36ed952b85820e78fba187ed39c06",
+  "source_archive_sha256": "331476865053d5aeb771cded173163ef9a81cf02cf39de38f6a718a2a7857504",
+  "source": "Original primary predictions, completion receipt, evaluation summary and SHA256SUMS agree; rechecked in the 2026-09-12 archive reconstruction."
+}

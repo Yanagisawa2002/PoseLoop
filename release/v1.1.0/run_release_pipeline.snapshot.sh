@@ -69,13 +69,6 @@ if [[ "$actual_checkpoint_sha" != "$expected_checkpoint_sha" ]]; then
   exit 5
 fi
 
-implementation_commit="$(git -C "$repo_root" rev-parse HEAD)"
-if [[ -n "$(git -C "$repo_root" status --porcelain --untracked-files=no)" ]]; then
-  printf 'Tracked release worktree must be clean before primary inference.\n' >&2
-  exit 6
-fi
-
-
 mkdir -p "$output_root"
 dataset_dir="$output_root/dataset"
 prediction_dir="$output_root/detector-predictions"
@@ -103,12 +96,17 @@ python -B -m pose_accuracy_recovery_prep.a9_foundationpose_e2e \
   validate-inputs --protocol "$protocol_pose" \
   --manifest "$freeze_dir/input-manifest.json" --verify-assets
 
+implementation_commit="$(git -C "$repo_root" rev-parse HEAD)"
+if [[ -n "$(git -C "$repo_root" status --porcelain --untracked-files=no)" ]]; then
+  printf 'Tracked release worktree must be clean before primary inference.\n' >&2
+  exit 6
+fi
 
 python -B -m pose_accuracy_recovery_prep.a9_foundationpose_e2e \
   run-primary --protocol "$protocol_pose" \
   --manifest "$freeze_dir/input-manifest.json" \
   --foundationpose-root "$foundationpose_root" --output-root "$primary_dir" \
-  --implementation-commit "$implementation_commit"
+  --implementation-commit "$implementation_commit" --resume
 python -B -m pose_accuracy_recovery_prep.a9_foundationpose_e2e \
   evaluate --protocol "$protocol_pose" \
   --manifest "$freeze_dir/input-manifest.json" --primary-root "$primary_dir" \
