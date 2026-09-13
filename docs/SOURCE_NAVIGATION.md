@@ -8,7 +8,7 @@ It uses the following source areas:
 - [`real_instance_detector_v1`](../pose_accuracy_recovery_prep/real_instance_detector_v1/): detector preparation, training, inference and evaluation.
 - [`a9_foundationpose_e2e`](../pose_accuracy_recovery_prep/a9_foundationpose_e2e/): frozen mask-to-pose handoff, execution and evidence packaging.
 - [`foundationpose_runtime_prep`](../foundationpose_runtime_prep/): upstream runtime adaptation.
-- [`protocols`](../protocols/), [`release/v1.1.0`](../release/v1.1.0/) and [`verify_release.py`](../scripts/verify_release.py): contracts and release checks.
+- [`protocols`](../protocols/), [`release/v1.1.0`](../release/v1.1.0/) and [`verify_portfolio.py`](../scripts/verify_portfolio.py) (current overview; `verify_release.py` is for the original frozen bundle): contracts and release checks.
 
 ## Historical exploration
 
