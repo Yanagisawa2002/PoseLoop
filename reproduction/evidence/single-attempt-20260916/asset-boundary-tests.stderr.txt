@@ -1,0 +1,9 @@
+test_catalog_matches_frozen_protocol (test_frozen_assets.FrozenAssetTests.test_catalog_matches_frozen_protocol) ... ok
+test_missing_and_corrupted_bytes_are_rejected (test_frozen_assets.FrozenAssetTests.test_missing_and_corrupted_bytes_are_rejected) ... ok
+test_no_assets_blocks_without_loading_and_receipt_is_create_only (test_frozen_assets.FrozenAssetTests.test_no_assets_blocks_without_loading_and_receipt_is_create_only) ... ok
+test_wrong_detector_never_reaches_model_loader (test_frozen_assets.FrozenAssetTests.test_wrong_detector_never_reaches_model_loader) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.070s
+
+OK

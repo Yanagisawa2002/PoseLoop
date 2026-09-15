@@ -1,12 +1,29 @@
 # Frozen weights and reproduction prerequisites
 
-## Current outcome: SKIPPED
+## Current outcome: reproduction SKIPPED; CPU batch FAILED
 
 The 2026-09-16 bounded attempt started from main
 `33311a52357c66819c9cb27bbd79e8035ec007c5`. Preflight could not obtain the
 **frozen detector checkpoint**. No model was loaded, no dependency deployment
 or GPU inference ran, and no new accuracy result was produced. The existing
 25-frame results remain historical development results.
+
+The single code candidate `e7b4a25a715cd35e6c492a80182a91079783d846` was checked
+once in a fresh local Python 3.13.5 environment, without pip or inherited
+site packages. All **4 asset-boundary tests passed**. The real missing-asset
+invocation returned the expected exit 3, with detector loading skipped.
+The subsequent historical portfolio-integrity check returned exit 1 because
+`docs/media/poseloop-demo.mp4` is a **132-byte Git LFS pointer** in this checkout,
+not its expected 1,846,462-byte media payload. The pointer's expected payload
+hash agrees with the Release asset; the payload was not downloaded or retried.
+The batch stopped there and is not an overall pass. Its final planned
+`git diff --check` command was not reached (the pre-commit check had passed).
+
+See the [validation receipt](../reproduction/evidence/single-attempt-20260916/validation.json)
+and [raw test output](../reproduction/evidence/single-attempt-20260916/asset-boundary-tests.stderr.txt).
+Actual model loading, CUDA compatibility and clean GPU pipeline reproduction
+are unvalidated. The final PR is Draft; no runtime code changed after the
+single validation batch.
 
 [The asset catalog](../reproduction/frozen-assets.json) records exact file
 sizes, hashes, provenance and the upstream source. It is not a weight delivery.

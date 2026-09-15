@@ -1,0 +1,125 @@
+{
+  "run_id": "poseloop-single-attempt-20260916-cpu-checks",
+  "started_utc": "2026-09-15T18:43:20.724711+00:00",
+  "candidate_sha": "e7b4a25a715cd35e6c492a80182a91079783d846",
+  "scope": "One standard-library code check batch; GPU reproduction SKIPPED",
+  "files_sha256": {
+    "scripts/verify_frozen_assets.py": "e32ebb6f65536cefe38c59977edba54d138eeda8119c75dc9180dd82f9b79607",
+    "tests/test_frozen_assets.py": "19db8b53799b94f9fd509ab83f4499a0fabaab9d2bfdc028b5dbae0b88f609a1",
+    "reproduction/frozen-assets.json": "587e9ceb72217a2e2268c36196aefecfa678c715f4e215e72feabe71753372cd"
+  },
+  "ended_utc": "2026-09-15T18:43:21.344552+00:00",
+  "commands": [
+    {
+      "name": "create-clean-cpu-venv",
+      "command": [
+        "<base-python-3.13.5>",
+        "-m",
+        "venv",
+        "--without-pip",
+        "<fresh-cpu-venv>"
+      ],
+      "started_utc": "2026-09-15T18:43:20.730861+00:00",
+      "ended_utc": "2026-09-15T18:43:20.813121+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "matched_expectation": true
+    },
+    {
+      "name": "clean-environment",
+      "command": [
+        "<fresh-cpu-venv>/Scripts/python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import json,sys,site; print(json.dumps({\"python\":sys.version,\"prefix\":sys.prefix,\"base_prefix\":sys.base_prefix,\"user_site_enabled\":site.ENABLE_USER_SITE,\"sys_path\":sys.path})); assert sys.prefix != sys.base_prefix; assert not site.ENABLE_USER_SITE"
+      ],
+      "started_utc": "2026-09-15T18:43:20.813164+00:00",
+      "ended_utc": "2026-09-15T18:43:20.952911+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "matched_expectation": true
+    },
+    {
+      "name": "asset-boundary-tests",
+      "command": [
+        "<fresh-cpu-venv>/Scripts/python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_frozen_assets.py",
+        "-v"
+      ],
+      "started_utc": "2026-09-15T18:43:20.952923+00:00",
+      "ended_utc": "2026-09-15T18:43:21.162874+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "matched_expectation": true
+    },
+    {
+      "name": "actual-missing-assets",
+      "command": [
+        "<fresh-cpu-venv>/Scripts/python.exe",
+        "-I",
+        "-B",
+        "scripts/verify_frozen_assets.py",
+        "--detector-checkpoint",
+        "<historical-detector-evidence>/training/model-final.pt",
+        "--foundationpose-root",
+        "<historical-FoundationPose>",
+        "--dataset-manifest",
+        "<historical-detector-evidence>/data/dataset-manifest.json",
+        "--load-detector",
+        "--receipt",
+        "<local-evidence>\\actual-missing-assets.json"
+      ],
+      "started_utc": "2026-09-15T18:43:21.162901+00:00",
+      "ended_utc": "2026-09-15T18:43:21.279260+00:00",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "matched_expectation": true
+    },
+    {
+      "name": "frozen-portfolio-integrity",
+      "command": [
+        "<fresh-cpu-venv>/Scripts/python.exe",
+        "-B",
+        "scripts/verify_portfolio.py"
+      ],
+      "started_utc": "2026-09-15T18:43:21.279272+00:00",
+      "ended_utc": "2026-09-15T18:43:21.344534+00:00",
+      "exit_code": 1,
+      "expected_exit_code": 0,
+      "matched_expectation": false
+    }
+  ],
+  "status": "FAILED_CPU_CHECKS",
+  "failure": "RuntimeError: frozen-portfolio-integrity: unexpected exit; no retry",
+  "model_load_executed": false,
+  "gpu_inference_runs": 0,
+  "full_pipeline_reproduced": false,
+  "remote_used": false,
+  "path_redaction": "Local-only paths replaced by named placeholders; unmodified receipt retained locally.",
+  "raw_local_receipt_sha256": "5be37a035074cb629df0dbf9133594ae0c9eb55c5b01300aa883d5f403253f3c",
+  "tests_passed": 4,
+  "reproduction_outcome": "SKIPPED_FROZEN_DETECTOR_UNAVAILABLE",
+  "independent_evaluation_outcome": "SKIPPED_NO_VERIFIED_UNUSED_DEVELOPMENT_MANIFEST",
+  "not_reached_commands": [
+    "git diff --check"
+  ],
+  "portfolio_failure": {
+    "path": "docs/media/poseloop-demo.mp4",
+    "actual_size_bytes": 132,
+    "actual_sha256": "094a4774127f033c43263f405431aa09b934a3f93dc414ef8aa90864b45d580d",
+    "pointer_text": "version https://git-lfs.github.com/spec/v1\noid sha256:bc32daf29d934c23dd51db7c1c5f200a826b7a3df09fb463ee17503e773715f3\nsize 1846462\n",
+    "expected_payload_size_bytes": 1846462,
+    "expected_payload_sha256": "bc32daf29d934c23dd51db7c1c5f200a826b7a3df09fb463ee17503e773715f3",
+    "media_modified_by_attempt": false,
+    "retry_count": 0
+  }
+}

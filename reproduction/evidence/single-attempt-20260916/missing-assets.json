@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "catalog_sha256": "587e9ceb72217a2e2268c36196aefecfa678c715f4e215e72feabe71753372cd",
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "assets": {
+    "detector": {
+      "expected_sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+      "expected_size_bytes": 183923343,
+      "path": "<historical-detector-evidence>/training/model-final.pt",
+      "status": "MISSING_OR_NOT_FILE"
+    },
+    "refiner_checkpoint": {
+      "expected_sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60",
+      "expected_size_bytes": 68220109,
+      "path": "<historical-FoundationPose>/weights/2023-10-28-18-33-37/model_best.pth",
+      "status": "UNREADABLE",
+      "error": "Windows OSError 1920: file cannot be accessed; original path/error retained locally"
+    },
+    "scorer_checkpoint": {
+      "expected_sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26",
+      "expected_size_bytes": 190229389,
+      "path": "<historical-FoundationPose>/weights/2024-01-11-20-02-45/model_best.pth",
+      "status": "UNREADABLE",
+      "error": "Windows OSError 1920: file cannot be accessed; original path/error retained locally"
+    },
+    "refiner_config": {
+      "expected_sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686",
+      "expected_size_bytes": 708,
+      "path": "<historical-FoundationPose>/weights/2023-10-28-18-33-37/config.yml",
+      "status": "UNREADABLE",
+      "error": "Windows OSError 1920: file cannot be accessed; original path/error retained locally"
+    },
+    "scorer_config": {
+      "expected_sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f",
+      "expected_size_bytes": 778,
+      "path": "<historical-FoundationPose>/weights/2024-01-11-20-02-45/config.yml",
+      "status": "UNREADABLE",
+      "error": "Windows OSError 1920: file cannot be accessed; original path/error retained locally"
+    }
+  },
+  "model_load": {
+    "status": "SKIPPED_UNVERIFIED_BYTES"
+  },
+  "inference_executed": false,
+  "dataset_payload_opened": false,
+  "status": "BLOCKED",
+  "full_pipeline_reproduced": false,
+  "exit_code": 3,
+  "raw_local_receipt_sha256": "41676e54dbbfe206711c3f4d0164278de264c8a31198f84783c90db84361d965"
+}
