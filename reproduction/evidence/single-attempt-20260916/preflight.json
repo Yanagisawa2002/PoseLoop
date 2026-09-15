@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "run_id": "poseloop-single-attempt-20260916",
+  "started_utc": "2026-09-15T18:32:41Z",
+  "preflight_ended_utc": "2026-09-15T18:36:04.728333+00:00",
+  "base_sha": "33311a52357c66819c9cb27bbd79e8035ec007c5",
+  "preflight_outcome": "SKIPPED_FROZEN_DETECTOR_UNAVAILABLE",
+  "registered_worktrees_inspected": 14,
+  "detector_checkpoints_found": 0,
+  "unreadable_foundationpose_checkpoint_paths": 2,
+  "other_pth_file": "One 18-byte Python _virtualenv.pth path file; not a checkpoint",
+  "inventory_scope": "Filename-only walk; skip .git, sealed/test directories and directory symlinks. No dataset payload loaded.",
+  "historical_archives": [
+    {
+      "name": "poseloop-a9-real-instance-detector-evidence-958d1a6.tar.gz",
+      "sha256": "ce15934bcb37cccaf677a2091ccf5df2583d711331746639aa0ef76647b784b8",
+      "file_member_count": 96,
+      "checkpoint_member_count": 0
+    },
+    {
+      "name": "a9-foundationpose-e2e-evidence.tar.gz",
+      "sha256": "331476865053d5aeb771cded173163ef9a81cf02cf39de38f6a718a2a7857504",
+      "file_member_count": 35,
+      "checkpoint_member_count": 0
+    }
+  ],
+  "training_receipt": {
+    "schema_version": "poseloop.a-r9.mask-rcnn-training-result.v1",
+    "mode": "FORMAL_OBJECT_DISJOINT_TRAINING",
+    "checkpoint": {
+      "relative_path": "model-final.pt",
+      "sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+      "size_bytes": 183923343
+    },
+    "protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+    "dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+    "source_sha256": "d717840057d0b359a1720afef041479b7548bb29f874832435a7375719283991"
+  },
+  "release_observation": {
+    "command": [
+      "gh",
+      "release",
+      "view",
+      "v1.1.0",
+      "--repo",
+      "Yanagisawa2002/PoseLoop",
+      "--json",
+      "assets,tagName,url"
+    ],
+    "exit_code": 0,
+    "url": "https://github.com/Yanagisawa2002/PoseLoop/releases/tag/v1.1.0",
+    "assets": [
+      {
+        "name": "poseloop-demo-poster.jpg",
+        "size": 182193,
+        "digest": "sha256:bafba73a34189aebad544e67fac368a65e1d6846f5d47526df00323e22334a14"
+      },
+      {
+        "name": "poseloop-demo.mp4",
+        "size": 1846462,
+        "digest": "sha256:bc32daf29d934c23dd51db7c1c5f200a826b7a3df09fb463ee17503e773715f3"
+      },
+      {
+        "name": "results.json",
+        "size": 2221,
+        "digest": "sha256:3e74ff1ccaa59cbcbde35e1fbe56f9c7ad8a93c5e5776923815dfe6b7cb65984"
+      },
+      {
+        "name": "SHA256SUMS",
+        "size": 836,
+        "digest": "sha256:7f0390ab6f8400d6afd95e2eb18227c6dd55117a2ea6d70d65ff4fe57a0b8a61"
+      }
+    ]
+  },
+  "independent_evaluation": {
+    "status": "SKIPPED",
+    "samples": [],
+    "reason": "No verified unused development manifest supplied; detector missing. Existing 25 frames already consumed."
+  },
+  "remote_used": false,
+  "remote_assets_added_bytes": 0,
+  "remote_lock_acquired": false,
+  "gpu_validation_runs": 0,
+  "model_load_executed": false,
+  "accuracy_metrics": null,
+  "clean_gpu_environment_reproduced": false,
+  "owned_remote_processes_remaining": 0,
+  "local_raw_preflight_sha256": "b8acd084246db60f4ba60af4579496a5f2b79c24ff82ffc61bcd1901f46c4148"
+}

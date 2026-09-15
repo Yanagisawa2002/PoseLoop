@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "release": "v1.1.0",
+  "scope": "Historical frozen weights; catalog is not a delivered checkpoint or a reproduction receipt",
+  "detector": {
+    "relative_path": "model-final.pt",
+    "size_bytes": 183923343,
+    "sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+    "architecture": "torchvision.maskrcnn_resnet50_fpn_v2",
+    "foreground_classes": 1,
+    "checkpoint_schema": "poseloop.a-r9.mask-rcnn-checkpoint.v1",
+    "epoch": 8,
+    "protocol_path": "protocols/poseloop_pose_accuracy_recovery_real_instance_detector_v1.json",
+    "protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+    "dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+    "training_implementation_commit": "958d1a66857e2ac928cac1eb34d825e65121c64d",
+    "training_result_relative_path_in_evidence": "training/training-result.json",
+    "training_result_sha256": "d717840057d0b359a1720afef041479b7548bb29f874832435a7375719283991",
+    "download_url": null,
+    "availability": "MISSING_IN_AUDITED_LOCAL_WORKTREES_AND_RELEASE_ASSETS",
+    "acquisition": "Obtain the exact historical model-final.pt from a retained owner backup, then verify size, SHA-256 and strict load. No usable copy or public URL was found in this attempt. Do not substitute COCO pretraining or retrain."
+  },
+  "foundationpose": {
+    "repository": "https://github.com/NVlabs/FoundationPose.git",
+    "commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "source_repository": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Locomanipulation-GRAIL",
+    "source_revision": "39a143ab8ff830a593f92b7ddf5d66c99e59bb44",
+    "source_path_prefix": "checkpoint/FoundationPose/",
+    "url_template": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Locomanipulation-GRAIL/resolve/39a143ab8ff830a593f92b7ddf5d66c99e59bb44/checkpoint/FoundationPose/{relative_path}",
+    "acquisition_script": "scripts/fetch_foundationpose_weights.py",
+    "availability": "PINNED_UPSTREAM_SOURCE_NOT_FETCHED_THIS_ATTEMPT; local model paths unreadable",
+    "assets": {
+      "refiner_checkpoint": {
+        "relative_path": "weights/2023-10-28-18-33-37/model_best.pth",
+        "size_bytes": 68220109,
+        "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60"
+      },
+      "scorer_checkpoint": {
+        "relative_path": "weights/2024-01-11-20-02-45/model_best.pth",
+        "size_bytes": 190229389,
+        "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26"
+      },
+      "refiner_config": {
+        "relative_path": "weights/2023-10-28-18-33-37/config.yml",
+        "size_bytes": 708,
+        "sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686"
+      },
+      "scorer_config": {
+        "relative_path": "weights/2024-01-11-20-02-45/config.yml",
+        "size_bytes": 778,
+        "sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f"
+      }
+    }
+  },
+  "historical_environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "source": "Historical FoundationPose primary/run-lock.json; not a current clean-environment validation",
+    "complete_dependency_lock_available": false
+  },
+  "independent_evaluation": {
+    "status": "SKIPPED",
+    "selected_samples": [],
+    "reason": "No verified unused development manifest supplied; frozen detector missing. Existing 25 frames are already consumed.",
+    "sealed_or_test_access_permitted": false
+  }
+}

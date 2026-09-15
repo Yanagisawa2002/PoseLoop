@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<checkout>\scripts\verify_portfolio.py", line 45, in <module>
+    print(json.dumps(validate(), indent=2, sort_keys=True))
+                     ~~~~~~~~^^
+  File "<checkout>\scripts\verify_portfolio.py", line 30, in validate
+    raise ValueError(f"Frozen release checksum mismatch: {original} -> {actual}")
+ValueError: Frozen release checksum mismatch: docs/media/poseloop-demo.mp4 -> docs/media/poseloop-demo.mp4

@@ -83,6 +83,11 @@ separate the release path from historical exploration without breaking replay.
 
 ## Run the frozen pipeline
 
+**Reproduction prerequisite:** the frozen detector checkpoint is currently
+missing from the audited local artifacts and public Release assets. See the
+[weight catalog, integrity checker and stopped reproduction attempt](docs/FROZEN_REPRODUCTION.md)
+before provisioning an environment. A checkpoint hash alone is not a delivered model.
+
 The full path requires Ubuntu, an NVIDIA GPU, the pinned XYZ-IBD development
 data, the frozen detector checkpoint, FoundationPose, and BOP Toolkit. External
 data, model weights, and third-party source are never stored in this repository.
