@@ -1,50 +1,66 @@
 # PoseLoop
 
-Current code and validation boundary: [2026-09-13 fixes and reproduction](docs/REVIEW_FIXES_20260913.md). Historical measurements below retain their original conditions.
+**RGB-D instance detection → FoundationPose 6D pose, with a frozen end-to-end evaluation path.**
 
-**Turn crowded RGB-D scenes into separate object instances and 6D poses.**
-
-In industrial bin-picking, touching and occluded parts make the detection-to-pose
-handoff difficult. I built a pipeline that trains an instance detector, passes
-its masks to FoundationPose, and evaluates the complete chain.
-
-## Results
+PoseLoop targets crowded industrial bin-picking scenes where touching and occluded
+parts make the detector-to-pose handoff the dominant failure mode. The supported
+pipeline trains a class-agnostic instance detector, passes separate masks to
+FoundationPose, and evaluates the complete chain with symmetry-aware pose criteria.
 
 [![RGB-D, instance masks and projected 6D poses](docs/media/poseloop-demo-poster.jpg)](docs/media/poseloop-demo.mp4)
 
-- **Instance F1: 0.038 → 0.726** at IoU 0.50, replacing the preceding generic
-  proposal stack with a supervised class-agnostic Mask R-CNN on the same evaluation.
-- **End-to-end joint pose F1: 0.606**, measuring successful detection and pose together.
+## Results at a glance
 
-Measured on a fixed XYZ-IBD development split: 25 frames, five scenes and 770
-ground-truth instances. [Watch the 73-second walkthrough](docs/media/poseloop-demo.mp4).
+| Stage | Result | What changed |
+| --- | ---: | --- |
+| Instance segmentation F1 @ IoU 0.50 | **0.038 → 0.726** | Replaced the preceding generic proposal stack with a supervised class-agnostic Mask R-CNN |
+| Instance segmentation AP50 / AP75 | **0.702 / 0.101** | Strong instance recovery at IoU50; high-IoU boundary quality remains a limitation |
+| End-to-end joint pose F1 | **0.606** | Detection and pose correctness measured together |
+| End-to-end joint pose AP | **0.532** | Frozen custom development metric |
+| Combined AR MSSD/MSPD | **0.638** | Symmetry-aware pose diagnostic |
+| Pose runtime completion | **820 / 820** | Every frozen detector prediction completed FoundationPose registration |
 
-## Visual walkthrough
+These measurements use a fixed XYZ-IBD RealSense development split: **25 frames,
+five scenes, 770 ground-truth instances**. Training and evaluation scenes and object
+identities are disjoint, but all data comes from the same already-consumed corpus.
+The pose metrics are custom frozen metrics, not official BOP leaderboard scores.
+This project does not claim state of the art or production real-time performance.
 
-[![Engineering overview and evidence](docs/portfolio/overview.svg)](docs/portfolio/overview.png)
+## Review this project in three minutes
 
-The stage diagram complements the real-scene video above; the paired bars show how pose correctness changes the end-to-end metrics. [Sources and reproduction](docs/portfolio/README.md).
+1. [Watch the 73-second walkthrough](docs/media/poseloop-demo.mp4).
+2. Read the [end-to-end failure waterfall](docs/failure-waterfall.md): **770 GT → 577 mask-IoU50 matches → 482 joint pose successes**.
+3. Inspect the two supported implementation surfaces:
+   - [`real_instance_detector_v1`](pose_accuracy_recovery_prep/real_instance_detector_v1/) — detector preparation, training, inference, and evaluation.
+   - [`a9_foundationpose_e2e`](pose_accuracy_recovery_prep/a9_foundationpose_e2e/) — frozen mask-to-pose handoff, execution, evaluation, and evidence packaging.
+4. Run the CPU-only tracked-evidence check: `python -B scripts/verify_portfolio.py`.
 
-## Engineering challenges
+The detailed historical experiment tree is retained for replay and provenance. It is
+**not** the recommended code-reading path; use [source navigation](docs/SOURCE_NAVIGATION.md)
+when historical context is needed.
 
-1. **Separate heavily occluded instances.** A downstream pose model needs usable
-   per-object masks; proposal quality determines how much of the scene reaches it.
-2. **Evaluate the whole handoff.** Camera/CAD inputs, object symmetries and missed
-   detections must remain consistent through pose execution and scoring.
+## Failure budget: where the current system still loses accuracy
 
-## My contribution
+The frozen v1.1.0 accounting is:
 
-I implemented detector preparation/training/inference, the FoundationPose
-adapter and resumable per-mask execution, plus symmetry-aware evaluation and
-release packaging. FoundationPose supplies the pose model and registration
-algorithms; the implementation table below documents the upstream boundaries.
+```text
+770 ground-truth instances
+  └─ 577 obtain a detector-mask match at IoU >= 0.50
+       └─ 482 also pass the joint pose gate
+```
 
-## Evidence and reproduction
+That leaves **193 GT instances (25.1%)** without an IoU50 mask match and another
+**95 instances (12.3% of GT; 16.5% of mask-matched GT)** that reach the pose stage
+but fail the joint MSSD/MSPD pose criteria. This is intentionally not described as
+193 pure detector misses: the upstream bucket also contains masks that fail the
+IoU50 matching criterion. See the generated [failure waterfall](docs/failure-waterfall.md)
+for the auditable derivation and per-scene recall.
 
-[Detector evaluation](pose_accuracy_recovery_prep/real_instance_detector_v1/DEVELOPMENT_RESULT.md) ·
-[End-to-end results](pose_accuracy_recovery_prep/a9_foundationpose_e2e/RESULT.md) ·
-[Run the pipeline](#run-the-frozen-pipeline) · [Source navigation](docs/SOURCE_NAVIGATION.md).
-The full metric table and development-evaluation context are available below.
+This breakdown makes the next technical question concrete: separate outright misses,
+over/under-segmentation and boundary errors from FoundationPose registration failures
+before changing either model family. AP75 of **0.101** and the weak scene-25 joint
+recall of **0.4373** are the most obvious diagnostic slices, but the already-consumed
+evaluation split should not become a new tuning target.
 
 ## Pipeline
 
@@ -58,46 +74,51 @@ flowchart LR
     POSES --> EVAL["Symmetry-aware development evaluation"]
 ```
 
-The public entry point runs this exact inference path. It deliberately excludes
-the retired exploratory branches and does not retune on the evaluation split.
+## Engineering contribution
 
-## Implementation and upstream responsibilities
+I implemented detector preparation/training/inference, the FoundationPose adapter and
+resumable per-mask execution, symmetry-aware end-to-end evaluation, frozen experiment
+contracts, failure analysis, and release/evidence packaging.
 
 | Layer | Work in this repository | Upstream capability |
 | --- | --- | --- |
-| Instance detection | Dataset preparation, class-agnostic detector training/inference, mask handoff and evaluation. | Mask R-CNN architecture and its framework implementation. |
-| 6D pose | FoundationPose adapter, frozen inputs, bounded execution/resume and per-mask orchestration. | FoundationPose's pose model, checkpoints and registration/refinement algorithms. |
-| End-to-end evidence | Symmetry-aware evaluation, failure analysis, release checks and reproducible result packaging. | XYZ-IBD data, CAD models and BOP Toolkit utilities, under their respective terms. |
+| Instance detection | Dataset preparation, class-agnostic detector training/inference, mask handoff, evaluation | Mask R-CNN architecture and framework implementation |
+| 6D pose | FoundationPose adapter, frozen inputs, bounded execution/resume, per-mask orchestration | FoundationPose pose model, checkpoints, registration/refinement algorithms |
+| End-to-end evidence | Symmetry-aware evaluation, anti-leak execution boundary, failure accounting, release checks, reproducible result packaging | XYZ-IBD data, CAD models, BOP Toolkit utilities |
 
-The engineering contribution is the measured detector-to-pose system and its
-evaluation boundary. This project does not claim authorship of FoundationPose
-or a new underlying pose network.
+The contribution is the measured detector-to-pose system and its evaluation/runtime
+engineering. PoseLoop does not claim authorship of FoundationPose or a new underlying
+pose network.
 
-## Start with the release path
+## Reproduction status
 
-The supported entry point is `scripts/run_release_pipeline.sh`; the repository
-map below identifies its implementation. Earlier experiment packages remain at
-their original paths because archived tests and experiment modules import them.
-Use the [source navigation and dependency audit](docs/SOURCE_NAVIGATION.md) to
-separate the release path from historical exploration without breaking replay.
+The supported entry point is [`scripts/run_release_pipeline.sh`](scripts/run_release_pipeline.sh).
+It is fail-fast and create-only: it verifies the frozen detector checkpoint, rebuilds
+the dataset manifest, records exact Git identity, executes all 820 pose registrations,
+evaluates only after primary inference is complete, and emits a hashable evidence
+archive.
 
-## Run the frozen pipeline
+There is one important current limitation: **the exact frozen Mask R-CNN checkpoint
+required by v1.1.0 is not redistributed in the repository or current Release assets**,
+so an independent full GPU replay is not turnkey today. The runner intentionally
+refuses a checkpoint whose SHA-256 differs from the frozen identity. The bounded
+reproduction investigation and asset preflight are tracked in [PR #2](../../pull/2).
+Do not interpret the extensive provenance checks as proof that the unavailable model
+bytes can currently be reconstructed from the public release alone.
 
-The full path requires Ubuntu, an NVIDIA GPU, the pinned XYZ-IBD development
-data, the frozen detector checkpoint, FoundationPose, and BOP Toolkit. External
-data, model weights, and third-party source are never stored in this repository.
+The tracked release evidence can still be checked independently. Git LFS media must
+be materialized rather than left as pointer files:
 
 ```bash
-git clone https://github.com/Yanagisawa2002/PoseLoop.git
-cd PoseLoop
+git lfs pull
+python -B scripts/verify_portfolio.py
+python -B scripts/build_failure_waterfall.py --check docs/failure-waterfall.md
+```
 
-# Check the two frozen contracts without a GPU.
-python -B -m pose_accuracy_recovery_prep.real_instance_detector_v1 \
-  protocol-check \
-  --protocol protocols/poseloop_pose_accuracy_recovery_real_instance_detector_v1.json
-python -B -m pose_accuracy_recovery_prep.a9_foundationpose_e2e contract-check
+A full GPU run additionally requires Ubuntu, an NVIDIA GPU, the pinned XYZ-IBD
+development data, the exact detector checkpoint, FoundationPose, and BOP Toolkit:
 
-# Run detector inference -> FoundationPose -> evaluation -> evidence package.
+```bash
 bash scripts/run_release_pipeline.sh \
   --dataset-root /datasets/xyzibd \
   --detector-checkpoint /models/poseloop-maskrcnn.pt \
@@ -106,57 +127,39 @@ bash scripts/run_release_pipeline.sh \
   --output-root /runs/poseloop-v1.1.0
 ```
 
-The runner is fail-fast and create-only. It verifies the frozen detector
-checkpoint, reconstructs the dataset manifest, records the exact Git identity,
-executes all 820 pose registrations, evaluates only after primary inference is
-complete, and emits a hashable evidence archive.
+The editable portfolio overview is separate from the frozen v1.1.0 README snapshot.
+[`scripts/verify_portfolio.py`](scripts/verify_portfolio.py) maps frozen checksum
+verification to that preserved snapshot and the unchanged release artifacts.
 
-For a CPU-only check of the tracked release summary and media:
+## Evidence
 
-```bash
-python -B scripts/verify_portfolio.py
-```
-
-The verifier checks the original release manifest against the frozen README
-snapshot and the unchanged result/media/script files. The editable project
-overview is separate from that release snapshot.
-
-## Evidence and design choices
-
-- [End-to-end result and immutable evidence identity](pose_accuracy_recovery_prep/a9_foundationpose_e2e/RESULT.md)
-- [Detector result](pose_accuracy_recovery_prep/real_instance_detector_v1/DEVELOPMENT_RESULT.md)
-- [Release result bundle](release/v1.1.0/results.json)
+- [Detector development result](pose_accuracy_recovery_prep/real_instance_detector_v1/DEVELOPMENT_RESULT.md)
+- [End-to-end FoundationPose result](pose_accuracy_recovery_prep/a9_foundationpose_e2e/RESULT.md)
+- [Generated end-to-end failure waterfall](docs/failure-waterfall.md)
+- [Compact v1.1.0 result bundle](release/v1.1.0/results.json)
+- [Source navigation and dependency audit](docs/SOURCE_NAVIGATION.md)
 - [Retired hypotheses and negative results](docs/archived-negative-results.md)
 - [Third-party licenses and dataset attribution](LICENSES.md)
 
-The release keeps prediction-time labels, evaluator inputs, and official scorer
-access at zero until primary inference is frozen. Runtime inputs, upstream
-commits, checkpoints, protocols, output manifests, and evidence members are
-SHA-256 bound. Long FoundationPose scoring is chunked to keep memory bounded,
-and the primary runner supports exact resume without changing candidate
-attention or scoring semantics.
+The release keeps prediction-time labels, evaluator inputs, official-scorer access and
+scene-9 access at zero until primary inference is frozen. Runtime inputs, upstream
+commits, checkpoints, protocols, output manifests, and evidence members are SHA-256
+bound. Long FoundationPose scoring is chunked to keep memory bounded, and the primary
+runner supports exact resume without changing candidate attention or scoring semantics.
 
 ## Repository map
 
-- `pose_accuracy_recovery_prep/real_instance_detector_v1/` — detector training,
-  inference, and evaluation.
-- `pose_accuracy_recovery_prep/a9_foundationpose_e2e/` — frozen detector-to-pose
-  handoff, primary execution, evaluation, and packaging.
-- `foundationpose_runtime_prep/` — audited FoundationPose adapter and
-  memory-bounded execution.
-- `protocols/` — immutable experiment contracts.
-- `release/v1.1.0/` — compact public result bundle.
+- `pose_accuracy_recovery_prep/real_instance_detector_v1/` — supported detector path.
+- `pose_accuracy_recovery_prep/a9_foundationpose_e2e/` — supported detector-to-pose path.
+- `foundationpose_runtime_prep/` — audited FoundationPose runtime adaptation.
+- `scripts/run_release_pipeline.sh` — supported release runner.
+- `protocols/` — frozen experiment contracts.
+- `release/v1.1.0/` — compact public result bundle and frozen snapshots.
 - `docs/media/` — release video, poster, and attribution.
+- historical `r3_*`, `r4a_*`, M1–M6 packages/scripts — retained for provenance and replay, not as public entry points.
 
 <details>
-<summary>Evaluation details, tradeoffs and supported scope</summary>
-
-## Result
-
-The detector was evaluated on a fixed 25-frame, five-scene split containing
-770 ground-truth instances. The frozen masks were then passed through
-FoundationPose without changing its model, checkpoints, candidate count,
-refinement count, or promotion thresholds.
+<summary>Detailed evaluation numbers</summary>
 
 | Stage | Metric | Result |
 | --- | --- | ---: |
@@ -167,30 +170,21 @@ refinement count, or promotion thresholds.
 | End-to-end pose | Joint AP | **0.532** |
 | End-to-end pose | Combined AR MSSD/MSPD | **0.638** |
 
-The preceding generic proposal stack reached only 0.038 instance F1 on the
-same evaluation. Replacing that stack with a true supervised instance detector
-produced a paired mean frame-F1 gain of +0.699 with a 95% bootstrap interval of
+The preceding generic proposal stack reached only 0.038 instance F1 on the same
+evaluation. Replacing that stack with the supervised instance detector produced a
+paired mean frame-F1 gain of +0.699 with a 95% bootstrap interval of
 [0.655, 0.737], positive on all 25 frames and all five scenes.
 
-## Evaluation boundary
-
-This is a positive result on already-consumed XYZ-IBD RealSense development
-data. Training and evaluation scenes and object identities are disjoint, but
-they come from the same corpus. The reported pose AP and AR are custom frozen
-metrics, not official BOP leaderboard scores. This release is not sealed, does
-not claim state of the art, and does not claim production real-time behavior.
-
-Scene 10 is the strongest representative example. Scene 25 remains the hardest:
-its end-to-end joint recall is 0.437, exposing misses and pose ambiguity among
-thin, heavily occluded parts. AP75 of 0.101 also shows that high-IoU mask
-boundaries remain substantially weaker than IoU50 instance recovery.
+Scene 10 is the strongest representative example. Scene 25 remains the hardest, with
+joint recall 0.4373. Scene 40 also exposes reflective, overlapping-instance boundary
+errors. These are development findings, not sealed-test or production claims.
 
 </details>
 
 ## License boundary
 
-No project-level license is granted for PoseLoop's original source at this
-time. The demo media is an adaptation of XYZ-IBD and is separately distributed
-under CC BY-NC-SA 4.0; see [the media notice](docs/media/README.md). FoundationPose
-source and checkpoints remain subject to NVIDIA's upstream terms. See
-[LICENSES.md](LICENSES.md) before reproducing or redistributing any component.
+No project-level license is currently granted for PoseLoop's original source. The demo
+media is an adaptation of XYZ-IBD and is separately distributed under CC BY-NC-SA 4.0;
+see [the media notice](docs/media/README.md). FoundationPose source and checkpoints
+remain subject to NVIDIA's upstream terms. See [LICENSES.md](LICENSES.md) before
+reproducing or redistributing any component.

@@ -1,0 +1,42 @@
+name: Portfolio integrity
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tracked release assets
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify generated failure waterfall
+        run: python -B scripts/build_failure_waterfall.py --check docs/failure-waterfall.md
+
+      - name: Verify frozen release evidence against editable overview
+        run: python -B scripts/verify_portfolio.py
+
+      - name: Compile supported Python surfaces
+        run: >-
+          python -m compileall -q
+          pose_accuracy_recovery_prep/real_instance_detector_v1
+          pose_accuracy_recovery_prep/a9_foundationpose_e2e
+          foundationpose_runtime_prep
+          scripts/build_failure_waterfall.py
+          scripts/verify_portfolio.py
+
+      - name: Check release runner shell syntax
+        run: bash -n scripts/run_release_pipeline.sh
