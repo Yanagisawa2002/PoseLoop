@@ -280,12 +280,13 @@ def _summary_markdown(rows: list[dict[str, Any]], summary: dict[str, Any]) -> st
         f"| {band} | {iou_counts.get(band, 0)} |"
         for band in ("<0.50", "0.50-0.75", ">=0.75")
     ]
-    return f"""# PoseLoop v1.1.0 per-instance failure taxonomy
+    version = "v1.2" if summary["schema_version"].startswith("poseloop.v1.2.") else "v1.1.0"
+    return f"""# PoseLoop {version} per-instance failure taxonomy
 
 Status: **COMPLETE_DIAGNOSTIC_RECONSTRUCTION**
 
-This is a post-hoc diagnostic of the already-consumed v1.1.0 development split.
-It is not a new untouched evaluation and must not be used to retune v1.1.0 and
+This is a post-hoc diagnostic of the already-consumed {version} development split.
+It is not a new untouched evaluation and must not be used to retune {version} and
 then presented as if the split were unseen.
 
 ## Reconciliation
@@ -333,11 +334,24 @@ is POSE_REGISTRATION_FAILURE.
 """
 
 
+def reconcile_counts(anchor, total, matched, joint):
+    for key, actual in (("ground_truth_instance_count", total),
+                        ("mask_iou50_match_count", matched), ("joint_pose_success_count", joint)):
+        expected = anchor.get(key)
+        if isinstance(expected, bool) or not isinstance(expected, int) or expected < 0 or actual != expected:
+            raise SystemExit(f"{key} reconciliation failed: {actual} != {expected}")
+    if not 0 <= joint <= matched <= total:
+        raise SystemExit("Impossible taxonomy population")
+
+
 def extract_taxonomy(args: argparse.Namespace) -> None:
     import numpy as np
     import cv2
 
-    from pose_accuracy_recovery_prep.a9_foundationpose_e2e import runtime as a9
+    if getattr(args, "result_anchor", None) is not None:
+        from pose_accuracy_recovery_prep.a10_foundationpose_e2e_v2 import runtime as a9
+    else:
+        from pose_accuracy_recovery_prep.a9_foundationpose_e2e import runtime as a9
     from pose_accuracy_recovery_prep.real_causal_ablation_v1.runtime import (
         _greedy_matches,
         _iou_matrix,
@@ -364,6 +378,8 @@ def extract_taxonomy(args: argparse.Namespace) -> None:
     manifest = a9.validate_input_manifest(
         manifest_path, protocol_path, verify_assets=True
     )
+    if getattr(args, "result_anchor", None) is not None:
+        a9.validate_primary_evidence(primary_root, manifest_path, protocol_path)
     completion_path = primary_root / "completion-receipt.json"
     predictions_path = primary_root / "predictions.jsonl"
     completion = a9._read_json(completion_path)
@@ -383,10 +399,11 @@ def extract_taxonomy(args: argparse.Namespace) -> None:
         raise SystemExit("Primary completion receipt is absent, changed, or unsafe")
 
     primary_rows = a9._read_jsonl(predictions_path)
-    if len(primary_rows) != 821 or primary_rows[0].get("record_type") != "metadata":
+    expected_count = int(manifest["item_count"])
+    if len(primary_rows) != expected_count + 1 or primary_rows[0].get("record_type") != "metadata":
         raise SystemExit("Primary prediction coverage changed")
     result_by_id = {str(row["item_id"]): row for row in primary_rows[1:]}
-    if len(result_by_id) != 820:
+    if len(result_by_id) != expected_count or set(result_by_id) != {str(item["item_id"]) for item in manifest["items"]}:
         raise SystemExit("Primary prediction IDs are duplicated")
 
     if toolkit_commit(toolkit_root) != BOP_TOOLKIT_COMMIT:
@@ -578,22 +595,23 @@ def extract_taxonomy(args: argparse.Namespace) -> None:
             joint_count += int(joint)
             taxonomy_rows.append(base)
 
-    release = _read_json(RELEASE_RESULT)
-    expected_total = int(release["dataset"]["ground_truth_instance_count"])
-    expected_match = int(release["pose_pipeline"]["mask_iou50_matches"])
-    expected_joint = int(release["pose_pipeline"]["joint_pose_successes"])
-    if len(taxonomy_rows) != expected_total:
-        raise SystemExit(
-            f"GT reconciliation failed: {len(taxonomy_rows)} != {expected_total}"
-        )
-    if mask_match_count != expected_match:
-        raise SystemExit(
-            f"IoU50 reconciliation failed: {mask_match_count} != {expected_match}"
-        )
-    if joint_count != expected_joint:
-        raise SystemExit(
-            f"Joint success reconciliation failed: {joint_count} != {expected_joint}"
-        )
+    anchor_path = getattr(args, "result_anchor", None)
+    if anchor_path is not None:
+        anchor = _read_json(anchor_path)
+        for key, path in (("protocol_sha256", protocol_path), ("manifest_sha256", manifest_path),
+                          ("predictions_sha256", predictions_path),
+                          ("primary_completion_receipt_sha256", completion_path)):
+            if anchor.get(key) != _sha256_file(path):
+                raise SystemExit(f"Result anchor does not bind current artifacts: {key}")
+        if anchor.get("schema_version") != a9.EVALUATION_SCHEMA:
+            raise SystemExit("Result anchor is not a v1.2 evaluation")
+        reconcile_counts(anchor, len(taxonomy_rows), mask_match_count, joint_count)
+    else:
+        release = _read_json(RELEASE_RESULT)
+        reconcile_counts({"ground_truth_instance_count": release["dataset"]["ground_truth_instance_count"],
+                          "mask_iou50_match_count": release["pose_pipeline"]["mask_iou50_matches"],
+                          "joint_pose_success_count": release["pose_pipeline"]["joint_pose_successes"]},
+                         len(taxonomy_rows), mask_match_count, joint_count)
 
     bucket_counts = Counter(str(row["failure_bucket"]) for row in taxonomy_rows)
     iou_counts = Counter(str(row["iou_band"]) for row in taxonomy_rows)
@@ -613,7 +631,7 @@ def extract_taxonomy(args: argparse.Namespace) -> None:
         }
 
     summary = {
-        "schema_version": "poseloop.v1.1.0.failure-taxonomy.v1",
+        "schema_version": "poseloop.v1.2.failure-taxonomy.v1" if anchor_path else "poseloop.v1.1.0.failure-taxonomy.v1",
         "status": "COMPLETE_DIAGNOSTIC_RECONSTRUCTION",
         "claim_scope": (
             "post-hoc diagnostic of already-consumed XYZ-IBD development split; "
@@ -631,6 +649,8 @@ def extract_taxonomy(args: argparse.Namespace) -> None:
         "protocol_sha256": _sha256_file(protocol_path),
     }
 
+    if anchor_path is not None:
+        summary["result_anchor_sha256"] = _sha256_file(anchor_path)
     output_root.mkdir(parents=True)
     _write_csv(output_root / "per-instance.csv", taxonomy_rows)
     (output_root / "summary.json").write_text(
@@ -708,6 +728,7 @@ def main() -> None:
     extract.add_argument("--dataset-root", type=Path, required=True)
     extract.add_argument("--toolkit-root", type=Path, required=True)
     extract.add_argument("--output-root", type=Path, required=True)
+    extract.add_argument("--result-anchor", type=Path)
 
     args = parser.parse_args()
     if args.command == "self-test":

@@ -1,0 +1,18 @@
+{
+  "schema_version": "poseloop.v1.2.experiment-template.v1",
+  "experiment_version": "v1.2",
+  "detector_training_protocol": "protocols/poseloop_pose_accuracy_recovery_real_instance_detector_v1.json",
+  "dataset_role": "ALREADY_CONSUMED_REAL_DEVELOPMENT",
+  "scene9_read_permitted": false,
+  "sealed_claim_permitted": false,
+  "formal_training_is_separate": true,
+  "pose_protocol_freeze": "after label-blind detector prediction, before primary inference",
+  "required_identity_fields": [
+    "source_detector_protocol_sha256", "implementation_commit", "gpu_name", "driver", "cuda",
+    "python", "pytorch", "torchvision", "official_weight_sha256", "dataset_manifest_sha256",
+    "detector_checkpoint_sha256", "detector_prediction_manifest_sha256", "foundationpose_source_commit",
+    "foundationpose_compatibility_patch", "foundationpose_input_manifest_sha256", "primary_prediction_sha256",
+    "evaluation_sha256"
+  ],
+  "missing_stage_identity_policy": "unavailable until that stage completes; never reuse v1.1 identities"
+}
