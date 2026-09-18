@@ -7,6 +7,8 @@ summary.
 
 - [`failure-waterfall.md`](failure-waterfall.md) — generated v1.1.0 stage-level
   failure accounting from the tracked compact result bundle.
+- [`failure-taxonomy.md`](failure-taxonomy.md) — current #5 recovery status, proven
+  coarse failure localization, and the exact evidence boundary for the 770-row taxonomy.
 - [`REPRODUCTION_STATUS.md`](REPRODUCTION_STATUS.md) — what is independently
   checkable today and why full v1.1.0 GPU replay is currently blocked.
 - [`SOURCE_NAVIGATION.md`](SOURCE_NAVIGATION.md) — supported release source path

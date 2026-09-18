@@ -26,6 +26,12 @@ jobs:
       - name: Verify generated failure waterfall
         run: python -B scripts/build_failure_waterfall.py --check docs/failure-waterfall.md
 
+      - name: Verify generated failure taxonomy status
+        run: python -B scripts/build_failure_taxonomy.py status --check docs/failure-taxonomy.md
+
+      - name: Self-test failure taxonomy classification rules
+        run: python -B scripts/build_failure_taxonomy.py self-test
+
       - name: Verify frozen release evidence against editable overview
         run: python -B scripts/verify_portfolio.py
 
@@ -36,6 +42,7 @@ jobs:
           pose_accuracy_recovery_prep/a9_foundationpose_e2e
           foundationpose_runtime_prep
           scripts/build_failure_waterfall.py
+          scripts/build_failure_taxonomy.py
           scripts/verify_portfolio.py
 
       - name: Check release runner shell syntax
