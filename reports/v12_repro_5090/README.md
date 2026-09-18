@@ -1,6 +1,7 @@
 # V1.2 RTX 5090 detector smoke
 
-V1.2 INTERFACES READY  
+V1.2 INTERFACES READY
+
 DETECTOR SMOKE PASS
 
 Implementation executed: `bd5c5b55ad450d8670c1acc8e4c02a0532cffa90`. The final report commit
