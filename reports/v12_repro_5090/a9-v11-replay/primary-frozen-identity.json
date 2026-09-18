@@ -1,0 +1,50 @@
+{
+  "predictions_sha256": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+  "completion_receipt_sha256": "5a0344b9098b0ed54222ead6f884c92451f62762a769569ce85fa85a49959092",
+  "run_lock_file_sha256": "c40a67fab64971165181a3c4803c696cf156e5875a9609daba74c9e70c239783",
+  "run_lock_identity_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+  "completion": {
+    "created_at_utc": "2026-09-18T19:54:47.471568+00:00",
+    "evaluator_path_open_count": 0,
+    "gt_path_open_count": 0,
+    "item_count": 820,
+    "label_access_count": 0,
+    "official_scorer_run_count": 0,
+    "predictions_sha256": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+    "run_lock_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+    "scene9_read_count": 0,
+    "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+    "stage": "primary-inference",
+    "status": "COMPLETE",
+    "status_counts": {
+      "success": 820
+    },
+    "wall_time_seconds": 551.1074293479323
+  },
+  "registration_seconds": {
+    "count": 820,
+    "min": 0.6259776996448636,
+    "median": 0.6551136998459697,
+    "p95": 0.681723405001685,
+    "p99": 0.709339178027585,
+    "max": 1.87279680557549,
+    "mean": 0.6569991685927096
+  },
+  "peak_allocated_bytes": {
+    "count": 820,
+    "min": 4539749888.0,
+    "median": 7672836096.0,
+    "p95": 8361192448.0,
+    "p99": 8363682816.0,
+    "max": 8363682816.0,
+    "mean": 7785371677.346341
+  },
+  "environment": {
+    "cuda_runtime": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "gpu_uuid": "GPU-aac37f94-5192-0c98-91e1-37e6f8109438",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128"
+  },
+  "frozen_before_evaluation_at_unix": 1789761293.128289
+}

@@ -1,0 +1,19 @@
+{
+  "evidence": {
+    "path": "/root/autodl-tmp/poseloop-v1.1-replay/a9-v1.1-replay-evidence.tar.gz",
+    "sha256": "06f04ae887786f798d5303981e8881ede648f9f1a9f36b8e2ab824fd49743bfe",
+    "size_bytes": 6678963,
+    "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-v12-5090\\artifacts\\a9-v11-replay-20260919\\a9-v1.1-replay-evidence.tar.gz"
+  },
+  "supplement": {
+    "path": "/root/autodl-tmp/poseloop-v1.1-replay/a9-v1.1-replay-supplement.tar.gz",
+    "sha256": "bc45a759c5d6216e1caa58558356b5014b80ba2091ba82389ade40fe745c8fb4",
+    "size_bytes": 842520,
+    "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-v12-5090\\artifacts\\a9-v11-replay-20260919\\a9-v1.1-replay-supplement.tar.gz"
+  },
+  "file_count": 54,
+  "status": "PASS_ALL_REQUIRED_FILES_BACKED_UP",
+  "detector_checkpoint_local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-v12-5090\\artifacts\\v12-formal-20260918\\model-final.pt",
+  "detector_prediction_backup": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-v12-5090\\artifacts\\detector-exact-replay-20260919\\detector-exact-replay-evidence.tar.gz",
+  "files_still_needing_download": []
+}

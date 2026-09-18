@@ -1,0 +1,141 @@
+{
+  "aggregate": {
+    "runtime_success_count": {
+      "historical": 820,
+      "actual": 820,
+      "delta": 0,
+      "exact": true
+    },
+    "mask_iou50_match_count": {
+      "historical": 577,
+      "actual": 577,
+      "delta": 0,
+      "exact": true
+    },
+    "joint_pose_success_count": {
+      "historical": 482,
+      "actual": 482,
+      "delta": 0,
+      "exact": true
+    },
+    "joint_pose_precision": {
+      "historical": 0.5878048780487805,
+      "actual": 0.5878048780487805,
+      "delta": 0.0,
+      "exact": true
+    },
+    "joint_pose_recall": {
+      "historical": 0.625974025974026,
+      "actual": 0.625974025974026,
+      "delta": 0.0,
+      "exact": true
+    },
+    "joint_pose_f1": {
+      "historical": 0.6062893081761006,
+      "actual": 0.6062893081761006,
+      "delta": 0.0,
+      "exact": true
+    },
+    "joint_pose_ap": {
+      "historical": 0.5318658235280908,
+      "actual": 0.5318658235280908,
+      "delta": 0.0,
+      "exact": true
+    },
+    "ar_mssd": {
+      "historical": 0.6305194805194805,
+      "actual": 0.6305194805194805,
+      "delta": 0.0,
+      "exact": true
+    },
+    "ar_mspd": {
+      "historical": 0.6457142857142858,
+      "actual": 0.6457142857142858,
+      "delta": 0.0,
+      "exact": true
+    },
+    "combined_ar_mssd_mspd": {
+      "historical": 0.6381168831168831,
+      "actual": 0.6381168831168831,
+      "delta": 0.0,
+      "exact": true
+    }
+  },
+  "per_scene": {
+    "10": {
+      "historical_joint": 148,
+      "historical_gt": 185,
+      "actual": {
+        "gt": 185,
+        "joint": 148,
+        "joint_pose_recall": 0.8,
+        "pred": 182,
+        "scene_id": 10
+      },
+      "joint_delta": 0,
+      "recall_delta": 0.0,
+      "exact": true
+    },
+    "25": {
+      "historical_joint": 129,
+      "historical_gt": 295,
+      "actual": {
+        "gt": 295,
+        "joint": 129,
+        "joint_pose_recall": 0.43728813559322033,
+        "pred": 234,
+        "scene_id": 25
+      },
+      "joint_delta": 0,
+      "recall_delta": 0.0,
+      "exact": true
+    },
+    "30": {
+      "historical_joint": 83,
+      "historical_gt": 105,
+      "actual": {
+        "gt": 105,
+        "joint": 83,
+        "joint_pose_recall": 0.7904761904761904,
+        "pred": 137,
+        "scene_id": 30
+      },
+      "joint_delta": 0,
+      "recall_delta": 0.0,
+      "exact": true
+    },
+    "40": {
+      "historical_joint": 83,
+      "historical_gt": 135,
+      "actual": {
+        "gt": 135,
+        "joint": 83,
+        "joint_pose_recall": 0.6148148148148148,
+        "pred": 198,
+        "scene_id": 40
+      },
+      "joint_delta": 0,
+      "recall_delta": 0.0,
+      "exact": true
+    },
+    "65": {
+      "historical_joint": 39,
+      "historical_gt": 50,
+      "actual": {
+        "gt": 50,
+        "joint": 39,
+        "joint_pose_recall": 0.78,
+        "pred": 69,
+        "scene_id": 65
+      },
+      "joint_delta": 0,
+      "recall_delta": 0.0,
+      "exact": true
+    }
+  },
+  "aggregate_exact": true,
+  "per_scene_exact": true,
+  "interpretation": "A9 V1.1 SEMANTIC REPLAY: EXACT AT RECORDED EVALUATION GRANULARITY",
+  "artifact_bit_exact_claim": false,
+  "per_instance_exact_claim": false
+}

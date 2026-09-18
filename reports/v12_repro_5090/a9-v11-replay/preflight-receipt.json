@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "foundationpose_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+  "tracked_foundationpose_source_modified": false,
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "capability": [
+    12,
+    0
+  ],
+  "nvdiffrast_import_and_cuda_rasterization": "PASS",
+  "pytorch3d_import_and_cuda_knn": "PASS",
+  "model_construction": "PASS",
+  "candidate_count": 252,
+  "dataset_or_gt_reads": 0,
+  "assets": {
+    "refiner_checkpoint": {
+      "relative_path": "weights/2023-10-28-18-33-37/model_best.pth",
+      "size_bytes": 68220109,
+      "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60"
+    },
+    "scorer_checkpoint": {
+      "relative_path": "weights/2024-01-11-20-02-45/model_best.pth",
+      "size_bytes": 190229389,
+      "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26"
+    },
+    "refiner_config": {
+      "relative_path": "weights/2023-10-28-18-33-37/config.yml",
+      "size_bytes": 708,
+      "sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686"
+    },
+    "scorer_config": {
+      "relative_path": "weights/2024-01-11-20-02-45/config.yml",
+      "size_bytes": 778,
+      "sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f"
+    }
+  },
+  "completed_at_unix": 1789760730.170322
+}

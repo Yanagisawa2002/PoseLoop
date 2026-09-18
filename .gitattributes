@@ -10,3 +10,6 @@
 
 # Preserve byte-stable v1.2 evidence text across Windows/Linux checkouts.
 reports/v12_repro_5090/** text eol=lf
+# Preserve exact CSV artifact bytes, including the original writer's CRLF.
+reports/v12_repro_5090/a9-v11-replay/**/*.csv -text whitespace=cr-at-eol
+reports/v12_repro_5090/a9-v11-replay/*.csv -text whitespace=cr-at-eol

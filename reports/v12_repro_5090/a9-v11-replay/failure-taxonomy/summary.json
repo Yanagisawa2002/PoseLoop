@@ -1,0 +1,54 @@
+{
+  "bucket_counts": {
+    "DETECTOR_MISS": 1,
+    "MASK_BOUNDARY_IOU_FAILURE": 114,
+    "OVER_SEGMENTATION": 24,
+    "POSE_MSPD_ONLY_FAILURE": 2,
+    "POSE_MSSD_AND_MSPD_FAILURE": 73,
+    "POSE_MSSD_ONLY_FAILURE": 20,
+    "SUCCESS": 482,
+    "UNDER_SEGMENTATION_OR_MERGE": 54
+  },
+  "claim_scope": "post-hoc diagnostic of already-consumed XYZ-IBD development split; not an untouched evaluation and not a retuning authorization",
+  "ground_truth_instance_count": 770,
+  "iou_band_counts": {
+    "0.50-0.75": 380,
+    "<0.50": 193,
+    ">=0.75": 197
+  },
+  "joint_pose_success_count": 482,
+  "manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+  "mask_iou50_match_count": 577,
+  "per_scene": {
+    "10": {
+      "failures": 37,
+      "gt": 185,
+      "joint_successes": 148
+    },
+    "25": {
+      "failures": 166,
+      "gt": 295,
+      "joint_successes": 129
+    },
+    "30": {
+      "failures": 22,
+      "gt": 105,
+      "joint_successes": 83
+    },
+    "40": {
+      "failures": 52,
+      "gt": 135,
+      "joint_successes": 83
+    },
+    "65": {
+      "failures": 11,
+      "gt": 50,
+      "joint_successes": 39
+    }
+  },
+  "primary_completion_receipt_sha256": "5a0344b9098b0ed54222ead6f884c92451f62762a769569ce85fa85a49959092",
+  "primary_predictions_sha256": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+  "protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+  "schema_version": "poseloop.v1.1.0.failure-taxonomy.v1",
+  "status": "COMPLETE_DIAGNOSTIC_RECONSTRUCTION"
+}

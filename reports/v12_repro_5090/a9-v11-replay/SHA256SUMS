@@ -1,0 +1,12 @@
+a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b  /root/autodl-tmp/poseloop-v1.2-5090/detector-formal/model-final.pt
+dded85d8d9bec68f3c6d80343183635bd80e738a28e9a93a87531d93fbe7441b  /root/autodl-tmp/poseloop-v1.2-5090/detector-exact-replay/prediction-manifest.json
+e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66  /root/autodl-tmp/poseloop-v1.2-5090/a9-exact-replay-freeze/input-manifest.json
+c40a67fab64971165181a3c4803c696cf156e5875a9609daba74c9e70c239783  /root/autodl-tmp/poseloop-v1.1-replay/foundationpose-primary/run-lock.json
+300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77  /root/autodl-tmp/poseloop-v1.1-replay/foundationpose-primary/predictions.jsonl
+5a0344b9098b0ed54222ead6f884c92451f62762a769569ce85fa85a49959092  /root/autodl-tmp/poseloop-v1.1-replay/foundationpose-primary/completion-receipt.json
+6d1ae63234e41dab30e2d50f40065fa76587f0032bdbd8900c758a346fef8624  /root/autodl-tmp/poseloop-v1.1-replay/evaluation/evaluation-result.json
+978eed042403ffb6c1d02ff56ecc032be6b0ae325ada9b698f5b4e2de6c6756b  /root/autodl-tmp/poseloop-v1.1-replay/evaluation/matched-pose-errors.csv
+06f04ae887786f798d5303981e8881ede648f9f1a9f36b8e2ab824fd49743bfe  /root/autodl-tmp/poseloop-v1.1-replay/a9-v1.1-replay-evidence.tar.gz
+bf5cc25778d3773ae6ab8a3efcd582ab9ac103d6b1e709508e65ef23dfa9ead7  /root/autodl-tmp/poseloop-v1.1-replay/failure-taxonomy/per-instance.csv
+10848cf1bb4961733e545d8ccf4ae2d8bacee66b5799808865c574d36323db40  /root/autodl-tmp/poseloop-v1.1-replay/failure-taxonomy/summary.json
+77d32791186446dfb3e2642ddb4581246375e3eaf6cc27825dfa5a58c775ac3d  /root/autodl-tmp/poseloop-v1.1-replay/failure-taxonomy/REPORT.md

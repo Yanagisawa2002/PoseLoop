@@ -1,5 +1,7 @@
 # V1.1 detector replay: BIT-EXACT
 
+Subsequent phase: the [original A9 v1.1 FoundationPose replay](../a9-v11-replay/README.md) completed with exact historical aggregate and per-scene metrics, reconstructed taxonomy, and verified off-server backups. The boundary described below records this earlier detector-only task.
+
 One unchanged historical detector prediction run reproduced the frozen v1.1 prediction manifest exactly. Its bound frame metadata and packed masks were independently hash-validated. The original A9 input freeze and full asset validation passed. No FoundationPose registrations were started.
 
 ## Identity correction

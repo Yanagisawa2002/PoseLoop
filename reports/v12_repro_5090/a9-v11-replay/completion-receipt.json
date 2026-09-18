@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-09-18T19:54:47.471568+00:00",
+  "evaluator_path_open_count": 0,
+  "gt_path_open_count": 0,
+  "item_count": 820,
+  "label_access_count": 0,
+  "official_scorer_run_count": 0,
+  "predictions_sha256": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+  "run_lock_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+  "scene9_read_count": 0,
+  "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+  "stage": "primary-inference",
+  "status": "COMPLETE",
+  "status_counts": {
+    "success": 820
+  },
+  "wall_time_seconds": 551.1074293479323
+}
