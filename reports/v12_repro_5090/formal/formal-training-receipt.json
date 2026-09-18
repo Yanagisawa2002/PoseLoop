@@ -1,0 +1,344 @@
+{
+  "schema_version": "poseloop.v1.2.formal-training-receipt.v1",
+  "identity": "NEW_V1_2_DETECTOR_NOT_V1_1_RECONSTRUCTION",
+  "status": "PASS",
+  "source_commit": "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41",
+  "protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+  "dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+  "official_weight_sha256": "73cbd0190fcbe3ba339921fbce2c3a0b6bb9126c9a133c85e43a2a8e060a109e",
+  "final_checkpoint": {
+    "relative_path": "model-final.pt",
+    "sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+    "size_bytes": 183923343
+  },
+  "epoch_checkpoint_count": 8,
+  "artifacts": [
+    {
+      "relative_path": "checkpoint-epoch-01.pt",
+      "sha256": "8732bafc63bc19fd3924307436afe4d2f19568aafaecf7b8c708498335c2b2d4",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-02.pt",
+      "sha256": "c628b1d8e1c8025310e5ff63389113a62355667aae9d92d5068668f3f2e0798f",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-03.pt",
+      "sha256": "d7b8b20e93776fe83105f467e79a5dc708195fd6654b59dae256b2ddcc3b812a",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-04.pt",
+      "sha256": "594d5f1c249d21f4344ed3f1f77f37e0b1fb653565104966d6cfe89d33896263",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-05.pt",
+      "sha256": "29910cf9fa8b052a8b75a466c0a3f76d4ce6e05db1a601a6aa9472e6e1dd1080",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-06.pt",
+      "sha256": "09032b0d0dc08cdedec5a7400433644474c51bacf76776db1350726805f3d529",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-07.pt",
+      "sha256": "9efad8cf0819770efbdd3f5a075b136aef1a23e8d541ea63427fab539221f6aa",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "checkpoint-epoch-08.pt",
+      "sha256": "845da0c8757acd3f38a4f5d888b440091cc065a80fef99fe82ef859406adaa81",
+      "size_bytes": 183926975
+    },
+    {
+      "relative_path": "model-final.pt",
+      "sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+      "size_bytes": 183923343
+    },
+    {
+      "relative_path": "training-result.json",
+      "sha256": "e45b0e0c05da6d3c000aefd6cd8f5d8cda83d944aaf1f24682f93df4a7822104",
+      "size_bytes": 6834
+    }
+  ],
+  "epochs_completed": 8,
+  "history": [
+    {
+      "batch_count": 400,
+      "epoch": 1,
+      "learning_rate_after_epoch": 0.005,
+      "mean_total_loss": 1.1072955078631639,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 2,
+      "learning_rate_after_epoch": 0.005,
+      "mean_total_loss": 0.6009352976083755,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 3,
+      "learning_rate_after_epoch": 0.005,
+      "mean_total_loss": 0.5027886068075895,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 4,
+      "learning_rate_after_epoch": 0.0005,
+      "mean_total_loss": 0.4436751463264227,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 5,
+      "learning_rate_after_epoch": 0.0005,
+      "mean_total_loss": 0.3871233563125134,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 6,
+      "learning_rate_after_epoch": 0.0005,
+      "mean_total_loss": 0.37223608687520027,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 7,
+      "learning_rate_after_epoch": 0.0005,
+      "mean_total_loss": 0.368091716915369,
+      "optimizer_step_count": 200
+    },
+    {
+      "batch_count": 400,
+      "epoch": 8,
+      "learning_rate_after_epoch": 5e-05,
+      "mean_total_loss": 0.3592687799036503,
+      "optimizer_step_count": 200
+    }
+  ],
+  "wall_time_seconds": 2117.2004539137706,
+  "peak_gpu_allocated_bytes": 3389988864,
+  "internal_validation_metrics": {
+    "ap50": 0.5859876831270748,
+    "ap75": 0.06905993212066086,
+    "fn_iou50": 80,
+    "fp_iou50": 71,
+    "frame_count": 10,
+    "ground_truth_count": 225,
+    "instance_f1_iou50": 0.6575963718820862,
+    "instance_precision_iou50": 0.6712962962962963,
+    "instance_recall_iou50": 0.6444444444444445,
+    "merge_count": 10,
+    "per_frame": [
+      {
+        "f1_iou50": 0.46511627906976744,
+        "fn_iou50": 10,
+        "fp_iou50": 13,
+        "frame_id": "s000060-i000000",
+        "ground_truth_count": 20,
+        "merge_count": 0,
+        "pq_iou50": 0.2959115046875229,
+        "precision_iou50": 0.43478260869565216,
+        "prediction_count": 23,
+        "recall_iou50": 0.5,
+        "split_count": 4,
+        "tp_iou50": 10,
+        "tp_iou75": 2
+      },
+      {
+        "f1_iou50": 0.5,
+        "fn_iou50": 9,
+        "fp_iou50": 13,
+        "frame_id": "s000060-i000010",
+        "ground_truth_count": 20,
+        "merge_count": 0,
+        "pq_iou50": 0.32020228740939255,
+        "precision_iou50": 0.4583333333333333,
+        "prediction_count": 24,
+        "recall_iou50": 0.55,
+        "split_count": 3,
+        "tp_iou50": 11,
+        "tp_iou75": 2
+      },
+      {
+        "f1_iou50": 0.5454545454545454,
+        "fn_iou50": 8,
+        "fp_iou50": 12,
+        "frame_id": "s000060-i000020",
+        "ground_truth_count": 20,
+        "merge_count": 0,
+        "pq_iou50": 0.34333339868926627,
+        "precision_iou50": 0.5,
+        "prediction_count": 24,
+        "recall_iou50": 0.6,
+        "split_count": 6,
+        "tp_iou50": 12,
+        "tp_iou75": 1
+      },
+      {
+        "f1_iou50": 0.6829268292682926,
+        "fn_iou50": 6,
+        "fp_iou50": 7,
+        "frame_id": "s000060-i000030",
+        "ground_truth_count": 20,
+        "merge_count": 0,
+        "pq_iou50": 0.44789073052093836,
+        "precision_iou50": 0.6666666666666666,
+        "prediction_count": 21,
+        "recall_iou50": 0.7,
+        "split_count": 1,
+        "tp_iou50": 14,
+        "tp_iou75": 3
+      },
+      {
+        "f1_iou50": 0.6046511627906976,
+        "fn_iou50": 7,
+        "fp_iou50": 10,
+        "frame_id": "s000060-i000040",
+        "ground_truth_count": 20,
+        "merge_count": 0,
+        "pq_iou50": 0.38678281270642567,
+        "precision_iou50": 0.5652173913043478,
+        "prediction_count": 23,
+        "recall_iou50": 0.65,
+        "split_count": 2,
+        "tp_iou50": 13,
+        "tp_iou75": 2
+      },
+      {
+        "f1_iou50": 0.8444444444444444,
+        "fn_iou50": 6,
+        "fp_iou50": 1,
+        "frame_id": "s000070-i000000",
+        "ground_truth_count": 25,
+        "merge_count": 1,
+        "pq_iou50": 0.6157554717077137,
+        "precision_iou50": 0.95,
+        "prediction_count": 20,
+        "recall_iou50": 0.76,
+        "split_count": 0,
+        "tp_iou50": 19,
+        "tp_iou75": 9
+      },
+      {
+        "f1_iou50": 0.7999999999999999,
+        "fn_iou50": 7,
+        "fp_iou50": 2,
+        "frame_id": "s000070-i000010",
+        "ground_truth_count": 25,
+        "merge_count": 2,
+        "pq_iou50": 0.5768451560488265,
+        "precision_iou50": 0.9,
+        "prediction_count": 20,
+        "recall_iou50": 0.72,
+        "split_count": 1,
+        "tp_iou50": 18,
+        "tp_iou75": 8
+      },
+      {
+        "f1_iou50": 0.6666666666666666,
+        "fn_iou50": 11,
+        "fp_iou50": 3,
+        "frame_id": "s000070-i000020",
+        "ground_truth_count": 25,
+        "merge_count": 2,
+        "pq_iou50": 0.4593967816063316,
+        "precision_iou50": 0.8235294117647058,
+        "prediction_count": 17,
+        "recall_iou50": 0.56,
+        "split_count": 0,
+        "tp_iou50": 14,
+        "tp_iou75": 3
+      },
+      {
+        "f1_iou50": 0.6808510638297872,
+        "fn_iou50": 9,
+        "fp_iou50": 6,
+        "frame_id": "s000070-i000030",
+        "ground_truth_count": 25,
+        "merge_count": 3,
+        "pq_iou50": 0.48925835999014183,
+        "precision_iou50": 0.7272727272727273,
+        "prediction_count": 22,
+        "recall_iou50": 0.64,
+        "split_count": 1,
+        "tp_iou50": 16,
+        "tp_iou75": 7
+      },
+      {
+        "f1_iou50": 0.7659574468085107,
+        "fn_iou50": 7,
+        "fp_iou50": 4,
+        "frame_id": "s000070-i000040",
+        "ground_truth_count": 25,
+        "merge_count": 2,
+        "pq_iou50": 0.5616401562110465,
+        "precision_iou50": 0.8181818181818182,
+        "prediction_count": 22,
+        "recall_iou50": 0.72,
+        "split_count": 1,
+        "tp_iou50": 18,
+        "tp_iou75": 10
+      }
+    ],
+    "pq_iou50": 0.4518568460898081,
+    "prediction_count": 216,
+    "split_count": 19,
+    "tp_iou50": 145
+  },
+  "environment": {
+    "python": "3.12.3",
+    "pytorch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "cuda": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "compute_capability": [
+      12,
+      0
+    ],
+    "driver": "595.71.05"
+  },
+  "training_contract": {
+    "epochs": 8,
+    "physical_batch_size": 1,
+    "gradient_accumulation": 2,
+    "optimizer": "SGD",
+    "learning_rate": 0.005,
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "scheduler": "StepLR(step_size=4,gamma=0.1)",
+    "horizontal_flip_probability": 0.5,
+    "internal_validation_health_image_ids": [
+      0,
+      10,
+      20,
+      30,
+      40
+    ],
+    "cublas_workspace_config": ":4096:8",
+    "seed": 314159,
+    "workers": 8
+  },
+  "disk_before_training_free_bytes": 43967668224,
+  "disk_after_training": {
+    "total_bytes": 53687091200,
+    "used_bytes": 11380961280,
+    "free_bytes": 42306129920
+  },
+  "scene9_read_count": 0,
+  "captured_at_unix": 1789734163.7304735,
+  "log_warning_error_lines": [],
+  "post_training_stat": "File: /root/autodl-tmp/poseloop-v1.2-5090/detector-formal/model-final.pt\n  Size: 183923343 \tBlocks: 359232     IO Block: 4096   regular file\nDevice: 900h/2304d\tInode: 16750923734  Links: 1\nAccess: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)\nAccess: 2026-09-18 20:22:19.782590143 +0800\nModify: 2026-09-18 20:21:48.166267094 +0800\nChange: 2026-09-18 20:21:48.166267094 +0800\n Birth: 2026-09-18 20:21:48.022265599 +0800",
+  "post_training_df": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/md0         50G   11G   40G  22% /root/autodl-tmp",
+  "post_training_du": "11G\t/root/autodl-tmp/poseloop-v1.2-5090",
+  "post_training_nvidia_smi": "Fri Sep 18 20:22:43 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 5090        On  |   00000000:99:00.0 Off |                  N/A |\n| 41%   34C    P8             10W /  575W |       2MiB /  32607MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|  No running processes found                                                             |\n+-----------------------------------------------------------------------------------------+",
+  "inference_started": false,
+  "foundationpose_started": false
+}
