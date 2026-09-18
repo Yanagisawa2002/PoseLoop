@@ -143,3 +143,49 @@ def test_stage_resume_rejects_tampering(tmp_path):
     target.write_text("changed")
     with pytest.raises(v2.ContractError, match="changed"):
         checked_stage(tmp_path, "test", [target], lambda: None)
+
+
+def test_three_item_input_freeze_roundtrip(frozen_predictions, tmp_path, monkeypatch):
+    """Exercise real manifest creation and byte verification without any GT files."""
+    from PIL import Image
+    import sys
+    import types
+    dataset, predictions, old_protocol, _ = frozen_predictions
+    data_root = tmp_path / "data"
+    payload = json.loads(dataset.read_text())
+    object_ids = {10: 2, 25: 1, 30: 5, 40: 4, 65: 6}
+    for source in payload["frames"]["fixed_evaluation"]:
+        scene, image = source["scene_id"], source["image_id"]
+        base = data_root / "val" / f"{scene:06d}"
+        (base / "rgb_realsense").mkdir(parents=True, exist_ok=True)
+        (base / "depth_realsense").mkdir(exist_ok=True)
+        rgb = base / "rgb_realsense" / f"{image:06d}.png"
+        Image.fromarray(np.zeros((2, 2, 3), dtype=np.uint8)).save(rgb)
+        Image.fromarray(np.full((2, 2), 1000, dtype=np.uint16)).save(base / "depth_realsense" / f"{image:06d}.png")
+        source["rgb"] = v2._bound_file(rgb, root=data_root)
+        dump(base / "scene_camera_realsense.json", {
+            str(i): {"cam_K": [100, 0, 1, 0, 100, 1, 0, 0, 1], "depth_scale": 1}
+            for i in (0, 10, 20, 30, 40)})
+    (data_root / "models").mkdir()
+    for obj in object_ids.values():
+        (data_root / "models" / f"obj_{obj:06d}.ply").write_text("synthetic CAD bytes")
+    dump(dataset, payload)
+    prediction_manifest = predictions / "prediction-manifest.json"
+    prediction_payload = json.loads(prediction_manifest.read_text())
+    prediction_payload["dataset_manifest_sha256"] = v2._sha256_file(dataset)
+    dump(prediction_manifest, prediction_payload)
+    protocol = tmp_path / "roundtrip-protocol.json"
+    api.generate_protocol(dataset, predictions, protocol)
+    monkeypatch.setitem(sys.modules, "cv2", types.SimpleNamespace(
+        IMREAD_UNCHANGED=-1, imread=lambda path, mode: np.asarray(Image.open(path))))
+    freeze = tmp_path / "freeze"
+    receipt = v2.freeze_inputs(protocol_path=protocol, dataset_root=data_root,
+        dataset_manifest_path=dataset, predictions_root=predictions, output_root=freeze)
+    assert receipt["item_count"] == 3
+    manifest_path = freeze / "input-manifest.json"
+    manifest = v2.validate_input_manifest(manifest_path, protocol, verify_assets=True)
+    assert not Path(manifest["dataset_root"]).is_absolute()
+    assert v2.asset_root(manifest, manifest_path, "dataset_root") == data_root
+    (predictions / "0.npz").write_bytes(b"changed")
+    with pytest.raises(v2.ContractError):
+        v2.validate_input_manifest(manifest_path, protocol, verify_assets=True)

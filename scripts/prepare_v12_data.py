@@ -8,6 +8,7 @@ import shlex
 import shutil
 import subprocess
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 
 REVISION = "4fe4671783172622313ac0c7182012cee618f217"
 ARCHIVES = {
@@ -54,15 +55,74 @@ def selected_path(name):
 def fetch(url, path, expected_size, expected_sha):
     if not path.exists():
         partial = path.with_suffix(path.suffix + ".part")
-        command = ["curl", "--fail", "--location", "--retry", "3", "--retry-all-errors",
-                   "--connect-timeout", "30", "--continue-at", "-", "--output", str(partial), url]
-        # Every download explicitly loads the user's acceleration setup first.
-        subprocess.run(["bash", "-c", "source /etc/network_turbo >/dev/null 2>&1 && exec " + shlex.join(command)], check=True)
+        if expected_size >= 1024**3:
+            parallel_download(url, partial, expected_size)
+        else:
+            command = ["curl", "--fail", "--location", "--retry", "3", "--retry-all-errors",
+                       "--connect-timeout", "30", "--continue-at", "-", "--output", str(partial), url]
+            # Every download explicitly loads the user's acceleration setup first.
+            subprocess.run(["bash", "-c", "source /etc/network_turbo >/dev/null 2>&1 && exec " + shlex.join(command)], check=True)
         if partial.stat().st_size != expected_size or sha(partial) != expected_sha:
             raise RuntimeError(f"Download identity mismatch: {path.name}")
         partial.rename(path)
+        segments = path.with_suffix(path.suffix + ".part.segments")
+        if segments.is_dir() and not segments.is_symlink():
+            shutil.rmtree(segments)
     if path.stat().st_size != expected_size or sha(path) != expected_sha:
         raise RuntimeError(f"Existing asset identity mismatch: {path.name}")
+
+
+def parallel_download(url, partial, total):
+    """Bounded HTTP ranges; partial-prefix recovery; full archive SHA remains authoritative."""
+    chunk_size = 256 * 1024**2
+    directory = partial.with_suffix(partial.suffix + ".segments")
+    if directory.is_symlink() or partial.is_symlink():
+        raise RuntimeError("Download cache must not contain symlinks")
+    directory.mkdir(exist_ok=True)
+    if partial.exists():
+        if partial.stat().st_size == total:
+            return
+        if partial.stat().st_size > total:
+            raise RuntimeError("Oversized partial download")
+        # Existing sequential bytes seed the segment cache, never redownloaded.
+        with partial.open("rb") as stream:
+            index = 0
+            while data := stream.read(chunk_size):
+                destination = directory / f"{index:06d}.part"
+                if not destination.exists() or destination.stat().st_size < len(data):
+                    destination.write_bytes(data)
+                index += 1
+        partial.unlink()
+    def segment(index):
+        start = index * chunk_size
+        end = min(total, start + chunk_size) - 1
+        destination = directory / f"{index:06d}.part"
+        have = destination.stat().st_size if destination.exists() else 0
+        if have == end - start + 1:
+            return
+        if have > end - start + 1:
+            raise RuntimeError("Oversized cached range")
+        tail = directory / f"{index:06d}.tail"
+        command = ["curl", "--fail", "--location", "--silent", "--show-error", "--retry", "3",
+                   "--retry-all-errors", "--connect-timeout", "30", "--max-time", "600",
+                   "--range", f"{start + have}-{end}", "--output", str(tail),
+                   url + f"?v12_range={start + have}"]
+        subprocess.run(["bash", "-c", "source /etc/network_turbo >/dev/null 2>&1 && exec " + shlex.join(command)], check=True)
+        if tail.stat().st_size != end - start + 1 - have:
+            raise RuntimeError("Server returned the wrong range size")
+        with destination.open("ab") as out, tail.open("rb") as inp:
+            shutil.copyfileobj(inp, out)
+        tail.unlink()
+        print(json.dumps({"range_complete": index, "bytes": destination.stat().st_size}), flush=True)
+    count = (total + chunk_size - 1) // chunk_size
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        list(pool.map(segment, range(count)))
+    assembling = partial.with_suffix(partial.suffix + ".assembling")
+    with assembling.open("wb") as out:
+        for index in range(count):
+            with (directory / f"{index:06d}.part").open("rb") as inp:
+                shutil.copyfileobj(inp, out)
+    assembling.replace(partial)
 
 
 def main():
