@@ -9,4 +9,4 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 
 # Preserve byte-stable v1.2 evidence text across Windows/Linux checkouts.
-reports/v12_repro_5090/* text eol=lf
+reports/v12_repro_5090/** text eol=lf
