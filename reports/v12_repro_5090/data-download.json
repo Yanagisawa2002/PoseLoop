@@ -1,0 +1,25 @@
+{
+  "revision": "4fe4671783172622313ac0c7182012cee618f217",
+  "archives": [
+    {
+      "archive": "xyzibd_base.zip",
+      "archive_sha256": "0eac3085c378001cd942515e85ee38ba6c0fbd9c4c5ccfd067f52f50810a96aa",
+      "selected_members": 3,
+      "selected_paths_sha256": "d218b871cb16f988016b451e7569f3f14b679b2bde3449283a0f0a6998c16141"
+    },
+    {
+      "archive": "xyzibd_models.zip",
+      "archive_sha256": "5ca56d98177c1ec3d083de661449dd0f532554a7af61fb18524730d2a6da7fc9",
+      "selected_members": 32,
+      "selected_paths_sha256": "dae6e922f171b35e4fab70ef6527babd62e6714cffffe3801f7b556adbb80c1b"
+    },
+    {
+      "archive": "xyzibd_val.zip",
+      "archive_sha256": "09c5639c6e55b8c9a0708a344037e98918c5935ddbd91b5db5a9b06f5484c659",
+      "selected_members": 14100,
+      "selected_paths_sha256": "1b46ed8e7d5dc9b4269cfdffa44ab935109687b14f241c3e57b0db3bcdcc0e90"
+    }
+  ],
+  "scene9_extracted": false,
+  "remaining_disk_bytes": 44464693248
+}
