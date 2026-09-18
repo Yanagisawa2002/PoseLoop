@@ -29,7 +29,7 @@ This project does not claim state of the art or production real-time performance
 ## Review this project in three minutes
 
 1. [Watch the 73-second walkthrough](docs/media/poseloop-demo.mp4).
-2. Read the [end-to-end failure waterfall](docs/failure-waterfall.md): **770 GT → 577 mask-IoU50 matches → 482 joint pose successes**.
+2. Read the [end-to-end failure waterfall](docs/failure-waterfall.md): **770 GT → 577 mask-IoU50 matches → 482 joint pose successes**, then the [failure-taxonomy recovery status](docs/failure-taxonomy.md).
 3. Inspect the two supported implementation surfaces:
    - [`real_instance_detector_v1`](pose_accuracy_recovery_prep/real_instance_detector_v1/) — detector preparation, training, inference, and evaluation.
    - [`a9_foundationpose_e2e`](pose_accuracy_recovery_prep/a9_foundationpose_e2e/) — frozen mask-to-pose handoff, execution, evaluation, and evidence packaging.
@@ -54,7 +54,7 @@ That leaves **193 GT instances (25.1%)** without an IoU50 mask match and another
 but fail the joint MSSD/MSPD pose criteria. This is intentionally not described as
 193 pure detector misses: the upstream bucket also contains masks that fail the
 IoU50 matching criterion. See the generated [failure waterfall](docs/failure-waterfall.md)
-for the auditable derivation and per-scene recall.
+for the auditable derivation and per-scene recall. The finer #5 breakdown is tracked in the [failure-taxonomy recovery status](docs/failure-taxonomy.md); the public release does not contain the original per-instance artifacts needed to finish that split without reconstruction.
 
 This breakdown makes the next technical question concrete: separate outright misses,
 over/under-segmentation and boundary errors from FoundationPose registration failures
