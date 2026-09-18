@@ -1,6 +1,8 @@
 ## Formal v1.2 detector training: PASS
 
-Exactly one formal run completed 8/8 epochs using the unchanged A-R9 detector contract, from source commit `3d5a33d64d9fbcdaecf97172fdea6f20ab647c41` on branch `run/v1.2-repro-5090`. PR #12 remains unmerged. This checkpoint is a new v1.2 detector identity, not a reconstruction of the lost v1.1 checkpoint.
+Exactly one formal run completed 8/8 epochs using the unchanged A-R9 detector contract, from source commit `3d5a33d64d9fbcdaecf97172fdea6f20ab647c41` on branch `run/v1.2-repro-5090`. PR #12 remains unmerged. Subsequent comparison with the frozen A9 protocol confirmed that this checkpoint exactly reconstructs the historical v1.1 checkpoint: SHA-256 `a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b`.
+
+The original receipt and export remain immutable records. Their `NEW_V1_2_DETECTOR_NOT_V1_1_RECONSTRUCTION` interpretation is superseded by this verified identity correction; the training measurements and artifact bytes are unchanged. See the [detector replay evidence](../detector-exact-replay/README.md) for the subsequent prediction identity and A9 handoff result.
 
 - Runtime: 2117.200454 seconds (35m 17s); process exit code 0.
 - Every epoch: 400 batches and 200 optimizer updates; 1,600 total updates.
@@ -48,7 +50,7 @@ This is neither the entire 100-frame validation set nor the 25-frame development
 
 The original server files remain unchanged. An off-server copy of `model-final.pt`, `training-result.json`, and `dataset-manifest.json` has been downloaded to `C:/Users/cgliu/Documents/Codex/poseloop-v12-5090/artifacts/v12-formal-20260918/`; all three SHA-256 hashes were independently verified against the frozen receipt. Logs, all epoch hashes, and formal receipts are also saved locally. The eight intermediate epoch weight files remain on the server; download `detector-formal/checkpoint-epoch-01.pt` through `checkpoint-epoch-08.pt` before discarding server storage if those intermediate weights are needed. No model/dataset bytes are committed to Git. Compact evidence is preserved under `reports/v12_repro_5090/formal/` on the run branch.
 
-READY FOR DETECTOR INFERENCE: YES. No development detector inference, FoundationPose work, retraining, PR merge, issue closure, or server shutdown was performed. This records technical completion of training, not downstream accuracy or release acceptance. Issue #11 remains open for subsequent evidence work.
+At training closeout on 2026-09-18: READY FOR DETECTOR INFERENCE: YES. That task performed no development detector inference, FoundationPose work, additional training, PR merge, issue closure, or server shutdown. This records technical completion of training, not downstream accuracy or release acceptance. The subsequent detector replay is documented separately; issue #11 remains open.
 
 ## Verified export
 

@@ -1,0 +1,9 @@
+{
+  "source_commit": "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41",
+  "protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+  "dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+  "checkpoint_sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+  "checkpoint_exact_historical_match": true,
+  "started_at_unix": 1789759214.9704561,
+  "pid": 19879
+}

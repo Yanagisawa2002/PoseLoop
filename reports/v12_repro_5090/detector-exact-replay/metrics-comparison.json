@@ -1,0 +1,67 @@
+{
+  "prediction_count": {
+    "actual": 820,
+    "historical": 820,
+    "exact_numeric_match": true
+  },
+  "tp_iou50": {
+    "actual": 577,
+    "historical": 577,
+    "exact_numeric_match": true
+  },
+  "fp_iou50": {
+    "actual": 243,
+    "historical": 243,
+    "exact_numeric_match": true
+  },
+  "fn_iou50": {
+    "actual": 193,
+    "historical": 193,
+    "exact_numeric_match": true
+  },
+  "instance_precision_iou50": {
+    "actual": 0.7036585365853658,
+    "historical": 0.7036585365853658,
+    "exact_numeric_match": true
+  },
+  "instance_recall_iou50": {
+    "actual": 0.7493506493506493,
+    "historical": 0.7493506493506493,
+    "exact_numeric_match": true
+  },
+  "instance_f1_iou50": {
+    "actual": 0.7257861635220125,
+    "historical": 0.7257861635220125,
+    "exact_numeric_match": true
+  },
+  "ap50": {
+    "actual": 0.7023932319668922,
+    "historical": 0.7023932319668922,
+    "exact_numeric_match": true
+  },
+  "ap75": {
+    "actual": 0.10114568295588894,
+    "historical": 0.10114568295588894,
+    "exact_numeric_match": true
+  },
+  "pq_iou50": {
+    "actual": 0.5104102419369828,
+    "historical": 0.5104102419369828,
+    "exact_numeric_match": true
+  },
+  "ranked_prediction_count": {
+    "actual": 997,
+    "historical": 997,
+    "exact_numeric_match": true
+  },
+  "merge_count": {
+    "actual": 40,
+    "historical": 40,
+    "exact_numeric_match": true
+  },
+  "split_count": {
+    "actual": 84,
+    "historical": 84,
+    "exact_numeric_match": true
+  }
+}

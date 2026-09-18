@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/root/autodl-tmp/PoseLoop-network/pose_accuracy_recovery_prep/a9_foundationpose_e2e/runtime.py", line 381, in freeze_inputs
+    import cv2
+ModuleNotFoundError: No module named 'cv2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/autodl-tmp/PoseLoop-network/pose_accuracy_recovery_prep/a9_foundationpose_e2e/__main__.py", line 3, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/autodl-tmp/PoseLoop-network/pose_accuracy_recovery_prep/a9_foundationpose_e2e/runtime.py", line 1691, in main
+    result = freeze_inputs(
+             ^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/PoseLoop-network/pose_accuracy_recovery_prep/a9_foundationpose_e2e/runtime.py", line 383, in freeze_inputs
+    raise ContractError("Input freezing requires OpenCV") from exc
+pose_accuracy_recovery_prep.a9_foundationpose_e2e.runtime.ContractError: Input freezing requires OpenCV

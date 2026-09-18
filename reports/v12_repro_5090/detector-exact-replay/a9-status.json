@@ -1,0 +1,9 @@
+{
+  "attempted": true,
+  "contract_check": "PASS",
+  "freeze_inputs": "PASS",
+  "validate_inputs": "PASS",
+  "input_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+  "initial_freeze_attempt": "Missing cv2; no output directory created",
+  "dependency_fix": "Installed opencv-python-headless==4.10.0.84 with --no-deps; prediction and evaluation were not rerun"
+}

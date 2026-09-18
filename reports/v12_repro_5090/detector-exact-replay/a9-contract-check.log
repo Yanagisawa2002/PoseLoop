@@ -1,0 +1,8 @@
+{
+  "oracle_diagnostic_run_limit": 1,
+  "protocol_id": "poseloop.pose-accuracy-recovery.a-r9-foundationpose-e2e.v1",
+  "protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+  "rescue_run_limit": 1,
+  "scene9_replay_permitted": false,
+  "status": "PASS_A9_FOUNDATIONPOSE_E2E_CONTRACT"
+}

@@ -1,0 +1,386 @@
+{
+  "checkpoint_sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+  "dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+  "fixed_evaluation_gt_access_count": 0,
+  "frame_count": 25,
+  "frames": [
+    {
+      "frame_id": "s000010-i000000",
+      "image_id": 0,
+      "masks": {
+        "relative_path": "frames/s000010-i000000.npz",
+        "sha256": "ecade79b790897a48b28ad2feec07fc43bc2f9b8305198969cbe83e81fd0dc2c",
+        "size_bytes": 22414
+      },
+      "metadata": {
+        "relative_path": "frames/s000010-i000000.json",
+        "sha256": "0d78376ee9c0079c8c33e504b17abd080ffde1cd7008fa8896d1a7ca35648c28",
+        "size_bytes": 6322
+      },
+      "scene_id": 10
+    },
+    {
+      "frame_id": "s000010-i000010",
+      "image_id": 10,
+      "masks": {
+        "relative_path": "frames/s000010-i000010.npz",
+        "sha256": "b282ca6479bca9e96de502e30fb30dff7b66c1171741a67382fe11b427f0ba64",
+        "size_bytes": 19044
+      },
+      "metadata": {
+        "relative_path": "frames/s000010-i000010.json",
+        "sha256": "d362fcc4dcc994963cc6ca2356553d1860aefe6b497e80888aa5b2751e02dd30",
+        "size_bytes": 5832
+      },
+      "scene_id": 10
+    },
+    {
+      "frame_id": "s000010-i000020",
+      "image_id": 20,
+      "masks": {
+        "relative_path": "frames/s000010-i000020.npz",
+        "sha256": "8e514345e4f5e8b41a0470515ebc6bd32b0189282aa36c00df2bd4dd00b3fdb7",
+        "size_bytes": 16892
+      },
+      "metadata": {
+        "relative_path": "frames/s000010-i000020.json",
+        "sha256": "dbe91c02665cbffc46a6bf2de857e728745a3fdc5b3992c310b38295bb169e55",
+        "size_bytes": 5260
+      },
+      "scene_id": 10
+    },
+    {
+      "frame_id": "s000010-i000030",
+      "image_id": 30,
+      "masks": {
+        "relative_path": "frames/s000010-i000030.npz",
+        "sha256": "71c0213bcb2cece12b9e827ea4658d9f5fea6eeddb457c7f3b3484c43f6e54fe",
+        "size_bytes": 18761
+      },
+      "metadata": {
+        "relative_path": "frames/s000010-i000030.json",
+        "sha256": "904fbfc96cd41dc8669313c4dfff6c1330b8bf788780163aa888fc5d78da6dc6",
+        "size_bytes": 5697
+      },
+      "scene_id": 10
+    },
+    {
+      "frame_id": "s000010-i000040",
+      "image_id": 40,
+      "masks": {
+        "relative_path": "frames/s000010-i000040.npz",
+        "sha256": "7d1439c6bff1fad3394926f44ac3aefe1b89b2a7db1988262d29f788392ca2f2",
+        "size_bytes": 17935
+      },
+      "metadata": {
+        "relative_path": "frames/s000010-i000040.json",
+        "sha256": "6bd5ac28b71a97edee2516a5b01a46db9a2329bf60de466c7af730f27d1e6dbc",
+        "size_bytes": 5547
+      },
+      "scene_id": 10
+    },
+    {
+      "frame_id": "s000025-i000000",
+      "image_id": 0,
+      "masks": {
+        "relative_path": "frames/s000025-i000000.npz",
+        "sha256": "38458e3862cec071d4353e2359aa2a72355471cd6394bcc3e7e2ba2d951b540e",
+        "size_bytes": 24204
+      },
+      "metadata": {
+        "relative_path": "frames/s000025-i000000.json",
+        "sha256": "5a5296ea5ec37df6ada28950b94f25a2ed3013d23a31ad38838846fbe55fcda4",
+        "size_bytes": 7825
+      },
+      "scene_id": 25
+    },
+    {
+      "frame_id": "s000025-i000010",
+      "image_id": 10,
+      "masks": {
+        "relative_path": "frames/s000025-i000010.npz",
+        "sha256": "b918b32803d8b0468fdb5a433609eb833f7d4604a046ffd32b61c79ac48bd3b4",
+        "size_bytes": 22470
+      },
+      "metadata": {
+        "relative_path": "frames/s000025-i000010.json",
+        "sha256": "90128a0ace8341e00a90b949c1bb68040cc7a239b9f51fafeca048634c492d19",
+        "size_bytes": 7848
+      },
+      "scene_id": 25
+    },
+    {
+      "frame_id": "s000025-i000020",
+      "image_id": 20,
+      "masks": {
+        "relative_path": "frames/s000025-i000020.npz",
+        "sha256": "c11b9f55a15a8949412812a4bf0601eb6c43eb8fceb71b0b6ec53857386f17ba",
+        "size_bytes": 20879
+      },
+      "metadata": {
+        "relative_path": "frames/s000025-i000020.json",
+        "sha256": "97ccd439224c6f674f04752ae0e7de9c00dcdfbf4229111a8aa4fa8553be107c",
+        "size_bytes": 7455
+      },
+      "scene_id": 25
+    },
+    {
+      "frame_id": "s000025-i000030",
+      "image_id": 30,
+      "masks": {
+        "relative_path": "frames/s000025-i000030.npz",
+        "sha256": "3b52afe198514b6bfffa271fb69c65fcc2ecb8101bb2cb49f51335ea31e4c66b",
+        "size_bytes": 21357
+      },
+      "metadata": {
+        "relative_path": "frames/s000025-i000030.json",
+        "sha256": "9cdc14b51c6d3194fe1b0d8e47e2bbad77023a8d68c19720212f4b1eeed6f3b0",
+        "size_bytes": 7453
+      },
+      "scene_id": 25
+    },
+    {
+      "frame_id": "s000025-i000040",
+      "image_id": 40,
+      "masks": {
+        "relative_path": "frames/s000025-i000040.npz",
+        "sha256": "487f2475157ceb0e964da841dc230cf49a4acf1bbf24617ded1b24ae4b5f96dd",
+        "size_bytes": 21124
+      },
+      "metadata": {
+        "relative_path": "frames/s000025-i000040.json",
+        "sha256": "f64ecc529eb2dae228d82127af1c5bb0e07ab11ae19b5d1a97604f74e7165244",
+        "size_bytes": 7585
+      },
+      "scene_id": 25
+    },
+    {
+      "frame_id": "s000030-i000000",
+      "image_id": 0,
+      "masks": {
+        "relative_path": "frames/s000030-i000000.npz",
+        "sha256": "c9bc2d42bae42539f5a18a374738f273f069769f8c3857e34eba881a0daecf59",
+        "size_bytes": 17345
+      },
+      "metadata": {
+        "relative_path": "frames/s000030-i000000.json",
+        "sha256": "ca602c4cc0afba5ba91086d305e6978bf5c3fbaee7a75082dd965bf6c53186b9",
+        "size_bytes": 4719
+      },
+      "scene_id": 30
+    },
+    {
+      "frame_id": "s000030-i000010",
+      "image_id": 10,
+      "masks": {
+        "relative_path": "frames/s000030-i000010.npz",
+        "sha256": "011ca558d6fefbbffbd32b47e2f1e907c205ebe34e867b6dba6a97066c448cf2",
+        "size_bytes": 16835
+      },
+      "metadata": {
+        "relative_path": "frames/s000030-i000010.json",
+        "sha256": "3aa8662781178ae775f554ddd0177835e1c764d8cc45a1589f570a0c80ff4aa7",
+        "size_bytes": 4876
+      },
+      "scene_id": 30
+    },
+    {
+      "frame_id": "s000030-i000020",
+      "image_id": 20,
+      "masks": {
+        "relative_path": "frames/s000030-i000020.npz",
+        "sha256": "bc5c98d8dee12e878e54672d5e250f4eba842f8065e57ee69ce090ab4e889a42",
+        "size_bytes": 14654
+      },
+      "metadata": {
+        "relative_path": "frames/s000030-i000020.json",
+        "sha256": "892d0d2c8932440bb19232c3e47253a3b2860cc2db908b0f023d396a2301005b",
+        "size_bytes": 4601
+      },
+      "scene_id": 30
+    },
+    {
+      "frame_id": "s000030-i000030",
+      "image_id": 30,
+      "masks": {
+        "relative_path": "frames/s000030-i000030.npz",
+        "sha256": "bd3c456c1a8d3d88d8159541f9783caeb9b0749574d218912717dd43360ee41b",
+        "size_bytes": 16135
+      },
+      "metadata": {
+        "relative_path": "frames/s000030-i000030.json",
+        "sha256": "2b7ac44bca17b7d042dca2e1b8d2863517da4b819d0a51f47b9aed85593e3101",
+        "size_bytes": 4853
+      },
+      "scene_id": 30
+    },
+    {
+      "frame_id": "s000030-i000040",
+      "image_id": 40,
+      "masks": {
+        "relative_path": "frames/s000030-i000040.npz",
+        "sha256": "feff659e87d31efa64b16f3e511d4565be5b7b483683ac8dc3cc6420f494c72c",
+        "size_bytes": 14131
+      },
+      "metadata": {
+        "relative_path": "frames/s000030-i000040.json",
+        "sha256": "f1c48a7f22d46b86164d417c9266f15d61867bc233cdc6b6c7022f82aa46ba82",
+        "size_bytes": 4342
+      },
+      "scene_id": 30
+    },
+    {
+      "frame_id": "s000040-i000000",
+      "image_id": 0,
+      "masks": {
+        "relative_path": "frames/s000040-i000000.npz",
+        "sha256": "36919a682352e67df1d18243bbe2c19432a4d6896d58900202db185cc88f51af",
+        "size_bytes": 27195
+      },
+      "metadata": {
+        "relative_path": "frames/s000040-i000000.json",
+        "sha256": "7f409b3af1e1efb1d70adf3c00d1a566e57edd7acc00ed252afc41c668f59435",
+        "size_bytes": 7323
+      },
+      "scene_id": 40
+    },
+    {
+      "frame_id": "s000040-i000010",
+      "image_id": 10,
+      "masks": {
+        "relative_path": "frames/s000040-i000010.npz",
+        "sha256": "946093b7eb93c7296e898603dca55f39eee591091ede0900e1f09dec53d948ae",
+        "size_bytes": 21699
+      },
+      "metadata": {
+        "relative_path": "frames/s000040-i000010.json",
+        "sha256": "9d17cc5c7640fe3a385941c705d9f670969b0863262f9c0446110a3176ef0635",
+        "size_bytes": 6245
+      },
+      "scene_id": 40
+    },
+    {
+      "frame_id": "s000040-i000020",
+      "image_id": 20,
+      "masks": {
+        "relative_path": "frames/s000040-i000020.npz",
+        "sha256": "529ddbb2002f3756b394ce1b0debf15c799e5fff8b7eedaa29c2e33b96ce1197",
+        "size_bytes": 23289
+      },
+      "metadata": {
+        "relative_path": "frames/s000040-i000020.json",
+        "sha256": "95aa7f5aa8bd6d2422706e4a64f495e6ff8dee3676f86252a141c693d1fabc08",
+        "size_bytes": 6751
+      },
+      "scene_id": 40
+    },
+    {
+      "frame_id": "s000040-i000030",
+      "image_id": 30,
+      "masks": {
+        "relative_path": "frames/s000040-i000030.npz",
+        "sha256": "77382d17a02d57433bce5ba9ac34fcf2feec5f976bd6cd72d7fb9ce63438b5d1",
+        "size_bytes": 24475
+      },
+      "metadata": {
+        "relative_path": "frames/s000040-i000030.json",
+        "sha256": "b4723640426a78716313436004ca7dc03b9894ed299461034cfe6c34ade5c836",
+        "size_bytes": 6640
+      },
+      "scene_id": 40
+    },
+    {
+      "frame_id": "s000040-i000040",
+      "image_id": 40,
+      "masks": {
+        "relative_path": "frames/s000040-i000040.npz",
+        "sha256": "20d1423517d0cfe4ab158d26dd2ba69eabd9e93c8b0130588671580d7073283f",
+        "size_bytes": 21662
+      },
+      "metadata": {
+        "relative_path": "frames/s000040-i000040.json",
+        "sha256": "4ffac314045e18d54f174ddcf24db4e7d9e4188220cbbd58cbcb131a61de80a6",
+        "size_bytes": 6237
+      },
+      "scene_id": 40
+    },
+    {
+      "frame_id": "s000065-i000000",
+      "image_id": 0,
+      "masks": {
+        "relative_path": "frames/s000065-i000000.npz",
+        "sha256": "05168c012116691f76aab46370f206c04786eff495e1ff7f59200c20263406eb",
+        "size_bytes": 12410
+      },
+      "metadata": {
+        "relative_path": "frames/s000065-i000000.json",
+        "sha256": "0b3a513d1b906a406de0c22b9f8ce1c177ccb59926bea19fcb7d0542c1c285e0",
+        "size_bytes": 2705
+      },
+      "scene_id": 65
+    },
+    {
+      "frame_id": "s000065-i000010",
+      "image_id": 10,
+      "masks": {
+        "relative_path": "frames/s000065-i000010.npz",
+        "sha256": "7d58554258c8c0ce893dbbd966dc11421c2a96a6ff6b8596927a0928829ea468",
+        "size_bytes": 13739
+      },
+      "metadata": {
+        "relative_path": "frames/s000065-i000010.json",
+        "sha256": "7b538f1af3fc80905dfa2612b6f899867ff5eda519ab3081734bed3532a7ed7b",
+        "size_bytes": 3254
+      },
+      "scene_id": 65
+    },
+    {
+      "frame_id": "s000065-i000020",
+      "image_id": 20,
+      "masks": {
+        "relative_path": "frames/s000065-i000020.npz",
+        "sha256": "a78dda2303bfd3fe9681cd1817e67a3d8185445eaeb53a2913d11be19c3df9eb",
+        "size_bytes": 14461
+      },
+      "metadata": {
+        "relative_path": "frames/s000065-i000020.json",
+        "sha256": "7019a83caa3063aca4b49a8140d9519531160dee757c0726e3168d9e0d52eca7",
+        "size_bytes": 3396
+      },
+      "scene_id": 65
+    },
+    {
+      "frame_id": "s000065-i000030",
+      "image_id": 30,
+      "masks": {
+        "relative_path": "frames/s000065-i000030.npz",
+        "sha256": "b9bc4bd1b435542e3916b198ad7571d9fe1f461516dd166bfa36ed8afdaac14d",
+        "size_bytes": 12570
+      },
+      "metadata": {
+        "relative_path": "frames/s000065-i000030.json",
+        "sha256": "fc5b2ba14707c601586f70cde726cc7ae15367b2a4c2d31d61ac8c7b4341edc0",
+        "size_bytes": 2580
+      },
+      "scene_id": 65
+    },
+    {
+      "frame_id": "s000065-i000040",
+      "image_id": 40,
+      "masks": {
+        "relative_path": "frames/s000065-i000040.npz",
+        "sha256": "f63450b9824541f6cac84f7ef1614c987ffd559c4475ba8a258bb0fa47ef39f6",
+        "size_bytes": 13427
+      },
+      "metadata": {
+        "relative_path": "frames/s000065-i000040.json",
+        "sha256": "1294e48844e1169ee33bbba4d2011aa243c92491aa92b0383409432417672fca",
+        "size_bytes": 2984
+      },
+      "scene_id": 65
+    }
+  ],
+  "protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+  "scene9_read_count": 0,
+  "schema_version": "poseloop.a-r9.mask-rcnn-predictions.v1"
+}

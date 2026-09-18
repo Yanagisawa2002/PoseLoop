@@ -1,0 +1,175 @@
+{
+  "status": "PASS",
+  "prediction_manifest_sha256": "dded85d8d9bec68f3c6d80343183635bd80e738a28e9a93a87531d93fbe7441b",
+  "exact_match": true,
+  "counts": {
+    "ranked": 997,
+    "operating": 820,
+    "gt_access_during_inference": 0,
+    "scene9_reads": 0,
+    "per_frame": [
+      {
+        "frame_id": "s000010-i000000",
+        "scene_id": 10,
+        "ranked": 46,
+        "operating": 38
+      },
+      {
+        "frame_id": "s000010-i000010",
+        "scene_id": 10,
+        "ranked": 42,
+        "operating": 37
+      },
+      {
+        "frame_id": "s000010-i000020",
+        "scene_id": 10,
+        "ranked": 38,
+        "operating": 37
+      },
+      {
+        "frame_id": "s000010-i000030",
+        "scene_id": 10,
+        "ranked": 41,
+        "operating": 35
+      },
+      {
+        "frame_id": "s000010-i000040",
+        "scene_id": 10,
+        "ranked": 40,
+        "operating": 35
+      },
+      {
+        "frame_id": "s000025-i000000",
+        "scene_id": 25,
+        "ranked": 57,
+        "operating": 50
+      },
+      {
+        "frame_id": "s000025-i000010",
+        "scene_id": 25,
+        "ranked": 57,
+        "operating": 49
+      },
+      {
+        "frame_id": "s000025-i000020",
+        "scene_id": 25,
+        "ranked": 54,
+        "operating": 44
+      },
+      {
+        "frame_id": "s000025-i000030",
+        "scene_id": 25,
+        "ranked": 54,
+        "operating": 43
+      },
+      {
+        "frame_id": "s000025-i000040",
+        "scene_id": 25,
+        "ranked": 55,
+        "operating": 48
+      },
+      {
+        "frame_id": "s000030-i000000",
+        "scene_id": 30,
+        "ranked": 34,
+        "operating": 27
+      },
+      {
+        "frame_id": "s000030-i000010",
+        "scene_id": 30,
+        "ranked": 35,
+        "operating": 30
+      },
+      {
+        "frame_id": "s000030-i000020",
+        "scene_id": 30,
+        "ranked": 33,
+        "operating": 26
+      },
+      {
+        "frame_id": "s000030-i000030",
+        "scene_id": 30,
+        "ranked": 35,
+        "operating": 28
+      },
+      {
+        "frame_id": "s000030-i000040",
+        "scene_id": 30,
+        "ranked": 31,
+        "operating": 26
+      },
+      {
+        "frame_id": "s000040-i000000",
+        "scene_id": 40,
+        "ranked": 53,
+        "operating": 41
+      },
+      {
+        "frame_id": "s000040-i000010",
+        "scene_id": 40,
+        "ranked": 45,
+        "operating": 38
+      },
+      {
+        "frame_id": "s000040-i000020",
+        "scene_id": 40,
+        "ranked": 49,
+        "operating": 41
+      },
+      {
+        "frame_id": "s000040-i000030",
+        "scene_id": 40,
+        "ranked": 48,
+        "operating": 40
+      },
+      {
+        "frame_id": "s000040-i000040",
+        "scene_id": 40,
+        "ranked": 45,
+        "operating": 38
+      },
+      {
+        "frame_id": "s000065-i000000",
+        "scene_id": 65,
+        "ranked": 19,
+        "operating": 13
+      },
+      {
+        "frame_id": "s000065-i000010",
+        "scene_id": 65,
+        "ranked": 23,
+        "operating": 14
+      },
+      {
+        "frame_id": "s000065-i000020",
+        "scene_id": 65,
+        "ranked": 24,
+        "operating": 14
+      },
+      {
+        "frame_id": "s000065-i000030",
+        "scene_id": 65,
+        "ranked": 18,
+        "operating": 14
+      },
+      {
+        "frame_id": "s000065-i000040",
+        "scene_id": 65,
+        "ranked": 21,
+        "operating": 14
+      }
+    ]
+  },
+  "a9": {
+    "attempted": true,
+    "contract_check": "PASS",
+    "freeze_inputs": "PASS",
+    "validate_inputs": "PASS",
+    "input_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+    "initial_freeze_attempt": "Missing cv2; no output directory created",
+    "dependency_fix": "Installed opencv-python-headless==4.10.0.84 with --no-deps; prediction and evaluation were not rerun"
+  },
+  "disk_free_bytes": 42304069632,
+  "completed_at_unix": 1789759923.8228493,
+  "foundationpose_run_started": false
+}
