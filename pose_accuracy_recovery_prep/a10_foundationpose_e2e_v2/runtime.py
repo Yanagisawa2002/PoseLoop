@@ -465,9 +465,9 @@ def freeze_inputs(
         "protocol_id": PROTOCOL_ID,
         "protocol_sha256": _sha256_file(protocol_path),
         "dataset_role": "ALREADY_CONSUMED_REAL_DEVELOPMENT",
-        "dataset_root": dataset_root.as_posix(),
-        "predictions_root": predictions_root.as_posix(),
-        "dataset_manifest": _bound_file(dataset_manifest_path),
+        "dataset_root": Path(os.path.relpath(dataset_root, output_root)).as_posix(),
+        "predictions_root": Path(os.path.relpath(predictions_root, output_root)).as_posix(),
+        "dataset_manifest": {**_bound_file(dataset_manifest_path), "relative_path": Path(os.path.relpath(dataset_manifest_path, output_root)).as_posix()},
         "prediction_manifest": _bound_file(
             prediction_manifest_path, root=predictions_root
         ),
@@ -506,6 +506,13 @@ def freeze_inputs(
     }
     _write_json_atomic(output_root / "freeze-receipt.json", receipt)
     return receipt
+
+
+def asset_root(manifest: Mapping[str, Any], manifest_path: Path, key: str) -> Path:
+    relative = Path(str(manifest[key]))
+    if relative.is_absolute():
+        raise ContractError("V1.2 asset locators must be manifest-relative")
+    return (manifest_path.resolve().parent / relative).resolve()
 
 
 def validate_input_manifest(
@@ -551,8 +558,8 @@ def validate_input_manifest(
     if any(int(item.get("scene_id", -1)) == 9 for item in items):
         raise ContractError("Scene 9 entered the A-R9 FoundationPose input")
     if verify_assets:
-        dataset_root = Path(str(manifest["dataset_root"])).resolve()
-        predictions_root = Path(str(manifest["predictions_root"])).resolve()
+        dataset_root = asset_root(manifest, path, "dataset_root")
+        predictions_root = asset_root(manifest, path, "predictions_root")
         seen: set[tuple[str, str]] = set()
         for frame in frames:
             for key in ("rgb", "depth", "camera", "cad"):
@@ -907,8 +914,8 @@ def run_primary(
         results_path, run_lock["run_lock_sha256"], set(item_by_id)
     )
     frame_by_id = {str(frame["frame_id"]): frame for frame in manifest["frames"]}
-    dataset_root = Path(str(manifest["dataset_root"])).resolve()
-    predictions_root = Path(str(manifest["predictions_root"])).resolve()
+    dataset_root = asset_root(manifest, manifest_path, "dataset_root")
+    predictions_root = asset_root(manifest, manifest_path, "predictions_root")
     estimator: Any | None = None
     estimator_object_id: int | None = None
     mesh_cache: dict[int, Any] = {}
@@ -1341,7 +1348,7 @@ def evaluate(
             items_by_frame[frame_id], key=lambda item: int(item["prediction_index"])
         )
         masks_path = _resolve_bound(
-            Path(str(manifest["predictions_root"])), frame["prediction_masks"]
+            asset_root(manifest, manifest_path, "predictions_root"), frame["prediction_masks"]
         )
         all_masks = _unpack_masks(masks_path)
         pred_masks = [all_masks[int(item["prediction_index"])] for item in pred_items]
@@ -1670,10 +1677,6 @@ def package_evidence(
 
 
 def _parser() -> argparse.ArgumentParser:
-    root = _repo_root()
-    default_protocol = (
-        root / "protocols/poseloop_pose_accuracy_recovery_a10_foundationpose_e2e_v2_v1.json"
-    )
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     check = commands.add_parser("contract-check")

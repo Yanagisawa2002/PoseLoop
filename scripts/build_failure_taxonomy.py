@@ -468,7 +468,7 @@ def extract_taxonomy(args: argparse.Namespace) -> None:
             key=lambda item: int(item["prediction_index"]),
         )
         masks_path = a9._resolve_bound(
-            Path(str(manifest["predictions_root"])), frame["prediction_masks"]
+            (a9.asset_root(manifest, manifest_path, "predictions_root") if getattr(args, "result_anchor", None) else Path(str(manifest["predictions_root"]))), frame["prediction_masks"]
         )
         all_masks = a9._unpack_masks(masks_path)
         pred_masks = [
