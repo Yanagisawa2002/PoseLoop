@@ -1,0 +1,106 @@
+{
+  "nsight_version": "2026.5.1.161-265138896106v0",
+  "nsight_package": "nsight-systems-cli-2026.5.1",
+  "install_source": "https://developer.nvidia.com/downloads/assets/tools/secure/nsight-systems/2026_5/nsightsystems-linux-cli-public-2026.5.1.161-3889610.deb",
+  "gui_installed": false,
+  "actual_pose_loop_head": "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41",
+  "local_report_parent": "e78ee00eb8e36884ef024daf900e7122e07b8041",
+  "remote_git_status": "",
+  "foundationpose_tracked_status": "",
+  "driver": "595.71.05",
+  "gpu_vram_mib": 32607,
+  "runtime": {
+    "cuda_runtime": "12.8",
+    "gpu_name": "NVIDIA GeForce RTX 5090",
+    "gpu_uuid": "GPU-aac37f94-5192-0c98-91e1-37e6f8109438",
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128"
+  },
+  "foundationpose_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+  "assets": {
+    "refiner_checkpoint": {
+      "relative_path": "weights/2023-10-28-18-33-37/model_best.pth",
+      "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60",
+      "size_bytes": 68220109
+    },
+    "refiner_config": {
+      "relative_path": "weights/2023-10-28-18-33-37/config.yml",
+      "sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686",
+      "size_bytes": 708
+    },
+    "scorer_checkpoint": {
+      "relative_path": "weights/2024-01-11-20-02-45/model_best.pth",
+      "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26",
+      "size_bytes": 190229389
+    },
+    "scorer_config": {
+      "relative_path": "weights/2024-01-11-20-02-45/config.yml",
+      "sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f",
+      "size_bytes": 778
+    }
+  },
+  "frozen_inference": {
+    "candidate_count": 252,
+    "iterations": 5,
+    "primary_register_only_no_trace_replay": true,
+    "resource_batches": {
+      "refine": 32,
+      "score_data": 8,
+      "score_feature": 32,
+      "warp": 32
+    },
+    "seed": 0
+  },
+  "cuda_home": "/usr/local/cuda",
+  "ld_preload": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+  "tmpdir": "/root/autodl-tmp/poseloop-a9-perf/tmp",
+  "network_turbo_used_before_download": true,
+  "collection_command": [
+    "nsys",
+    "profile",
+    "--trace=cuda,nvtx,osrt,cublas,cudnn",
+    "--sample=none",
+    "--cpuctxsw=none",
+    "--delay=60",
+    "--duration=60",
+    "--kill=none",
+    "--wait=primary",
+    "--session-new=poseloop-a9-baseline",
+    "--discard-environment=true",
+    "--force-overwrite=false",
+    "--output=/root/autodl-tmp/poseloop-a9-perf/capture/baseline",
+    "/root/autodl-tmp/poseloop-v1.1-replay/foundationpose-runtime/venv/bin/python",
+    "-u",
+    "-B",
+    "-m",
+    "pose_accuracy_recovery_prep.a9_foundationpose_e2e",
+    "run-primary",
+    "--protocol",
+    "protocols/poseloop_pose_accuracy_recovery_a9_foundationpose_e2e_v1.json",
+    "--manifest",
+    "/root/autodl-tmp/poseloop-v1.2-5090/a9-exact-replay-freeze/input-manifest.json",
+    "--foundationpose-root",
+    "/root/autodl-tmp/poseloop-v1.1-replay/foundationpose-runtime/sources/FoundationPose",
+    "--output-root",
+    "/root/autodl-tmp/poseloop-a9-perf/primary",
+    "--implementation-commit",
+    "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41"
+  ],
+  "known_packages_from_verified_clean_environment": {
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "numpy": "2.3.2",
+    "scipy": "1.18.1",
+    "opencv-python": "5.0.0.93",
+    "open3d": "0.20.0",
+    "trimesh": "5.0.0",
+    "nvdiffrast": "0.4.0",
+    "pytorch3d": "0.7.9",
+    "warp-lang": "1.17.0",
+    "pypng": "0.20220715.0"
+  },
+  "source_and_configuration_changes": false,
+  "manual_nvtx_added": false,
+  "cpu_sampling": false,
+  "cpu_scheduling": false
+}

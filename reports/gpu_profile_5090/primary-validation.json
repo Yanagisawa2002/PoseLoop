@@ -1,0 +1,40 @@
+{
+  "clean_count": 820,
+  "profile_count": 820,
+  "unique_items": 820,
+  "same_item_order": true,
+  "ignored_provenance_timing_fields": [
+    "cuda_peak_allocated_bytes",
+    "registration_seconds",
+    "run_lock_sha256"
+  ],
+  "semantic_differences": [],
+  "semantic_exact": true,
+  "profile_completion": {
+    "created_at_utc": "2026-09-19T03:11:10.162714+00:00",
+    "evaluator_path_open_count": 0,
+    "gt_path_open_count": 0,
+    "item_count": 820,
+    "label_access_count": 0,
+    "official_scorer_run_count": 0,
+    "predictions_sha256": "d797eeea607620eece85322ff6a702a12ab8079a9afa87a9537a211ab439433e",
+    "run_lock_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+    "scene9_read_count": 0,
+    "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+    "stage": "primary-inference",
+    "status": "COMPLETE",
+    "status_counts": {
+      "success": 820
+    },
+    "wall_time_seconds": 604.5738052260131
+  },
+  "free_disk_bytes": 38759555072,
+  "clean_hashes": {
+    "predictions.jsonl": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+    "completion-receipt.json": "5a0344b9098b0ed54222ead6f884c92451f62762a769569ce85fa85a49959092",
+    "run-lock.json": "c40a67fab64971165181a3c4803c696cf156e5875a9609daba74c9e70c239783"
+  },
+  "git_head": "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41",
+  "git_status": "",
+  "foundationpose_tracked_status": ""
+}

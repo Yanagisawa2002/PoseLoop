@@ -1,0 +1,47 @@
+{
+  "complete_registration_ranges": 80,
+  "range_exceptions": [],
+  "phase_mapping": "Inference from six RasterizeCudaFwdShaderKernel calls per complete registration: first five refine, sixth score. No model NVTX ranges added; phase boundaries are shader launch starts, not exact Python function boundaries.",
+  "phase_kernel_attribution": {
+    "refine_render_1_to_5": {
+      "kernel_count": 998880,
+      "kernel_ns": 26268294293,
+      "compute_ns": 16252329848,
+      "dominant_conv_ns": 11602169112,
+      "dominant_conv_calls": 41600
+    },
+    "score_render_6": {
+      "kernel_count": 589446,
+      "kernel_ns": 9080021730,
+      "compute_ns": 4144903219,
+      "dominant_conv_ns": 2318813992,
+      "dominant_conv_calls": 8320
+    }
+  },
+  "inner_window": {
+    "start_s": 1,
+    "end_s": 59,
+    "duration_s": 58,
+    "gpu_activity_union_s": 35.384002619,
+    "kernel_s": 34.748942858,
+    "dominant_conv_s": 13.543831527,
+    "dominant_conv_share": 0.38976240463907813,
+    "kernel_count": 1553421
+  },
+  "registration_boundary_mapping": {
+    "post_count": 81,
+    "post_total_us": 879.713,
+    "pre_count": 81,
+    "pre_total_us": 721.163,
+    "method": "Alternating closely spaced post/pre pair followed by depth erosion kernels and approximately 0.7s registration. Source loop has only these two device sync calls; attribution is inferred, not stack-sampled."
+  },
+  "launch_correlation_coverage": {
+    "launch_api_count": 1606039,
+    "launches_without_kernel": 602,
+    "interior_1_to_59s_launches_without_kernel": 0,
+    "unmatched_by_second": {
+      "59": 602
+    },
+    "interpretation": "Correlation check detects missing launch/kernel pairs, not every possible missing event; no completeness guarantee."
+  }
+}

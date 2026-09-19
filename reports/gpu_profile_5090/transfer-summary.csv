@@ -1,0 +1,4 @@
+direction,count,total_ns,bytes
+Host-to-Device,31268,411510730,3876721244
+Device-to-Host,71796,54308143,605100924
+Device-to-Device,95842,166325002,86912535912

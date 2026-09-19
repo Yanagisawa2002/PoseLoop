@@ -1,0 +1,6 @@
+family,calls,total_seconds,kernel_time_share
+convolution/GEMM/attention compute,166626,20.572886548,0.5737086288332588
+tensor elementwise/copy/concat,963028,9.582263934,0.2672171204496319
+cuDNN layout/batchnorm,234889,2.932143525,0.08176762348566022
+other kernels,237046,1.524574868,0.04251526663665761
+nvdiffrast/render (symbol heuristic),3848,1.247599702,0.03479136059479145
