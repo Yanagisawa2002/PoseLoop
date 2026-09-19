@@ -1,7 +1,8 @@
 # PoseLoop v1.1.0 failure taxonomy - recovery status
 
-This page is generated from tracked frozen evidence. It deliberately stops
-where the repository no longer contains enough per-instance evidence.
+This page describes the original frozen aggregate bundle and its limitations.
+The subsequent [5090 reconstruction result](FAILURE_TAXONOMY_RESULT.md) completes
+the 770-instance taxonomy; use that page for the current result.
 
 ## What is proven now
 

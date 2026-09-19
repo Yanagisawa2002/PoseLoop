@@ -1,0 +1,306 @@
+{
+  "schema_version": "poseloop.reproduction.a9.v1",
+  "recorded_metric_comparison": {
+    "aggregate": {
+      "runtime_success_count": {
+        "historical": 820,
+        "actual": 820,
+        "delta": 0,
+        "exact": true
+      },
+      "mask_iou50_match_count": {
+        "historical": 577,
+        "actual": 577,
+        "delta": 0,
+        "exact": true
+      },
+      "joint_pose_success_count": {
+        "historical": 482,
+        "actual": 482,
+        "delta": 0,
+        "exact": true
+      },
+      "joint_pose_precision": {
+        "historical": 0.5878048780487805,
+        "actual": 0.5878048780487805,
+        "delta": 0.0,
+        "exact": true
+      },
+      "joint_pose_recall": {
+        "historical": 0.625974025974026,
+        "actual": 0.625974025974026,
+        "delta": 0.0,
+        "exact": true
+      },
+      "joint_pose_f1": {
+        "historical": 0.6062893081761006,
+        "actual": 0.6062893081761006,
+        "delta": 0.0,
+        "exact": true
+      },
+      "joint_pose_ap": {
+        "historical": 0.5318658235280908,
+        "actual": 0.5318658235280908,
+        "delta": 0.0,
+        "exact": true
+      },
+      "ar_mssd": {
+        "historical": 0.6305194805194805,
+        "actual": 0.6305194805194805,
+        "delta": 0.0,
+        "exact": true
+      },
+      "ar_mspd": {
+        "historical": 0.6457142857142858,
+        "actual": 0.6457142857142858,
+        "delta": 0.0,
+        "exact": true
+      },
+      "combined_ar_mssd_mspd": {
+        "historical": 0.6381168831168831,
+        "actual": 0.6381168831168831,
+        "delta": 0.0,
+        "exact": true
+      }
+    },
+    "per_scene": {
+      "10": {
+        "historical_joint": 148,
+        "historical_gt": 185,
+        "actual": {
+          "gt": 185,
+          "joint": 148,
+          "joint_pose_recall": 0.8,
+          "pred": 182,
+          "scene_id": 10
+        },
+        "joint_delta": 0,
+        "recall_delta": 0.0,
+        "exact": true
+      },
+      "25": {
+        "historical_joint": 129,
+        "historical_gt": 295,
+        "actual": {
+          "gt": 295,
+          "joint": 129,
+          "joint_pose_recall": 0.43728813559322033,
+          "pred": 234,
+          "scene_id": 25
+        },
+        "joint_delta": 0,
+        "recall_delta": 0.0,
+        "exact": true
+      },
+      "30": {
+        "historical_joint": 83,
+        "historical_gt": 105,
+        "actual": {
+          "gt": 105,
+          "joint": 83,
+          "joint_pose_recall": 0.7904761904761904,
+          "pred": 137,
+          "scene_id": 30
+        },
+        "joint_delta": 0,
+        "recall_delta": 0.0,
+        "exact": true
+      },
+      "40": {
+        "historical_joint": 83,
+        "historical_gt": 135,
+        "actual": {
+          "gt": 135,
+          "joint": 83,
+          "joint_pose_recall": 0.6148148148148148,
+          "pred": 198,
+          "scene_id": 40
+        },
+        "joint_delta": 0,
+        "recall_delta": 0.0,
+        "exact": true
+      },
+      "65": {
+        "historical_joint": 39,
+        "historical_gt": 50,
+        "actual": {
+          "gt": 50,
+          "joint": 39,
+          "joint_pose_recall": 0.78,
+          "pred": 69,
+          "scene_id": 65
+        },
+        "joint_delta": 0,
+        "recall_delta": 0.0,
+        "exact": true
+      }
+    },
+    "aggregate_exact": true,
+    "per_scene_exact": true,
+    "interpretation": "A9 V1.1 SEMANTIC REPLAY: EXACT AT RECORDED EVALUATION GRANULARITY",
+    "artifact_bit_exact_claim": false,
+    "per_instance_exact_claim": false
+  },
+  "primary_receipt": {
+    "predictions_sha256": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+    "completion_receipt_sha256": "5a0344b9098b0ed54222ead6f884c92451f62762a769569ce85fa85a49959092",
+    "run_lock_file_sha256": "c40a67fab64971165181a3c4803c696cf156e5875a9609daba74c9e70c239783",
+    "run_lock_identity_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+    "completion": {
+      "created_at_utc": "2026-09-18T19:54:47.471568+00:00",
+      "evaluator_path_open_count": 0,
+      "gt_path_open_count": 0,
+      "item_count": 820,
+      "label_access_count": 0,
+      "official_scorer_run_count": 0,
+      "predictions_sha256": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+      "run_lock_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+      "scene9_read_count": 0,
+      "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+      "stage": "primary-inference",
+      "status": "COMPLETE",
+      "status_counts": {
+        "success": 820
+      },
+      "wall_time_seconds": 551.1074293479323
+    },
+    "registration_seconds": {
+      "count": 820,
+      "min": 0.6259776996448636,
+      "median": 0.6551136998459697,
+      "p95": 0.681723405001685,
+      "p99": 0.709339178027585,
+      "max": 1.87279680557549,
+      "mean": 0.6569991685927096
+    },
+    "peak_allocated_bytes": {
+      "count": 820,
+      "min": 4539749888.0,
+      "median": 7672836096.0,
+      "p95": 8361192448.0,
+      "p99": 8363682816.0,
+      "max": 8363682816.0,
+      "mean": 7785371677.346341
+    },
+    "environment": {
+      "cuda_runtime": "12.8",
+      "gpu_name": "NVIDIA GeForce RTX 5090",
+      "gpu_uuid": "GPU-aac37f94-5192-0c98-91e1-37e6f8109438",
+      "python": "3.12.3",
+      "torch": "2.8.0+cu128"
+    },
+    "frozen_before_evaluation_at_unix": 1789761293.128289
+  },
+  "run_lock": {
+    "environment": {
+      "cuda_runtime": "12.8",
+      "gpu_name": "NVIDIA GeForce RTX 5090",
+      "gpu_uuid": "GPU-aac37f94-5192-0c98-91e1-37e6f8109438",
+      "python": "3.12.3",
+      "torch": "2.8.0+cu128"
+    },
+    "foundationpose_assets": {
+      "refiner_checkpoint": {
+        "relative_path": "weights/2023-10-28-18-33-37/model_best.pth",
+        "sha256": "774700586ddc435d408fc01c9809c43e151232936369dfbea0f0f964ba471d60",
+        "size_bytes": 68220109
+      },
+      "refiner_config": {
+        "relative_path": "weights/2023-10-28-18-33-37/config.yml",
+        "sha256": "28a6ba94a33230ee5fc3c51939486281578b0972542bd9e38ca6123e75605686",
+        "size_bytes": 708
+      },
+      "scorer_checkpoint": {
+        "relative_path": "weights/2024-01-11-20-02-45/model_best.pth",
+        "sha256": "81924d384bf5c26c646ee4783104982ae3d1e049c181c36641b6a7aeae494c26",
+        "size_bytes": 190229389
+      },
+      "scorer_config": {
+        "relative_path": "weights/2024-01-11-20-02-45/config.yml",
+        "sha256": "a79db4de3b95885dd5ae86833b37b8698a75dad81e87d1086cd50b2fcd8dda3f",
+        "size_bytes": 778
+      }
+    },
+    "foundationpose_commit": "a1b694b83e633c2cb6115b9063d940a687759392",
+    "frozen_inference": {
+      "candidate_count": 252,
+      "iterations": 5,
+      "primary_register_only_no_trace_replay": true,
+      "resource_batches": {
+        "refine": 32,
+        "score_data": 8,
+        "score_feature": 32,
+        "warp": 32
+      },
+      "seed": 0
+    },
+    "implementation": {
+      "files_sha256": {
+        "pose_accuracy_recovery_prep/a9_foundationpose_e2e/__init__.py": "e3df3f2ee81f921d26e61f03c58b3263084823249749863a1ac2214473c7ac57",
+        "pose_accuracy_recovery_prep/a9_foundationpose_e2e/__main__.py": "7212b0ce1aa122151bc31f8b0dab31623db8a5474b5eeded07cc7b42296dab0c",
+        "pose_accuracy_recovery_prep/a9_foundationpose_e2e/runtime.py": "6656105bb15825f0967d80c740975fe25072b4764110be1c8f9716d88d594490",
+        "protocols/poseloop_pose_accuracy_recovery_a9_foundationpose_e2e_v1.json": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+        "scripts/provision_a9_foundationpose_env.sh": "6845bc734cd1db8e264b403ac144112b3e29adb7e57cef36c74b95e1a368ce38",
+        "scripts/run_r1_sealed_inference.py": "1acf3bad5e64950831d1b137d8fa89ca1182c482952cfb42d293581077a7f1d4",
+        "scripts/run_xyzibd_batch.py": "979622519b98f6249cb69af932180495716cd047303533943c10ceedb37c5b4a"
+      },
+      "identity_sha256": "87bc29764cddc273dfc9e30aeb6defa9750e4077e56aa383181f64e48820e087"
+    },
+    "implementation_commit": "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41",
+    "manifest_lock_sha256": "50617838b2e20ad09d4ba216fce44985bc6c0f0bcafaf5de672d405b65396662",
+    "manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+    "protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+    "run_lock_sha256": "26a24359c08f90ba03156967d45c0b1d1c56295df5b7974958c64526437688e4",
+    "runtime_boundary": {
+      "evaluator_path_open_count": 0,
+      "gt_path_open_count": 0,
+      "label_access_count": 0,
+      "official_scorer_run_count": 0,
+      "scene9_read_count": 0
+    },
+    "schema_version": "poseloop.a-r9-foundationpose-e2e.run-lock.v1"
+  },
+  "runtime_identity": {
+    "sources": {
+      "FoundationPose": {
+        "head": "a1b694b83e633c2cb6115b9063d940a687759392",
+        "tracked_changes": []
+      },
+      "nvdiffrast": {
+        "head": "253ac4fcea7de5f396371124af597e6cc957bfae",
+        "tracked_changes": []
+      },
+      "pytorch3d": {
+        "head": "3143b3baf8ef8b1023ed76f225af59e2e8a71e06",
+        "tracked_changes": []
+      }
+    },
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "torchvision": "0.23.0+cu128",
+      "numpy": "2.3.2",
+      "scipy": "1.18.1",
+      "opencv-python": "5.0.0.93",
+      "open3d": "0.20.0",
+      "trimesh": "5.0.0",
+      "nvdiffrast": "0.4.0",
+      "pytorch3d": "0.7.9",
+      "warp-lang": "1.17.0",
+      "pypng": "0.20220715.0"
+    },
+    "environment_fixes": [
+      "apt libegl1 libgl1",
+      "LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+      "pypng==0.20220715.0",
+      "PYTHONPATH=/root/autodl-tmp/poseloop-v1.1-replay/bop_toolkit:/root/autodl-tmp/PoseLoop-network"
+    ],
+    "cuda_home": "/usr/local/cuda",
+    "torch_cuda_arch_list": "12.0",
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0\n",
+    "bop_toolkit": {
+      "commit": "cea62d651c7e395b2e1962b9749e4e89693c6ac4",
+      "tracked_clean": true
+    }
+  },
+  "historical_raw_pose_identity": "unavailable; no per-instance historical equivalence claim"
+}

@@ -47,3 +47,8 @@ jobs:
 
       - name: Check release runner shell syntax
         run: bash -n scripts/run_release_pipeline.sh
+
+      - name: Verify compact reproduction evidence and integrity failure cases
+        run: |
+          python -B scripts/verify_reproduction_5090.py
+          python -B -m unittest discover -s tests -p test_reproduction_5090.py
