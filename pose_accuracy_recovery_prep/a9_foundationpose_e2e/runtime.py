@@ -734,6 +734,7 @@ def run_primary(
     output_root: Path,
     implementation_commit: str,
     resume: bool,
+    performance_variant: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     protocol_path = protocol_path.resolve()
     manifest_path = manifest_path.resolve()
@@ -743,6 +744,10 @@ def run_primary(
     manifest = validate_input_manifest(manifest_path, protocol_path, verify_assets=True)
     root = _repo_root()
     implementation = _implementation_identity(protocol_path)
+    if performance_variant is not None:
+        from .performance import validate_variant
+
+        validate_variant(performance_variant, protocol_path, manifest_path, implementation_commit)
     if len(implementation_commit) != 40 or any(
         ch not in "0123456789abcdef" for ch in implementation_commit
     ):
@@ -771,6 +776,7 @@ def run_primary(
             "implementation": implementation,
             "foundationpose_commit": protocol["foundationpose"]["commit"],
             "foundationpose_assets": foundationpose_assets,
+            "performance_variant": performance_variant,
         },
     )
     if completion is not None:
@@ -815,7 +821,11 @@ def run_primary(
     install_memory_bounded_score_data(scorer, int(batches["score_data"]))
     install_memory_bounded_score_forward(scorer, int(batches["score_feature"]))
     refiner = PoseRefinePredictor()
-    install_memory_bounded_refine_forward(refiner, int(batches["refine"]))
+    refine_batch = (
+        int(batches["refine"]) if performance_variant is None
+        else int(performance_variant["overrides"]["refine_batch_size"])
+    )
+    install_memory_bounded_refine_forward(refiner, refine_batch)
     glctx = dr.RasterizeCudaContext(device=gpu_index)
     environment = {
         "python": sys.version.split()[0],
@@ -859,6 +869,10 @@ def run_primary(
             "scene9_read_count": 0,
         },
     }
+    if performance_variant is not None:
+        run_lock["performance_variant"] = performance_variant
+        run_lock["experiment_kind"] = "PERFORMANCE_EXPERIMENT_NOT_FROZEN_V1_1"
+        run_lock["effective_resource_batches"] = {**batches, "refine": refine_batch}
     run_lock["run_lock_sha256"] = _canonical_sha256(
         _without_lock(run_lock, "run_lock_sha256")
     )
@@ -887,6 +901,8 @@ def run_primary(
             raise ContractError("Completed primary predictions changed")
         return receipt
     item_by_id = {str(item["item_id"]): item for item in manifest["items"]}
+    if performance_variant is not None and performance_variant["safety_item_ids"]:
+        item_by_id = {key: item_by_id[key] for key in performance_variant["safety_item_ids"]}
     completed = _load_existing_results(
         results_path, run_lock["run_lock_sha256"], set(item_by_id)
     )
@@ -945,7 +961,7 @@ def run_primary(
         return mesh_cache[object_id]
 
     started = time.monotonic()
-    ordered_items = list(manifest["items"])
+    ordered_items = [item for item in manifest["items"] if str(item["item_id"]) in item_by_id]
     for ordinal, item in enumerate(ordered_items, 1):
         item_id = str(item["item_id"])
         if item_id in completed:
@@ -1097,6 +1113,11 @@ def run_primary(
         "official_scorer_run_count": 0,
         "scene9_read_count": 0,
     }
+    if performance_variant is not None:
+        receipt["performance_variant"] = performance_variant
+        receipt["experiment_kind"] = "PERFORMANCE_EXPERIMENT_NOT_FROZEN_V1_1"
+        if performance_variant["safety_item_ids"]:
+            receipt["stage"] = "performance-safety-check"
     _write_json_atomic(completion_path, receipt)
     return receipt
 
