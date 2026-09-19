@@ -1,9 +1,0 @@
-{"batch_count": 400, "epoch": 1, "learning_rate_after_epoch": 0.005, "mean_total_loss": 1.1072955078631639, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 2, "learning_rate_after_epoch": 0.005, "mean_total_loss": 0.6009352976083755, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 3, "learning_rate_after_epoch": 0.005, "mean_total_loss": 0.5027886068075895, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 4, "learning_rate_after_epoch": 0.0005, "mean_total_loss": 0.4436751463264227, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 5, "learning_rate_after_epoch": 0.0005, "mean_total_loss": 0.3871233563125134, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 6, "learning_rate_after_epoch": 0.0005, "mean_total_loss": 0.37223608687520027, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 7, "learning_rate_after_epoch": 0.0005, "mean_total_loss": 0.368091716915369, "optimizer_step_count": 200}
-{"batch_count": 400, "epoch": 8, "learning_rate_after_epoch": 5e-05, "mean_total_loss": 0.3592687799036503, "optimizer_step_count": 200}
-{"checkpoint": {"relative_path": "model-final.pt", "sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b", "size_bytes": 183923343}, "status": "FORMAL_OBJECT_DISJOINT_TRAINING"}

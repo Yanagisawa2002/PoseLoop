@@ -1,9 +1,0 @@
-{
-  "status": "PASS",
-  "unique_taxonomy_rows": 770,
-  "csv_iou50_matches": 577,
-  "csv_joint_successes": 482,
-  "matched_pose_error_rows": 577,
-  "artifact_inventory_files_verified": 12,
-  "all_historical_numeric_deltas_zero": true
-}

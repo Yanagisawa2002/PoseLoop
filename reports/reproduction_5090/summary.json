@@ -1,0 +1,436 @@
+{
+  "schema_version": "poseloop.reproduction.summary.v1",
+  "project_status": "FROZEN",
+  "allowed_future_work": [
+    "bug fixes",
+    "README and portfolio presentation",
+    "genuinely new external evaluation data"
+  ],
+  "scope": "Previously consumed XYZ-IBD development set; not an unseen test or official BOP result.",
+  "training": {
+    "source_commit": "3d5a33d64d9fbcdaecf97172fdea6f20ab647c41",
+    "protocol_sha256": "c200f80cd47ef338341ba9e1ba941b0cd81ba9fc28f8b1dca4c05dfb33bcc5f1",
+    "dataset_manifest_sha256": "b958091b602a3d9a62bc1b60ea28174d6f79ffcda5523c4e68bb33600f56810e",
+    "official_weight_sha256": "73cbd0190fcbe3ba339921fbce2c3a0b6bb9126c9a133c85e43a2a8e060a109e",
+    "final_checkpoint": {
+      "relative_path": "model-final.pt",
+      "sha256": "a90d4134cb36cb242e98481440cfdc782c15b65f8d1068c2964243d7152fec2b",
+      "size_bytes": 183923343
+    },
+    "epochs_completed": 8,
+    "wall_time_seconds": 2117.2004539137706,
+    "peak_gpu_allocated_bytes": 3389988864,
+    "training_contract": {
+      "epochs": 8,
+      "physical_batch_size": 1,
+      "gradient_accumulation": 2,
+      "optimizer": "SGD",
+      "learning_rate": 0.005,
+      "momentum": 0.9,
+      "weight_decay": 0.0005,
+      "scheduler": "StepLR(step_size=4,gamma=0.1)",
+      "horizontal_flip_probability": 0.5,
+      "internal_validation_health_image_ids": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cublas_workspace_config": ":4096:8",
+      "seed": 314159,
+      "workers": 8
+    },
+    "environment": {
+      "python": "3.12.3",
+      "pytorch": "2.8.0+cu128",
+      "torchvision": "0.23.0+cu128",
+      "cuda": "12.8",
+      "gpu_name": "NVIDIA GeForce RTX 5090",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "driver": "595.71.05"
+    },
+    "scene9_read_count": 0,
+    "epoch_checkpoint_hashes": {
+      "checkpoint-epoch-01.pt": "8732bafc63bc19fd3924307436afe4d2f19568aafaecf7b8c708498335c2b2d4",
+      "checkpoint-epoch-02.pt": "c628b1d8e1c8025310e5ff63389113a62355667aae9d92d5068668f3f2e0798f",
+      "checkpoint-epoch-03.pt": "d7b8b20e93776fe83105f467e79a5dc708195fd6654b59dae256b2ddcc3b812a",
+      "checkpoint-epoch-04.pt": "594d5f1c249d21f4344ed3f1f77f37e0b1fb653565104966d6cfe89d33896263",
+      "checkpoint-epoch-05.pt": "29910cf9fa8b052a8b75a466c0a3f76d4ce6e05db1a601a6aa9472e6e1dd1080",
+      "checkpoint-epoch-06.pt": "09032b0d0dc08cdedec5a7400433644474c51bacf76776db1350726805f3d529",
+      "checkpoint-epoch-07.pt": "9efad8cf0819770efbdd3f5a075b136aef1a23e8d541ea63427fab539221f6aa",
+      "checkpoint-epoch-08.pt": "845da0c8757acd3f38a4f5d888b440091cc065a80fef99fe82ef859406adaa81"
+    },
+    "identity_correction": "The original NEW_V1_2_DETECTOR_NOT_V1_1_RECONSTRUCTION interpretation is superseded by verified historical checkpoint SHA equality; original receipt remains unchanged in history."
+  },
+  "performance": {
+    "decision": "REJECTED",
+    "issue_6_disposition": "COMPLETED",
+    "reason": "Rejected: +0.76% wall-time improvement but failed numerical/evaluation equivalence.",
+    "ab": {
+      "classification": "TRADEOFF",
+      "runs": {
+        "A1": 551.1074293479323,
+        "B1": 546.915343798697,
+        "B2": null,
+        "A2": null
+      },
+      "missing_runs_reason": "B1 required evaluation gate failed; conditional B2/A2 and profiler stages were not entered.",
+      "observed_single_pair": {
+        "time_saved_seconds": 4.192085549235344,
+        "wall_reduction_percent": 0.7606657660549776,
+        "speedup_factor": 1.0076649624055498,
+        "median_latency_delta_seconds": -0.008149071130901575,
+        "p95_latency_delta_seconds": 0.018673140276223354,
+        "peak_allocated_delta_gib": -0.17072725296020508,
+        "peak_allocated_delta_percent": -2.1918214264332043
+      },
+      "central_timing": {
+        "descriptive_baseline_mean_seconds": 551.1074293479323,
+        "descriptive_baseline_median_seconds": 551.1074293479323,
+        "descriptive_candidate_mean_seconds": 546.915343798697,
+        "descriptive_candidate_median_seconds": 546.915343798697,
+        "n_baseline": 1,
+        "n_candidate": 1,
+        "repeat_controlled_speedup": null,
+        "warning": "Descriptive central values each contain one observation; they establish neither reproducibility nor noise bounds."
+      },
+      "equivalence_preserving": false,
+      "successful_optimization": false
+    },
+    "semantic_comparison": {
+      "scope": "All 820 ordered items, A1 versus B1",
+      "exact": false,
+      "summary": {
+        "item_count": 820,
+        "exact_pose_match_count": 5,
+        "non_exact_pose_count": 815,
+        "max_pose_element_absolute_difference": 1.998599886894226,
+        "median_pose_element_absolute_difference": 6.49280846118927e-05,
+        "max_rotation_element_absolute_difference": 1.998599886894226,
+        "max_translation_absolute_difference_m": 0.12898153811693192,
+        "exact_top_score_match_count": 40,
+        "max_top_score_absolute_difference": 4.626953125,
+        "exact_score_margin_match_count": 396,
+        "max_score_margin_absolute_difference": 0.3046875,
+        "finite": true,
+        "status_and_252_candidates_unchanged": true,
+        "pose_shapes_4x4": true
+      },
+      "per_item_deltas_file": "per-item-deltas.csv",
+      "raw_primary_artifacts": "See artifact-inventory.json and verified external archive",
+      "large_pose_changes_are_not_all_classified_as_harmless_roundoff": true
+    },
+    "evaluation_comparison": {
+      "run": "B1",
+      "acceptance_metrics": [
+        "runtime_success_count",
+        "mask_iou50_match_count",
+        "joint_pose_success_count",
+        "joint_pose_precision",
+        "joint_pose_recall",
+        "joint_pose_f1",
+        "joint_pose_ap",
+        "ar_mssd",
+        "ar_mspd",
+        "combined_ar_mssd_mspd",
+        "per_scene",
+        "mssd_threshold_recalls",
+        "mspd_threshold_recalls"
+      ],
+      "required_evaluation_exact": false,
+      "pass_gate": false,
+      "differences": {
+        "joint_pose_success_count": {
+          "baseline": 482,
+          "candidate": 479
+        },
+        "joint_pose_precision": {
+          "baseline": 0.5878048780487805,
+          "candidate": 0.5841463414634146
+        },
+        "joint_pose_recall": {
+          "baseline": 0.625974025974026,
+          "candidate": 0.6220779220779221
+        },
+        "joint_pose_f1": {
+          "baseline": 0.6062893081761006,
+          "candidate": 0.6025157232704402
+        },
+        "joint_pose_ap": {
+          "baseline": 0.5318658235280908,
+          "candidate": 0.5292226099228429
+        },
+        "ar_mssd": {
+          "baseline": 0.6305194805194805,
+          "candidate": 0.6258441558441559
+        },
+        "ar_mspd": {
+          "baseline": 0.6457142857142858,
+          "candidate": 0.6411688311688312
+        },
+        "combined_ar_mssd_mspd": {
+          "baseline": 0.6381168831168831,
+          "candidate": 0.6335064935064936
+        },
+        "per_scene": {
+          "baseline": [
+            {
+              "gt": 185,
+              "joint": 148,
+              "joint_pose_recall": 0.8,
+              "pred": 182,
+              "scene_id": 10
+            },
+            {
+              "gt": 295,
+              "joint": 129,
+              "joint_pose_recall": 0.43728813559322033,
+              "pred": 234,
+              "scene_id": 25
+            },
+            {
+              "gt": 105,
+              "joint": 83,
+              "joint_pose_recall": 0.7904761904761904,
+              "pred": 137,
+              "scene_id": 30
+            },
+            {
+              "gt": 135,
+              "joint": 83,
+              "joint_pose_recall": 0.6148148148148148,
+              "pred": 198,
+              "scene_id": 40
+            },
+            {
+              "gt": 50,
+              "joint": 39,
+              "joint_pose_recall": 0.78,
+              "pred": 69,
+              "scene_id": 65
+            }
+          ],
+          "candidate": [
+            {
+              "gt": 185,
+              "joint": 146,
+              "joint_pose_recall": 0.7891891891891892,
+              "pred": 182,
+              "scene_id": 10
+            },
+            {
+              "gt": 295,
+              "joint": 128,
+              "joint_pose_recall": 0.43389830508474575,
+              "pred": 234,
+              "scene_id": 25
+            },
+            {
+              "gt": 105,
+              "joint": 82,
+              "joint_pose_recall": 0.780952380952381,
+              "pred": 137,
+              "scene_id": 30
+            },
+            {
+              "gt": 135,
+              "joint": 84,
+              "joint_pose_recall": 0.6222222222222222,
+              "pred": 198,
+              "scene_id": 40
+            },
+            {
+              "gt": 50,
+              "joint": 39,
+              "joint_pose_recall": 0.78,
+              "pred": 69,
+              "scene_id": 65
+            }
+          ]
+        },
+        "mssd_threshold_recalls": {
+          "baseline": {
+            "0.05": 0.2753246753246753,
+            "0.1": 0.6285714285714286,
+            "0.15": 0.6584415584415585,
+            "0.2": 0.6636363636363637,
+            "0.25": 0.6662337662337663,
+            "0.3": 0.6662337662337663,
+            "0.35": 0.6779220779220779,
+            "0.4": 0.6857142857142857,
+            "0.45": 0.6909090909090909,
+            "0.5": 0.6922077922077922
+          },
+          "candidate": {
+            "0.05": 0.2675324675324675,
+            "0.1": 0.6272727272727273,
+            "0.15": 0.6545454545454545,
+            "0.2": 0.6584415584415585,
+            "0.25": 0.6610389610389611,
+            "0.3": 0.6623376623376623,
+            "0.35": 0.6727272727272727,
+            "0.4": 0.6805194805194805,
+            "0.45": 0.6857142857142857,
+            "0.5": 0.6883116883116883
+          }
+        },
+        "mspd_threshold_recalls": {
+          "baseline": {
+            "10": 0.6519480519480519,
+            "15": 0.6610389610389611,
+            "20": 0.6662337662337663,
+            "25": 0.6662337662337663,
+            "30": 0.6662337662337663,
+            "35": 0.6688311688311688,
+            "40": 0.6753246753246753,
+            "45": 0.6779220779220779,
+            "5": 0.43766233766233764,
+            "50": 0.6857142857142857
+          },
+          "candidate": {
+            "10": 0.6441558441558441,
+            "15": 0.6558441558441559,
+            "20": 0.6597402597402597,
+            "25": 0.6610389610389611,
+            "30": 0.6636363636363637,
+            "35": 0.6649350649350649,
+            "40": 0.6701298701298701,
+            "45": 0.6727272727272727,
+            "5": 0.43766233766233764,
+            "50": 0.6818181818181818
+          }
+        }
+      },
+      "all_per_frame_results_equal": false
+    },
+    "baseline_trace": {
+      "sha256": "20a72e4e34740a15a41af95fcaf4a52f0af88869ab1e70f5b99b9a73ac0deb2a",
+      "size_bytes": 98570303,
+      "capture_seconds": 60.000211702,
+      "complete_registrations": 80,
+      "kernel_count": 1605437,
+      "median_kernel_us": 2.752,
+      "kernels_under_10us_percent": 69.77,
+      "conv_gemm_attention_seconds": 20.573,
+      "conv_gemm_attention_kernel_share_percent": 57.37,
+      "dominant_convolution_seconds": 13.959,
+      "dominant_convolution_kernel_share_percent": 38.93,
+      "scope": "scene 10/object 2 window; capture-edge incomplete events; not a whole-workload profile",
+      "source": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/gpu_profile_5090/README.md"
+    },
+    "optimized_profile": null,
+    "mechanism_confirmation": "unavailable: correctness gate failed; no optimized trace or repeat timing controls",
+    "evidence_archive_sha256": "776785fd1586e467ed2e1ee8d937337be36a601ff4d3279e980eb3e43fcc3afe",
+    "original_relative_reference_base": "https://github.com/Yanagisawa2002/PoseLoop/tree/1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f/reports/gpu_perf_case/"
+  },
+  "archives": {
+    "training": {
+      "name": "poseloop-v1.2-detector-formal-export.zip",
+      "sha256": "bae2b53ae1d433be2dd2da4ae53130c94319001ffd842fad92dabb840e52b124",
+      "size_bytes": 190017558,
+      "intermediate_epoch_weights_included": false
+    },
+    "a9_evidence": {
+      "sha256": "06f04ae887786f798d5303981e8881ede648f9f1a9f36b8e2ab824fd49743bfe",
+      "size_bytes": 6678963,
+      "name": "a9-v1.1-replay-evidence.tar.gz"
+    },
+    "a9_supplement": {
+      "sha256": "bc45a759c5d6216e1caa58558356b5014b80ba2091ba82389ade40fe745c8fb4",
+      "size_bytes": 842520,
+      "name": "a9-v1.1-replay-supplement.tar.gz"
+    },
+    "detector_replay": {
+      "name": "detector-exact-replay-evidence.tar.gz",
+      "sha256": "a0b60a846c21065712797d7a0bd5fcb33f0bf743599ae1ed5d776dfc82a239b2",
+      "size_bytes": 474453
+    }
+  },
+  "archive_availability": "Verified off-server private backups; hashes identify artifacts but do not make checkpoint, dataset, or raw trace publicly downloadable.",
+  "source_receipts": {
+    "reports/v12_repro_5090/formal/formal-training-receipt.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "91be06db8d92a365e87a59374b5d39c803ab925d83d2ad814aaf7454bba1090f",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/formal/formal-training-receipt.json"
+    },
+    "reports/v12_repro_5090/formal/export-receipt.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "fadc02f78667a6a19ca9e53e58c01f3f13e4a1188601c3e3456a38e39b719323",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/formal/export-receipt.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/final-backup-receipt.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "c1015539a7bd9f781820af09ed826ea0ea3bb70073c14f6fa9b3aeba17a2ec16",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/final-backup-receipt.json"
+    },
+    "reports/v12_repro_5090/detector-exact-replay/completion.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "05b9004b010103b7cac3d957c1c3bd7d6c1d00db20c78cd6ea9991eb7144d2a2",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/detector-exact-replay/completion.json"
+    },
+    "reports/v12_repro_5090/detector-exact-replay/metrics-comparison.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "d7e00024a49ec209998951a0131b75508544feca1aa7239f353deca29a8dae04",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/detector-exact-replay/metrics-comparison.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/historical-comparison.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "a9bad8f09dce8bc3a99bb61844d1b55d30c468b5360c87f7c7c93b857620208b",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/historical-comparison.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/primary-frozen-identity.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "b17faa7ae65a44bca546d9c76c57f65f4f4d6ea60f6966440ffdf16a83399986",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/primary-frozen-identity.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/run-lock.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "c40a67fab64971165181a3c4803c696cf156e5875a9609daba74c9e70c239783",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/run-lock.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/runtime-identity.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "46736b8388ff947b13ada84c4f106273dba26860f77eefdef0843830e0879be2",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/runtime-identity.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/failure-taxonomy/summary.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "10848cf1bb4961733e545d8ccf4ae2d8bacee66b5799808865c574d36323db40",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/failure-taxonomy/summary.json"
+    },
+    "reports/gpu_perf_case/ab-comparison.json": {
+      "commit": "1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f",
+      "sha256": "3453729f7bf5cb536bb60613d6363bb0179394d3349a40564aac6cb1d4d13ce0",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f/reports/gpu_perf_case/ab-comparison.json"
+    },
+    "reports/gpu_perf_case/semantic-equivalence.json": {
+      "commit": "1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f",
+      "sha256": "a160cb8dd77c0a527bef794cdfe7290933bb3eeb528122d22eeae630503267e0",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f/reports/gpu_perf_case/semantic-equivalence.json"
+    },
+    "reports/gpu_perf_case/evaluation-equivalence.json": {
+      "commit": "1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f",
+      "sha256": "8e4ed5bd71549db8b62aa2c073623b39b700546a5c8b7fa2a74e3e69c52952ae",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/1ce0d7a94d1fc08b21875b6dc7f18085d86eb36f/reports/gpu_perf_case/evaluation-equivalence.json"
+    },
+    "reports/v12_repro_5090/detector-exact-replay/backup-receipt.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "be607db1e90efba10ffccff4358de35afea24ff6290aa62101bce0c6f035abf7",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/detector-exact-replay/backup-receipt.json"
+    },
+    "reports/v12_repro_5090/a9-v11-replay/bop-identity.json": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "6627eb5b15d73c2abe447a076e7d1c4167f7f930e3096e851feb0dfd9a02e067",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/v12_repro_5090/a9-v11-replay/bop-identity.json"
+    },
+    "reports/gpu_profile_5090/README.md": {
+      "commit": "4a96a7c102510abc43eee4b35e40f02cd932bee2",
+      "sha256": "05ff0c0b39dbe827014fdcb3f26ecfab94738cefdd599dc8eee2fd885fe8bf47",
+      "url": "https://github.com/Yanagisawa2002/PoseLoop/blob/4a96a7c102510abc43eee4b35e40f02cd932bee2/reports/gpu_profile_5090/README.md"
+    }
+  }
+}

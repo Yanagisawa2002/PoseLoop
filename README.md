@@ -29,7 +29,7 @@ This project does not claim state of the art or production real-time performance
 ## Review this project in three minutes
 
 1. [Watch the 73-second walkthrough](docs/media/poseloop-demo.mp4).
-2. Read the [end-to-end failure waterfall](docs/failure-waterfall.md): **770 GT → 577 mask-IoU50 matches → 482 joint pose successes**, then the [failure-taxonomy recovery status](docs/failure-taxonomy.md).
+2. Read the [5090 reproduction](docs/REPRODUCTION_5090.md), [770-instance failure taxonomy](docs/FAILURE_TAXONOMY_RESULT.md), and [GPU profiling case](docs/GPU_PERFORMANCE_CASE.md): a measured batching experiment rejected after failing correctness.
 3. Inspect the two supported implementation surfaces:
    - [`real_instance_detector_v1`](pose_accuracy_recovery_prep/real_instance_detector_v1/) — detector preparation, training, inference, and evaluation.
    - [`a9_foundationpose_e2e`](pose_accuracy_recovery_prep/a9_foundationpose_e2e/) — frozen mask-to-pose handoff, execution, evaluation, and evidence packaging.
@@ -54,13 +54,13 @@ That leaves **193 GT instances (25.1%)** without an IoU50 mask match and another
 but fail the joint MSSD/MSPD pose criteria. This is intentionally not described as
 193 pure detector misses: the upstream bucket also contains masks that fail the
 IoU50 matching criterion. See the generated [failure waterfall](docs/failure-waterfall.md)
-for the auditable derivation and per-scene recall. The finer #5 breakdown is tracked in the [failure-taxonomy recovery status](docs/failure-taxonomy.md); the public release does not contain the original per-instance artifacts needed to finish that split without reconstruction.
+for the auditable derivation and per-scene recall. The subsequent replay completed
+the [770-instance taxonomy](docs/FAILURE_TAXONOMY_RESULT.md): 1 detector miss,
+114 boundary/IoU failures, 24 over-segmentation and 54 under-segmentation/merge
+cases, plus 95 matched pose failures. These are diagnostic rule classifications.
 
-This breakdown makes the next technical question concrete: separate outright misses,
-over/under-segmentation and boundary errors from FoundationPose registration failures
-before changing either model family. AP75 of **0.101** and the weak scene-25 joint
-recall of **0.4373** are the most obvious diagnostic slices, but the already-consumed
-evaluation split should not become a new tuning target.
+AP75 of **0.101** and scene-25 joint recall of **0.4373** remain limitations.
+The already-consumed evaluation split is not a new tuning target.
 
 ## Pipeline
 
@@ -98,13 +98,19 @@ the dataset manifest, records exact Git identity, executes all 820 pose registra
 evaluates only after primary inference is complete, and emits a hashable evidence
 archive.
 
-There is one important current limitation: **the exact frozen Mask R-CNN checkpoint
-required by v1.1.0 is not redistributed in the repository or current Release assets**,
-so an independent full GPU replay is not turnkey today. The runner intentionally
-refuses a checkpoint whose SHA-256 differs from the frozen identity. The bounded
-reproduction investigation and asset preflight are tracked in [PR #2](../../pull/2).
-Do not interpret the extensive provenance checks as proof that the unavailable model
-bytes can currently be reconstructed from the public release alone.
+**Recovered and replayed on RTX 5090:** deterministic retraining recovered the
+exact frozen checkpoint, detector outputs matched, and original A9 recorded
+aggregate and per-scene metrics reproduced exactly. See the
+[compact evidence and recovery commands](docs/REPRODUCTION_5090.md).
+Historical per-instance A9 pose identity is not established. The checkpoint and
+raw archives are backed up off-server but are not redistributed here; independent
+GPU replay still requires pinned data, weights and dependencies. The runner
+rejects a checkpoint whose SHA-256 differs from the frozen identity.
+
+**Experimental development is frozen.** Further work is limited to bug fixes,
+README/portfolio presentation or genuinely new external evaluation data.
+The [GPU experiment](docs/GPU_PERFORMANCE_CASE.md) is complete: refine=64 was
+rejected after numerical/evaluation equivalence failed. No Candidate #2 is planned.
 
 The tracked release evidence can still be checked independently. Git LFS media must
 be materialized rather than left as pointer files:
@@ -112,6 +118,7 @@ be materialized rather than left as pointer files:
 ```bash
 git lfs pull
 python -B scripts/verify_portfolio.py
+python -B scripts/verify_reproduction_5090.py
 python -B scripts/build_failure_waterfall.py --check docs/failure-waterfall.md
 ```
 
@@ -133,6 +140,9 @@ verification to that preserved snapshot and the unchanged release artifacts.
 
 ## Evidence
 
+- [RTX 5090 recovery, reproducibility receipts and freeze policy](docs/REPRODUCTION_5090.md)
+- [Completed failure taxonomy](docs/FAILURE_TAXONOMY_RESULT.md)
+- [GPU performance case, resume bullets and interview preparation](docs/GPU_PERFORMANCE_CASE.md)
 - [Detector development result](pose_accuracy_recovery_prep/real_instance_detector_v1/DEVELOPMENT_RESULT.md)
 - [End-to-end FoundationPose result](pose_accuracy_recovery_prep/a9_foundationpose_e2e/RESULT.md)
 - [Generated end-to-end failure waterfall](docs/failure-waterfall.md)

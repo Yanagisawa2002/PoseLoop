@@ -1,7 +1,0 @@
-{
-  "prediction_manifest_sha256": "dded85d8d9bec68f3c6d80343183635bd80e738a28e9a93a87531d93fbe7441b",
-  "historical_prediction_manifest_sha256": "dded85d8d9bec68f3c6d80343183635bd80e738a28e9a93a87531d93fbe7441b",
-  "exact_match": true,
-  "hashed_at_unix": 1789759224.5350494,
-  "evaluation_started": false
-}
