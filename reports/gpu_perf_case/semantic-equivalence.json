@@ -1,0 +1,23 @@
+{
+  "scope": "All 820 ordered items, A1 versus B1",
+  "exact": false,
+  "summary": {
+    "item_count": 820,
+    "exact_pose_match_count": 5,
+    "non_exact_pose_count": 815,
+    "max_pose_element_absolute_difference": 1.998599886894226,
+    "median_pose_element_absolute_difference": 6.49280846118927e-05,
+    "max_rotation_element_absolute_difference": 1.998599886894226,
+    "max_translation_absolute_difference_m": 0.12898153811693192,
+    "exact_top_score_match_count": 40,
+    "max_top_score_absolute_difference": 4.626953125,
+    "exact_score_margin_match_count": 396,
+    "max_score_margin_absolute_difference": 0.3046875,
+    "finite": true,
+    "status_and_252_candidates_unchanged": true,
+    "pose_shapes_4x4": true
+  },
+  "per_item_deltas_file": "per-item-deltas.csv",
+  "raw_primary_artifacts": "See artifact-inventory.json and verified external archive",
+  "large_pose_changes_are_not_all_classified_as_harmless_roundoff": true
+}

@@ -1,0 +1,399 @@
+{
+  "classification": "TRADEOFF",
+  "implementation_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+  "run": "B1",
+  "timing": {
+    "root": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary",
+    "completion": {
+      "created_at_utc": "2026-09-19T03:46:13.194918+00:00",
+      "evaluator_path_open_count": 0,
+      "experiment_kind": "PERFORMANCE_EXPERIMENT_NOT_FROZEN_V1_1",
+      "gt_path_open_count": 0,
+      "item_count": 820,
+      "label_access_count": 0,
+      "official_scorer_run_count": 0,
+      "performance_variant": {
+        "base_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+        "base_protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+        "is_frozen_release_run": false,
+        "overrides": {
+          "refine_batch_size": 64
+        },
+        "safety_item_ids": [],
+        "schema_version": "poseloop.performance.refiner64.v1",
+        "variant_git_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+        "variant_source_sha256": "226b1377a88d8722e1dcd5f1d7b78c39cfefe2ea3ebdd4ff4d1053df722bc6c9"
+      },
+      "predictions_sha256": "a4405708ef75d40a945c68f987aac1880e14fe4c31688750762b5510b9cbf00b",
+      "run_lock_sha256": "8ce60000610c8e00fbeadaee1a5f3043cd1bacf4d816f10942ea5b1a0b609d63",
+      "scene9_read_count": 0,
+      "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+      "stage": "primary-inference",
+      "status": "COMPLETE",
+      "status_counts": {
+        "success": 820
+      },
+      "wall_time_seconds": 546.915343798697
+    },
+    "latency_seconds": {
+      "median": 0.6469646287150681,
+      "p95": 0.7003965452779084,
+      "mean": 0.6519593940797921,
+      "max": 1.2957826182246208
+    },
+    "peak_allocated_bytes": 8180365824
+  },
+  "evaluation": {
+    "ar_mspd": 0.6411688311688312,
+    "ar_mssd": 0.6258441558441559,
+    "claim": "custom already-consumed development pipeline metric; not official BOP leaderboard AR or AP",
+    "combined_ar_mssd_mspd": 0.6335064935064936,
+    "dataset_role": "ALREADY_CONSUMED_REAL_DEVELOPMENT",
+    "frame_count": 25,
+    "ground_truth_instance_count": 770,
+    "joint_pose_ap": 0.5292226099228429,
+    "joint_pose_f1": 0.6025157232704402,
+    "joint_pose_precision": 0.5841463414634146,
+    "joint_pose_recall": 0.6220779220779221,
+    "joint_pose_success_count": 479,
+    "labels_opened_after_primary_completion": true,
+    "manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+    "mask_iou50_match_count": 577,
+    "mspd_threshold_recalls": {
+      "10": 0.6441558441558441,
+      "15": 0.6558441558441559,
+      "20": 0.6597402597402597,
+      "25": 0.6610389610389611,
+      "30": 0.6636363636363637,
+      "35": 0.6649350649350649,
+      "40": 0.6701298701298701,
+      "45": 0.6727272727272727,
+      "5": 0.43766233766233764,
+      "50": 0.6818181818181818
+    },
+    "mssd_threshold_recalls": {
+      "0.05": 0.2675324675324675,
+      "0.1": 0.6272727272727273,
+      "0.15": 0.6545454545454545,
+      "0.2": 0.6584415584415585,
+      "0.25": 0.6610389610389611,
+      "0.3": 0.6623376623376623,
+      "0.35": 0.6727272727272727,
+      "0.4": 0.6805194805194805,
+      "0.45": 0.6857142857142857,
+      "0.5": 0.6883116883116883
+    },
+    "oracle_diagnostic_runs_used": 0,
+    "per_frame": [
+      {
+        "frame_id": "s000010-i000000",
+        "gt_count": 37,
+        "joint_pose_recall": 0.8108108108108109,
+        "joint_pose_successes": 30,
+        "mask_iou50_matches": 31,
+        "pose_evaluated_matches": 31,
+        "prediction_count": 38,
+        "scene_id": 10
+      },
+      {
+        "frame_id": "s000010-i000010",
+        "gt_count": 37,
+        "joint_pose_recall": 0.7837837837837838,
+        "joint_pose_successes": 29,
+        "mask_iou50_matches": 32,
+        "pose_evaluated_matches": 32,
+        "prediction_count": 37,
+        "scene_id": 10
+      },
+      {
+        "frame_id": "s000010-i000020",
+        "gt_count": 37,
+        "joint_pose_recall": 0.7297297297297297,
+        "joint_pose_successes": 27,
+        "mask_iou50_matches": 29,
+        "pose_evaluated_matches": 29,
+        "prediction_count": 37,
+        "scene_id": 10
+      },
+      {
+        "frame_id": "s000010-i000030",
+        "gt_count": 37,
+        "joint_pose_recall": 0.8108108108108109,
+        "joint_pose_successes": 30,
+        "mask_iou50_matches": 30,
+        "pose_evaluated_matches": 30,
+        "prediction_count": 35,
+        "scene_id": 10
+      },
+      {
+        "frame_id": "s000010-i000040",
+        "gt_count": 37,
+        "joint_pose_recall": 0.8108108108108109,
+        "joint_pose_successes": 30,
+        "mask_iou50_matches": 31,
+        "pose_evaluated_matches": 31,
+        "prediction_count": 35,
+        "scene_id": 10
+      },
+      {
+        "frame_id": "s000025-i000000",
+        "gt_count": 59,
+        "joint_pose_recall": 0.4576271186440678,
+        "joint_pose_successes": 27,
+        "mask_iou50_matches": 40,
+        "pose_evaluated_matches": 40,
+        "prediction_count": 50,
+        "scene_id": 25
+      },
+      {
+        "frame_id": "s000025-i000010",
+        "gt_count": 59,
+        "joint_pose_recall": 0.4406779661016949,
+        "joint_pose_successes": 26,
+        "mask_iou50_matches": 40,
+        "pose_evaluated_matches": 40,
+        "prediction_count": 49,
+        "scene_id": 25
+      },
+      {
+        "frame_id": "s000025-i000020",
+        "gt_count": 59,
+        "joint_pose_recall": 0.3728813559322034,
+        "joint_pose_successes": 22,
+        "mask_iou50_matches": 36,
+        "pose_evaluated_matches": 36,
+        "prediction_count": 44,
+        "scene_id": 25
+      },
+      {
+        "frame_id": "s000025-i000030",
+        "gt_count": 59,
+        "joint_pose_recall": 0.5084745762711864,
+        "joint_pose_successes": 30,
+        "mask_iou50_matches": 38,
+        "pose_evaluated_matches": 38,
+        "prediction_count": 43,
+        "scene_id": 25
+      },
+      {
+        "frame_id": "s000025-i000040",
+        "gt_count": 59,
+        "joint_pose_recall": 0.3898305084745763,
+        "joint_pose_successes": 23,
+        "mask_iou50_matches": 38,
+        "pose_evaluated_matches": 38,
+        "prediction_count": 48,
+        "scene_id": 25
+      },
+      {
+        "frame_id": "s000030-i000000",
+        "gt_count": 21,
+        "joint_pose_recall": 0.8571428571428571,
+        "joint_pose_successes": 18,
+        "mask_iou50_matches": 21,
+        "pose_evaluated_matches": 21,
+        "prediction_count": 27,
+        "scene_id": 30
+      },
+      {
+        "frame_id": "s000030-i000010",
+        "gt_count": 21,
+        "joint_pose_recall": 0.7619047619047619,
+        "joint_pose_successes": 16,
+        "mask_iou50_matches": 21,
+        "pose_evaluated_matches": 21,
+        "prediction_count": 30,
+        "scene_id": 30
+      },
+      {
+        "frame_id": "s000030-i000020",
+        "gt_count": 21,
+        "joint_pose_recall": 0.6666666666666666,
+        "joint_pose_successes": 14,
+        "mask_iou50_matches": 18,
+        "pose_evaluated_matches": 18,
+        "prediction_count": 26,
+        "scene_id": 30
+      },
+      {
+        "frame_id": "s000030-i000030",
+        "gt_count": 21,
+        "joint_pose_recall": 0.7619047619047619,
+        "joint_pose_successes": 16,
+        "mask_iou50_matches": 19,
+        "pose_evaluated_matches": 19,
+        "prediction_count": 28,
+        "scene_id": 30
+      },
+      {
+        "frame_id": "s000030-i000040",
+        "gt_count": 21,
+        "joint_pose_recall": 0.8571428571428571,
+        "joint_pose_successes": 18,
+        "mask_iou50_matches": 20,
+        "pose_evaluated_matches": 20,
+        "prediction_count": 26,
+        "scene_id": 30
+      },
+      {
+        "frame_id": "s000040-i000000",
+        "gt_count": 27,
+        "joint_pose_recall": 0.48148148148148145,
+        "joint_pose_successes": 13,
+        "mask_iou50_matches": 14,
+        "pose_evaluated_matches": 14,
+        "prediction_count": 41,
+        "scene_id": 40
+      },
+      {
+        "frame_id": "s000040-i000010",
+        "gt_count": 27,
+        "joint_pose_recall": 0.6296296296296297,
+        "joint_pose_successes": 17,
+        "mask_iou50_matches": 18,
+        "pose_evaluated_matches": 18,
+        "prediction_count": 38,
+        "scene_id": 40
+      },
+      {
+        "frame_id": "s000040-i000020",
+        "gt_count": 27,
+        "joint_pose_recall": 0.6666666666666666,
+        "joint_pose_successes": 18,
+        "mask_iou50_matches": 18,
+        "pose_evaluated_matches": 18,
+        "prediction_count": 41,
+        "scene_id": 40
+      },
+      {
+        "frame_id": "s000040-i000030",
+        "gt_count": 27,
+        "joint_pose_recall": 0.6666666666666666,
+        "joint_pose_successes": 18,
+        "mask_iou50_matches": 18,
+        "pose_evaluated_matches": 18,
+        "prediction_count": 40,
+        "scene_id": 40
+      },
+      {
+        "frame_id": "s000040-i000040",
+        "gt_count": 27,
+        "joint_pose_recall": 0.6666666666666666,
+        "joint_pose_successes": 18,
+        "mask_iou50_matches": 19,
+        "pose_evaluated_matches": 19,
+        "prediction_count": 38,
+        "scene_id": 40
+      },
+      {
+        "frame_id": "s000065-i000000",
+        "gt_count": 10,
+        "joint_pose_recall": 0.8,
+        "joint_pose_successes": 8,
+        "mask_iou50_matches": 9,
+        "pose_evaluated_matches": 9,
+        "prediction_count": 13,
+        "scene_id": 65
+      },
+      {
+        "frame_id": "s000065-i000010",
+        "gt_count": 10,
+        "joint_pose_recall": 1.0,
+        "joint_pose_successes": 10,
+        "mask_iou50_matches": 10,
+        "pose_evaluated_matches": 10,
+        "prediction_count": 14,
+        "scene_id": 65
+      },
+      {
+        "frame_id": "s000065-i000020",
+        "gt_count": 10,
+        "joint_pose_recall": 0.6,
+        "joint_pose_successes": 6,
+        "mask_iou50_matches": 8,
+        "pose_evaluated_matches": 8,
+        "prediction_count": 14,
+        "scene_id": 65
+      },
+      {
+        "frame_id": "s000065-i000030",
+        "gt_count": 10,
+        "joint_pose_recall": 0.6,
+        "joint_pose_successes": 6,
+        "mask_iou50_matches": 9,
+        "pose_evaluated_matches": 9,
+        "prediction_count": 14,
+        "scene_id": 65
+      },
+      {
+        "frame_id": "s000065-i000040",
+        "gt_count": 10,
+        "joint_pose_recall": 0.9,
+        "joint_pose_successes": 9,
+        "mask_iou50_matches": 10,
+        "pose_evaluated_matches": 10,
+        "prediction_count": 14,
+        "scene_id": 65
+      }
+    ],
+    "per_scene": [
+      {
+        "gt": 185,
+        "joint": 146,
+        "joint_pose_recall": 0.7891891891891892,
+        "pred": 182,
+        "scene_id": 10
+      },
+      {
+        "gt": 295,
+        "joint": 128,
+        "joint_pose_recall": 0.43389830508474575,
+        "pred": 234,
+        "scene_id": 25
+      },
+      {
+        "gt": 105,
+        "joint": 82,
+        "joint_pose_recall": 0.780952380952381,
+        "pred": 137,
+        "scene_id": 30
+      },
+      {
+        "gt": 135,
+        "joint": 84,
+        "joint_pose_recall": 0.6222222222222222,
+        "pred": 198,
+        "scene_id": 40
+      },
+      {
+        "gt": 50,
+        "joint": 39,
+        "joint_pose_recall": 0.78,
+        "pred": 69,
+        "scene_id": 65
+      }
+    ],
+    "pose_evaluated_match_count": 577,
+    "positive_scene_count": 5,
+    "prediction_count": 820,
+    "predictions_sha256": "a4405708ef75d40a945c68f987aac1880e14fe4c31688750762b5510b9cbf00b",
+    "primary_completion_receipt_sha256": "c28326809124f8ddad612f7571c65d1b689f17d122d1f92ad41dee3933155875",
+    "promotion_checks": {
+      "combined_ar_mssd_mspd_min": true,
+      "joint_pose_ap_min": true,
+      "joint_pose_recall_min": true,
+      "positive_scene_count_min": true,
+      "runtime_completion_fraction_min": true
+    },
+    "protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+    "rescue_runs_used": 0,
+    "runtime_completion_fraction": 1.0,
+    "runtime_success_count": 820,
+    "scene9_read_count": 0,
+    "scene9_replay_permitted": false,
+    "schema_version": "poseloop.a-r9-foundationpose-e2e.evaluation.v1",
+    "sealed_claim_permitted": false,
+    "status": "PASS_PACKAGE_AND_CLOSE"
+  },
+  "full_run_repeated": false
+}

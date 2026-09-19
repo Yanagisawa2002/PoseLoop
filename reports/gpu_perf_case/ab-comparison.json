@@ -1,0 +1,31 @@
+{
+  "classification": "TRADEOFF",
+  "runs": {
+    "A1": 551.1074293479323,
+    "B1": 546.915343798697,
+    "B2": null,
+    "A2": null
+  },
+  "missing_runs_reason": "B1 required evaluation gate failed; conditional B2/A2 and profiler stages were not entered.",
+  "observed_single_pair": {
+    "time_saved_seconds": 4.192085549235344,
+    "wall_reduction_percent": 0.7606657660549776,
+    "speedup_factor": 1.0076649624055498,
+    "median_latency_delta_seconds": -0.008149071130901575,
+    "p95_latency_delta_seconds": 0.018673140276223354,
+    "peak_allocated_delta_gib": -0.17072725296020508,
+    "peak_allocated_delta_percent": -2.1918214264332043
+  },
+  "central_timing": {
+    "descriptive_baseline_mean_seconds": 551.1074293479323,
+    "descriptive_baseline_median_seconds": 551.1074293479323,
+    "descriptive_candidate_mean_seconds": 546.915343798697,
+    "descriptive_candidate_median_seconds": 546.915343798697,
+    "n_baseline": 1,
+    "n_candidate": 1,
+    "repeat_controlled_speedup": null,
+    "warning": "Descriptive central values each contain one observation; they establish neither reproducibility nor noise bounds."
+  },
+  "equivalence_preserving": false,
+  "successful_optimization": false
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "verified": [
+    "820 unique ordered items",
+    "independent pose exact count/max/median",
+    "independent top-score/margin exact counts and maxima",
+    "820 success, 577 matches, 479 joint successes",
+    "evaluation rejection preserved",
+    "57 archive member hashes verified"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "purpose": "Diagnostic only: compare B to A predictions, not ground truth; does not establish evaluation equivalence.",
+  "gt_pose_files_read": false,
+  "rows": [
+    {
+      "item_id": "s000010-i000000-p000000",
+      "object_id": 2,
+      "symmetry_count": 24,
+      "raw_rotation_angle_degrees": 90.0416889701788,
+      "pairwise_symmetry_aware_mssd_mm": 0.6120169296942514,
+      "pairwise_symmetry_aware_mspd_px": 0.7041944820755552,
+      "baseline_score": 93.68359375,
+      "new_score": 93.6953125,
+      "baseline_margin": 0.0,
+      "new_margin": 0.0
+    },
+    {
+      "item_id": "s000025-i000000-p000000",
+      "object_id": 1,
+      "symmetry_count": 315,
+      "raw_rotation_angle_degrees": 114.38303554578535,
+      "pairwise_symmetry_aware_mssd_mm": 0.2663919757303161,
+      "pairwise_symmetry_aware_mspd_px": 0.3081464264941627,
+      "baseline_score": 110.4375,
+      "new_score": 110.53125,
+      "baseline_margin": 0.0,
+      "new_margin": 0.0
+    },
+    {
+      "item_id": "s000030-i000000-p000000",
+      "object_id": 5,
+      "symmetry_count": 2,
+      "raw_rotation_angle_degrees": 0.09736393153549097,
+      "pairwise_symmetry_aware_mssd_mm": 0.14785539553005883,
+      "pairwise_symmetry_aware_mspd_px": 0.16796501867982744,
+      "baseline_score": 90.6484375,
+      "new_score": 90.8359375,
+      "baseline_margin": 0.015625,
+      "new_margin": 0.0
+    },
+    {
+      "item_id": "s000040-i000000-p000000",
+      "object_id": 4,
+      "symmetry_count": 1,
+      "raw_rotation_angle_degrees": 0.021839108552818443,
+      "pairwise_symmetry_aware_mssd_mm": 0.0028111859842591277,
+      "pairwise_symmetry_aware_mspd_px": 0.0026214588745542456,
+      "baseline_score": 86.359375,
+      "new_score": 86.359375,
+      "baseline_margin": 0.0,
+      "new_margin": 0.0
+    },
+    {
+      "item_id": "s000065-i000000-p000000",
+      "object_id": 6,
+      "symmetry_count": 1,
+      "raw_rotation_angle_degrees": 0.06475541046395587,
+      "pairwise_symmetry_aware_mssd_mm": 0.039003571922505656,
+      "pairwise_symmetry_aware_mspd_px": 0.055358778949428686,
+      "baseline_score": 83.84375,
+      "new_score": 83.65625,
+      "baseline_margin": 0.015625,
+      "new_margin": 0.015625
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "created_at_utc": "2026-09-19T03:46:13.194918+00:00",
+  "evaluator_path_open_count": 0,
+  "experiment_kind": "PERFORMANCE_EXPERIMENT_NOT_FROZEN_V1_1",
+  "gt_path_open_count": 0,
+  "item_count": 820,
+  "label_access_count": 0,
+  "official_scorer_run_count": 0,
+  "performance_variant": {
+    "base_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+    "base_protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+    "is_frozen_release_run": false,
+    "overrides": {
+      "refine_batch_size": 64
+    },
+    "safety_item_ids": [],
+    "schema_version": "poseloop.performance.refiner64.v1",
+    "variant_git_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+    "variant_source_sha256": "226b1377a88d8722e1dcd5f1d7b78c39cfefe2ea3ebdd4ff4d1053df722bc6c9"
+  },
+  "predictions_sha256": "a4405708ef75d40a945c68f987aac1880e14fe4c31688750762b5510b9cbf00b",
+  "run_lock_sha256": "8ce60000610c8e00fbeadaee1a5f3043cd1bacf4d816f10942ea5b1a0b609d63",
+  "scene9_read_count": 0,
+  "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+  "stage": "primary-inference",
+  "status": "COMPLETE",
+  "status_counts": {
+    "success": 820
+  },
+  "wall_time_seconds": 546.915343798697
+}

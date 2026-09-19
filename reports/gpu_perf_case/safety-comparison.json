@@ -1,0 +1,115 @@
+{
+  "comparison": {
+    "item_count": 5,
+    "exact_pose_match_count": 0,
+    "non_exact_pose_count": 5,
+    "max_pose_element_absolute_difference": 1.3643489480018616,
+    "median_pose_element_absolute_difference": 4.255957901477814e-05,
+    "max_rotation_element_absolute_difference": 1.3643489480018616,
+    "max_translation_absolute_difference_m": 0.00014104321599006653,
+    "exact_top_score_match_count": 1,
+    "max_top_score_absolute_difference": 0.1875,
+    "exact_score_margin_match_count": 4,
+    "max_score_margin_absolute_difference": 0.015625,
+    "finite": true,
+    "status_and_252_candidates_unchanged": true,
+    "pose_shapes_4x4": true
+  },
+  "timing": {
+    "root": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/safety",
+    "completion": {
+      "created_at_utc": "2026-09-19T03:33:39.584925+00:00",
+      "evaluator_path_open_count": 0,
+      "experiment_kind": "PERFORMANCE_EXPERIMENT_NOT_FROZEN_V1_1",
+      "gt_path_open_count": 0,
+      "item_count": 5,
+      "label_access_count": 0,
+      "official_scorer_run_count": 0,
+      "performance_variant": {
+        "base_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+        "base_protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+        "is_frozen_release_run": false,
+        "overrides": {
+          "refine_batch_size": 64
+        },
+        "safety_item_ids": [
+          "s000010-i000000-p000000",
+          "s000025-i000000-p000000",
+          "s000030-i000000-p000000",
+          "s000040-i000000-p000000",
+          "s000065-i000000-p000000"
+        ],
+        "schema_version": "poseloop.performance.refiner64.v1",
+        "variant_git_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+        "variant_source_sha256": "226b1377a88d8722e1dcd5f1d7b78c39cfefe2ea3ebdd4ff4d1053df722bc6c9"
+      },
+      "predictions_sha256": "24fe9e45459a0b238cf3bf6f1f128c9465e4c7c5c0bda9ba611cae4ed60ff66d",
+      "run_lock_sha256": "579d29b8e1d4d933a863a2ff7b55d0fa3856a9f4d288e6b5fac8327f9f234e2a",
+      "scene9_read_count": 0,
+      "schema_version": "poseloop.a-r9-foundationpose-e2e.receipt.v1",
+      "stage": "performance-safety-check",
+      "status": "COMPLETE",
+      "status_counts": {
+        "success": 5
+      },
+      "wall_time_seconds": 13.35920953284949
+    },
+    "latency_seconds": {
+      "median": 0.67398476973176,
+      "p95": 1.1625754836946725,
+      "mean": 0.786775672622025,
+      "max": 1.2822520937770605
+    },
+    "peak_allocated_bytes": 6437664768
+  },
+  "per_item": [
+    {
+      "item_id": "s000010-i000000-p000000",
+      "pose_max_abs": 1.3643489480018616,
+      "rotation_element_max_abs": 1.3643489480018616,
+      "translation_max_abs_m": 4.250183701515198e-05,
+      "top_score_abs": 0.01171875,
+      "score_margin_abs": 0.0
+    },
+    {
+      "item_id": "s000025-i000000-p000000",
+      "pose_max_abs": 1.304117113351822,
+      "rotation_element_max_abs": 1.304117113351822,
+      "translation_max_abs_m": 0.00014104321599006653,
+      "top_score_abs": 0.09375,
+      "score_margin_abs": 0.0
+    },
+    {
+      "item_id": "s000030-i000000-p000000",
+      "pose_max_abs": 0.001495063304901123,
+      "rotation_element_max_abs": 0.001495063304901123,
+      "translation_max_abs_m": 7.499009370803833e-05,
+      "top_score_abs": 0.1875,
+      "score_margin_abs": 0.015625
+    },
+    {
+      "item_id": "s000040-i000000-p000000",
+      "pose_max_abs": 4.466064274311066e-05,
+      "rotation_element_max_abs": 4.466064274311066e-05,
+      "translation_max_abs_m": 5.364418029785156e-07,
+      "top_score_abs": 0.0,
+      "score_margin_abs": 0.0
+    },
+    {
+      "item_id": "s000065-i000000-p000000",
+      "pose_max_abs": 0.0008287671953439713,
+      "rotation_element_max_abs": 0.0008287671953439713,
+      "translation_max_abs_m": 3.230944275856018e-05,
+      "top_score_abs": 0.1875,
+      "score_margin_abs": 0.0
+    }
+  ],
+  "safety_screen_limits": {
+    "rotation_element_max": 0.01,
+    "translation_max_m": 0.001,
+    "top_score_max": 1.0,
+    "margin_max": 1.0,
+    "peak_allocated_gib_max": 24.0
+  },
+  "safety_pass": false
+}

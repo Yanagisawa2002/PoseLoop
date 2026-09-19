@@ -1,0 +1,80 @@
+{
+  "backup": {
+    "server_archive": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab-evidence.tar.gz",
+    "local_archive": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\refine64-ab-evidence.tar.gz",
+    "archive_sha256": "776785fd1586e467ed2e1ee8d937337be36a601ff4d3279e980eb3e43fcc3afe",
+    "size_bytes": 7453376,
+    "verified_members": 57
+  },
+  "artifacts": [
+    {
+      "relative_path": "B1-primary/predictions.jsonl",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1-primary\\predictions.jsonl",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary/predictions.jsonl",
+      "bytes": 861211,
+      "sha256": "a4405708ef75d40a945c68f987aac1880e14fe4c31688750762b5510b9cbf00b"
+    },
+    {
+      "relative_path": "B1-primary/run-lock.json",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1-primary\\run-lock.json",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary/run-lock.json",
+      "bytes": 3899,
+      "sha256": "46dbbda0e2eae127702c0c72aacc0b47ffd4a0f88d16d4a5641351d1eac92219"
+    },
+    {
+      "relative_path": "B1-primary/completion-receipt.json",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1-primary\\completion-receipt.json",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary/completion-receipt.json",
+      "bytes": 1249,
+      "sha256": "c28326809124f8ddad612f7571c65d1b689f17d122d1f92ad41dee3933155875"
+    },
+    {
+      "relative_path": "B1-evaluation/evaluation-result.json",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1-evaluation\\evaluation-result.json",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-evaluation/evaluation-result.json",
+      "bytes": 9749,
+      "sha256": "0e5d6f33dc61a638a400b6521f361377de69c802967951f2d2684e4d888f0a0e"
+    },
+    {
+      "relative_path": "B1-evaluation/matched-pose-errors.csv",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1-evaluation\\matched-pose-errors.csv",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-evaluation/matched-pose-errors.csv",
+      "bytes": 58115,
+      "sha256": "8613f6840f40d4ef692ceb56eab08e18489183347c0707f93640593f20ddff51"
+    },
+    {
+      "relative_path": "B1.log",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1.log",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1.log",
+      "bytes": 5306522,
+      "sha256": "51abec838d5e312ab15862c666e9b4294e46755a106dd6f954cb04f9d295a885"
+    },
+    {
+      "relative_path": "B1-comparison.json",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\B1-comparison.json",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-comparison.json",
+      "bytes": 229803,
+      "sha256": "3b54c17e5ad53e367fe52681860b9c8d73a56c1ac189a52251a5fa3350a7782a"
+    },
+    {
+      "relative_path": "safety/predictions.jsonl",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\safety\\predictions.jsonl",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/safety/predictions.jsonl",
+      "bytes": 5337,
+      "sha256": "24fe9e45459a0b238cf3bf6f1f128c9465e4c7c5c0bda9ba611cae4ed60ff66d"
+    },
+    {
+      "relative_path": "symmetry-diagnostic.json",
+      "local_path": "C:\\Users\\cgliu\\Documents\\Codex\\poseloop-perf-batch64\\artifacts\\gpu-perf-case\\evidence\\symmetry-diagnostic.json",
+      "server_path": "/root/autodl-tmp/poseloop-a9-perf/refine64-ab/symmetry-diagnostic.json",
+      "bytes": 2220,
+      "sha256": "2445a67a6f5027fb77e4564c42bd06aabb26829e9f50e857c5d456903062177a"
+    }
+  ],
+  "baseline_nsys_trace": {
+    "server_path": "/root/autodl-tmp/poseloop-a9-perf/capture/baseline.nsys-rep",
+    "sha256": "20a72e4e34740a15a41af95fcaf4a52f0af88869ab1e70f5b99b9a73ac0deb2a"
+  },
+  "optimized_nsys_trace": null,
+  "reason": "Evaluation gate failed; no optimized profile collected."
+}

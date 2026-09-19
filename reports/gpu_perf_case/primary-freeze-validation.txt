@@ -1,0 +1,3 @@
+/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary/predictions.jsonl: OK
+/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary/run-lock.json: OK
+/root/autodl-tmp/poseloop-a9-perf/refine64-ab/B1-primary/completion-receipt.json: OK

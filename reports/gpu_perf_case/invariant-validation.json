@@ -1,0 +1,85 @@
+{
+  "run_invariants": {
+    "safety": {
+      "frozen_fields_equal": {
+        "protocol_sha256": true,
+        "manifest_sha256": true,
+        "manifest_lock_sha256": true,
+        "foundationpose_commit": true,
+        "foundationpose_assets": true,
+        "environment": true,
+        "frozen_inference": true,
+        "runtime_boundary": true
+      },
+      "all_frozen_fields_equal": true,
+      "effective_resource_batches": {
+        "refine": 64,
+        "score_data": 8,
+        "score_feature": 32,
+        "warp": 32
+      },
+      "implementation_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+      "performance_variant": {
+        "base_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+        "base_protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+        "is_frozen_release_run": false,
+        "overrides": {
+          "refine_batch_size": 64
+        },
+        "safety_item_ids": [
+          "s000010-i000000-p000000",
+          "s000025-i000000-p000000",
+          "s000030-i000000-p000000",
+          "s000040-i000000-p000000",
+          "s000065-i000000-p000000"
+        ],
+        "schema_version": "poseloop.performance.refiner64.v1",
+        "variant_git_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+        "variant_source_sha256": "226b1377a88d8722e1dcd5f1d7b78c39cfefe2ea3ebdd4ff4d1053df722bc6c9"
+      }
+    },
+    "B1-primary": {
+      "frozen_fields_equal": {
+        "protocol_sha256": true,
+        "manifest_sha256": true,
+        "manifest_lock_sha256": true,
+        "foundationpose_commit": true,
+        "foundationpose_assets": true,
+        "environment": true,
+        "frozen_inference": true,
+        "runtime_boundary": true
+      },
+      "all_frozen_fields_equal": true,
+      "effective_resource_batches": {
+        "refine": 64,
+        "score_data": 8,
+        "score_feature": 32,
+        "warp": 32
+      },
+      "implementation_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+      "performance_variant": {
+        "base_manifest_sha256": "e2d3bba5b743b214d2491ae6b6f3619d2849d861655a13b474fa170f4ed30a66",
+        "base_protocol_sha256": "589bae96278f7d43c81d04cb422fdda7568a9b4f2adc06e10a2df04b54cf6c0e",
+        "is_frozen_release_run": false,
+        "overrides": {
+          "refine_batch_size": 64
+        },
+        "safety_item_ids": [],
+        "schema_version": "poseloop.performance.refiner64.v1",
+        "variant_git_commit": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+        "variant_source_sha256": "226b1377a88d8722e1dcd5f1d7b78c39cfefe2ea3ebdd4ff4d1053df722bc6c9"
+      }
+    }
+  },
+  "source": {
+    "head": "af0cc13c89e6038c91385ca9a25b54ffa1ab9198",
+    "status": "",
+    "frozen_protocol_release_and_memory_wrapper_diff": ""
+  },
+  "clean_baseline_hashes": {
+    "predictions.jsonl": "300deaca726983a5e15513e6ed49814527a752581c11bb957d0bde8135927b77",
+    "completion-receipt.json": "5a0344b9098b0ed54222ead6f884c92451f62762a769569ce85fa85a49959092",
+    "run-lock.json": "c40a67fab64971165181a3c4803c696cf156e5875a9609daba74c9e70c239783"
+  },
+  "free_disk_bytes": 38711181312
+}

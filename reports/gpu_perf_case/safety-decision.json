@@ -1,0 +1,11 @@
+{
+  "decision": "PROCEED_TO_FULL_B1_AND_UNCHANGED_EVALUATOR",
+  "raw_elementwise_screen_pass": false,
+  "raw_screen_thresholds_were_not_changed": true,
+  "runtime_safety": "5/5 success, no OOM/CUDA error, finite 4x4 poses and scores, 252 candidates, 6437664768 peak allocated bytes",
+  "unexpected_difference_investigated_before_full_run": true,
+  "diagnostic": "Large raw rotations occur on declared symmetric objects (2: 24 symmetry transforms; 1: 315 transforms), with zero top-score margins. Comparing B predictions to A predictions using the original BOP symmetry-aware geometry gives max 0.6120169296942514 mm MSSD and 0.7041944820755552 px MSPD. Ground-truth poses were not read.",
+  "interpretation": "The raw matrix gate conflates symmetry-equivalent orientations with geometric displacement. Bounded diagnosis explains the large raw rotation changes; raw differences remain reported and exact numerical equivalence is not claimed.",
+  "scope": "Safety screening decision only, not a relaxed scientific/evaluation acceptance threshold. Full original aggregate and five-scene metrics must still be exactly unchanged.",
+  "inference_changes_after_safety_check": "NONE"
+}
